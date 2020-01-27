@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class FieldManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    GameManager GM;
-    GameObject Player;
+    
+    GameManager GM;                     //used to use the GameManager
+    GameObject Player;                  //used to use informations of the Player
 
     [SerializeField]
-    private enum Fieldstate
+    private enum Fieldstate             //different fieldstates
     {
         empty,
         seeded,
@@ -20,7 +20,7 @@ public class FieldManager : MonoBehaviour
     }
 
     [SerializeField]
-    private Fieldstate ActiveFieldState = Fieldstate.empty;
+    private Fieldstate ActiveFieldState = Fieldstate.empty;     //all Fields are empty at the start
 
     [SerializeField]
     private int SeedDay;
@@ -37,8 +37,8 @@ public class FieldManager : MonoBehaviour
 
     private void Start()
     {
-        GM = GameManager.GMInstance;
-        Player = GameObject.FindGameObjectWithTag("Player");
+        GM = GameManager.GMInstance;                                    //finds the GM
+        Player = GameObject.FindGameObjectWithTag("Player");            //finds the Player
     }
 
     void Update()
@@ -46,15 +46,15 @@ public class FieldManager : MonoBehaviour
         SwitchFields();
     }
 
-    private void SwitchFields()
+    private void SwitchFields()         //this switches the different states of the Field (Enums)
     {
         switch (ActiveFieldState)
         {
-            case (Fieldstate.empty):
-                if(IsSeeded)
+            case (Fieldstate.empty):                                        //if this field is empty
+                if(IsSeeded)                                                //if the player seeded the field
                 {
-                    ActiveFieldState = Fieldstate.seeded;
-                    SeedDay = GameManager.GMInstance.GetCalenderDay();
+                    ActiveFieldState = Fieldstate.seeded;                   //switch the state of the Field to seeded
+                    SeedDay = GameManager.GMInstance.GetCalenderDay();      //remember what day the seeding has taken place
                 }
                 break;
             case (Fieldstate.seeded):
@@ -72,22 +72,22 @@ public class FieldManager : MonoBehaviour
     }
 
 
-    public void SetIsSeeded(bool NewState)
+    public void SetIsSeeded(bool NewState)          //can get called by PlayerActions to seed the field/empty the field
     {
         IsSeeded = NewState;
-      //  GrowthRateMedium = 
     }
 
-    public void SetGrowthrates(GameObject _MySamplePlant)
+    public void SetGrowthrates(GameObject _MySamplePlant)           //gets informations of MySamplePlant to the field
     {
-        GrowthRateMedium = _MySamplePlant.GetComponent<MySamplePlant>().GetPlant().GetGrowthRateMedium();
-        GrowthRateFinished = _MySamplePlant.GetComponent<MySamplePlant>().GetPlant().GetGrowthRateFinish();
+        GrowthRateMedium = _MySamplePlant.GetComponent<MySamplePlant>().GetGrowthRateMedium();          //growthrate to first state
+        GrowthRateFinished = _MySamplePlant.GetComponent<MySamplePlant>().GetGrowthRateFinished();      //growthrate to finished state
     }
 
 
 
-    public void ResetField()
+    public void ResetField()            //resets the field to an empty state
     {
         IsSeeded = false;
+        ActiveFieldState = Fieldstate.empty;
     }
 }
