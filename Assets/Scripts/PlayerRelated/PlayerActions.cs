@@ -32,25 +32,25 @@ public class PlayerActions : MonoBehaviour
         }
     } */
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)         //checks if the Player touches a Field
     {
         if (other.tag == "Field")
         {
-            IsOnField = true;
-            CurrentField = other.gameObject;
+            IsOnField = true;                           //sets the bool for it to true
+            CurrentField = other.gameObject;            //references the current field; used for SeedField to know which field is seeded
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other)          //checks if the Player stops touching a field
     {
         if (other.tag == "Field")
         {
-            IsOnField = false;
-            CurrentField = null;
+            IsOnField = false;                          //sets the bool for it to false
+            CurrentField = null;                        //dereferences the current field
         }
     }
 
-    void SeedField()
+    void SeedField()                                    //Seeds the field and gives over the plants information
     {
         CurrentField.GetComponent<FieldManager>().SetIsSeeded(true);
         CurrentField.GetComponent<FieldManager>().SetGrowthrates(CurrentItem);

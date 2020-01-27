@@ -29,22 +29,22 @@ public class SamplePlant : ScriptableObject
     private int SellPrice;
 
 
-    public void Print()
+    public void PrintInformation()
     {
         Debug.Log(PlantName + ": " + Description + ". You can sell it for " + SellPrice);
     }
 
-    public int GetGrowthRateMedium()
+    public int GetGrowthRateMedium()        //Used for instances of the Plant to give Information to the Field
     {
         return GrowtRateMedium;
     }
-    public int GetGrowthRateFinish()
+    public int GetGrowthRateFinished()      //Used for instances of the Plant to give Information to the Field
     {
         return GrowthRateFinish;
     }
     
 
-    public (string _PlantName, int _GrowthRateSmall, int _GrowthRateFinish) GetPlantInfos()
+    public (string _PlantName, int _GrowthRateSmall, int _GrowthRateFinish) GetPlantInfos()     //??
     {
         return (PlantName, GrowtRateMedium, GrowthRateFinish);
     }
