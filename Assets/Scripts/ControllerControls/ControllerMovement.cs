@@ -8,7 +8,7 @@ public class ControllerMovement : MonoBehaviour
     [SerializeField]
     private float playerSpeed = 5f;  // Playerspeed, editable in the Editor
 
-    private PlayerControls controls; // This is where the Controls and actual Input are saved (via Unity Input System)
+    PlayerControls controls; // This is where the Controls and actual Input are saved (via Unity Input System)
     private Vector2 move;            // Vector to save the JoyStick Inputs X and Y
 
     private void Awake()

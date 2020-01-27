@@ -27,7 +27,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Camera"",
+                    ""name"": ""CameraRight"",
                     ""type"": ""Button"",
                     ""id"": ""98fd291e-fff9-4bd3-b928-61cac5f0430f"",
                     ""expectedControlType"": """",
@@ -35,7 +35,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Blitz"",
+                    ""name"": ""CameraLeft"",
                     ""type"": ""Button"",
                     ""id"": ""06b5a90e-45ec-46d6-a43f-64f0b82ebd8b"",
                     ""expectedControlType"": """",
@@ -43,7 +43,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Feuer"",
+                    ""name"": ""Blitz"",
                     ""type"": ""Button"",
                     ""id"": ""e1b24da9-de4b-4323-a2f2-8f60866d8889"",
                     ""expectedControlType"": """",
@@ -51,7 +51,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Inventar"",
+                    ""name"": ""Feuer"",
                     ""type"": ""Button"",
                     ""id"": ""75f0c5f0-a5ac-4001-aaee-56bc00b3f087"",
                     ""expectedControlType"": """",
@@ -59,7 +59,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Hotbar"",
+                    ""name"": ""Inventar"",
                     ""type"": ""Button"",
                     ""id"": ""0b06ac3a-658a-43dd-a35b-caa35b6e9f9b"",
                     ""expectedControlType"": """",
@@ -67,7 +67,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Menu"",
+                    ""name"": ""Hotbar"",
                     ""type"": ""Button"",
                     ""id"": ""65fd3001-9c5a-414e-b752-8c2f9c609c81"",
                     ""expectedControlType"": """",
@@ -75,7 +75,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Map"",
+                    ""name"": ""Menu"",
                     ""type"": ""Button"",
                     ""id"": ""4a4f695c-54ff-4b1f-8715-77a96573c472"",
                     ""expectedControlType"": """",
@@ -83,7 +83,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Erde"",
+                    ""name"": ""Map"",
                     ""type"": ""Button"",
                     ""id"": ""5efbfc1b-68f9-45bb-b37d-03985a09ebdb"",
                     ""expectedControlType"": """",
@@ -91,7 +91,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Interact"",
+                    ""name"": ""Erde"",
                     ""type"": ""Button"",
                     ""id"": ""40e582ab-0b9e-431d-9390-dc11b75f8114"",
                     ""expectedControlType"": """",
@@ -99,7 +99,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Wind"",
+                    ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""b6098745-292f-4c2e-acc9-d227e9a9c1cd"",
                     ""expectedControlType"": """",
@@ -107,9 +107,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Wasser"",
+                    ""name"": ""Wind"",
                     ""type"": ""Button"",
                     ""id"": ""5235e537-e34c-4a4d-9375-c40a59dba01b"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Wasser"",
+                    ""type"": ""Button"",
+                    ""id"": ""b104a8ed-b42d-4cb3-ab2f-30719bc671e2"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
@@ -130,11 +138,11 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""c47922fb-1253-4904-8afc-d8c26f887bd0"",
-                    ""path"": ""<Gamepad>/rightStick"",
+                    ""path"": ""<Gamepad>/rightStick/right"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Camera"",
+                    ""action"": ""CameraRight"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -245,6 +253,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Wasser"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6051f6dd-6d29-4d9b-a1bf-0a8295d145b2"",
+                    ""path"": ""<Gamepad>/rightStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -378,7 +397,8 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
-        m_Gameplay_Camera = m_Gameplay.FindAction("Camera", throwIfNotFound: true);
+        m_Gameplay_CameraRight = m_Gameplay.FindAction("CameraRight", throwIfNotFound: true);
+        m_Gameplay_CameraLeft = m_Gameplay.FindAction("CameraLeft", throwIfNotFound: true);
         m_Gameplay_Blitz = m_Gameplay.FindAction("Blitz", throwIfNotFound: true);
         m_Gameplay_Feuer = m_Gameplay.FindAction("Feuer", throwIfNotFound: true);
         m_Gameplay_Inventar = m_Gameplay.FindAction("Inventar", throwIfNotFound: true);
@@ -447,7 +467,8 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Gameplay;
     private IGameplayActions m_GameplayActionsCallbackInterface;
     private readonly InputAction m_Gameplay_Move;
-    private readonly InputAction m_Gameplay_Camera;
+    private readonly InputAction m_Gameplay_CameraRight;
+    private readonly InputAction m_Gameplay_CameraLeft;
     private readonly InputAction m_Gameplay_Blitz;
     private readonly InputAction m_Gameplay_Feuer;
     private readonly InputAction m_Gameplay_Inventar;
@@ -463,7 +484,8 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         private @PlayerControls m_Wrapper;
         public GameplayActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Gameplay_Move;
-        public InputAction @Camera => m_Wrapper.m_Gameplay_Camera;
+        public InputAction @CameraRight => m_Wrapper.m_Gameplay_CameraRight;
+        public InputAction @CameraLeft => m_Wrapper.m_Gameplay_CameraLeft;
         public InputAction @Blitz => m_Wrapper.m_Gameplay_Blitz;
         public InputAction @Feuer => m_Wrapper.m_Gameplay_Feuer;
         public InputAction @Inventar => m_Wrapper.m_Gameplay_Inventar;
@@ -486,9 +508,12 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Move.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
-                @Camera.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCamera;
-                @Camera.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCamera;
-                @Camera.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCamera;
+                @CameraRight.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraRight;
+                @CameraRight.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraRight;
+                @CameraRight.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraRight;
+                @CameraLeft.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraLeft;
+                @CameraLeft.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraLeft;
+                @CameraLeft.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraLeft;
                 @Blitz.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnBlitz;
                 @Blitz.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnBlitz;
                 @Blitz.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnBlitz;
@@ -526,9 +551,12 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
-                @Camera.started += instance.OnCamera;
-                @Camera.performed += instance.OnCamera;
-                @Camera.canceled += instance.OnCamera;
+                @CameraRight.started += instance.OnCameraRight;
+                @CameraRight.performed += instance.OnCameraRight;
+                @CameraRight.canceled += instance.OnCameraRight;
+                @CameraLeft.started += instance.OnCameraLeft;
+                @CameraLeft.performed += instance.OnCameraLeft;
+                @CameraLeft.canceled += instance.OnCameraLeft;
                 @Blitz.started += instance.OnBlitz;
                 @Blitz.performed += instance.OnBlitz;
                 @Blitz.canceled += instance.OnBlitz;
@@ -639,7 +667,8 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     public interface IGameplayActions
     {
         void OnMove(InputAction.CallbackContext context);
-        void OnCamera(InputAction.CallbackContext context);
+        void OnCameraRight(InputAction.CallbackContext context);
+        void OnCameraLeft(InputAction.CallbackContext context);
         void OnBlitz(InputAction.CallbackContext context);
         void OnFeuer(InputAction.CallbackContext context);
         void OnInventar(InputAction.CallbackContext context);
