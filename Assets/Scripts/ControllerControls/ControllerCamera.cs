@@ -21,8 +21,6 @@ public class ControllerCamera : MonoBehaviour
     private Vector3 facingSouth = new Vector3(0, 4, 7);
     private Vector3 facingWest = new Vector3(-7, 4, 0);
 
-    private enum cameraAngle { facingNorth, facingEast, facingSouth, facingWest };
-
     private void Awake()
     {
         player = GameObject.Find("Player");   //Finding the Player in the scene
@@ -51,47 +49,46 @@ public class ControllerCamera : MonoBehaviour
         transform.position = smoothedPosition;                                                          //Moving the Camera when the player is moving
 
         transform.LookAt(target);                                                                       //Always look towards the player
-    
-        if(Input.GetKey(KeyCode.T))
-        {
-            TurnLeft();
-        }
     }
-
-  /*  void AdjustCamera ()
-    {
-        
-        switch (angle)
-        {
-            case cameraAngle.facingNorth:
-                offset = new Vector3(0, 4, -7);
-                break;
-
-            case cameraAngle.facingEast:
-                offset = new Vector3(7, 4, 0);
-                break;
-
-            case cameraAngle.facingSouth:
-                offset = new Vector3(0, 4, 7);
-                break;
-
-            case cameraAngle.facingWest:
-                offset = new Vector3(-7, 4, 0);
-                break;
-        }
-    }*/
 
     private void TurnRight()
     {
-        if(offset == facingNorth)
+        if (offset == facingNorth)
         {
             offset = facingEast;
+        }
+        else if (offset == facingEast)
+        {
+            offset = facingSouth;
+        }
+        else if (offset == facingSouth)
+        {
+            offset = facingWest;
+        }
+        else if (offset == facingWest)
+        {
+            offset = facingNorth;
         }
     }
 
     private void TurnLeft()
     {
-        offset = new Vector3(offset.x - 7, offset.y, offset.z + 7);       
+        if (offset == facingNorth)
+        {
+            offset = facingWest;
+        }
+        else if (offset == facingWest)
+        {
+            offset = facingSouth;
+        }
+        else if (offset == facingSouth)
+        {
+            offset = facingEast;
+        }
+        else if (offset == facingEast)
+        {
+            offset = facingNorth;
+        }
     }
 
     private void OnEnable() // This function enables the controls when the object becomes enabled and active
