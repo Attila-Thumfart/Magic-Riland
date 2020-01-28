@@ -16,21 +16,8 @@ public class PlayerActions : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E) && IsOnField)
-        {
-            CurrentItem = FindObjectOfType<MySamplePlant>().gameObject;  //Later: first item in inventory
-            SeedField();
-        }
+        FieldAction();
     }
-
-
-  /*  private void OnTriggerStay(Collider other)
-    {
-        if (Input.GetKeyDown(KeyCode.E) && other.tag == "Field")
-        {
-            other.GetComponent<FieldManager>().SetIsSeeded(true);
-        }
-    } */
 
     private void OnTriggerEnter(Collider other)         //checks if the Player touches a Field
     {
@@ -46,7 +33,7 @@ public class PlayerActions : MonoBehaviour
         if (other.tag == "Field")
         {
             IsOnField = false;                          //sets the bool for it to false
-            CurrentField = null;                        //dereferences the current field
+            CurrentField = null;                        //dereferences the current field 
         }
     }
 
@@ -54,7 +41,27 @@ public class PlayerActions : MonoBehaviour
     {
         CurrentField.GetComponent<FieldManager>().SetIsSeeded(true);
         CurrentField.GetComponent<FieldManager>().SetGrowthrates(CurrentItem);
-        
     }
 
+    void HarvestField()
+    {
+        CurrentField.GetComponent<FieldManager>().ResetField();
+    }
+
+    void FieldAction()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && IsOnField)
+        {
+            if (CurrentField.GetComponent<FieldManager>().GetFieldstate() == FieldManager.Fieldstate.empty)
+            {
+                CurrentItem = FindObjectOfType<MySamplePlant>().gameObject;  //Later: first item in inventory
+                SeedField();
+            }
+
+            if (CurrentField.GetComponent<FieldManager>().GetFieldstate() == FieldManager.Fieldstate.finished)
+            {
+                HarvestField();
+            }
+        }
+    }
 }
