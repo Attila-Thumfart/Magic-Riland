@@ -43,7 +43,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Blitz"",
+                    ""name"": ""MoveSpell"",
                     ""type"": ""Button"",
                     ""id"": ""e1b24da9-de4b-4323-a2f2-8f60866d8889"",
                     ""expectedControlType"": """",
@@ -51,7 +51,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Feuer"",
+                    ""name"": ""Blitz"",
                     ""type"": ""Button"",
                     ""id"": ""75f0c5f0-a5ac-4001-aaee-56bc00b3f087"",
                     ""expectedControlType"": """",
@@ -59,7 +59,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Inventar"",
+                    ""name"": ""Feuer"",
                     ""type"": ""Button"",
                     ""id"": ""0b06ac3a-658a-43dd-a35b-caa35b6e9f9b"",
                     ""expectedControlType"": """",
@@ -67,7 +67,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Hotbar"",
+                    ""name"": ""Inventar"",
                     ""type"": ""Button"",
                     ""id"": ""65fd3001-9c5a-414e-b752-8c2f9c609c81"",
                     ""expectedControlType"": """",
@@ -75,7 +75,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Menu"",
+                    ""name"": ""Hotbar"",
                     ""type"": ""Button"",
                     ""id"": ""4a4f695c-54ff-4b1f-8715-77a96573c472"",
                     ""expectedControlType"": """",
@@ -83,7 +83,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Map"",
+                    ""name"": ""Menu"",
                     ""type"": ""Button"",
                     ""id"": ""5efbfc1b-68f9-45bb-b37d-03985a09ebdb"",
                     ""expectedControlType"": """",
@@ -91,7 +91,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Erde"",
+                    ""name"": ""Map"",
                     ""type"": ""Button"",
                     ""id"": ""40e582ab-0b9e-431d-9390-dc11b75f8114"",
                     ""expectedControlType"": """",
@@ -99,7 +99,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Interact"",
+                    ""name"": ""Erde"",
                     ""type"": ""Button"",
                     ""id"": ""b6098745-292f-4c2e-acc9-d227e9a9c1cd"",
                     ""expectedControlType"": """",
@@ -107,7 +107,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Wind"",
+                    ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""5235e537-e34c-4a4d-9375-c40a59dba01b"",
                     ""expectedControlType"": """",
@@ -115,9 +115,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Wasser"",
+                    ""name"": ""Wind"",
                     ""type"": ""Button"",
                     ""id"": ""b104a8ed-b42d-4cb3-ab2f-30719bc671e2"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Wasser"",
+                    ""type"": ""Button"",
+                    ""id"": ""e7640111-8c73-4119-b0a0-39454971d9e9"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
@@ -266,6 +274,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""CameraLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b8a939cd-cedd-4a4f-a664-402fe259ec92"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveSpell"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -399,6 +418,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
         m_Gameplay_CameraRight = m_Gameplay.FindAction("CameraRight", throwIfNotFound: true);
         m_Gameplay_CameraLeft = m_Gameplay.FindAction("CameraLeft", throwIfNotFound: true);
+        m_Gameplay_MoveSpell = m_Gameplay.FindAction("MoveSpell", throwIfNotFound: true);
         m_Gameplay_Blitz = m_Gameplay.FindAction("Blitz", throwIfNotFound: true);
         m_Gameplay_Feuer = m_Gameplay.FindAction("Feuer", throwIfNotFound: true);
         m_Gameplay_Inventar = m_Gameplay.FindAction("Inventar", throwIfNotFound: true);
@@ -469,6 +489,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Move;
     private readonly InputAction m_Gameplay_CameraRight;
     private readonly InputAction m_Gameplay_CameraLeft;
+    private readonly InputAction m_Gameplay_MoveSpell;
     private readonly InputAction m_Gameplay_Blitz;
     private readonly InputAction m_Gameplay_Feuer;
     private readonly InputAction m_Gameplay_Inventar;
@@ -486,6 +507,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Move => m_Wrapper.m_Gameplay_Move;
         public InputAction @CameraRight => m_Wrapper.m_Gameplay_CameraRight;
         public InputAction @CameraLeft => m_Wrapper.m_Gameplay_CameraLeft;
+        public InputAction @MoveSpell => m_Wrapper.m_Gameplay_MoveSpell;
         public InputAction @Blitz => m_Wrapper.m_Gameplay_Blitz;
         public InputAction @Feuer => m_Wrapper.m_Gameplay_Feuer;
         public InputAction @Inventar => m_Wrapper.m_Gameplay_Inventar;
@@ -514,6 +536,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @CameraLeft.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraLeft;
                 @CameraLeft.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraLeft;
                 @CameraLeft.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraLeft;
+                @MoveSpell.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMoveSpell;
+                @MoveSpell.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMoveSpell;
+                @MoveSpell.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMoveSpell;
                 @Blitz.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnBlitz;
                 @Blitz.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnBlitz;
                 @Blitz.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnBlitz;
@@ -557,6 +582,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @CameraLeft.started += instance.OnCameraLeft;
                 @CameraLeft.performed += instance.OnCameraLeft;
                 @CameraLeft.canceled += instance.OnCameraLeft;
+                @MoveSpell.started += instance.OnMoveSpell;
+                @MoveSpell.performed += instance.OnMoveSpell;
+                @MoveSpell.canceled += instance.OnMoveSpell;
                 @Blitz.started += instance.OnBlitz;
                 @Blitz.performed += instance.OnBlitz;
                 @Blitz.canceled += instance.OnBlitz;
@@ -669,6 +697,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnCameraRight(InputAction.CallbackContext context);
         void OnCameraLeft(InputAction.CallbackContext context);
+        void OnMoveSpell(InputAction.CallbackContext context);
         void OnBlitz(InputAction.CallbackContext context);
         void OnFeuer(InputAction.CallbackContext context);
         void OnInventar(InputAction.CallbackContext context);
