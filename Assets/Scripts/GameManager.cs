@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager GMInstance;   //an instance for other scripts to call functions from GM
 
+    List<FieldManager> Fields = new List<FieldManager>();
 
     [SerializeField]
     private int CalenderDay = 1;            //the days passing in a playthrough
@@ -18,6 +19,11 @@ public class GameManager : MonoBehaviour
     public void Awake()
     {
         GMInstance = this;
+        foreach (FieldManager go in FieldManager.FindObjectsOfType(typeof(FieldManager)))
+        {
+            if (go.name == "Field")
+                Fields.Add(go);
+        }
     }
 
     private void Update()
@@ -46,7 +52,15 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown("q") && isNight)
         {
             isNight = false;
+
+            for (int i = 0; i < Fields.Count; i++)
+            {
+                Fields[i].UpdateFieldDays();
+            }
         }
+
+
+
     }
 
 }
