@@ -21,6 +21,7 @@ public class ControllerCamera : MonoBehaviour
     private Vector3 facingSouth = new Vector3(0, 4, 7);
     private Vector3 facingWest = new Vector3(-7, 4, 0);
 
+    private int resetTimer = 0;
     private void Awake()
     {
         player = GameObject.Find("Player");   //Finding the Player in the scene
@@ -49,10 +50,13 @@ public class ControllerCamera : MonoBehaviour
         transform.position = smoothedPosition;                                                          //Moving the Camera when the player is moving
 
         transform.LookAt(target);                                                                       //Always look towards the player
+        resetCamera();
     }
 
     private void TurnRight()
     {
+        resetTimer = 1;
+
         if (offset == facingNorth)
         {
             offset = facingEast;
@@ -73,6 +77,8 @@ public class ControllerCamera : MonoBehaviour
 
     private void TurnLeft()
     {
+        resetTimer = 1;
+
         if (offset == facingNorth)
         {
             offset = facingWest;
@@ -89,6 +95,21 @@ public class ControllerCamera : MonoBehaviour
         {
             offset = facingNorth;
         }
+    }
+
+    private void resetCamera()
+    {
+        if(resetTimer >= 1)
+        {
+            resetTimer++;
+        }
+        if (resetTimer >= 150)
+        {
+            resetTimer = 0;
+
+            offset = facingNorth;
+        }
+
     }
 
     private void OnEnable() // This function enables the controls when the object becomes enabled and active
