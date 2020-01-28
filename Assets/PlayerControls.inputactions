@@ -14,7 +14,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Camera",
+                    "name": "CameraRight",
                     "type": "Button",
                     "id": "98fd291e-fff9-4bd3-b928-61cac5f0430f",
                     "expectedControlType": "",
@@ -22,7 +22,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Blitz",
+                    "name": "CameraLeft",
                     "type": "Button",
                     "id": "06b5a90e-45ec-46d6-a43f-64f0b82ebd8b",
                     "expectedControlType": "",
@@ -30,7 +30,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Feuer",
+                    "name": "Blitz",
                     "type": "Button",
                     "id": "e1b24da9-de4b-4323-a2f2-8f60866d8889",
                     "expectedControlType": "",
@@ -38,7 +38,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Inventar",
+                    "name": "Feuer",
                     "type": "Button",
                     "id": "75f0c5f0-a5ac-4001-aaee-56bc00b3f087",
                     "expectedControlType": "",
@@ -46,7 +46,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Hotbar",
+                    "name": "Inventar",
                     "type": "Button",
                     "id": "0b06ac3a-658a-43dd-a35b-caa35b6e9f9b",
                     "expectedControlType": "",
@@ -54,7 +54,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Menu",
+                    "name": "Hotbar",
                     "type": "Button",
                     "id": "65fd3001-9c5a-414e-b752-8c2f9c609c81",
                     "expectedControlType": "",
@@ -62,7 +62,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Map",
+                    "name": "Menu",
                     "type": "Button",
                     "id": "4a4f695c-54ff-4b1f-8715-77a96573c472",
                     "expectedControlType": "",
@@ -70,7 +70,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Erde",
+                    "name": "Map",
                     "type": "Button",
                     "id": "5efbfc1b-68f9-45bb-b37d-03985a09ebdb",
                     "expectedControlType": "",
@@ -78,7 +78,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Interact",
+                    "name": "Erde",
                     "type": "Button",
                     "id": "40e582ab-0b9e-431d-9390-dc11b75f8114",
                     "expectedControlType": "",
@@ -86,7 +86,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Wind",
+                    "name": "Interact",
                     "type": "Button",
                     "id": "b6098745-292f-4c2e-acc9-d227e9a9c1cd",
                     "expectedControlType": "",
@@ -94,9 +94,17 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Wasser",
+                    "name": "Wind",
                     "type": "Button",
                     "id": "5235e537-e34c-4a4d-9375-c40a59dba01b",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Wasser",
+                    "type": "Button",
+                    "id": "b104a8ed-b42d-4cb3-ab2f-30719bc671e2",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
@@ -117,11 +125,11 @@
                 {
                     "name": "",
                     "id": "c47922fb-1253-4904-8afc-d8c26f887bd0",
-                    "path": "<Gamepad>/rightStick",
+                    "path": "<Gamepad>/rightStick/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Camera",
+                    "action": "CameraRight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -232,6 +240,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Wasser",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6051f6dd-6d29-4d9b-a1bf-0a8295d145b2",
+                    "path": "<Gamepad>/rightStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
