@@ -13,6 +13,8 @@ public class ControllerActions : MonoBehaviour
 
     private void Awake()
     {
+        controls = new PlayerControls();
+
         controls.Gameplay.Interact.performed += ctx => SeedField();
     }
 

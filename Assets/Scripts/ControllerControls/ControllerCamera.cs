@@ -21,8 +21,10 @@ public class ControllerCamera : MonoBehaviour
         player = GameObject.Find("Player");   //Finding the Player in the scene
         target = player.transform;            //Setting target in dependend on the Player
 
-        controls.Gameplay.CameraRight.performed += ctx => TurnRight();
-        controls.Gameplay.CameraLeft.performed += ctx => TurnLeft();
+        controls = new PlayerControls();
+
+        controls.Gameplay.CameraRight.started += ctx => TurnRight();
+        controls.Gameplay.CameraLeft.started += ctx => TurnLeft();
     }
 
 
@@ -40,16 +42,21 @@ public class ControllerCamera : MonoBehaviour
         transform.position = smoothedPosition;                                                          //Moving the Camera when the player is moving
 
         transform.LookAt(target);                                                                       //Always look towards the player
+    
+        if(Input.GetKey(KeyCode.T))
+        {
+            TurnLeft();
+        }
     }
 
     private void TurnRight()
     {
-        offset = new Vector3(offset.x + 7, offset.y, offset.z + 7);
+        offset = new Vector3(offset.x + 7, offset.y, offset.z - 7);
     }
 
     private void TurnLeft()
     {
-        offset = new Vector3(offset.x - 7, offset.y, offset.z - 7);       
+        offset = new Vector3(offset.x - 7, offset.y, offset.z + 7);       
     }
 
     private void OnEnable() // This function enables the controls when the object becomes enabled and active
