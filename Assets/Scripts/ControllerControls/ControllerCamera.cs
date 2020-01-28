@@ -16,10 +16,18 @@ public class ControllerCamera : MonoBehaviour
 
     PlayerControls controls; // This is where the Controls and actual Input are saved (via Unity Input System)
 
+    private Vector3 facingNorth = new Vector3(0, 4, -7);
+    private Vector3 facingEast = new Vector3(7, 4, 0);
+    private Vector3 facingSouth = new Vector3(0, 4, 7);
+    private Vector3 facingWest = new Vector3(-7, 4, 0);
+
+    private int resetTimer = 0;
     private void Awake()
     {
         player = GameObject.Find("Player");   //Finding the Player in the scene
         target = player.transform;            //Setting target in dependend on the Player
+
+        offset = facingNorth;
 
         controls = new PlayerControls();
 
@@ -42,21 +50,66 @@ public class ControllerCamera : MonoBehaviour
         transform.position = smoothedPosition;                                                          //Moving the Camera when the player is moving
 
         transform.LookAt(target);                                                                       //Always look towards the player
-    
-        if(Input.GetKey(KeyCode.T))
-        {
-            TurnLeft();
-        }
+        resetCamera();
     }
 
     private void TurnRight()
     {
-        offset = new Vector3(offset.x + 7, offset.y, offset.z - 7);
+        resetTimer = 1;
+
+        if (offset == facingNorth)
+        {
+            offset = facingEast;
+        }
+        else if (offset == facingEast)
+        {
+            offset = facingSouth;
+        }
+        else if (offset == facingSouth)
+        {
+            offset = facingWest;
+        }
+        else if (offset == facingWest)
+        {
+            offset = facingNorth;
+        }
     }
 
     private void TurnLeft()
     {
-        offset = new Vector3(offset.x - 7, offset.y, offset.z + 7);       
+        resetTimer = 1;
+
+        if (offset == facingNorth)
+        {
+            offset = facingWest;
+        }
+        else if (offset == facingWest)
+        {
+            offset = facingSouth;
+        }
+        else if (offset == facingSouth)
+        {
+            offset = facingEast;
+        }
+        else if (offset == facingEast)
+        {
+            offset = facingNorth;
+        }
+    }
+
+    private void resetCamera()
+    {
+        if(resetTimer >= 1)
+        {
+            resetTimer++;
+        }
+        if (resetTimer >= 150)
+        {
+            resetTimer = 0;
+
+            offset = facingNorth;
+        }
+
     }
 
     private void OnEnable() // This function enables the controls when the object becomes enabled and active
