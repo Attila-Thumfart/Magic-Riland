@@ -9,6 +9,11 @@ public class ControllerActions : MonoBehaviour
     GameObject CurrentField;
     GameObject CurrentItem;
 
+    public GameObject cloud;
+    public GameObject player;
+    // public GameObject mainCam;
+    // public GameObject cloudCam;
+
     PlayerControls controls; // This is where the Controls and actual Input are saved (via Unity Input System)
 
     private void Awake()
@@ -16,6 +21,7 @@ public class ControllerActions : MonoBehaviour
         controls = new PlayerControls();
 
         controls.Gameplay.Interact.performed += ctx => SeedField();
+        controls.Gameplay.Wasser.performed += ctx => waterSpell();
     }
 
     /*  private void OnTriggerStay(Collider other)
@@ -25,6 +31,17 @@ public class ControllerActions : MonoBehaviour
               other.GetComponent<FieldManager>().SetIsSeeded(true);
           }
       } */
+
+    private void waterSpell()
+    {
+        cloud.transform.position = player.transform.position;
+        //cloudCam.transform.position = mainCam.transform.position;
+
+        cloud.SetActive(true);
+        // cloudCam.SetActive(true);
+        // player.GetComponent<ControllerMovement>().enabled = false;
+        // mainCam.SetActive(false);
+    }
 
     private void OnTriggerEnter(Collider other)         //checks if the Player touches a Field
     {
