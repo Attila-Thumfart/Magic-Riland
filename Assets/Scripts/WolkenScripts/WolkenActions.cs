@@ -35,6 +35,11 @@ public class WolkenActions : MonoBehaviour
         {
             cancleSpell();
         }
+
+        if(IsOnField)
+        {
+            CurrentField.GetComponent<FieldManager>().SetIsWatered(true);
+        }
     }
 
     private void OnTriggerEnter(Collider other)         //checks if the Player touches a Field
@@ -43,6 +48,7 @@ public class WolkenActions : MonoBehaviour
         {
             IsOnField = true;                           //sets the bool for it to true
             CurrentField = other.gameObject;            //references the current field; used for SeedField to know which field is seeded
+
         }
     }
 

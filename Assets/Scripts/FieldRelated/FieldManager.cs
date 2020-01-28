@@ -118,7 +118,7 @@ public class FieldManager : MonoBehaviour
             DaysUntilProgress++;
             IsWatered = false;
         }
-        else if (!IsWatered)
+        else if (!IsWatered && IsSeeded)
         {
             DaysUntilWithered--;
         }

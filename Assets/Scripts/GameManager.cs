@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
         GMInstance = this;
         foreach (FieldManager go in FieldManager.FindObjectsOfType(typeof(FieldManager)))
         {
-            if (go.name == "Field")
+            if (go.tag == "Field")
                 Fields.Add(go);
         }
     }
@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
             for (int i = 0; i < Fields.Count; i++)
             {
                 Fields[i].UpdateFieldDays();
+                Debug.Log(Fields.Count);
             }
         }
 
