@@ -16,10 +16,19 @@ public class ControllerCamera : MonoBehaviour
 
     PlayerControls controls; // This is where the Controls and actual Input are saved (via Unity Input System)
 
+    private Vector3 facingNorth = new Vector3(0, 4, -7);
+    private Vector3 facingEast = new Vector3(7, 4, 0);
+    private Vector3 facingSouth = new Vector3(0, 4, 7);
+    private Vector3 facingWest = new Vector3(-7, 4, 0);
+
+    private enum cameraAngle { facingNorth, facingEast, facingSouth, facingWest };
+
     private void Awake()
     {
         player = GameObject.Find("Player");   //Finding the Player in the scene
         target = player.transform;            //Setting target in dependend on the Player
+
+        offset = facingNorth;
 
         controls = new PlayerControls();
 
@@ -49,9 +58,35 @@ public class ControllerCamera : MonoBehaviour
         }
     }
 
+  /*  void AdjustCamera ()
+    {
+        
+        switch (angle)
+        {
+            case cameraAngle.facingNorth:
+                offset = new Vector3(0, 4, -7);
+                break;
+
+            case cameraAngle.facingEast:
+                offset = new Vector3(7, 4, 0);
+                break;
+
+            case cameraAngle.facingSouth:
+                offset = new Vector3(0, 4, 7);
+                break;
+
+            case cameraAngle.facingWest:
+                offset = new Vector3(-7, 4, 0);
+                break;
+        }
+    }*/
+
     private void TurnRight()
     {
-        offset = new Vector3(offset.x + 7, offset.y, offset.z - 7);
+        if(offset == facingNorth)
+        {
+            offset = facingEast;
+        }
     }
 
     private void TurnLeft()
