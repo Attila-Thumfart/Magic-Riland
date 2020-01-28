@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 490731bf45c0e5b4a8f93118f2ad748b, type: 3}
-  m_Name: New Plant
+  m_Name: SampleStrawberry
   m_EditorClassIdentifier: 
-  PlantName: 
-  Description: 
+  PlantName: SampleStrawberry
+  Description: A nice Strawberry
   PlantModel: {fileID: 0}
   GrowthModelSmall: {fileID: 0}
   GrowthModelMedium: {fileID: 0}
   Art: {fileID: 0}
-  GrowtRateMedium: 0
-  GrowthRateFinish: 0
-  SellPrice: 0
+  GrowtRateMedium: 1
+  GrowthRateFinish: 4
+  SellPrice: 2000

@@ -316,7 +316,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 930713916}
-  - component: {fileID: 930713915}
   m_Layer: 0
   m_Name: PlantManager
   m_TagString: Untagged
@@ -324,18 +323,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &930713915
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 930713914}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 26568e41ea300f34f9922247f4830c1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &930713916
 Transform:
   m_ObjectHideFlags: 0
@@ -1036,7 +1023,7 @@ GameObject:
   - component: {fileID: 2016596980}
   - component: {fileID: 2016596979}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: SamplePlant
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1051,10 +1038,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2016596978}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 073a94e090bb3c546b95aa1849a94818, type: 3}
+  m_Script: {fileID: 11500000, guid: efc31bf7dd765fb43904f642368c8599, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Plant: {fileID: 0}
+  plant: {fileID: 11400000, guid: c47da54da3c7c5d4892c47e2b736044d, type: 2}
 --- !u!135 &2016596980
 SphereCollider:
   m_ObjectHideFlags: 0
