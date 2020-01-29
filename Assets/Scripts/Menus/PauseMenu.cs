@@ -34,6 +34,7 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
+    //Deactivates the UI Elements and activates Game Time again
     public void Resume()
     {
         PauseMenuUI.SetActive(false);
@@ -41,6 +42,7 @@ public class PauseMenu : MonoBehaviour
         GameIsPaused = false;
     }
 
+    //Activates UI Elements and stops Game Time
     public void Pause()
     {
         PauseMenuUI.SetActive(true);
@@ -48,6 +50,7 @@ public class PauseMenu : MonoBehaviour
         GameIsPaused = true;
     }
 
+    // Loads the first scene in the Build order (usually the Main Menu)
     public void LoadMenu()
     {
         SceneManager.LoadScene(sceneBuildIndex: 0);

@@ -27,6 +27,7 @@ public class PlayerActions : MonoBehaviour
     {
         controls = new PlayerControls();
 
+        // The Controls via the Unity Action Input System are set here
         controls.Gameplay.Interact.performed += ctx => SeedField();
         controls.Gameplay.Wasser.started += ctx => StartChannel();
         controls.Gameplay.Wasser.canceled += ctx => EndChannel();
@@ -45,7 +46,7 @@ public class PlayerActions : MonoBehaviour
     }
 
 
-    private void StartChannel()
+    private void StartChannel()  // Checks if there is already a cloud active, if not the Max Duration of the used cloud is pulled here for later use and the channel State is set as true to start the charge up/channel
     {
 
         if (cloud.activeSelf == false)
@@ -57,7 +58,7 @@ public class PlayerActions : MonoBehaviour
         }
     }
 
-    private void EndChannel()
+    private void EndChannel()  // Activates when the button is released and stops the counter, if it is above the threshold a cloud is spawned with a duration according to the channel time
     {
         if (cloudDuration < 1f)
         {
@@ -72,7 +73,7 @@ public class PlayerActions : MonoBehaviour
         }
     }
 
-    private void ChannelCounter()
+    private void ChannelCounter()  // the counter that measures the channel duration, if the maximum channel duration is reached it automatically casts the spell fully charged and stops the counter
     {
         if (channelState)
         {
@@ -87,7 +88,7 @@ public class PlayerActions : MonoBehaviour
         }
     }
 
-    private void WaterSpell(float _duration)
+    private void WaterSpell(float _duration)   // Spawns a cloud on the player position and sets its duration
     {
         cloud.transform.position = Player.transform.position;
         //cloudCam.transform.position = mainCam.transform.position;
