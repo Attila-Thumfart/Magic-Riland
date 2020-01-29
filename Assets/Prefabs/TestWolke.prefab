@@ -187,4 +187,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cloud: {fileID: 1230103767551851472}
-  cloudDuration: 5
+  maxCloudChannelDuration: 5

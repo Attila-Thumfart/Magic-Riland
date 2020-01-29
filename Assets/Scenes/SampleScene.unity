@@ -464,8 +464,6 @@ GameObject:
   - component: {fileID: 956287183}
   - component: {fileID: 956287185}
   - component: {fileID: 956287187}
-  - component: {fileID: 956287189}
-  - component: {fileID: 956287188}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -543,34 +541,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a24a7d99142044e488fcc3fc47663544, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player: {fileID: 0}
---- !u!114 &956287188
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 956287182}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 487d23e3bc1bde240be7ac6cc8d0d437, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerSpeed: 5
---- !u!114 &956287189
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 956287182}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d45ac86d87de3884795763c737598a3a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  cloud: {fileID: 1954827868}
-  player: {fileID: 956287182}
+  cloud: {fileID: 0}
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1448,12 +1419,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1954827868 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1230103767551851472, guid: 9ed01fb2d8841db41a500f7d9950fa96,
-    type: 3}
-  m_PrefabInstance: {fileID: 1296104641}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2016596978
 GameObject:
   m_ObjectHideFlags: 0
