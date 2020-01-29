@@ -63,12 +63,12 @@ public class GameManager : MonoBehaviour
 
     private void DefineGameObjects()
     {
-        Player = GameObject.Find("Player");           //Finds the Player
-        DontDestroyOnLoad(Player);
+        Player = GameObject.Find("Player");         //Finds the Player
+        DontDestroyOnLoad(Player);                  //Player wont get destroyed if a new scene is loading
 
-        if (GMInstance == null)
+        if (GMInstance == null)                     //this makes it so only one GM is loaded
         {
-            GMInstance = this;
+            GMInstance = this;                      //Defines the GM for other scripts to use
             DontDestroyOnLoad(this);
         }
         else
