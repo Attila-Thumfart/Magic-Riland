@@ -95,8 +95,6 @@ public class PlayerActions : MonoBehaviour
         WolkenActions myCloud = cloud.GetComponent<WolkenActions>();
         myCloud.SetCloudDuration(_duration);
 
-        Debug.Log("Duration Set");
-
         cloud.SetActive(true);
 
         // cloudCam.SetActive(true);
