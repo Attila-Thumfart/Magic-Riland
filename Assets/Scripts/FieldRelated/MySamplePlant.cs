@@ -4,20 +4,25 @@ using UnityEngine;
 
 public class MySamplePlant : MonoBehaviour
 {
-
     [SerializeField]
-    private SamplePlant Plant;
-
+    private SamplePlant plant;
 
     void Start()
     {
-        //Plant = Get
-        Plant.Print();
+        
+    }
+    private void Update()
+    {
+
     }
 
-    public SamplePlant GetPlant()
-    {
-        return Plant;
-    }
-    
+        public int GetGrowthRateMedium()            //gives growthrateinformation to the field        
+        {
+            return plant.GetGrowthRateMedium();
+        }
+
+        public int GetGrowthRateFinished()          //gives growthrateinformation to the field
+        {
+            return plant.GetGrowthRateFinished();
+        }
 }

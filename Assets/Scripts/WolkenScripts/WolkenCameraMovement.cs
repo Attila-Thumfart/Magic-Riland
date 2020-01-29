@@ -1,21 +1,21 @@
 ﻿using UnityEngine;
 
-public class CameraMovement : MonoBehaviour
+public class WolkenCameraMovement : MonoBehaviour
 {
-    private GameObject player;              //Player an dem die Camera hängt
+    private GameObject wolke;              //Player an dem die Camera hängt
     private Transform target;               //Position, Rotation und Scale vom Target (Player)
 
     [SerializeField]
     private float smoothSpeed = 0.125f;     //Speed for Cameradelay when moving the Player
 
     [SerializeField]
-    private Vector3  offset;                 //Used for Positioning the Camera in relation to the Player
+    private Vector3 offset;                 //Used for Positioning the Camera in relation to the Player
 
 
     private void Awake()
     {
-        player = GameObject.Find("Player");   //Finding the Player in the scene
-        target = player.transform;            //Setting target in dependend on the Player
+        wolke = GameObject.Find("TestWolke");   //Finding the Player in the scene
+        target = wolke.transform;            //Setting target in dependend on the Player
     }
 
 

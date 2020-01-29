@@ -4,26 +4,31 @@ using UnityEngine;
 
 public class FieldManager : MonoBehaviour
 {
-    // Start is called before the first frame update
-    GameManager GM;
-    GameObject Player;
+
+    GameManager GM;                     //used to use the GameManager
+    GameObject Player;                  //used to use informations of the Player
 
     [SerializeField]
-    private enum Fieldstate
+    public enum Fieldstate             //different fieldstates
     {
         empty,
         seeded,
         sprout,
-        growing,
+        medium,
         finished,
-        withered
+        withered,
     }
 
     [SerializeField]
-    private Fieldstate ActiveFieldState = Fieldstate.empty;
+    private Fieldstate ActiveFieldstate = Fieldstate.empty;     //all Fields are empty at the start
 
     [SerializeField]
     private int SeedDay;
+    [SerializeField]
+    private int DayOfProgress;
+    [SerializeField]
+    private int DaysUntilWithered = 3;
+
     [SerializeField]
     private int GrowthRateMedium;
     [SerializeField]
@@ -37,34 +42,63 @@ public class FieldManager : MonoBehaviour
 
     private void Start()
     {
-        GM = GameManager.GMInstance;
-        Player = GameObject.FindGameObjectWithTag("Player");
+        GM = GameManager.GMInstance;                                    //finds the GM
+        Player = GameObject.FindGameObjectWithTag("Player");            //finds the Player
     }
 
     void Update()
     {
+
         SwitchFields();
+
+
+        WitheredField();
     }
 
-    private void SwitchFields()
+    private void SwitchFields()         //this switches the different states of the Field (Enums)
     {
-        switch (ActiveFieldState)
+        switch (ActiveFieldstate)
         {
-            case (Fieldstate.empty):
-                if(IsSeeded)
+            case (Fieldstate.empty):                                        //if this field is empty
+                if (IsSeeded)                                               //if the player seeded the field
                 {
-                    ActiveFieldState = Fieldstate.seeded;
-                    SeedDay = GameManager.GMInstance.GetCalenderDay();
+                    ActiveFieldstate = Fieldstate.seeded;                   //the field is now seeded
+                    SeedDay = GameManager.GMInstance.GetCalenderDay();      //remember what day the seeding has taken place
+                    DayOfProgress = 0;
                 }
                 break;
-            case (Fieldstate.seeded):
+
+            case (Fieldstate.seeded):                                       //if the plant is seeded
+                if (DayOfProgress == 1)                                     //and if the day is ended (only for the first step from seed --> sprout)
+                {
+                    ActiveFieldstate = Fieldstate.sprout;                   //the seed growths into a sprout
+                    DayOfProgress = 0;                                      //reset the progresstimer
+                }
                 break;
-            case (Fieldstate.sprout):
+
+            case (Fieldstate.sprout):                                       //if the plant is a sprout
+                if (DayOfProgress == GrowthRateMedium)                      //and if the DayOfProgress matches the GrowthRateMedium step of the plant
+                {                    
+                    ActiveFieldstate = Fieldstate.medium;                   //the plant reaches its 2nd stage of its growthcycle
+                    DayOfProgress = 0;                                      //reset the progresstimer
+                }
                 break;
-            case (Fieldstate.growing):
+
+            case (Fieldstate.medium):                                       //if the plant is on its medium state
+                if (DayOfProgress == GrowthRateFinished)                    //and if the DayOfProgress matches the GrowthRateFinished step of the plant
+                {
+                    ActiveFieldstate = Fieldstate.finished;                 //the plant is fully grown and ready to be harvested
+                    DayOfProgress = 0;                                      //reset the progresstimer
+                }
                 break;
-            case (Fieldstate.finished):
+
+            case (Fieldstate.finished):                                     //if the plant is fully grown
+                if(DayOfProgress == 3)                                      //and if 3 days are passed
+                {
+                    ActiveFieldstate = Fieldstate.withered;                 //the plant is withered 
+                }
                 break;
+
             case (Fieldstate.withered):
                 break;
 
@@ -72,22 +106,53 @@ public class FieldManager : MonoBehaviour
     }
 
 
-    public void SetIsSeeded(bool NewState)
+    public void SetIsSeeded(bool _NewState)          //can get called by PlayerActions to seed the field/empty the field
     {
-        IsSeeded = NewState;
-      //  GrowthRateMedium = 
+        IsSeeded = _NewState;
     }
 
-    public void SetGrowthrates(GameObject _MySamplePlant)
+    public void UpdateFieldDays()                   //does the logic behind the daily cycling of the stages, gets called every day from GameManager
     {
-        GrowthRateMedium = _MySamplePlant.GetComponent<MySamplePlant>().GetPlant().GetGrowthRateMedium();
-        GrowthRateFinished = _MySamplePlant.GetComponent<MySamplePlant>().GetPlant().GetGrowthRateFinish();
+        if (IsWatered)                              //if the field is watered
+        {
+            DayOfProgress++;                        //the plant growths towards its next step
+            IsWatered = false;                      //dry out the field again
+        }
+        else if (!IsWatered && IsSeeded)            //if the field is not waterd but seeded
+        {
+            DaysUntilWithered--;                    //the plant is one step closer to dry out
+        }
+    }
+
+    public void SetGrowthrates(GameObject _MySamplePlant)           //gets informations of MySamplePlant to the field
+    {
+        GrowthRateMedium = _MySamplePlant.GetComponent<MySamplePlant>().GetGrowthRateMedium();          //growthrate to first state
+        GrowthRateFinished = _MySamplePlant.GetComponent<MySamplePlant>().GetGrowthRateFinished();      //growthrate to finished state
+    }
+
+    public void SetIsWatered(bool _NewState)               //setter for other scripts to set the watered state of the field
+    {
+        IsWatered = _NewState;
     }
 
 
-
-    public void ResetField()
+    public void ResetField()                                //resets the field to an empty state
     {
         IsSeeded = false;
+        ActiveFieldstate = Fieldstate.empty;
+    }
+
+    private void WitheredField()                            //if the plant is not watered for 3 days this function is called and "kills" the plant
+    {
+        if (DaysUntilWithered == 0)
+        {
+            ActiveFieldstate = Fieldstate.withered;
+        }
+    }
+
+
+    public Fieldstate GetFieldstate()                       //getter for other scripts to get the active Fieldstate
+    {
+        return ActiveFieldstate;
     }
 }
