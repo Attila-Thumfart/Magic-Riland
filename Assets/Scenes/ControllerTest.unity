@@ -746,6 +746,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a24a7d99142044e488fcc3fc47663544, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cloud: {fileID: 1423751467}
 --- !u!114 &1994709405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -811,7 +812,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1994709403}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 487d23e3bc1bde240be7ac6cc8d0d437, type: 3}
   m_Name: 
@@ -824,13 +825,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1994709403}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d45ac86d87de3884795763c737598a3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cloud: {fileID: 1423751467}
-  player: {fileID: 1994709403}
+  Player: {fileID: 0}
 --- !u!1001 &1230103766130262779
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -838,6 +839,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1230103767551851467, guid: 9ed01fb2d8841db41a500f7d9950fa96,
+        type: 3}
+      propertyPath: maxCloudChannelDuration
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 1230103767551851472, guid: 9ed01fb2d8841db41a500f7d9950fa96,
         type: 3}
       propertyPath: m_Name

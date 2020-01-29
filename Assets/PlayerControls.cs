@@ -1,4 +1,4 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/Scripts/ControllerControls/PlayerControls.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/PlayerControls.inputactions'
 
 using System;
 using System.Collections;
@@ -409,6 +409,85 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Keyboard"",
+            ""id"": ""6325aeb0-02b6-4737-87f0-17d21a7bbeaa"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Button"",
+                    ""id"": ""652313ca-edd8-462e-bd40-ff41fc2a140a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""fd91bc33-f812-4e66-a66c-32b1d0a601ed"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""c86a0c70-10d2-4e12-9fab-985c437095a1"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""002e5e29-bc00-4aaf-be03-23b869dfb4cc"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6138ca36-9b48-4ba8-b505-76ae807cd22e"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9b0f4fb1-dcc2-4e7f-9403-40c65275059b"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""31277347-280a-4715-8985-10b606dda63a"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -437,6 +516,10 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Menus_TabRight = m_Menus.FindAction("TabRight", throwIfNotFound: true);
         m_Menus_Cancle = m_Menus.FindAction("Cancle", throwIfNotFound: true);
         m_Menus_Use = m_Menus.FindAction("Use", throwIfNotFound: true);
+        // Keyboard
+        m_Keyboard = asset.FindActionMap("Keyboard", throwIfNotFound: true);
+        m_Keyboard_Move = m_Keyboard.FindAction("Move", throwIfNotFound: true);
+        m_Keyboard_Interact = m_Keyboard.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -692,6 +775,47 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         }
     }
     public MenusActions @Menus => new MenusActions(this);
+
+    // Keyboard
+    private readonly InputActionMap m_Keyboard;
+    private IKeyboardActions m_KeyboardActionsCallbackInterface;
+    private readonly InputAction m_Keyboard_Move;
+    private readonly InputAction m_Keyboard_Interact;
+    public struct KeyboardActions
+    {
+        private @PlayerControls m_Wrapper;
+        public KeyboardActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_Keyboard_Move;
+        public InputAction @Interact => m_Wrapper.m_Keyboard_Interact;
+        public InputActionMap Get() { return m_Wrapper.m_Keyboard; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(KeyboardActions set) { return set.Get(); }
+        public void SetCallbacks(IKeyboardActions instance)
+        {
+            if (m_Wrapper.m_KeyboardActionsCallbackInterface != null)
+            {
+                @Move.started -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnMove;
+                @Interact.started -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnInteract;
+            }
+            m_Wrapper.m_KeyboardActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
+            }
+        }
+    }
+    public KeyboardActions @Keyboard => new KeyboardActions(this);
     public interface IGameplayActions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -717,5 +841,10 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnTabRight(InputAction.CallbackContext context);
         void OnCancle(InputAction.CallbackContext context);
         void OnUse(InputAction.CallbackContext context);
+    }
+    public interface IKeyboardActions
+    {
+        void OnMove(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }

@@ -1,27 +1,107 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerActions : MonoBehaviour
 {
-
     private bool IsOnField = false;
     private bool TouchesBed = false;
-    private GameObject CurrentField;
-    private GameObject CurrentItem;
+    GameObject CurrentField;
+    GameObject CurrentItem;
 
-    public GameObject Player;
+    [SerializeField]
+    private GameObject cloud;
+    private GameObject Player;
 
+    private bool channelState = false;
+    private float cloudDuration;
+    private float maxCloudDuration;
 
-    private void Start()
+    // public GameObject mainCam;
+    // public GameObject cloudCam;
+
+    PlayerControls controls; // This is where the Controls and actual Input are saved (via Unity Input System)
+
+    private void Awake()
     {
+        controls = new PlayerControls();
+
+        controls.Gameplay.Interact.performed += ctx => SeedField();
+        controls.Gameplay.Wasser.started += ctx => StartChannel();
+        controls.Gameplay.Wasser.canceled += ctx => EndChannel();
+        controls.Gameplay.Interact.performed += ctx => FieldAction();
+        controls.Keyboard.Interact.performed += ctx => FieldAction();
+        controls.Gameplay.Interact.performed += ctx => EndDay();
+        controls.Keyboard.Interact.performed += ctx => EndDay();
+
         Player = this.gameObject;
     }
 
-    private void Update()
+
+    private void FixedUpdate()
     {
-        FieldAction();
-        EndDay();
+        ChannelCounter();
+    }
+
+
+    private void StartChannel()
+    {
+
+        if (cloud.activeSelf == false)
+        {
+            WolkenActions myCloud = cloud.GetComponent<WolkenActions>();
+            maxCloudDuration = myCloud.GetMaxCloudChannelDuration();
+
+            channelState = true;
+        }
+    }
+
+    private void EndChannel()
+    {
+        if (cloudDuration < 1f)
+        {
+            channelState = false;
+            cloudDuration = 0f;
+        }
+        else if (cloudDuration >= 1f)
+        {
+            channelState = false;
+            WaterSpell(cloudDuration * 2);
+            cloudDuration = 0f;
+        }
+    }
+
+    private void ChannelCounter()
+    {
+        if (channelState)
+        {
+            cloudDuration += Time.deltaTime;
+        }
+
+        if (channelState && cloudDuration >= maxCloudDuration)
+        {
+            channelState = false;
+            cloudDuration = maxCloudDuration;
+            EndChannel();
+        }
+    }
+
+    private void WaterSpell(float _duration)
+    {
+        cloud.transform.position = Player.transform.position;
+        //cloudCam.transform.position = mainCam.transform.position;
+
+        WolkenActions myCloud = cloud.GetComponent<WolkenActions>();
+        myCloud.SetCloudDuration(_duration);
+
+        Debug.Log("Duration Set");
+
+        cloud.SetActive(true);
+
+        // cloudCam.SetActive(true);
+        // player.GetComponent<ControllerMovement>().enabled = false;
+        // mainCam.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)         //checks if the Player touches a Field
@@ -54,8 +134,12 @@ public class PlayerActions : MonoBehaviour
 
     void SeedField()                                    //Seeds the field and gives over the plants information
     {
-        CurrentField.GetComponent<FieldManager>().SetIsSeeded(true);
-        CurrentField.GetComponent<FieldManager>().SetGrowthrates(CurrentItem);
+        if (IsOnField)
+        {
+
+            CurrentField.GetComponent<FieldManager>().SetIsSeeded(true);
+            CurrentField.GetComponent<FieldManager>().SetGrowthrates(CurrentItem);
+        }
     }
 
     void HarvestField()                                 //Harvests the field the player is standing on
@@ -65,7 +149,7 @@ public class PlayerActions : MonoBehaviour
 
     void FieldAction()
     {
-        if (Input.GetKeyDown(KeyCode.E) && IsOnField)
+        if (IsOnField)
         {
             if (CurrentField.GetComponent<FieldManager>().GetFieldstate() == FieldManager.Fieldstate.empty)         //if the field the player is standing on is empty
             {
@@ -82,7 +166,7 @@ public class PlayerActions : MonoBehaviour
 
     void EndDay()
     {
-        if(TouchesBed && Input.GetKeyDown(KeyCode.E))           //if the player touches the Bed and presses "E"
+        if (TouchesBed)           //if the player touches the Bed and presses "E"
         {
             GameManager.GMInstance.IncrementCalenderDay();      //end the day 
             GetComponent<PlayerMovement>().enabled = false;
@@ -92,5 +176,15 @@ public class PlayerActions : MonoBehaviour
     public void EnableMovement()
     {
         GetComponent<PlayerMovement>().enabled = true;
+    }
+
+    private void OnEnable() // This function enables the controls when the object becomes enabled and active
+    {
+        controls.Gameplay.Enable();
+    }
+
+    private void OnDisable() // This function disables the controls when the object becomes disabled or inactive
+    {
+        controls.Gameplay.Disable();
     }
 }

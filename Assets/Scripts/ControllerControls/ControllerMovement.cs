@@ -23,9 +23,32 @@ public class ControllerMovement : MonoBehaviour
     {
         Vector3 movement = new Vector3(move.x * playerSpeed, 0f, move.y * playerSpeed) * Time.deltaTime; // X and Y Values of the JoyStick are multiplyed with the Playerspeed
         transform.Translate(movement, Space.World); // The values are applied to move the player in relation to the world
+
+        PlayerTransformation();
     }
 
-    private void OnEnable() // This function enables the controls when the object becomes enabled and active
+    void PlayerTransformation()    // Movement for WASD and dependend on playerSpeed
+    {
+        if (Input.GetKey("w"))
+        {
+            transform.position = transform.position + new Vector3(0f, 0f, playerSpeed * Time.deltaTime);
+        }
+
+        if (Input.GetKey("s"))
+        {
+            transform.position = transform.position + new Vector3(0f, 0f, -playerSpeed * Time.deltaTime);
+        }
+        if (Input.GetKey("a"))
+        {
+            transform.position = transform.position + new Vector3(-playerSpeed * Time.deltaTime, 0f, 0f);
+        }
+        if (Input.GetKey("d"))
+        {
+            transform.position = transform.position + new Vector3(playerSpeed * Time.deltaTime, 0f, 0f);
+        }
+    }
+
+        private void OnEnable() // This function enables the controls when the object becomes enabled and active
     {
         controls.Gameplay.Enable();
     }
