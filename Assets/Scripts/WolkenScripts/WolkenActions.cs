@@ -12,17 +12,18 @@ public class WolkenActions : MonoBehaviour
     // public GameObject cloudCam;
 
     private float cloudDuration;
+
     [SerializeField]
     private float maxCloudChannelDuration;
 
-    private float countdown;
+    // private float countdown;
 
     private bool IsOnField = false;
     GameObject CurrentField;
 
     private void Awake()
     {
-        controls = new PlayerControls();
+        controls = new PlayerControls();  //enables the controls from the Unity Action Input System
 
        // countdown = cloudDuration;
 
@@ -31,14 +32,14 @@ public class WolkenActions : MonoBehaviour
 
     private void Update()
     {
-        cloudDuration -= Time.deltaTime;
+        cloudDuration -= Time.deltaTime;  // Counts down the duration of the cloud
 
-        if (cloudDuration <= 0f)
+        if (cloudDuration <= 0f)  //If the countdown reaches 0 the spell is cancled
         {
             CancleSpell();
         }
 
-        if(IsOnField)
+        if(IsOnField)  //If the cloud is above a field it is watered
         {
             CurrentField.GetComponent<FieldManager>().SetIsWatered(true);
         }
@@ -72,12 +73,12 @@ public class WolkenActions : MonoBehaviour
         //countdown = cloudDuration;
     }
 
-    public void SetCloudDuration(float _duration)
+    public void SetCloudDuration(float _duration)  //Simple Setter for the cloud duration
     {
         cloudDuration = _duration;
     }
 
-    public float GetMaxCloudChannelDuration()
+    public float GetMaxCloudChannelDuration()  //Simple Getter for the Maximum Cloud Duration
     {
         return maxCloudChannelDuration;
     }
