@@ -11,6 +11,11 @@ public class ControllerActions : MonoBehaviour
 
     public GameObject cloud;
     public GameObject player;
+
+    private bool channelState = false;
+    private float cloudDuration;
+    private float maxCloudDuration;
+
     // public GameObject mainCam;
     // public GameObject cloudCam;
 
@@ -21,23 +26,87 @@ public class ControllerActions : MonoBehaviour
         controls = new PlayerControls();
 
         controls.Gameplay.Interact.performed += ctx => SeedField();
-        controls.Gameplay.Wasser.performed += ctx => waterSpell();
+        controls.Gameplay.Wasser.started += ctx => StartChannel();
+        controls.Gameplay.Wasser.canceled += ctx => EndChannel();
     }
 
-    /*  private void OnTriggerStay(Collider other)
-      {
-          if (Input.GetKeyDown(KeyCode.E) && other.tag == "Field")
-          {
-              other.GetComponent<FieldManager>().SetIsSeeded(true);
-          }
-      } */
 
-    private void waterSpell()
+    private void FixedUpdate()
+    {
+        ChannelCounter();
+        Debug.Log(cloudDuration);
+    }
+
+
+    private void StartChannel()
+    {
+        Debug.Log("StartedChannel");
+
+        if (cloud.activeSelf == false)
+        {
+            WolkenActions myCloud = cloud.GetComponent<WolkenActions>();
+            maxCloudDuration = myCloud.GetMaxCloudChannelDuration();
+
+            channelState = true;
+        }
+    }
+
+    private void EndChannel()
+    {
+        if (cloudDuration < 1f)
+        {
+            Debug.Log("EndWithoutCloud");
+            channelState = false;
+            cloudDuration = 0f;
+        }
+        else if (cloudDuration >= 1f)
+        {
+            Debug.Log("EndWithCloud");
+            channelState = false;
+            waterSpell(cloudDuration * 2);
+            Debug.Log("waterSpell activated");
+            cloudDuration = 0f;
+            Debug.Log("CounterSet0");
+        }
+    }
+
+    private void ChannelCounter()
+    {
+        if (channelState)
+        {
+            cloudDuration += Time.deltaTime;
+        }
+
+        if (channelState && cloudDuration >= maxCloudDuration)
+        {
+            channelState = false;
+            cloudDuration = maxCloudDuration;
+            EndChannel();
+        }
+    }
+
+    //state true
+    //if true
+    // counter = deltatime
+
+    //on cancle
+    //if counter < 1 ---> state false, counter 0
+    //if counter > 1 ---> state false, waterspell + channle duration *2, counter 0
+    //
+
+
+    private void waterSpell(float _duration)
     {
         cloud.transform.position = player.transform.position;
         //cloudCam.transform.position = mainCam.transform.position;
 
+        WolkenActions myCloud = cloud.GetComponent<WolkenActions>();
+        myCloud.SetCloudDuration(_duration);
+
+        Debug.Log("Duration Set");
+
         cloud.SetActive(true);
+
         // cloudCam.SetActive(true);
         // player.GetComponent<ControllerMovement>().enabled = false;
         // mainCam.SetActive(false);

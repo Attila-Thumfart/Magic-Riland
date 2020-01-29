@@ -11,8 +11,9 @@ public class WolkenActions : MonoBehaviour
     // public GameObject mainCam;
     // public GameObject cloudCam;
 
-    [SerializeField]
     private float cloudDuration;
+    [SerializeField]
+    private float maxCloudChannelDuration;
 
     private float countdown;
 
@@ -23,17 +24,18 @@ public class WolkenActions : MonoBehaviour
     {
         controls = new PlayerControls();
 
-        countdown = cloudDuration;
+       // countdown = cloudDuration;
 
-        controls.Gameplay.Wasser.performed += ctx => cancleSpell();
+     //   controls.Gameplay.Wasser.performed += ctx => CancleSpell();
     }
 
     private void Update()
     {
-        countdown = countdown - Time.deltaTime;
-        if (countdown <= 0f)
+        cloudDuration -= Time.deltaTime;
+
+        if (cloudDuration <= 0f)
         {
-            cancleSpell();
+            CancleSpell();
         }
 
         if(IsOnField)
@@ -61,18 +63,23 @@ public class WolkenActions : MonoBehaviour
         }
     }
 
-    private void cancleSpell()
+    private void CancleSpell()
     {
         cloud.SetActive(false);
         //cloudCam.SetActive(false);
         //player.GetComponent<ControllerMovement>().enabled = true;
         //mainCam.SetActive(true);
-        countdown = cloudDuration;
+        //countdown = cloudDuration;
     }
 
-    void SetCloudDuration(float _duration)
+    public void SetCloudDuration(float _duration)
     {
         cloudDuration = _duration;
+    }
+
+    public float GetMaxCloudChannelDuration()
+    {
+        return maxCloudChannelDuration;
     }
 
     private void OnEnable() // This function enables the controls when the object becomes enabled and active
