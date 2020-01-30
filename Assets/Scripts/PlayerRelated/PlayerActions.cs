@@ -13,6 +13,7 @@ public class PlayerActions : MonoBehaviour
     [SerializeField]
     private GameObject cloud;
     private GameObject Player;
+    private GameObject animator;
 
     private bool channelState = false;
     private float cloudDuration;
@@ -37,6 +38,7 @@ public class PlayerActions : MonoBehaviour
         controls.Keyboard.Interact.performed += ctx => EndDay();
 
         Player = this.gameObject;
+        animator = GameObject.FindGameObjectWithTag("Animator");
     }
 
 
@@ -160,6 +162,11 @@ public class PlayerActions : MonoBehaviour
             {
                 HarvestField();                                                                                     //harvests the field
             }
+
+            if (CurrentField.GetComponent<FieldManager>().GetFieldstate() == FieldManager.Fieldstate.withered)
+            {
+                HarvestField();
+            }
         }
     }
 
@@ -169,6 +176,7 @@ public class PlayerActions : MonoBehaviour
         {
             GameManager.GMInstance.IncrementCalenderDay();      //end the day 
             GetComponent<PlayerMovement>().enabled = false;
+            animator.GetComponent<FadingManager>().SetFade(true);
         }
     }
 

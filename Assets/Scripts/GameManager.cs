@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager GMInstance;   //an instance for other scripts to call functions from GM
 
+    private GameObject animator;
     private GameObject Player;                                  //used to find the Player
     List<FieldManager> Fields = new List<FieldManager>();       //makes a List containing all "FieldManagers"
 
@@ -52,6 +53,7 @@ public class GameManager : MonoBehaviour
         {
             isNight = false;
             Player.GetComponent<PlayerActions>().EnableMovement();      //Enables the Movement of the player when ending the night
+            animator.GetComponent<FadingManager>().SetFade(false);
 
             for (int i = 0; i < Fields.Count; i++)                      //every field in the scene
             {
@@ -63,6 +65,7 @@ public class GameManager : MonoBehaviour
 
     private void DefineGameObjects()
     {
+        animator = GameObject.FindGameObjectWithTag("Animator");
         Player = GameObject.Find("Player");         //Finds the Player
         DontDestroyOnLoad(Player);                  //Player wont get destroyed if a new scene is loading
 
