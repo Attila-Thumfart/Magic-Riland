@@ -29,6 +29,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        animator.GetComponent<FadingManager>().SetFade(false);
+    }
+
     private void Update()
     {
         // IncrementCalenderDay();
@@ -67,7 +72,7 @@ public class GameManager : MonoBehaviour
     {
         animator = GameObject.FindGameObjectWithTag("Animator");
         Player = GameObject.Find("Player");         //Finds the Player
-        DontDestroyOnLoad(Player);                  //Player wont get destroyed if a new scene is loading
+        //DontDestroyOnLoad(Player);                  //Player wont get destroyed if a new scene is loading
 
         if (GMInstance == null)                     //this makes it so only one GM is loaded
         {

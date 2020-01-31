@@ -154,7 +154,7 @@ public class PlayerActions : MonoBehaviour
         {
             if (CurrentField.GetComponent<FieldManager>().GetFieldstate() == FieldManager.Fieldstate.empty)         //if the field the player is standing on is empty
             {
-                CurrentItem = FindObjectOfType<MySamplePlant>().gameObject;                                         //and if there is a Plant in the scene (Later: if the first item in inventory is a seed)
+                CurrentItem = GameObject.FindObjectOfType<MySamplePlant>().gameObject;                                         //and if there is a Plant in the scene (Later: if the first item in inventory is a seed)
                 SeedField();                                                                                        //seeds the field
             }
 
