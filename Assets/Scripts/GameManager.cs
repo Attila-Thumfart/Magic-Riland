@@ -85,7 +85,7 @@ public class GameManager : MonoBehaviour
 
     private void DefineGameObjects()
     {
-        animator = GameObject.FindGameObjectWithTag("Animator");
+        animator = GameObject.Find("FadeManager");
         Player = GameObject.Find("Player");         //Finds the Player
         //DontDestroyOnLoad(Player);                  //Player wont get destroyed if a new scene is loading
 
