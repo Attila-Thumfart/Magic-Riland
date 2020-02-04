@@ -39,9 +39,17 @@ public class FieldManager : MonoBehaviour
     [SerializeField]
     private bool IsWatered = false;
 
+    private GameObject MediumPlant;
+    private GameObject MyMediumPlant;
+
+    private GameObject FinishedPlant;
+
+    
+
 
     private void Start()
     {
+        MyMediumPlant = GameObject.Find("MyMediumPlant");
         GM = GameManager.GMInstance;                                    //finds the GM
         Player = GameObject.FindGameObjectWithTag("Player");            //finds the Player
     }
@@ -62,6 +70,8 @@ public class FieldManager : MonoBehaviour
             case (Fieldstate.empty):                                        //if this field is empty
                 if (IsSeeded)                                               //if the player seeded the field
                 {
+                    MediumPlant.SetActive(true);
+                    GetComponent<MeshRenderer>().enabled = false;
                     ActiveFieldstate = Fieldstate.seeded;                   //the field is now seeded
                     SeedDay = GameManager.GMInstance.GetCalenderDay();      //remember what day the seeding has taken place
                     DayOfProgress = 0;
@@ -78,7 +88,7 @@ public class FieldManager : MonoBehaviour
 
             case (Fieldstate.sprout):                                       //if the plant is a sprout
                 if (DayOfProgress == GrowthRateMedium)                      //and if the DayOfProgress matches the GrowthRateMedium step of the plant
-                {                    
+                {
                     ActiveFieldstate = Fieldstate.medium;                   //the plant reaches its 2nd stage of its growthcycle
                     DayOfProgress = 0;                                      //reset the progresstimer
                 }
@@ -87,13 +97,14 @@ public class FieldManager : MonoBehaviour
             case (Fieldstate.medium):                                       //if the plant is on its medium state
                 if (DayOfProgress == GrowthRateFinished)                    //and if the DayOfProgress matches the GrowthRateFinished step of the plant
                 {
+                    //MeshRenderer
                     ActiveFieldstate = Fieldstate.finished;                 //the plant is fully grown and ready to be harvested
                     DayOfProgress = 0;                                      //reset the progresstimer
                 }
                 break;
 
             case (Fieldstate.finished):                                     //if the plant is fully grown
-                if(DayOfProgress == 3)                                      //and if 3 days are passed
+                if (DayOfProgress == 3)                                      //and if 3 days are passed
                 {
                     ActiveFieldstate = Fieldstate.withered;                 //the plant is withered 
                 }
@@ -128,6 +139,14 @@ public class FieldManager : MonoBehaviour
     {
         GrowthRateMedium = _MySamplePlant.GetComponent<MySamplePlant>().GetGrowthRateMedium();          //growthrate to first state
         GrowthRateFinished = _MySamplePlant.GetComponent<MySamplePlant>().GetGrowthRateFinished();      //growthrate to finished state
+    }
+
+    public void SetMeshes(GameObject _MySamplePlant)
+    {
+        MediumPlant = Instantiate(_MySamplePlant.GetComponent<MySamplePlant>().GetPlantMedium(), transform);
+        MediumPlant.SetActive(false);
+        
+        FinishedPlant = _MySamplePlant.GetComponent<MySamplePlant>().GetPlantFinished();
     }
 
     public void SetIsWatered(bool _NewState)               //setter for other scripts to set the watered state of the field

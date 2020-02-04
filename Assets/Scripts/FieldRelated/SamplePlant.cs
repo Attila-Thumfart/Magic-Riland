@@ -12,11 +12,11 @@ public class SamplePlant : ScriptableObject
     private string Description;
 
     [SerializeField]
-    private Mesh PlantModel;
+    private MeshRenderer PlantModel;
     [SerializeField]
-    private Mesh GrowthModelSmall;
+    private GameObject GrowthModelFinished;
     [SerializeField]
-    private Mesh GrowthModelMedium;
+    private GameObject GrowthModelMedium;
     [SerializeField]
     private Sprite Art;
 
@@ -42,7 +42,17 @@ public class SamplePlant : ScriptableObject
     {
         return GrowthRateFinish;
     }
-    
+
+    public GameObject GetPlantMeshMedium()
+    {
+        return GrowthModelMedium;
+    }
+
+    public GameObject GetPlantMeshFinished()
+    {
+        return GrowthModelFinished;
+    }
+
 
     public (string _PlantName, int _GrowthRateSmall, int _GrowthRateFinish) GetPlantInfos()     //??
     {
