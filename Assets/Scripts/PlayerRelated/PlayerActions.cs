@@ -174,6 +174,7 @@ public class PlayerActions : MonoBehaviour
     {
         if (TouchesBed)           //if the player touches the Bed and presses "E"
         {
+            TouchesBed = false;
             GameManager.GMInstance.IncrementCalenderDay();      //end the day 
             GetComponent<PlayerMovement>().enabled = false;
             animator.GetComponent<FadingManager>().SetFade(true);
