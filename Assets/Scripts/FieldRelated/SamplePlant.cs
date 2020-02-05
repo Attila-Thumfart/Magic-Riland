@@ -14,9 +14,11 @@ public class SamplePlant : ScriptableObject
     [SerializeField]
     private MeshRenderer PlantModel;
     [SerializeField]
-    private GameObject GrowthModelFinished;
+    private GameObject GrowthModelFinished;     //this stores the Finished plant as a GameObject
     [SerializeField]
-    private GameObject GrowthModelMedium;
+    private GameObject GrowthModelMedium;       //this stores the Finished plant as a GameObject
+    [SerializeField]
+    private GameObject GrowthModelSprout;       //this stores the Finished plant as a GameObject
     [SerializeField]
     private Sprite Art;
 
@@ -51,11 +53,5 @@ public class SamplePlant : ScriptableObject
     public GameObject GetPlantMeshFinished()
     {
         return GrowthModelFinished;
-    }
-
-
-    public (string _PlantName, int _GrowthRateSmall, int _GrowthRateFinish) GetPlantInfos()     //??
-    {
-        return (PlantName, GrowtRateMedium, GrowthRateFinish);
     }
 }
