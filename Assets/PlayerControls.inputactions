@@ -14,6 +14,14 @@
                     "interactions": ""
                 },
                 {
+                    "name": "Rotate",
+                    "type": "Button",
+                    "id": "49eea098-9f40-4278-8418-89a4d96602be",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "CameraRight",
                     "type": "Button",
                     "id": "98fd291e-fff9-4bd3-b928-61cac5f0430f",
@@ -270,6 +278,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "MoveSpell",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2aefda90-ffce-488a-a706-19f4b0bf6607",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "StickDeadzone(min=0.025,max=0.125)",
+                    "groups": "",
+                    "action": "Rotate",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

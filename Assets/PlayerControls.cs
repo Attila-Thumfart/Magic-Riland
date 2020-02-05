@@ -27,6 +27,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""Rotate"",
+                    ""type"": ""Button"",
+                    ""id"": ""49eea098-9f40-4278-8418-89a4d96602be"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""CameraRight"",
                     ""type"": ""Button"",
                     ""id"": ""98fd291e-fff9-4bd3-b928-61cac5f0430f"",
@@ -285,6 +293,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""MoveSpell"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2aefda90-ffce-488a-a706-19f4b0bf6607"",
+                    ""path"": ""<Gamepad>/leftStick"",
+                    ""interactions"": """",
+                    ""processors"": ""StickDeadzone(min=0.025,max=0.125)"",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -495,6 +514,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         // Gameplay
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
+        m_Gameplay_Rotate = m_Gameplay.FindAction("Rotate", throwIfNotFound: true);
         m_Gameplay_CameraRight = m_Gameplay.FindAction("CameraRight", throwIfNotFound: true);
         m_Gameplay_CameraLeft = m_Gameplay.FindAction("CameraLeft", throwIfNotFound: true);
         m_Gameplay_MoveSpell = m_Gameplay.FindAction("MoveSpell", throwIfNotFound: true);
@@ -570,6 +590,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputActionMap m_Gameplay;
     private IGameplayActions m_GameplayActionsCallbackInterface;
     private readonly InputAction m_Gameplay_Move;
+    private readonly InputAction m_Gameplay_Rotate;
     private readonly InputAction m_Gameplay_CameraRight;
     private readonly InputAction m_Gameplay_CameraLeft;
     private readonly InputAction m_Gameplay_MoveSpell;
@@ -588,6 +609,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         private @PlayerControls m_Wrapper;
         public GameplayActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Gameplay_Move;
+        public InputAction @Rotate => m_Wrapper.m_Gameplay_Rotate;
         public InputAction @CameraRight => m_Wrapper.m_Gameplay_CameraRight;
         public InputAction @CameraLeft => m_Wrapper.m_Gameplay_CameraLeft;
         public InputAction @MoveSpell => m_Wrapper.m_Gameplay_MoveSpell;
@@ -613,6 +635,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Move.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
                 @Move.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
                 @Move.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMove;
+                @Rotate.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRotate;
+                @Rotate.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRotate;
+                @Rotate.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRotate;
                 @CameraRight.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraRight;
                 @CameraRight.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraRight;
                 @CameraRight.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraRight;
@@ -659,6 +684,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Move.started += instance.OnMove;
                 @Move.performed += instance.OnMove;
                 @Move.canceled += instance.OnMove;
+                @Rotate.started += instance.OnRotate;
+                @Rotate.performed += instance.OnRotate;
+                @Rotate.canceled += instance.OnRotate;
                 @CameraRight.started += instance.OnCameraRight;
                 @CameraRight.performed += instance.OnCameraRight;
                 @CameraRight.canceled += instance.OnCameraRight;
@@ -819,6 +847,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     public interface IGameplayActions
     {
         void OnMove(InputAction.CallbackContext context);
+        void OnRotate(InputAction.CallbackContext context);
         void OnCameraRight(InputAction.CallbackContext context);
         void OnCameraLeft(InputAction.CallbackContext context);
         void OnMoveSpell(InputAction.CallbackContext context);
