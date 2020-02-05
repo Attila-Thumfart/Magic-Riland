@@ -15,8 +15,9 @@ MonoBehaviour:
   PlantName: SampleStrawberry
   Description: A nice Strawberry
   PlantModel: {fileID: 0}
-  GrowthModelSmall: {fileID: 0}
-  GrowthModelMedium: {fileID: 0}
+  GrowthModelFinished: {fileID: 0}
+  GrowthModelMedium: {fileID: 1606099100166842225, guid: d499a7d3ae87f5c479dc0f384726fb29,
+    type: 3}
   Art: {fileID: 0}
   GrowtRateMedium: 1
   GrowthRateFinish: 4

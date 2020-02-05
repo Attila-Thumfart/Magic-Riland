@@ -9,20 +9,30 @@ public class MySamplePlant : MonoBehaviour
 
     void Start()
     {
-        
+        // plant = GameObject.Find("SampleStrawberry");
     }
     private void Update()
     {
 
     }
 
-        public int GetGrowthRateMedium()            //gives growthrateinformation to the field        
-        {
-            return plant.GetGrowthRateMedium();
-        }
+    public int GetGrowthRateMedium()            //gives growthrateinformation to the field        
+    {
+        return plant.GetGrowthRateMedium();
+    }
 
-        public int GetGrowthRateFinished()          //gives growthrateinformation to the field
-        {
-            return plant.GetGrowthRateFinished();
-        }
+    public int GetGrowthRateFinished()          //gives growthrateinformation to the field
+    {
+        return plant.GetGrowthRateFinished();
+    }
+    public GameObject GetPlantMedium()
+    {
+        return plant.GetPlantMeshMedium();
+    }
+
+    public GameObject GetPlantFinished()
+    {
+        return plant.GetPlantMeshFinished();
+    }
+
 }

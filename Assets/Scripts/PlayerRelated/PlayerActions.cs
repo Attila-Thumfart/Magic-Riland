@@ -29,7 +29,7 @@ public class PlayerActions : MonoBehaviour
         controls = new PlayerControls();
 
         // The Controls via the Unity Action Input System are set here
-        controls.Gameplay.Interact.performed += ctx => SeedField();
+
         controls.Gameplay.Wasser.started += ctx => StartChannel();
         controls.Gameplay.Wasser.canceled += ctx => EndChannel();
         controls.Gameplay.Interact.performed += ctx => FieldAction();
@@ -137,9 +137,11 @@ public class PlayerActions : MonoBehaviour
     {
         if (IsOnField)
         {
-
+            CurrentItem = GameObject.FindObjectOfType<MySamplePlant>().gameObject;
+            
             CurrentField.GetComponent<FieldManager>().SetIsSeeded(true);
             CurrentField.GetComponent<FieldManager>().SetGrowthrates(CurrentItem);
+            CurrentField.GetComponent<FieldManager>().SetMeshes(CurrentItem);
         }
     }
 
@@ -154,7 +156,7 @@ public class PlayerActions : MonoBehaviour
         {
             if (CurrentField.GetComponent<FieldManager>().GetFieldstate() == FieldManager.Fieldstate.empty)         //if the field the player is standing on is empty
             {
-                CurrentItem = GameObject.FindObjectOfType<MySamplePlant>().gameObject;                                         //and if there is a Plant in the scene (Later: if the first item in inventory is a seed)
+                                                        //and if there is a Plant in the scene (Later: if the first item in inventory is a seed)
                 SeedField();                                                                                        //seeds the field
             }
 

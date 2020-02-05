@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        animator.GetComponent<FadingManager>().SetFade(false);
+        //animator.GetComponent<FadingManager>().SetFade(false);
         EndOfDayCardUI = GameObject.Find("EndOfDayCard");
         EndOfDayCardUI.SetActive(false);
     }
