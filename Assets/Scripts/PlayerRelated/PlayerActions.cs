@@ -19,6 +19,10 @@ public class PlayerActions : MonoBehaviour
     private float cloudDuration;
     private float maxCloudDuration;
 
+    private float interactionRange = 1.2f;
+    private Vector3 raycastHigth = new Vector3(0, 0.3f, 0);
+    public Interactable focus;
+
     // public GameObject mainCam;
     // public GameObject cloudCam;
 
@@ -32,10 +36,11 @@ public class PlayerActions : MonoBehaviour
 
         controls.Gameplay.Wasser.started += ctx => StartChannel();
         controls.Gameplay.Wasser.canceled += ctx => EndChannel();
-        controls.Gameplay.Interact.performed += ctx => FieldAction();
-        controls.Keyboard.Interact.performed += ctx => FieldAction();
-        controls.Gameplay.Interact.performed += ctx => EndDay();
-        controls.Keyboard.Interact.performed += ctx => EndDay();
+        controls.Gameplay.Interact.performed += ctx => Interact();
+        // controls.Gameplay.Interact.performed += ctx => FieldAction();
+        // controls.Keyboard.Interact.performed += ctx => FieldAction();
+        // controls.Gameplay.Interact.performed += ctx => EndDay();
+        // controls.Keyboard.Interact.performed += ctx => EndDay();
 
         Player = this.gameObject;
         animator = GameObject.FindGameObjectWithTag("Animator");
@@ -47,6 +52,52 @@ public class PlayerActions : MonoBehaviour
         ChannelCounter();
     }
 
+    void Interact()
+    {
+        RaycastHit hit;
+        Ray interactionRay = new Ray(transform.position + raycastHigth, transform.TransformDirection(Vector3.forward) * interactionRange);
+
+        Debug.DrawRay(transform.position + raycastHigth, transform.TransformDirection(Vector3.forward) * interactionRange);
+
+        if (Physics.Raycast(interactionRay, out hit, Mathf.Infinity))
+        {
+            Interactable interactable = hit.collider.GetComponent<Interactable>();
+
+            if (interactable != null)
+            {
+                SetFocus(interactable);
+
+            }
+        }
+        else
+        {
+            RemoveFocus();
+        }
+    }
+
+    void SetFocus(Interactable newFocus)
+    {
+        if (newFocus != focus)
+        {
+            if (focus != null)
+            {
+                focus.OnDefocused();
+            }
+
+            focus = newFocus;
+        }
+        newFocus.OnFocused(transform);
+    }
+
+    void RemoveFocus()
+    {
+        if (focus != null)
+        {
+            focus.OnDefocused();
+        }
+
+        focus = null;
+    }
 
     private void StartChannel()  // Checks if there is already a cloud active, if not the Max Duration of the used cloud is pulled here for later use and the channel State is set as true to start the charge up/channel
     {
@@ -105,7 +156,7 @@ public class PlayerActions : MonoBehaviour
         // mainCam.SetActive(false);
     }
 
-    private void OnTriggerEnter(Collider other)         //checks if the Player touches a Field
+   /* private void OnTriggerEnter(Collider other)         //checks if the Player touches a Field
     {
         if (other.tag == "Field")
         {
@@ -138,7 +189,7 @@ public class PlayerActions : MonoBehaviour
         if (IsOnField)
         {
             CurrentItem = GameObject.FindObjectOfType<MySamplePlant>().gameObject;
-            
+
             CurrentField.GetComponent<FieldManager>().SetIsSeeded(true);
             CurrentField.GetComponent<FieldManager>().SetGrowthrates(CurrentItem);
             CurrentField.GetComponent<FieldManager>().SetMeshes(CurrentItem);
@@ -156,7 +207,7 @@ public class PlayerActions : MonoBehaviour
         {
             if (CurrentField.GetComponent<FieldManager>().GetFieldstate() == FieldManager.Fieldstate.empty)         //if the field the player is standing on is empty
             {
-                                                        //and if there is a Plant in the scene (Later: if the first item in inventory is a seed)
+                //and if there is a Plant in the scene (Later: if the first item in inventory is a seed)
                 SeedField();                                                                                        //seeds the field
             }
 
@@ -170,7 +221,7 @@ public class PlayerActions : MonoBehaviour
                 HarvestField();
             }
         }
-    }
+    }*/
 
     void EndDay()
     {

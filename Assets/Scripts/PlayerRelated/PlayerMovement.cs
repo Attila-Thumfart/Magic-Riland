@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
         transform.Translate(movement, Space.World); // The values are applied to move the player in relation to the world
 
         Vector3 rotation = new Vector3(rotate.x, 0f, rotate.y) * Time.deltaTime;
+        if(rotation != Vector3.zero)
         transform.rotation = Quaternion.LookRotation(rotation);
 
         PlayerTransformation();
