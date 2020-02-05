@@ -57,4 +57,9 @@ public class PlayerMovement : MonoBehaviour
     {
         controls.Gameplay.Disable();
     }
+
+    public void SetPlayerPosition(Vector3 _targetPosition)
+    {
+        transform.position = new Vector3(_targetPosition.x, _targetPosition.y, _targetPosition.z);
+    }
 }

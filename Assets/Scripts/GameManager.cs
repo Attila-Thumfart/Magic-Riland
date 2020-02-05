@@ -1,11 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager GMInstance;   //an instance for other scripts to call functions from GM
 
+    private GameObject animator;
     private GameObject Player;                                  //used to find the Player
     List<FieldManager> Fields = new List<FieldManager>();       //makes a List containing all "FieldManagers"
 
@@ -15,12 +17,12 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private bool isNight;                   //for checks if its Day or Night
 
-
+    private GameObject EndOfDayCardUI;
 
     public void Awake()
     {
         DefineGameObjects();
-        
+
         foreach (FieldManager go in FieldManager.FindObjectsOfType(typeof(FieldManager)))       //finds all objects of type FieldManager
         {
             if (go.tag == "Field")                                                              //if the Tag of this object is "Field"
@@ -28,10 +30,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        animator.GetComponent<FadingManager>().SetFade(false);
+        EndOfDayCardUI = GameObject.Find("EndOfDayCard");
+        EndOfDayCardUI.SetActive(false);
+    }
+
     private void Update()
     {
         // IncrementCalenderDay();
-        EndNight();
+       // EndNight();
     }
 
 
@@ -39,6 +48,17 @@ public class GameManager : MonoBehaviour
     {
         isNight = true;
         CalenderDay++;
+        StartCoroutine(Coroutine(1.2f, () =>
+        {
+            EndOfDayCardUI.SetActive(true);
+        }));
+    }
+
+    private IEnumerator Coroutine(float _TimeToWait, Action _callback)
+    {
+        yield return new WaitForSecondsRealtime(_TimeToWait);
+        _callback?.Invoke();
+
     }
 
     public int GetCalenderDay()                             //getter for other scripts to read CalenderDay
@@ -46,12 +66,14 @@ public class GameManager : MonoBehaviour
         return CalenderDay;
     }
 
-    private void EndNight()
+    public void EndNight()
     {
-        if (Input.GetKeyDown("q") && isNight)                           //later: if player ends the night via a submenu
+        if (isNight)                           //later: if player ends the night via a submenu
         {
+            EndOfDayCardUI.SetActive(false);
             isNight = false;
             Player.GetComponent<PlayerActions>().EnableMovement();      //Enables the Movement of the player when ending the night
+            animator.GetComponent<FadingManager>().SetFade(false);
 
             for (int i = 0; i < Fields.Count; i++)                      //every field in the scene
             {
@@ -63,8 +85,9 @@ public class GameManager : MonoBehaviour
 
     private void DefineGameObjects()
     {
+        animator = GameObject.Find("FadeManager");
         Player = GameObject.Find("Player");         //Finds the Player
-        DontDestroyOnLoad(Player);                  //Player wont get destroyed if a new scene is loading
+        //DontDestroyOnLoad(Player);                  //Player wont get destroyed if a new scene is loading
 
         if (GMInstance == null)                     //this makes it so only one GM is loaded
         {

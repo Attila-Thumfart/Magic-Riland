@@ -9,19 +9,21 @@ public class CameraMovement : MonoBehaviour
     private float smoothSpeed = 0.125f;     //Speed for Cameradelay when moving the Player
 
     [SerializeField]
-    private Vector3  offset;                 //Used for Positioning the Camera in relation to the Player
+    private Vector3 offset;                 //Used for Positioning the Camera in relation to the Player
 
 
     private void Awake()
     {
         player = GameObject.Find("Player");   //Finding the Player in the scene
         target = player.transform;            //Setting target in dependend on the Player
+        //DontDestroyOnLoad(this);
     }
 
 
     private void Start()
     {
         transform.position = new Vector3(target.position.x + offset.x, target.position.y + offset.y, target.position.z + offset.z);     //sets the Camera behind the player when starting
+        offset = new Vector3(0, 4, -7);
     }
 
 

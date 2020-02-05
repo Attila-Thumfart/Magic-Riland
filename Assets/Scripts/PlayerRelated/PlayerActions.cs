@@ -13,6 +13,7 @@ public class PlayerActions : MonoBehaviour
     [SerializeField]
     private GameObject cloud;
     private GameObject Player;
+    private GameObject animator;
 
     private bool channelState = false;
     private float cloudDuration;
@@ -37,6 +38,7 @@ public class PlayerActions : MonoBehaviour
         controls.Keyboard.Interact.performed += ctx => EndDay();
 
         Player = this.gameObject;
+        animator = GameObject.FindGameObjectWithTag("Animator");
     }
 
 
@@ -152,13 +154,18 @@ public class PlayerActions : MonoBehaviour
         {
             if (CurrentField.GetComponent<FieldManager>().GetFieldstate() == FieldManager.Fieldstate.empty)         //if the field the player is standing on is empty
             {
-                CurrentItem = FindObjectOfType<MySamplePlant>().gameObject;                                         //and if there is a Plant in the scene (Later: if the first item in inventory is a seed)
+                CurrentItem = GameObject.FindObjectOfType<MySamplePlant>().gameObject;                                         //and if there is a Plant in the scene (Later: if the first item in inventory is a seed)
                 SeedField();                                                                                        //seeds the field
             }
 
             if (CurrentField.GetComponent<FieldManager>().GetFieldstate() == FieldManager.Fieldstate.finished)      //if the field the player is standing on has a grown up plant
             {
                 HarvestField();                                                                                     //harvests the field
+            }
+
+            if (CurrentField.GetComponent<FieldManager>().GetFieldstate() == FieldManager.Fieldstate.withered)
+            {
+                HarvestField();
             }
         }
     }
@@ -167,8 +174,10 @@ public class PlayerActions : MonoBehaviour
     {
         if (TouchesBed)           //if the player touches the Bed and presses "E"
         {
+            TouchesBed = false;
             GameManager.GMInstance.IncrementCalenderDay();      //end the day 
             GetComponent<PlayerMovement>().enabled = false;
+            animator.GetComponent<FadingManager>().SetFade(true);
         }
     }
 
