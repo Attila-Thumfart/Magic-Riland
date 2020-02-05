@@ -43,7 +43,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Blitz"",
+                    ""name"": ""MoveSpell"",
                     ""type"": ""Button"",
                     ""id"": ""e1b24da9-de4b-4323-a2f2-8f60866d8889"",
                     ""expectedControlType"": """",
@@ -51,7 +51,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Feuer"",
+                    ""name"": ""Blitz"",
                     ""type"": ""Button"",
                     ""id"": ""75f0c5f0-a5ac-4001-aaee-56bc00b3f087"",
                     ""expectedControlType"": """",
@@ -59,7 +59,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Inventar"",
+                    ""name"": ""Feuer"",
                     ""type"": ""Button"",
                     ""id"": ""0b06ac3a-658a-43dd-a35b-caa35b6e9f9b"",
                     ""expectedControlType"": """",
@@ -67,7 +67,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Hotbar"",
+                    ""name"": ""Inventar"",
                     ""type"": ""Button"",
                     ""id"": ""65fd3001-9c5a-414e-b752-8c2f9c609c81"",
                     ""expectedControlType"": """",
@@ -75,7 +75,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Menu"",
+                    ""name"": ""Hotbar"",
                     ""type"": ""Button"",
                     ""id"": ""4a4f695c-54ff-4b1f-8715-77a96573c472"",
                     ""expectedControlType"": """",
@@ -83,7 +83,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Map"",
+                    ""name"": ""Menu"",
                     ""type"": ""Button"",
                     ""id"": ""5efbfc1b-68f9-45bb-b37d-03985a09ebdb"",
                     ""expectedControlType"": """",
@@ -91,7 +91,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Erde"",
+                    ""name"": ""Map"",
                     ""type"": ""Button"",
                     ""id"": ""40e582ab-0b9e-431d-9390-dc11b75f8114"",
                     ""expectedControlType"": """",
@@ -99,7 +99,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Interact"",
+                    ""name"": ""Erde"",
                     ""type"": ""Button"",
                     ""id"": ""b6098745-292f-4c2e-acc9-d227e9a9c1cd"",
                     ""expectedControlType"": """",
@@ -107,7 +107,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Wind"",
+                    ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""5235e537-e34c-4a4d-9375-c40a59dba01b"",
                     ""expectedControlType"": """",
@@ -115,9 +115,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""Wasser"",
+                    ""name"": ""Wind"",
                     ""type"": ""Button"",
                     ""id"": ""b104a8ed-b42d-4cb3-ab2f-30719bc671e2"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Wasser"",
+                    ""type"": ""Button"",
+                    ""id"": ""e7640111-8c73-4119-b0a0-39454971d9e9"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
@@ -266,6 +274,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""CameraLeft"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b8a939cd-cedd-4a4f-a664-402fe259ec92"",
+                    ""path"": ""<Gamepad>/rightStick"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveSpell"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -390,6 +409,85 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Keyboard"",
+            ""id"": ""6325aeb0-02b6-4737-87f0-17d21a7bbeaa"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Button"",
+                    ""id"": ""652313ca-edd8-462e-bd40-ff41fc2a140a"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""fd91bc33-f812-4e66-a66c-32b1d0a601ed"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""c86a0c70-10d2-4e12-9fab-985c437095a1"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""002e5e29-bc00-4aaf-be03-23b869dfb4cc"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6138ca36-9b48-4ba8-b505-76ae807cd22e"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9b0f4fb1-dcc2-4e7f-9403-40c65275059b"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""31277347-280a-4715-8985-10b606dda63a"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": []
@@ -399,6 +497,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
         m_Gameplay_CameraRight = m_Gameplay.FindAction("CameraRight", throwIfNotFound: true);
         m_Gameplay_CameraLeft = m_Gameplay.FindAction("CameraLeft", throwIfNotFound: true);
+        m_Gameplay_MoveSpell = m_Gameplay.FindAction("MoveSpell", throwIfNotFound: true);
         m_Gameplay_Blitz = m_Gameplay.FindAction("Blitz", throwIfNotFound: true);
         m_Gameplay_Feuer = m_Gameplay.FindAction("Feuer", throwIfNotFound: true);
         m_Gameplay_Inventar = m_Gameplay.FindAction("Inventar", throwIfNotFound: true);
@@ -417,6 +516,10 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Menus_TabRight = m_Menus.FindAction("TabRight", throwIfNotFound: true);
         m_Menus_Cancle = m_Menus.FindAction("Cancle", throwIfNotFound: true);
         m_Menus_Use = m_Menus.FindAction("Use", throwIfNotFound: true);
+        // Keyboard
+        m_Keyboard = asset.FindActionMap("Keyboard", throwIfNotFound: true);
+        m_Keyboard_Move = m_Keyboard.FindAction("Move", throwIfNotFound: true);
+        m_Keyboard_Interact = m_Keyboard.FindAction("Interact", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -469,6 +572,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Move;
     private readonly InputAction m_Gameplay_CameraRight;
     private readonly InputAction m_Gameplay_CameraLeft;
+    private readonly InputAction m_Gameplay_MoveSpell;
     private readonly InputAction m_Gameplay_Blitz;
     private readonly InputAction m_Gameplay_Feuer;
     private readonly InputAction m_Gameplay_Inventar;
@@ -486,6 +590,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Move => m_Wrapper.m_Gameplay_Move;
         public InputAction @CameraRight => m_Wrapper.m_Gameplay_CameraRight;
         public InputAction @CameraLeft => m_Wrapper.m_Gameplay_CameraLeft;
+        public InputAction @MoveSpell => m_Wrapper.m_Gameplay_MoveSpell;
         public InputAction @Blitz => m_Wrapper.m_Gameplay_Blitz;
         public InputAction @Feuer => m_Wrapper.m_Gameplay_Feuer;
         public InputAction @Inventar => m_Wrapper.m_Gameplay_Inventar;
@@ -514,6 +619,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @CameraLeft.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraLeft;
                 @CameraLeft.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraLeft;
                 @CameraLeft.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraLeft;
+                @MoveSpell.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMoveSpell;
+                @MoveSpell.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMoveSpell;
+                @MoveSpell.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnMoveSpell;
                 @Blitz.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnBlitz;
                 @Blitz.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnBlitz;
                 @Blitz.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnBlitz;
@@ -557,6 +665,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @CameraLeft.started += instance.OnCameraLeft;
                 @CameraLeft.performed += instance.OnCameraLeft;
                 @CameraLeft.canceled += instance.OnCameraLeft;
+                @MoveSpell.started += instance.OnMoveSpell;
+                @MoveSpell.performed += instance.OnMoveSpell;
+                @MoveSpell.canceled += instance.OnMoveSpell;
                 @Blitz.started += instance.OnBlitz;
                 @Blitz.performed += instance.OnBlitz;
                 @Blitz.canceled += instance.OnBlitz;
@@ -664,11 +775,53 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         }
     }
     public MenusActions @Menus => new MenusActions(this);
+
+    // Keyboard
+    private readonly InputActionMap m_Keyboard;
+    private IKeyboardActions m_KeyboardActionsCallbackInterface;
+    private readonly InputAction m_Keyboard_Move;
+    private readonly InputAction m_Keyboard_Interact;
+    public struct KeyboardActions
+    {
+        private @PlayerControls m_Wrapper;
+        public KeyboardActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_Keyboard_Move;
+        public InputAction @Interact => m_Wrapper.m_Keyboard_Interact;
+        public InputActionMap Get() { return m_Wrapper.m_Keyboard; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(KeyboardActions set) { return set.Get(); }
+        public void SetCallbacks(IKeyboardActions instance)
+        {
+            if (m_Wrapper.m_KeyboardActionsCallbackInterface != null)
+            {
+                @Move.started -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnMove;
+                @Interact.started -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_KeyboardActionsCallbackInterface.OnInteract;
+            }
+            m_Wrapper.m_KeyboardActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
+            }
+        }
+    }
+    public KeyboardActions @Keyboard => new KeyboardActions(this);
     public interface IGameplayActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnCameraRight(InputAction.CallbackContext context);
         void OnCameraLeft(InputAction.CallbackContext context);
+        void OnMoveSpell(InputAction.CallbackContext context);
         void OnBlitz(InputAction.CallbackContext context);
         void OnFeuer(InputAction.CallbackContext context);
         void OnInventar(InputAction.CallbackContext context);
@@ -688,5 +841,10 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnTabRight(InputAction.CallbackContext context);
         void OnCancle(InputAction.CallbackContext context);
         void OnUse(InputAction.CallbackContext context);
+    }
+    public interface IKeyboardActions
+    {
+        void OnMove(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
 }

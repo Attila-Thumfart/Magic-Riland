@@ -16,23 +16,26 @@ public class ControllerCamera : MonoBehaviour
 
     PlayerControls controls; // This is where the Controls and actual Input are saved (via Unity Input System)
 
+
+    //Hardcoded Offsets for the camera to turn in 90° Steps
     private Vector3 facingNorth = new Vector3(0, 4, -7);
     private Vector3 facingEast = new Vector3(7, 4, 0);
     private Vector3 facingSouth = new Vector3(0, 4, 7);
     private Vector3 facingWest = new Vector3(-7, 4, 0);
 
-    private int resetTimer = 0;
+    private int resetTimer = 0; //A timer to reset the camera after a certain amount of time
+
     private void Awake()
     {
         player = GameObject.Find("Player");   //Finding the Player in the scene
         target = player.transform;            //Setting target in dependend on the Player
 
-        offset = facingNorth;
+        offset = facingNorth;                 //The standard offset of the camera is set here
 
-        controls = new PlayerControls();
+        controls = new PlayerControls();      //Unity Input Action System activated here
 
-        controls.Gameplay.CameraRight.started += ctx => TurnRight();
-        controls.Gameplay.CameraLeft.started += ctx => TurnLeft();
+        controls.Gameplay.CameraRight.started += ctx => TurnRight();   //The controls for the camera through the Unity Input Action System
+        controls.Gameplay.CameraLeft.started += ctx => TurnLeft();      //The controls for the camera through the Unity Input Action System
     }
 
 
@@ -53,6 +56,8 @@ public class ControllerCamera : MonoBehaviour
         resetCamera();
     }
 
+
+    // Changes the offset to one of the predefiened ones based on the current offset and activates the reset timer
     private void TurnRight()
     {
         resetTimer = 1;
@@ -75,6 +80,7 @@ public class ControllerCamera : MonoBehaviour
         }
     }
 
+    // Changes the offset to one of the predefiened ones based on the current offset and activates the reset timer
     private void TurnLeft()
     {
         resetTimer = 1;
@@ -97,6 +103,7 @@ public class ControllerCamera : MonoBehaviour
         }
     }
 
+    //Resets the camera after a certain amount of time
     private void resetCamera()
     {
         if(resetTimer >= 1)

@@ -8,6 +8,8 @@ using TMPro;
 
 public class OptionsMenu : MonoBehaviour
 {
+    //The UI Elements required by this script can be dragged in here via the Inspector
+
     [SerializeField]
     protected AudioMixer audioMixer;
 
@@ -30,14 +32,15 @@ public class OptionsMenu : MonoBehaviour
     //An array to fill with the available resolutions of the screen currently used
     Resolution[] resolutions;
 
+    //These are to store the information of each UI Element when the Application is closed or another scene is loaded
     const string qualitySaveBucket = "qualityValue";
     const string resolutionSaveBucket = "resolutionValue";
 
     private void Awake()
     {
-        screenState = PlayerPrefs.GetInt("togglestate");
+        screenState = PlayerPrefs.GetInt("togglestate");   // Checks if the screen is in Fullscreen
 
-        if (screenState == 1)
+        if (screenState == 1)                              // Activates the Toggle UI Element if 
         {
             isFullscreen = true;
             fullscreenToggle.isOn = true;
@@ -47,13 +50,13 @@ public class OptionsMenu : MonoBehaviour
             fullscreenToggle.isOn = false;
         }
 
-        resolutionDropdown.onValueChanged.AddListener(new UnityAction<int>(index =>
+        resolutionDropdown.onValueChanged.AddListener(new UnityAction<int>(index =>  // Checks if there are any previously safed states for this UI and loads them if that is the case
         {
             PlayerPrefs.SetInt(resolutionSaveBucket, resolutionDropdown.value);
             Save();
         }));
 
-        qualityDropdown.onValueChanged.AddListener(new UnityAction<int>(index =>
+        qualityDropdown.onValueChanged.AddListener(new UnityAction<int>(index =>    // Checks if there are any previously safed states for this UI and loads them if that is the case
         {
             PlayerPrefs.SetInt(qualitySaveBucket, qualityDropdown.value);
             Save();
@@ -62,9 +65,11 @@ public class OptionsMenu : MonoBehaviour
 
     private void Start()
     {
+        // Changes the Volume to the saved value
         volumeSlider.value = PlayerPrefs.GetFloat("MVolume", 1f);
         audioMixer.SetFloat("Volume", PlayerPrefs.GetFloat("MVolume"));
 
+        //Sets the quality to the previously saved option if there is one
         qualityDropdown.value = PlayerPrefs.GetInt(qualitySaveBucket, 5);
 
         //fills the array with all available resolutions for the currently used screen
