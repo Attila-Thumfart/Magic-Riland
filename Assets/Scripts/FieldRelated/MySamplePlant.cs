@@ -35,4 +35,9 @@ public class MySamplePlant : MonoBehaviour
         return plant.GetPlantMeshFinished();
     }
 
+    public Item GetFinishedItem()
+    {
+        return plant.GetFinishedItem();
+    }
+
 }

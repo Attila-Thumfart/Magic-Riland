@@ -10,6 +10,10 @@ public class PlayerActions : MonoBehaviour
     GameObject CurrentField;
     GameObject CurrentItem;
 
+    GameObject CIO;
+    Interactable CurrentInteractable;
+
+
     [SerializeField]
     private GameObject cloud;
     private GameObject Player;
@@ -21,7 +25,7 @@ public class PlayerActions : MonoBehaviour
 
     private float interactionRange = 1.2f;
     private Vector3 raycastHigth = new Vector3(0, 0.3f, 0);
-    public Interactable focus;
+    private Interactable focus;
 
     // public GameObject mainCam;
     // public GameObject cloudCam;
@@ -52,6 +56,11 @@ public class PlayerActions : MonoBehaviour
         ChannelCounter();
     }
 
+    private void LateUpdate()
+    {
+        RemoveFocus();
+    }
+
     void Interact()
     {
         RaycastHit hit;
@@ -59,33 +68,21 @@ public class PlayerActions : MonoBehaviour
 
         Debug.DrawRay(transform.position + raycastHigth, transform.TransformDirection(Vector3.forward) * interactionRange);
 
-        if (Physics.Raycast(interactionRay, out hit, Mathf.Infinity))
+        if (Physics.Raycast(interactionRay, out hit, interactionRange))
         {
-            Interactable interactable = hit.collider.GetComponent<Interactable>();
-
-            if (interactable != null)
+            CurrentInteractable = hit.collider.GetComponent<Interactable>();
+            if (CurrentInteractable != null)
             {
-                SetFocus(interactable);
-
+                CurrentItem = GameObject.FindObjectOfType<MySamplePlant>().gameObject;
+                SetFocus(CurrentInteractable);
             }
         }
-        else
-        {
-            RemoveFocus();
-        }
+
     }
 
     void SetFocus(Interactable newFocus)
     {
-        if (newFocus != focus)
-        {
-            if (focus != null)
-            {
-                focus.OnDefocused();
-            }
-
-            focus = newFocus;
-        }
+        focus = newFocus;
         newFocus.OnFocused(transform);
     }
 
@@ -155,9 +152,10 @@ public class PlayerActions : MonoBehaviour
         // player.GetComponent<ControllerMovement>().enabled = false;
         // mainCam.SetActive(false);
     }
-
-   /* private void OnTriggerEnter(Collider other)         //checks if the Player touches a Field
+/*
+    private void OnTriggerEnter(Collider other)         //checks if the Player touches a Field
     {
+
         if (other.tag == "Field")
         {
             IsOnField = true;                           //sets the bool for it to true
@@ -186,22 +184,20 @@ public class PlayerActions : MonoBehaviour
 
     void SeedField()                                    //Seeds the field and gives over the plants information
     {
-        if (IsOnField)
-        {
-            CurrentItem = GameObject.FindObjectOfType<MySamplePlant>().gameObject;
-
-            CurrentField.GetComponent<FieldManager>().SetIsSeeded(true);
-            CurrentField.GetComponent<FieldManager>().SetGrowthrates(CurrentItem);
-            CurrentField.GetComponent<FieldManager>().SetMeshes(CurrentItem);
-        }
+        /*
+        CurrentField.GetComponent<FieldManager>().SetIsSeeded(true);
+        CurrentField.GetComponent<FieldManager>().SetGrowthrates(CurrentItem);
+        CurrentField.GetComponent<FieldManager>().SetMeshes(CurrentItem);
+        CurrentField.GetComponent<FieldManager>().SetItem(CurrentItem);
     }
 
     void HarvestField()                                 //Harvests the field the player is standing on
     {
         CurrentField.GetComponent<FieldManager>().ResetField();
+        Inventory.instance.Add(CurrentField.GetComponent<FieldManager>().GetItem());
     }
 
-    void FieldAction()
+    public void FieldAction()
     {
         if (IsOnField)
         {
@@ -221,8 +217,8 @@ public class PlayerActions : MonoBehaviour
                 HarvestField();
             }
         }
-    }*/
-
+    }
+*/
     void EndDay()
     {
         if (TouchesBed)           //if the player touches the Bed and presses "E"
@@ -232,6 +228,11 @@ public class PlayerActions : MonoBehaviour
             GetComponent<PlayerMovement>().enabled = false;
             animator.GetComponent<FadingManager>().SetFade(true);
         }
+    }
+
+    public Interactable GetFocus()
+    {
+        return focus;
     }
 
     public void EnableMovement()
@@ -247,5 +248,10 @@ public class PlayerActions : MonoBehaviour
     private void OnDisable() // This function disables the controls when the object becomes disabled or inactive
     {
         controls.Gameplay.Disable();
+    }
+
+    public GameObject GetCurrentItem()
+    {
+        return CurrentItem;
     }
 }

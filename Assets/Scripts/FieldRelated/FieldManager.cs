@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FieldManager : MonoBehaviour
+public class FieldManager : Interactable
 {
 
     GameManager GM;                     //used to use the GameManager
@@ -43,9 +43,29 @@ public class FieldManager : MonoBehaviour
     private GameObject MyMediumPlant;
 
     private GameObject FinishedPlant;
+    private Item Item;
 
-    
 
+    public override void Interact()
+    {
+        if (!IsSeeded)
+        {
+            SetIsSeeded(true);
+            SetGrowthrates(Player.GetComponent<PlayerActions>().GetCurrentItem());
+            SetMeshes(Player.GetComponent<PlayerActions>().GetCurrentItem());
+            SetItem(Player.GetComponent<PlayerActions>().GetCurrentItem());
+        }
+
+        if (IsSeeded && (ActiveFieldstate == Fieldstate.finished || ActiveFieldstate == Fieldstate.withered))
+        {
+            ResetField();
+            if (ActiveFieldstate == Fieldstate.finished)
+                GetItem();
+        }
+
+        
+ 
+    }
 
     private void Start()
     {
@@ -111,12 +131,14 @@ public class FieldManager : MonoBehaviour
                 break;
 
             case (Fieldstate.withered):
+                MediumPlant.SetActive(false);
+                GetComponent<MeshRenderer>().enabled = true;
                 break;
 
         }
     }
 
-
+    
     public void SetIsSeeded(bool _NewState)          //can get called by PlayerActions to seed the field/empty the field
     {
         IsSeeded = _NewState;
@@ -159,6 +181,8 @@ public class FieldManager : MonoBehaviour
     {
         IsSeeded = false;
         ActiveFieldstate = Fieldstate.empty;
+        GetComponent<MeshRenderer>().enabled = true;
+        MediumPlant.SetActive(false);
     }
 
     private void WitheredField()                            //if the plant is not watered for 3 days this function is called and "kills" the plant
@@ -169,6 +193,15 @@ public class FieldManager : MonoBehaviour
         }
     }
 
+    public void SetItem(GameObject _MySamplePlant)
+    {
+        Item = _MySamplePlant.GetComponent<MySamplePlant>().GetFinishedItem();
+    }
+
+    public Item GetItem()
+    {
+        return Item;
+    }
 
     public Fieldstate GetFieldstate()                       //getter for other scripts to get the active Fieldstate
     {

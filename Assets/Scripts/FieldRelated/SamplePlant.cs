@@ -28,6 +28,8 @@ public class SamplePlant : ScriptableObject
     [SerializeField]
     private int SellPrice;
 
+    private Item FinishedItem;
+
 
     public void PrintInformation()
     {
@@ -51,6 +53,11 @@ public class SamplePlant : ScriptableObject
     public GameObject GetPlantMeshFinished()
     {
         return GrowthModelFinished;
+    }
+
+    public Item GetFinishedItem()
+    {
+        return FinishedItem;
     }
 
 
