@@ -5,8 +5,8 @@ using UnityEngine;
 public class FieldManager : Interactable
 {
 
-    GameManager GM;                     //used to use the GameManager
-    GameObject Player;                  //used to use informations of the Player
+    //GameManager GM;                     //used to use the GameManager
+    //GameObject Player;                  //used to use informations of the Player
 
     [SerializeField]
     public enum Fieldstate             //different fieldstates
@@ -40,7 +40,6 @@ public class FieldManager : Interactable
     private bool IsWatered = false;
 
     private GameObject MediumPlant;
-    private GameObject MyMediumPlant;
 
     private GameObject FinishedPlant;
     private Item Item;
@@ -67,12 +66,6 @@ public class FieldManager : Interactable
  
     }
 
-    private void Start()
-    {
-        MyMediumPlant = GameObject.Find("MyMediumPlant");
-        GM = GameManager.GMInstance;                                    //finds the GM
-        Player = GameObject.FindGameObjectWithTag("Player");            //finds the Player
-    }
 
     void Update()
     {
@@ -87,7 +80,8 @@ public class FieldManager : Interactable
     {
         switch (ActiveFieldstate)
         {
-            case (Fieldstate.empty):                                        //if this field is empty
+            case (Fieldstate.empty):                                        //if this field is empty   
+
                 if (IsSeeded)                                               //if the player seeded the field
                 {
                     MediumPlant.SetActive(true);
@@ -96,6 +90,11 @@ public class FieldManager : Interactable
                     SeedDay = GameManager.GMInstance.GetCalenderDay();      //remember what day the seeding has taken place
                     DayOfProgress = 0;
                 }
+
+                //IsSeeded = false;  
+                //GetComponent<MeshRenderer>().enabled = true;
+                //Destroy(MediumPlant);
+                //Destroy(FinishedPlant); // REFACTORING!
                 break;
 
             case (Fieldstate.seeded):                                       //if the plant is seeded
@@ -179,10 +178,7 @@ public class FieldManager : Interactable
 
     public void ResetField()                                //resets the field to an empty state
     {
-        IsSeeded = false;
         ActiveFieldstate = Fieldstate.empty;
-        GetComponent<MeshRenderer>().enabled = true;
-        MediumPlant.SetActive(false);
     }
 
     private void WitheredField()                            //if the plant is not watered for 3 days this function is called and "kills" the plant

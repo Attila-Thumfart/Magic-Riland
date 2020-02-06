@@ -17,7 +17,7 @@ public class PlayerActions : MonoBehaviour
     [SerializeField]
     private GameObject cloud;
     private GameObject Player;
-    private GameObject animator;
+   // private GameObject animator;
 
     private bool channelState = false;
     private float cloudDuration;
@@ -47,7 +47,7 @@ public class PlayerActions : MonoBehaviour
         // controls.Keyboard.Interact.performed += ctx => EndDay();
 
         Player = this.gameObject;
-        animator = GameObject.FindGameObjectWithTag("Animator");
+     //   animator = GameObject.FindGameObjectWithTag("Animator");
     }
 
 
@@ -56,44 +56,22 @@ public class PlayerActions : MonoBehaviour
         ChannelCounter();
     }
 
-    private void LateUpdate()
-    {
-        RemoveFocus();
-    }
-
     void Interact()
     {
-        RaycastHit hit;
-        Ray interactionRay = new Ray(transform.position + raycastHigth, transform.TransformDirection(Vector3.forward) * interactionRange);
+            RaycastHit hit;
+            Ray interactionRay = new Ray(transform.position + raycastHigth, transform.TransformDirection(Vector3.forward) * interactionRange);
 
-        Debug.DrawRay(transform.position + raycastHigth, transform.TransformDirection(Vector3.forward) * interactionRange);
+            Debug.DrawRay(transform.position + raycastHigth, transform.TransformDirection(Vector3.forward) * interactionRange);
 
-        if (Physics.Raycast(interactionRay, out hit, interactionRange))
-        {
-            CurrentInteractable = hit.collider.GetComponent<Interactable>();
-            if (CurrentInteractable != null)
+            if (Physics.Raycast(interactionRay, out hit, interactionRange))
             {
-                CurrentItem = GameObject.FindObjectOfType<MySamplePlant>().gameObject;
-                SetFocus(CurrentInteractable);
+                CurrentInteractable = hit.collider.GetComponent<Interactable>();
+                if (CurrentInteractable != null)
+                {
+                    CurrentItem = GameObject.FindObjectOfType<MySamplePlant>().gameObject;
+                    CurrentInteractable.Interact();
+                }
             }
-        }
-
-    }
-
-    void SetFocus(Interactable newFocus)
-    {
-        focus = newFocus;
-        newFocus.OnFocused(transform);
-    }
-
-    void RemoveFocus()
-    {
-        if (focus != null)
-        {
-            focus.OnDefocused();
-        }
-
-        focus = null;
     }
 
     private void StartChannel()  // Checks if there is already a cloud active, if not the Max Duration of the used cloud is pulled here for later use and the channel State is set as true to start the charge up/channel
@@ -219,7 +197,7 @@ public class PlayerActions : MonoBehaviour
         }
     }
 */
-    void EndDay()
+   /* void EndDay()
     {
         if (TouchesBed)           //if the player touches the Bed and presses "E"
         {
@@ -228,7 +206,7 @@ public class PlayerActions : MonoBehaviour
             GetComponent<PlayerMovement>().enabled = false;
             animator.GetComponent<FadingManager>().SetFade(true);
         }
-    }
+    }*/
 
     public Interactable GetFocus()
     {
