@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,9 +14,6 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private int CalenderDay = 1;            //the days passing in a playthrough
-
-    [SerializeField]
-    private bool isNight;                   //for checks if its Day or Night
 
     private GameObject EndOfDayCardUI;
 
@@ -34,19 +32,18 @@ public class GameManager : MonoBehaviour
     {
         //animator.GetComponent<FadingManager>().SetFade(false);
         EndOfDayCardUI = GameObject.Find("EndOfDayCard");
-        EndOfDayCardUI.SetActive(false);
+       // EndOfDayCardUI.SetActive(false);
     }
 
     private void Update()
     {
         // IncrementCalenderDay();
-       // EndNight();
+        // EndNight();
     }
 
 
     public void IncrementCalenderDay()                       //Incrementer for other scripts to call an update of CalenderDay
     {
-        isNight = true;
         CalenderDay++;
         StartCoroutine(Coroutine(1.2f, () =>
         {
@@ -58,7 +55,6 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(_TimeToWait);
         _callback?.Invoke();
-
     }
 
     public int GetCalenderDay()                             //getter for other scripts to read CalenderDay
@@ -66,20 +62,27 @@ public class GameManager : MonoBehaviour
         return CalenderDay;
     }
 
+    public void ControlButton()
+    {
+
+    }
+
     public void EndNight()
     {
-        if (isNight)                           //later: if player ends the night via a submenu
-        {
-            EndOfDayCardUI.SetActive(false);
-            isNight = false;
-            Player.GetComponent<PlayerActions>().EnableMovement();      //Enables the Movement of the player when ending the night
-            animator.GetComponent<FadingManager>().SetFade(false);
 
-            for (int i = 0; i < Fields.Count; i++)                      //every field in the scene
-            {
-                Fields[i].UpdateFieldDays();                            //update their status (happens in FieldManager)
-            }
+        EndOfDayCardUI.SetActive(false);
+        StartCoroutine(Coroutine(0.2f, () =>
+       {
+           Player.GetComponent<PlayerActions>().enabled = true;
+           Player.GetComponent<PlayerActions>().EnableMovement();      //Enables the Movement of the player when ending the night
+        }));
+        animator.GetComponent<FadingManager>().SetFade(false);
+
+        for (int i = 0; i < Fields.Count; i++)                      //every field in the scene
+        {
+            Fields[i].UpdateFieldDays();                            //update their status (happens in FieldManager)
         }
+
     }
 
 

@@ -16,6 +16,8 @@ public class MySamplePlant : MonoBehaviour
 
     }
 
+    
+
     public int GetGrowthRateMedium()            //gives growthrateinformation to the field        
     {
         return plant.GetGrowthRateMedium();
@@ -35,4 +37,8 @@ public class MySamplePlant : MonoBehaviour
         return plant.GetPlantMeshFinished();
     }
 
+    public Item GetFinishedItem()
+    {
+        return plant.GetFinishedItem();
+    }
 }
