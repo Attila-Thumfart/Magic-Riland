@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Inventory : MonoBehaviour
 {
+    #region Singleton
     public static Inventory instance;
 
     private void Awake()
@@ -15,6 +16,7 @@ public class Inventory : MonoBehaviour
         }
         instance = this;
     }
+    #endregion
 
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;

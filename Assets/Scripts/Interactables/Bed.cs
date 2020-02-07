@@ -19,10 +19,10 @@ public class Bed : Interactable
         animator.GetComponent<FadingManager>().SetFade(true);
     }
 
-    public override void Start()
+   /* public override void Start()
     {
         base.Start();
         EndOfDayCardUI = GameObject.Find("EndOfDayCard");
         EndOfDayCardUI.SetActive(false);
-    }
+    }*/
 }
