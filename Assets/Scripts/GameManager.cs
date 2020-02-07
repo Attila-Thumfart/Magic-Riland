@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [SerializeField]
     private int CalenderDay = 1;            //the days passing in a playthrough
 
+    [SerializeField]
     private GameObject EndOfDayCardUI;
 
     public void Awake()
@@ -26,13 +27,19 @@ public class GameManager : MonoBehaviour
             if (go.tag == "Field")                                                              //if the Tag of this object is "Field"
                 Fields.Add(go);                                                                 //add it to the List of Fields
         }
+
+        //EndOfDayCardUI = GameObject.Find("EndOfDayCard");
+        EndOfDayCardUI.SetActive(false);
+        Debug.Log("EndOfDayCard disabled");
     }
 
     private void Start()
     {
+        //DefineGameObjects();
+
         //animator.GetComponent<FadingManager>().SetFade(false);
-        EndOfDayCardUI = GameObject.Find("EndOfDayCard");
-       // EndOfDayCardUI.SetActive(false);
+        //  EndOfDayCardUI = GameObject.Find("EndOfDayCard");
+        // EndOfDayCardUI.SetActive(false);
     }
 
     private void Update()
@@ -71,11 +78,13 @@ public class GameManager : MonoBehaviour
     {
 
         EndOfDayCardUI.SetActive(false);
+        Player = GameObject.Find("Player");         //Finds the Player
+
         StartCoroutine(Coroutine(0.2f, () =>
        {
            Player.GetComponent<PlayerActions>().enabled = true;
            Player.GetComponent<PlayerActions>().EnableMovement();      //Enables the Movement of the player when ending the night
-        }));
+       }));
         animator.GetComponent<FadingManager>().SetFade(false);
 
         for (int i = 0; i < Fields.Count; i++)                      //every field in the scene
@@ -88,19 +97,22 @@ public class GameManager : MonoBehaviour
 
     private void DefineGameObjects()
     {
-        animator = GameObject.Find("FadeManager");
-        Player = GameObject.Find("Player");         //Finds the Player
-        //DontDestroyOnLoad(Player);                  //Player wont get destroyed if a new scene is loading
-
         if (GMInstance == null)                     //this makes it so only one GM is loaded
         {
             GMInstance = this;                      //Defines the GM for other scripts to use
-            DontDestroyOnLoad(this);
         }
-        else
+        else if (GMInstance != this)
         {
-            Destroy(this);
+           Destroy(this);
+           return;
         }
+
+        DontDestroyOnLoad(this);
+
+        animator = GameObject.Find("FadeManager");
+
+        //DontDestroyOnLoad(Player);                  //Player wont get destroyed if a new scene is loading
+
     }
 
 }
