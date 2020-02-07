@@ -48,7 +48,7 @@ public class Item : ScriptableObject
         return Cost;
     }
 
-    public Sprite GetInventoryItem()
+    public Sprite GetInventoryIcon()
     {
         return InventoryIcon;
     }
