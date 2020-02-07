@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -31,7 +32,7 @@ public class GameManager : MonoBehaviour
     {
         //animator.GetComponent<FadingManager>().SetFade(false);
         EndOfDayCardUI = GameObject.Find("EndOfDayCard");
-        EndOfDayCardUI.SetActive(false);
+       // EndOfDayCardUI.SetActive(false);
     }
 
     private void Update()

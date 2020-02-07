@@ -5,12 +5,12 @@ using UnityEngine.InputSystem;
 
 public class PlayerActions : MonoBehaviour
 {
-    private bool IsOnField = false;
-    private bool TouchesBed = false;
-    GameObject CurrentField;
+    //private bool IsOnField = false;
+   // private bool TouchesBed = false;
+    //GameObject CurrentField;
     GameObject CurrentItem;
 
-    GameObject CIO;
+   // GameObject CIO;
     Interactable CurrentInteractable;
 
 

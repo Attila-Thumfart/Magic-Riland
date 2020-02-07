@@ -21,7 +21,7 @@ public class SamplePlant : ScriptableObject
     private Sprite Art;
 
     [SerializeField]
-    private int GrowtRateMedium;
+    public int GrowtRateMedium;
     [SerializeField]
     private int GrowthRateFinish;
 
