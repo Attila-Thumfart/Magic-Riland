@@ -21,12 +21,14 @@ public class SamplePlant : ScriptableObject
     private Sprite Art;
 
     [SerializeField]
-    private int GrowtRateMedium;
+    public int GrowtRateMedium;
     [SerializeField]
     private int GrowthRateFinish;
 
     [SerializeField]
     private int SellPrice;
+
+    private Item FinishedItem;
 
 
     public void PrintInformation()
@@ -51,6 +53,11 @@ public class SamplePlant : ScriptableObject
     public GameObject GetPlantMeshFinished()
     {
         return GrowthModelFinished;
+    }
+
+    public Item GetFinishedItem()
+    {
+        return FinishedItem;
     }
 
 

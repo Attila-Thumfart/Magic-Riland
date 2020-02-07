@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FieldManager : MonoBehaviour
+public class FieldManager : Interactable
 {
 
-    GameManager GM;                     //used to use the GameManager
-    GameObject Player;                  //used to use informations of the Player
+    //GameManager GM;                     //used to use the GameManager
+    //GameObject Player;                  //used to use informations of the Player
 
     [SerializeField]
     public enum Fieldstate             //different fieldstates
@@ -40,19 +40,32 @@ public class FieldManager : MonoBehaviour
     private bool IsWatered = false;
 
     private GameObject MediumPlant;
-    private GameObject MyMediumPlant;
 
     private GameObject FinishedPlant;
+    private Item Item;
 
-    
 
-
-    private void Start()
+    public override void Interact()
     {
-        MyMediumPlant = GameObject.Find("MyMediumPlant");
-        GM = GameManager.GMInstance;                                    //finds the GM
-        Player = GameObject.FindGameObjectWithTag("Player");            //finds the Player
+        if (!IsSeeded)
+        {
+            SetIsSeeded(true);
+            SetGrowthrates(Player.GetComponent<PlayerActions>().GetCurrentItem());
+            SetMeshes(Player.GetComponent<PlayerActions>().GetCurrentItem());
+            SetItem(Player.GetComponent<PlayerActions>().GetCurrentItem());
+        }
+
+        if (IsSeeded && (ActiveFieldstate == Fieldstate.finished || ActiveFieldstate == Fieldstate.withered))
+        {
+            ResetField();
+            if (ActiveFieldstate == Fieldstate.finished)
+                GetItem();
+        }
+
+        
+ 
     }
+
 
     void Update()
     {
@@ -67,7 +80,8 @@ public class FieldManager : MonoBehaviour
     {
         switch (ActiveFieldstate)
         {
-            case (Fieldstate.empty):                                        //if this field is empty
+            case (Fieldstate.empty):                                        //if this field is empty   
+
                 if (IsSeeded)                                               //if the player seeded the field
                 {
                     MediumPlant.SetActive(true);
@@ -76,6 +90,11 @@ public class FieldManager : MonoBehaviour
                     SeedDay = GameManager.GMInstance.GetCalenderDay();      //remember what day the seeding has taken place
                     DayOfProgress = 0;
                 }
+
+                //IsSeeded = false;  
+                //GetComponent<MeshRenderer>().enabled = true;
+                //Destroy(MediumPlant);
+                //Destroy(FinishedPlant); // REFACTORING!
                 break;
 
             case (Fieldstate.seeded):                                       //if the plant is seeded
@@ -111,12 +130,14 @@ public class FieldManager : MonoBehaviour
                 break;
 
             case (Fieldstate.withered):
+                MediumPlant.SetActive(false);
+                GetComponent<MeshRenderer>().enabled = true;
                 break;
 
         }
     }
 
-
+    
     public void SetIsSeeded(bool _NewState)          //can get called by PlayerActions to seed the field/empty the field
     {
         IsSeeded = _NewState;
@@ -157,7 +178,6 @@ public class FieldManager : MonoBehaviour
 
     public void ResetField()                                //resets the field to an empty state
     {
-        IsSeeded = false;
         ActiveFieldstate = Fieldstate.empty;
     }
 
@@ -169,6 +189,15 @@ public class FieldManager : MonoBehaviour
         }
     }
 
+    public void SetItem(GameObject _MySamplePlant)
+    {
+        Item = _MySamplePlant.GetComponent<MySamplePlant>().GetFinishedItem();
+    }
+
+    public Item GetItem()
+    {
+        return Item;
+    }
 
     public Fieldstate GetFieldstate()                       //getter for other scripts to get the active Fieldstate
     {

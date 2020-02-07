@@ -109,6 +109,7 @@ GameObject:
   - component: {fileID: 7714960469062638504}
   - component: {fileID: 7714960469062638518}
   - component: {fileID: 7714960469062638516}
+  - component: {fileID: 3871046172646977992}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -174,6 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerSpeed: 5
+  characterController: {fileID: 0}
 --- !u!114 &7714960469062638516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,3 +189,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cloud: {fileID: 0}
+--- !u!143 &3871046172646977992
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7714960469062638505}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 1, z: 0}

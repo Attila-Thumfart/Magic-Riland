@@ -5,19 +5,27 @@ using UnityEngine.InputSystem;
 
 public class PlayerActions : MonoBehaviour
 {
-    private bool IsOnField = false;
-    private bool TouchesBed = false;
-    GameObject CurrentField;
+    //private bool IsOnField = false;
+   // private bool TouchesBed = false;
+    //GameObject CurrentField;
     GameObject CurrentItem;
+
+   // GameObject CIO;
+    Interactable CurrentInteractable;
+
 
     [SerializeField]
     private GameObject cloud;
     private GameObject Player;
-    private GameObject animator;
+   // private GameObject animator;
 
     private bool channelState = false;
     private float cloudDuration;
     private float maxCloudDuration;
+
+    private float interactionRange = 1.2f;
+    private Vector3 raycastHigth = new Vector3(0, 0.3f, 0);
+    private Interactable focus;
 
     // public GameObject mainCam;
     // public GameObject cloudCam;
@@ -32,13 +40,14 @@ public class PlayerActions : MonoBehaviour
 
         controls.Gameplay.Wasser.started += ctx => StartChannel();
         controls.Gameplay.Wasser.canceled += ctx => EndChannel();
-        controls.Gameplay.Interact.performed += ctx => FieldAction();
-        controls.Keyboard.Interact.performed += ctx => FieldAction();
-        controls.Gameplay.Interact.performed += ctx => EndDay();
-        controls.Keyboard.Interact.performed += ctx => EndDay();
+        controls.Gameplay.Interact.performed += ctx => Interact();
+        // controls.Gameplay.Interact.performed += ctx => FieldAction();
+        // controls.Keyboard.Interact.performed += ctx => FieldAction();
+        // controls.Gameplay.Interact.performed += ctx => EndDay();
+        // controls.Keyboard.Interact.performed += ctx => EndDay();
 
         Player = this.gameObject;
-        animator = GameObject.FindGameObjectWithTag("Animator");
+     //   animator = GameObject.FindGameObjectWithTag("Animator");
     }
 
 
@@ -47,6 +56,23 @@ public class PlayerActions : MonoBehaviour
         ChannelCounter();
     }
 
+    void Interact()
+    {
+            RaycastHit hit;
+            Ray interactionRay = new Ray(transform.position + raycastHigth, transform.TransformDirection(Vector3.forward) * interactionRange);
+
+            Debug.DrawRay(transform.position + raycastHigth, transform.TransformDirection(Vector3.forward) * interactionRange);
+
+            if (Physics.Raycast(interactionRay, out hit, interactionRange))
+            {
+                CurrentInteractable = hit.collider.GetComponent<Interactable>();
+                if (CurrentInteractable != null)
+                {
+                    CurrentItem = GameObject.FindObjectOfType<MySamplePlant>().gameObject;
+                    CurrentInteractable.Interact();
+                }
+            }
+    }
 
     private void StartChannel()  // Checks if there is already a cloud active, if not the Max Duration of the used cloud is pulled here for later use and the channel State is set as true to start the charge up/channel
     {
@@ -104,9 +130,10 @@ public class PlayerActions : MonoBehaviour
         // player.GetComponent<ControllerMovement>().enabled = false;
         // mainCam.SetActive(false);
     }
-
+/*
     private void OnTriggerEnter(Collider other)         //checks if the Player touches a Field
     {
+
         if (other.tag == "Field")
         {
             IsOnField = true;                           //sets the bool for it to true
@@ -135,28 +162,26 @@ public class PlayerActions : MonoBehaviour
 
     void SeedField()                                    //Seeds the field and gives over the plants information
     {
-        if (IsOnField)
-        {
-            CurrentItem = GameObject.FindObjectOfType<MySamplePlant>().gameObject;
-            
-            CurrentField.GetComponent<FieldManager>().SetIsSeeded(true);
-            CurrentField.GetComponent<FieldManager>().SetGrowthrates(CurrentItem);
-            CurrentField.GetComponent<FieldManager>().SetMeshes(CurrentItem);
-        }
+        /*
+        CurrentField.GetComponent<FieldManager>().SetIsSeeded(true);
+        CurrentField.GetComponent<FieldManager>().SetGrowthrates(CurrentItem);
+        CurrentField.GetComponent<FieldManager>().SetMeshes(CurrentItem);
+        CurrentField.GetComponent<FieldManager>().SetItem(CurrentItem);
     }
 
     void HarvestField()                                 //Harvests the field the player is standing on
     {
         CurrentField.GetComponent<FieldManager>().ResetField();
+        Inventory.instance.Add(CurrentField.GetComponent<FieldManager>().GetItem());
     }
 
-    void FieldAction()
+    public void FieldAction()
     {
         if (IsOnField)
         {
             if (CurrentField.GetComponent<FieldManager>().GetFieldstate() == FieldManager.Fieldstate.empty)         //if the field the player is standing on is empty
             {
-                                                        //and if there is a Plant in the scene (Later: if the first item in inventory is a seed)
+                //and if there is a Plant in the scene (Later: if the first item in inventory is a seed)
                 SeedField();                                                                                        //seeds the field
             }
 
@@ -171,8 +196,8 @@ public class PlayerActions : MonoBehaviour
             }
         }
     }
-
-    void EndDay()
+*/
+   /* void EndDay()
     {
         if (TouchesBed)           //if the player touches the Bed and presses "E"
         {
@@ -181,6 +206,11 @@ public class PlayerActions : MonoBehaviour
             GetComponent<PlayerMovement>().enabled = false;
             animator.GetComponent<FadingManager>().SetFade(true);
         }
+    }*/
+
+    public Interactable GetFocus()
+    {
+        return focus;
     }
 
     public void EnableMovement()
@@ -196,5 +226,10 @@ public class PlayerActions : MonoBehaviour
     private void OnDisable() // This function disables the controls when the object becomes disabled or inactive
     {
         controls.Gameplay.Disable();
+    }
+
+    public GameObject GetCurrentItem()
+    {
+        return CurrentItem;
     }
 }
