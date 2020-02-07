@@ -25,15 +25,19 @@ public class GameManager : MonoBehaviour
         {
             if (go.tag == "Field")                                                              //if the Tag of this object is "Field"
                 Fields.Add(go);                                                                 //add it to the List of Fields
+
+            EndOfDayCardUI = GameObject.Find("EndOfDayCard");
         }
+
+
     }
 
-    private void Start()
-    {
+  //  private void Start()
+  //  {
         //animator.GetComponent<FadingManager>().SetFade(false);
-        EndOfDayCardUI = GameObject.Find("EndOfDayCard");
+      //  EndOfDayCardUI = GameObject.Find("EndOfDayCard");
        // EndOfDayCardUI.SetActive(false);
-    }
+  //  }
 
     private void Update()
     {
