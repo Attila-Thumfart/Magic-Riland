@@ -99,4 +99,9 @@ public class Item : ScriptableObject
     }
 
     #endregion
+
+    public virtual void UseItem()
+    {
+
+    }
 }
