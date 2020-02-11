@@ -3,7 +3,8 @@ using UnityEngine.UI;
 
 public class InventorySlot : MonoBehaviour
 {
-    public Image Icon;
+    [SerializeField]
+    private Image Icon;
 
     Item Item;
 

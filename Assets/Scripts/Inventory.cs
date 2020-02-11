@@ -9,7 +9,7 @@ public class Inventory : MonoBehaviour
 
     private void Awake()
     {
-        if(instance != null)
+        if (instance != null)
         {
             ;
             return;
@@ -21,35 +21,72 @@ public class Inventory : MonoBehaviour
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
 
-    public int space = 20;
+    private InventorySlot inventorySlot;
 
-    public List<Item> items = new List<Item>();
+    [SerializeField]
+    private int InventorySpace = 30;
+    [SerializeField]
+    private InventoryUI inventoryUI;
 
-    public bool Add (Item item)
+    public Item[] items;
+
+    private void Start()
     {
-        if(items.Count >= space)
-        {
-            Debug.Log("Not enough room.");
-            return false;
-        }
-
-        items.Add(item);
-
-        if (onItemChangedCallback != null)
-        {
-            onItemChangedCallback.Invoke();
-        }
-
-        return true;
+        items = new Item[InventorySpace];
     }
 
-    public void Remove(Item item)
+    public bool AddItemToInventory(Item item)
     {
-        items.Remove(item);
+        for (int i = 0; i < items.Length; i++)
+        {
+            if (items[i] == null)
+            {
+                items[i] = item;
+
+                inventoryUI.AddItemToSlot(i, item);
+
+                if (onItemChangedCallback != null)
+                {
+                    onItemChangedCallback.Invoke();
+                }
+
+                return true;
+            }
+
+            if (i == items.Length - 1 && items[i] != null)
+            {
+                Debug.Log("Inventory full.");
+                return false;
+            }
+        }
+        return false;
+    }
+
+    public void RemoveItemFromInventory(int _inventorySlot)
+    {
+        items[_inventorySlot] = null;
+        inventoryUI.RemoveItemFromSlot(_inventorySlot);
+
+        //inventorySlot.ClearSlot();
 
         if (onItemChangedCallback != null)
         {
             onItemChangedCallback.Invoke();
         }
+    }
+
+    public Item GetFirstItem()
+    {
+        /*
+        for (int i = 0; i < items.Length; i++)
+        {
+            if (items[i].GetIsSeed())
+            {
+                return items[i];
+            }
+        }
+        return null;*/
+
+        return items[0];
     }
 }

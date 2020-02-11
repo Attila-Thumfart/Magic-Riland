@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(Coroutine(1.2f, () =>
         {
             EndOfDayCardUI.SetActive(true);
+            EndOfDayCardUI.GetComponent<EndOfDayRandomNumbers>().Start();
         }));
     }
 
@@ -102,16 +103,14 @@ public class GameManager : MonoBehaviour
         }
         else if (GMInstance != this)
         {
-           Destroy(this);
-           return;
+            Destroy(this);
+            return;
         }
 
         DontDestroyOnLoad(this);
 
         animator = GameObject.Find("FadeManager");
 
-        //DontDestroyOnLoad(Player);                  //Player wont get destroyed if a new scene is loading
-
+        //DontDestroyOnLoad(Player);                  //Player wont get destroyed if a new scene is loadin
     }
-
 }
