@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5178220324224561604}
   - component: {fileID: 1504257905549315389}
   m_Layer: 0
-  m_Name: 009_Setzling
+  m_Name: Tulpe-Setzling_einzeln
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 926866951584954849}
   m_LocalRotation: {x: 0.16464272, y: 0.68767196, z: 0.687672, w: 0.16464278}
-  m_LocalPosition: {x: -7.467, y: -0.024, z: 0.773}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.160417, y: 0.829547, z: 1.225922}
   m_Children: []
   m_Father: {fileID: 0}

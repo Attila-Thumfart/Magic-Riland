@@ -76,7 +76,6 @@ public class GameManager : MonoBehaviour
 
     public void EndNight()
     {
-
         EndOfDayCardUI.SetActive(false);
         Player = GameObject.Find("Player");         //Finds the Player
 

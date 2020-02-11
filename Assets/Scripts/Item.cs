@@ -48,7 +48,7 @@ public class Item : ScriptableObject
         return Cost;
     }
 
-    public Sprite GetInventoryItem()
+    public Sprite GetInventoryIcon()
     {
         return InventoryIcon;
     }
@@ -98,5 +98,15 @@ public class Item : ScriptableObject
         return HandModel;
     }
 
+    public Item GetItem()
+    {
+        return this;
+    }
+
     #endregion
+
+    public virtual void UseItem()
+    {
+
+    }
 }

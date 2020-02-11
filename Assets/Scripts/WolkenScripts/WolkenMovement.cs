@@ -6,7 +6,7 @@ using UnityEngine.InputSystem;
 public class WolkenMovement : MonoBehaviour
 {
     [SerializeField]
-    private float playerSpeed = 5f;  // Playerspeed, editable in the Editor
+    private float cloudSpeed = 5f;  // Playerspeed, editable in the Editor
 
     PlayerControls controls; // This is where the Controls and actual Input are saved (via Unity Input System)
     private Vector2 move;            // Vector to save the JoyStick Inputs X and Y
@@ -21,7 +21,7 @@ public class WolkenMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Vector3 movement = new Vector3(move.x * playerSpeed, 0f, move.y * playerSpeed) * Time.deltaTime; // X and Y Values of the JoyStick are multiplyed with the Playerspeed
+        Vector3 movement = new Vector3(move.x * cloudSpeed, 0f, move.y * cloudSpeed) * Time.deltaTime; // X and Y Values of the JoyStick are multiplyed with the Playerspeed
         transform.Translate(movement, Space.World); // The values are applied to move the player in relation to the world
     }
 
