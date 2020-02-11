@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9173471043873612131}
   - component: {fileID: 150221810051586901}
   - component: {fileID: 5848267833606137772}
-  - component: {fileID: 7404679416448683750}
+  - component: {fileID: -1418347438085065307}
   m_Layer: 0
   m_Name: stein_2_2
   m_TagString: Untagged
@@ -80,8 +80,8 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!64 &7404679416448683750
-MeshCollider:
+--- !u!136 &-1418347438085065307
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -90,7 +90,7 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 6461297695846733525, guid: cebfc376c32871b4997027dfc0b6b03f, type: 3}
+  m_Radius: 0.6475156
+  m_Height: 1.5632683
+  m_Direction: 2
+  m_Center: {x: -0.046676457, y: 0.12134542, z: -0.01307657}
