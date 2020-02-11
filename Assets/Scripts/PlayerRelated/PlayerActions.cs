@@ -13,8 +13,6 @@ public class PlayerActions : MonoBehaviour
    // GameObject CIO;
     Interactable CurrentInteractable;
 
-
-    [SerializeField]
     private GameObject cloud;
     private GameObject Player;
    // private GameObject animator;
@@ -41,10 +39,6 @@ public class PlayerActions : MonoBehaviour
         controls.Gameplay.Wasser.started += ctx => StartChannel();
         controls.Gameplay.Wasser.canceled += ctx => EndChannel();
         controls.Gameplay.Interact.performed += ctx => Interact();
-        // controls.Gameplay.Interact.performed += ctx => FieldAction();
-        // controls.Keyboard.Interact.performed += ctx => FieldAction();
-        // controls.Gameplay.Interact.performed += ctx => EndDay();
-        // controls.Keyboard.Interact.performed += ctx => EndDay();
 
         Player = this.gameObject;
      //   animator = GameObject.FindGameObjectWithTag("Animator");
@@ -76,6 +70,7 @@ public class PlayerActions : MonoBehaviour
 
     private void StartChannel()  // Checks if there is already a cloud active, if not the Max Duration of the used cloud is pulled here for later use and the channel State is set as true to start the charge up/channel
     {
+
 
         if (cloud.activeSelf == false)
         {
@@ -130,83 +125,6 @@ public class PlayerActions : MonoBehaviour
         // player.GetComponent<ControllerMovement>().enabled = false;
         // mainCam.SetActive(false);
     }
-/*
-    private void OnTriggerEnter(Collider other)         //checks if the Player touches a Field
-    {
-
-        if (other.tag == "Field")
-        {
-            IsOnField = true;                           //sets the bool for it to true
-            CurrentField = other.gameObject;            //references the current field; used for SeedField to know which field is seeded
-        }
-
-        else if (other.name == "Bed")
-        {
-            TouchesBed = true;
-        }
-    }
-
-    private void OnTriggerExit(Collider other)          //checks if the Player stops touching a field
-    {
-        if (other.tag == "Field")
-        {
-            IsOnField = false;                          //sets the bool for it to false
-            CurrentField = null;                        //dereferences the current field 
-        }
-
-        else if (other.name == "Bed")
-        {
-            TouchesBed = false;
-        }
-    }
-
-    void SeedField()                                    //Seeds the field and gives over the plants information
-    {
-        /*
-        CurrentField.GetComponent<FieldManager>().SetIsSeeded(true);
-        CurrentField.GetComponent<FieldManager>().SetGrowthrates(CurrentItem);
-        CurrentField.GetComponent<FieldManager>().SetMeshes(CurrentItem);
-        CurrentField.GetComponent<FieldManager>().SetItem(CurrentItem);
-    }
-
-    void HarvestField()                                 //Harvests the field the player is standing on
-    {
-        CurrentField.GetComponent<FieldManager>().ResetField();
-        Inventory.instance.Add(CurrentField.GetComponent<FieldManager>().GetItem());
-    }
-
-    public void FieldAction()
-    {
-        if (IsOnField)
-        {
-            if (CurrentField.GetComponent<FieldManager>().GetFieldstate() == FieldManager.Fieldstate.empty)         //if the field the player is standing on is empty
-            {
-                //and if there is a Plant in the scene (Later: if the first item in inventory is a seed)
-                SeedField();                                                                                        //seeds the field
-            }
-
-            if (CurrentField.GetComponent<FieldManager>().GetFieldstate() == FieldManager.Fieldstate.finished)      //if the field the player is standing on has a grown up plant
-            {
-                HarvestField();                                                                                     //harvests the field
-            }
-
-            if (CurrentField.GetComponent<FieldManager>().GetFieldstate() == FieldManager.Fieldstate.withered)
-            {
-                HarvestField();
-            }
-        }
-    }
-*/
-   /* void EndDay()
-    {
-        if (TouchesBed)           //if the player touches the Bed and presses "E"
-        {
-            TouchesBed = false;
-            GameManager.GMInstance.IncrementCalenderDay();      //end the day 
-            GetComponent<PlayerMovement>().enabled = false;
-            animator.GetComponent<FadingManager>().SetFade(true);
-        }
-    }*/
 
     public Interactable GetFocus()
     {
