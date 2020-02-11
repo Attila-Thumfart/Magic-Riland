@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 1987751481817394185}
   - component: {fileID: 7408122113597658687}
   - component: {fileID: 3887282285979871942}
+  - component: {fileID: 3550626705507967932}
+  - component: {fileID: 4541131465571452891}
   m_Layer: 0
   m_Name: Stein_1_1
   m_TagString: Untagged
@@ -79,3 +81,31 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &3550626705507967932
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3300769812525719066}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.65886354
+  m_Height: 2.3342686
+  m_Direction: 0
+  m_Center: {x: -0.14231634, y: -0.011883497, z: 0.61625093}
+--- !u!136 &4541131465571452891
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3300769812525719066}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.7841149
+  m_Height: 1.9784913
+  m_Direction: 1
+  m_Center: {x: -0.086087525, y: 0.01570642, z: 0.5250523}
