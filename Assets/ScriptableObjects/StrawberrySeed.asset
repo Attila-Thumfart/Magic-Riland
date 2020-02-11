@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 71e50bdf55f8b8f4abf95e0f69e63767, type: 3}
-  m_Name: Strawberry
+  m_Name: StrawberrySeed
   m_EditorClassIdentifier: 
   Name: Strawberry Seed
-  Description: A BEATIFUL berry made of Straw.... -_-
-  IsSeed: 0
-  SellingPrice: 200
-  Cost: 50
-  InventoryIcon: {fileID: 21300000, guid: 2a21235d205a0da439987ae5933c7030, type: 3}
+  Description: This is a Strawberry Seed
+  IsSeed: 1
+  SellingPrice: 10
+  Cost: 80
+  InventoryIcon: {fileID: 21300000, guid: bcc691569210a3446bc291d486614f5c, type: 3}
   GrowthRateUntilSprout: 1
-  GrowtRateUntilMedium: 2
+  GrowtRateUntilMedium: 1
   GrowthRateUntilFinished: 1
   GrowthModelSeed: {fileID: 999019228972583639, guid: 90721b090083e0449ba866ba37833413,
     type: 3}
@@ -29,7 +29,8 @@ MonoBehaviour:
     type: 3}
   GrowthModelFinished: {fileID: 2095344982100626464, guid: cacc92ed19e8d8d48bb2ac16d40af793,
     type: 3}
-  GrowthModelWithered: {fileID: 926866951584954849, guid: 92186779d7b39e3498dd28eba9a1b85c,
+  GrowthModelWithered: {fileID: 4121299954250595396, guid: 6938bc29446a96249b279d14571050bd,
     type: 3}
   HandModel: {fileID: 5282601792828595530, guid: 5699bc6a59b4f9f4990db8faea0b4359,
     type: 3}
+  FinishedPlant: {fileID: 11400000, guid: 4c0a4a961e45cf449af449cc6b5b33de, type: 2}
