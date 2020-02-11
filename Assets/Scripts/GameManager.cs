@@ -72,7 +72,7 @@ public class GameManager : MonoBehaviour
 
     public void EndNight()
     {
-
+        Fields.Clear();
         foreach (FieldManager go in FieldManager.FindObjectsOfType(typeof(FieldManager)))       //finds all objects of type FieldManager
         {
             if (go.tag == "Field")                                                              //if the Tag of this object is "Field"
