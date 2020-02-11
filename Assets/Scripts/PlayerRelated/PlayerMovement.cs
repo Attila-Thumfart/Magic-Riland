@@ -14,6 +14,9 @@ public class PlayerMovement : MonoBehaviour
     PlayerControls controls; // This is where the Controls and actual Input are saved (via Unity Input System)
     private Vector2 move;            // Vector to save the JoyStick Inputs X and Y
     private Vector2 rotate;
+   
+    [SerializeField]
+    private float Gravity = 4f;
 
     private void Awake()
     {
@@ -31,7 +34,8 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector3 movement = new Vector3(move.x, 0f, move.y); // X and Y Values of the JoyStick are multiplyed with the Playerspeed
         movement *= playerSpeed;
-        characterController.Move(movement * Time.deltaTime);
+        characterController.SimpleMove(movement);
+        Debug.Log(Time.deltaTime);
         //transform.Translate(movement, Space.World); // The values are applied to move the player in relation to the world
 
         Vector3 rotation = new Vector3(rotate.x, 0f, rotate.y) * Time.deltaTime;
