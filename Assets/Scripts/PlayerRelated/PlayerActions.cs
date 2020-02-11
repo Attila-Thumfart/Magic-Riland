@@ -29,8 +29,8 @@ public class PlayerActions : MonoBehaviour
     private Interactable focus;
     private Inventory PlayerInventory;
 
-    // public GameObject mainCam;
-    // public GameObject cloudCam;
+     public GameObject mainCam;
+     public GameObject cloudCam;
 
     PlayerControls controls; // This is where the Controls and actual Input are saved (via Unity Input System)
 
@@ -121,16 +121,16 @@ public class PlayerActions : MonoBehaviour
     private void WaterSpell(float _duration)   // Spawns a cloud on the player position and sets its duration
     {
         CloudInstance.transform.position = Player.transform.position;
-        //cloudCam.transform.position = mainCam.transform.position;
+        cloudCam.transform.position = mainCam.transform.position;
 
         WolkenActions myCloud = CloudInstance.GetComponent<WolkenActions>();
         myCloud.SetCloudDuration(_duration);
 
         CloudInstance.SetActive(true);
 
-        // cloudCam.SetActive(true);
-        // player.GetComponent<ControllerMovement>().enabled = false;
-        // mainCam.SetActive(false);
+         cloudCam.SetActive(true);
+         Player.GetComponent<PlayerMovement>().enabled = false;
+         mainCam.SetActive(false);
     }
 
     public Interactable GetFocus()
@@ -156,5 +156,20 @@ public class PlayerActions : MonoBehaviour
     public Item GetCurrentItem()
     {
         return CurrentItem;
+    }
+
+    public GameObject GetCloudInstance()
+    {
+        return CloudInstance;
+    }
+
+    public GameObject GetMainCam()
+    {
+        return mainCam;
+    }
+
+    public GameObject GetCloudCam()
+    {
+        return cloudCam;
     }
 }

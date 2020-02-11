@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class WolkenActions : MonoBehaviour
 {
-    // public GameObject cloud;
-    // public GameObject player;
-    // public GameObject mainCam;
-    // public GameObject cloudCam;
+     // public GameObject cloud;
+     public GameObject player;
+     public GameObject mainCam;
+     public GameObject cloudCam;
 
     private float cloudDuration;
 
@@ -24,6 +24,11 @@ public class WolkenActions : MonoBehaviour
         // countdown = cloudDuration;
 
         //   controls.Gameplay.Wasser.performed += ctx => CancleSpell();
+
+        player = GameObject.Find("Player");
+        mainCam = player.GetComponent<PlayerActions>().GetMainCam();
+        cloudCam = player.GetComponent<PlayerActions>().GetCloudCam();
+
     }
 
     private void Update()
@@ -64,9 +69,9 @@ public class WolkenActions : MonoBehaviour
     private void CancleSpell()
     {
         Destroy(this.gameObject);
-        //cloudCam.SetActive(false);
-        //player.GetComponent<ControllerMovement>().enabled = true;
-        //mainCam.SetActive(true);
+        cloudCam.SetActive(false);
+        player.GetComponent<PlayerMovement>().enabled = true;
+        mainCam.SetActive(true);
         //countdown = cloudDuration;
     }
 

@@ -15,8 +15,8 @@ public class WolkenMovement : MonoBehaviour
     {
         controls = new PlayerControls();
 
-        controls.Gameplay.MoveSpell.performed += ctx => move = ctx.ReadValue<Vector2>();  // When the action defined in controls is performed read and save the values of the Joystick in a Vector2
-        controls.Gameplay.MoveSpell.canceled += ctx => move = Vector2.zero;               // When there is no input the vector is 0
+        controls.Gameplay.Move.performed += ctx => move = ctx.ReadValue<Vector2>();  // When the action defined in controls is performed read and save the values of the Joystick in a Vector2
+        controls.Gameplay.Move.canceled += ctx => move = Vector2.zero;               // When there is no input the vector is 0
     }
 
     private void FixedUpdate()

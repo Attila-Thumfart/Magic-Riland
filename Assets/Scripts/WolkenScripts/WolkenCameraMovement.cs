@@ -2,6 +2,7 @@
 
 public class WolkenCameraMovement : MonoBehaviour
 {
+    private GameObject player;
     private GameObject wolke;              //Player an dem die Camera hängt
     private Transform target;               //Position, Rotation und Scale vom Target (Player)
 
@@ -12,9 +13,10 @@ public class WolkenCameraMovement : MonoBehaviour
     private Vector3 offset;                 //Used for Positioning the Camera in relation to the Player
 
 
-    private void Awake()
+    private void OnEnable()
     {
-        wolke = GameObject.Find("TestWolke");   //Finding the Player in the scene
+        player = GameObject.Find("Player");
+        wolke = player.GetComponent<PlayerActions>().GetCloudInstance();   //Finding the Player in the scene
         target = wolke.transform;            //Setting target in dependend on the Player
     }
 
