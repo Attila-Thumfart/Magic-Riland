@@ -48,7 +48,7 @@ public class Item : ScriptableObject
         return Cost;
     }
 
-    public Sprite GetInventoryItem()
+    public Sprite GetInventoryIcon()
     {
         return InventoryIcon;
     }
@@ -104,4 +104,9 @@ public class Item : ScriptableObject
     }
 
     #endregion
+
+    public virtual void UseItem()
+    {
+
+    }
 }
