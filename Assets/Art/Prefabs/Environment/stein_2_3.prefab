@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6798366876089434913}
   - component: {fileID: 2523036243761625367}
   - component: {fileID: 8088229033236694510}
+  - component: {fileID: 6948892111850456329}
   m_Layer: 0
   m_Name: stein_2_3
   m_TagString: Untagged
@@ -79,3 +80,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &6948892111850456329
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7495115127436423474}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 6461297695846733525, guid: cebfc376c32871b4997027dfc0b6b03f, type: 3}
