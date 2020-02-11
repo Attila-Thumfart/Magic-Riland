@@ -98,5 +98,10 @@ public class Item : ScriptableObject
         return HandModel;
     }
 
+    public Item GetItem()
+    {
+        return this;
+    }
+
     #endregion
 }

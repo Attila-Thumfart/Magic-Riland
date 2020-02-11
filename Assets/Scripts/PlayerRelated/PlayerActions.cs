@@ -68,7 +68,7 @@ public class PlayerActions : MonoBehaviour
                 CurrentInteractable = hit.collider.GetComponent<Interactable>();
                 if (CurrentInteractable != null)
                 {
-                    CurrentItem = GameObject.FindObjectOfType<MySamplePlant>().gameObject;
+                    CurrentItem = GameObject.FindObjectOfType<Strawberry>().gameObject; // WICHTIG: FindObjectOfType<___>(). ÄNDERN SOBALD INVENTORY STEHT!
                     CurrentInteractable.Interact();
                 }
             }
