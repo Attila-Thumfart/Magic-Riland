@@ -66,7 +66,7 @@ public class WolkenActions : MonoBehaviour
 
     private void CancleSpell()
     {
-        cloud.SetActive(false);
+        Destroy(this.gameObject);
         //cloudCam.SetActive(false);
         //player.GetComponent<ControllerMovement>().enabled = true;
         //mainCam.SetActive(true);

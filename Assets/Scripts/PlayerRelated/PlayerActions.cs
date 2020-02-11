@@ -6,16 +6,19 @@ using UnityEngine.InputSystem;
 public class PlayerActions : MonoBehaviour
 {
     //private bool IsOnField = false;
-   // private bool TouchesBed = false;
+    // private bool TouchesBed = false;
     //GameObject CurrentField;
-    GameObject CurrentItem;
+    Item CurrentItem;
 
-   // GameObject CIO;
+    // GameObject CIO;
     Interactable CurrentInteractable;
 
-    private GameObject cloud;
+    [SerializeField]
+    private GameObject Cloud;
     private GameObject Player;
-   // private GameObject animator;
+    // private GameObject animator;
+
+    private GameObject CloudInstance;
 
     private bool channelState = false;
     private float cloudDuration;
@@ -24,6 +27,7 @@ public class PlayerActions : MonoBehaviour
     private float interactionRange = 1.2f;
     private Vector3 raycastHigth = new Vector3(0, 0.3f, 0);
     private Interactable focus;
+    private Inventory PlayerInventory;
 
     // public GameObject mainCam;
     // public GameObject cloudCam;
@@ -38,10 +42,11 @@ public class PlayerActions : MonoBehaviour
 
         controls.Gameplay.Wasser.started += ctx => StartChannel();
         controls.Gameplay.Wasser.canceled += ctx => EndChannel();
-        controls.Gameplay.Interact.performed += ctx => Interact();
+        controls.Gameplay.Interact.started += ctx => Interact();
 
         Player = this.gameObject;
-     //   animator = GameObject.FindGameObjectWithTag("Animator");
+
+        PlayerInventory = Inventory.instance;        //   animator = GameObject.FindGameObjectWithTag("Animator");
     }
 
 
@@ -52,29 +57,27 @@ public class PlayerActions : MonoBehaviour
 
     void Interact()
     {
-            RaycastHit hit;
-            Ray interactionRay = new Ray(transform.position + raycastHigth, transform.TransformDirection(Vector3.forward) * interactionRange);
+        RaycastHit hit;
+        Ray interactionRay = new Ray(transform.position + raycastHigth, transform.TransformDirection(Vector3.forward) * interactionRange);
 
-            Debug.DrawRay(transform.position + raycastHigth, transform.TransformDirection(Vector3.forward) * interactionRange);
+        Debug.DrawRay(transform.position + raycastHigth, transform.TransformDirection(Vector3.forward) * interactionRange);
 
-            if (Physics.Raycast(interactionRay, out hit, interactionRange))
+        if (Physics.Raycast(interactionRay, out hit, interactionRange))
+        {
+            CurrentInteractable = hit.collider.GetComponent<Interactable>();
+            if (CurrentInteractable != null)
             {
-                CurrentInteractable = hit.collider.GetComponent<Interactable>();
-                if (CurrentInteractable != null)
-                {
-                    CurrentItem = GameObject.FindObjectOfType<Strawberry>().gameObject; // WICHTIG: FindObjectOfType<___>(). ÄNDERN SOBALD INVENTORY STEHT!
-                    CurrentInteractable.Interact();
-                }
+                CurrentItem = Inventory.instance.GetFirstItem(); ; // WICHTIG: FindObjectOfType<___>(). ÄNDERN SOBALD INVENTORY STEHT!
+                CurrentInteractable.Interact();
             }
+        }
     }
 
     private void StartChannel()  // Checks if there is already a cloud active, if not the Max Duration of the used cloud is pulled here for later use and the channel State is set as true to start the charge up/channel
     {
-
-
-        if (cloud.activeSelf == false)
+        if (CloudInstance == null)
         {
-            WolkenActions myCloud = cloud.GetComponent<WolkenActions>();
+            WolkenActions myCloud = Cloud.GetComponent<WolkenActions>();
             maxCloudDuration = myCloud.GetMaxCloudChannelDuration();
 
             channelState = true;
@@ -87,10 +90,14 @@ public class PlayerActions : MonoBehaviour
         {
             channelState = false;
             cloudDuration = 0f;
+
         }
         else if (cloudDuration >= 1f)
         {
             channelState = false;
+
+            CloudInstance = Instantiate(Cloud);
+
             WaterSpell(cloudDuration * 2);
             cloudDuration = 0f;
         }
@@ -113,13 +120,13 @@ public class PlayerActions : MonoBehaviour
 
     private void WaterSpell(float _duration)   // Spawns a cloud on the player position and sets its duration
     {
-        cloud.transform.position = Player.transform.position;
+        CloudInstance.transform.position = Player.transform.position;
         //cloudCam.transform.position = mainCam.transform.position;
 
-        WolkenActions myCloud = cloud.GetComponent<WolkenActions>();
+        WolkenActions myCloud = CloudInstance.GetComponent<WolkenActions>();
         myCloud.SetCloudDuration(_duration);
 
-        cloud.SetActive(true);
+        CloudInstance.SetActive(true);
 
         // cloudCam.SetActive(true);
         // player.GetComponent<ControllerMovement>().enabled = false;
@@ -146,7 +153,7 @@ public class PlayerActions : MonoBehaviour
         controls.Gameplay.Disable();
     }
 
-    public GameObject GetCurrentItem()
+    public Item GetCurrentItem()
     {
         return CurrentItem;
     }

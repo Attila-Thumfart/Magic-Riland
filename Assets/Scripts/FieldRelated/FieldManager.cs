@@ -13,6 +13,7 @@ public class FieldManager : Interactable
         finished,
         withered,
     }
+    [SerializeField]
     private Fieldstate ActiveFieldstate = Fieldstate.empty;     //all Fields are empty at the start
 
 
@@ -28,6 +29,7 @@ public class FieldManager : Interactable
 
 
     private Item ThisPlant;
+    private Item ThisFinishedPlant;
 
     private int GrowthRateUntilSprout;
     private int GrowthRateUntilMedium;
@@ -42,7 +44,7 @@ public class FieldManager : Interactable
     private GameObject FieldDryInstance, FieldWateredInstance;
     private GameObject GrowthModelSeedInstance, GrowthModelSproutInstance, GrowthModelMediumInstance, GrowthModelFinishedInstance, GrowthModelWitheredInstance;
 
-
+    private Inventory inventory;
 
 
     public override void Start()
@@ -57,17 +59,26 @@ public class FieldManager : Interactable
 
     public override void Interact()
     {
+        inventory = Inventory.instance;
+
         if (!IsSeeded)
         {
-            SetIsSeeded(true);
-            SetThisPlant(Player.GetComponent<PlayerActions>().GetCurrentItem());
+            Debug.Log("Still Seeded");
+            ThisPlant = Player.GetComponent<PlayerActions>().GetCurrentItem();
+            if (ThisPlant.GetIsSeed())
+            {
+                SetThisPlant(ThisPlant);
+                SetIsSeeded(true);
+               // inventory.RemoveItemFromInventory(0);
+            }
         }
 
         if (IsSeeded && (ActiveFieldstate == Fieldstate.finished || ActiveFieldstate == Fieldstate.withered))
         {
-            ResetField();
             if (ActiveFieldstate == Fieldstate.finished)
-                GetThisPlant();
+                inventory.AddItemToInventory(GetThisPlant());
+
+            ResetField();
         }
     }
 
@@ -75,7 +86,6 @@ public class FieldManager : Interactable
     {
         SwitchFields();
         WitheredField();
-        Debug.Log(IsWatered);
         if (IsWatered)
         {
             FieldDryInstance.SetActive(false);
@@ -162,10 +172,8 @@ public class FieldManager : Interactable
     {
         IsWatered = _NewState;
     }
-    public void SetThisPlant(GameObject _PlayerFirstItem)
+    public void SetThisPlant(Item _PlayerFirstItem)
     {
-        ThisPlant = _PlayerFirstItem.GetComponent<Strawberry>().GetItem();
-
         GrowthRateUntilSprout = ThisPlant.GetGrowthRateUntilSprout();
         GrowthRateUntilMedium = ThisPlant.GetGrowthRateUntilMedium();
         GrowthRateUntilFinished = ThisPlant.GetGrowthRateUntilMedium();
@@ -175,6 +183,8 @@ public class FieldManager : Interactable
         GrowthModelMedium = ThisPlant.GetGrowthModelMedium();
         GrowthModelFinished = ThisPlant.GetGrowthModelFinished();
         GrowthModelWithered = ThisPlant.GetGrowthModelWithered();
+
+        ThisFinishedPlant = ThisPlant.GetFinishedPlant();
 
         GrowthModelSeedInstance = Instantiate(GrowthModelSeed, transform);
         GrowthModelSproutInstance = Instantiate(GrowthModelSprout, transform);
@@ -208,6 +218,7 @@ public class FieldManager : Interactable
 
     public void ResetField()                                //resets the field to an empty state
     {
+        IsSeeded = false;
         ActiveFieldstate = Fieldstate.empty;
     }
 
@@ -221,7 +232,7 @@ public class FieldManager : Interactable
 
     public Item GetThisPlant()
     {
-        return ThisPlant;
+        return ThisFinishedPlant;
     }
 
     public Fieldstate GetFieldstate()                       //getter for other scripts to get the active Fieldstate

@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a24a7d99142044e488fcc3fc47663544, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cloud: {fileID: 0}
+  Cloud: {fileID: 1388125985609021433, guid: f2ed377b8ec653c4eafe371e5f4575ec, type: 3}
 --- !u!143 &3871046172646977992
 CharacterController:
   m_ObjectHideFlags: 0
