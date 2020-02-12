@@ -11,6 +11,8 @@ public class InventoryUI : MonoBehaviour
 
     InventorySlot[] Slots;
 
+    Item item;
+
     public GameObject inventoryUI;
     public GameObject Player;
 
@@ -19,14 +21,14 @@ public class InventoryUI : MonoBehaviour
     private void Awake()
     {
         controls = new PlayerControls();
-        Player = GameObject.FindGameObjectWithTag("Player");
+        DontDestroyOnLoad(this);
     }
 
     // Start is called before the first frame update
     void Start()
     {
         Inventory = Inventory.instance;
-        Inventory.onItemChangedCallback += UpdateUI;
+       // Inventory.onItemChangedCallback += UpdateUI;
 
         Slots = ItemsParent.GetComponentsInChildren<InventorySlot>();
 
@@ -39,11 +41,21 @@ public class InventoryUI : MonoBehaviour
 
     }
 
-    void UpdateUI()
+    public void AddItemToSlot(int slot, Item _myItem)
+    {
+        Slots[slot].AddItem(_myItem);
+    }
+
+    public void RemoveItemFromSlot(int _slotNumber)
+    {
+        Slots[_slotNumber].ClearSlot();
+    }
+
+   /* void UpdateUI()
     {
         for (int i = 0; i < Slots.Length; i++)
         {
-            if (i < Inventory.items.Count)
+            if (i < Inventory.items.Length)
             {
                 Slots[i].AddItem(Inventory.items[i]);
             }
@@ -52,11 +64,12 @@ public class InventoryUI : MonoBehaviour
                 Slots[i].ClearSlot();
             }
         }
-    }
+    }*/
 
     private void ToggleUI()
     {
         inventoryUI.SetActive(!inventoryUI.activeSelf);
+        Player = GameObject.FindGameObjectWithTag("Player");
 
         if (inventoryUI.activeSelf)
         {

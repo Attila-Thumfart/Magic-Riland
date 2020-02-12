@@ -22,12 +22,7 @@ public class GameManager : MonoBehaviour
     {
         DefineGameObjects();
 
-        foreach (FieldManager go in FieldManager.FindObjectsOfType(typeof(FieldManager)))       //finds all objects of type FieldManager
-        {
-            if (go.tag == "Field")                                                              //if the Tag of this object is "Field"
-                Fields.Add(go);                                                                 //add it to the List of Fields
-        }
-
+     
         //EndOfDayCardUI = GameObject.Find("EndOfDayCard");
         EndOfDayCardUI.SetActive(false);
         Debug.Log("EndOfDayCard disabled");
@@ -55,6 +50,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(Coroutine(1.2f, () =>
         {
             EndOfDayCardUI.SetActive(true);
+            EndOfDayCardUI.GetComponent<EndOfDayRandomNumbers>().Start();
         }));
     }
 
@@ -76,6 +72,17 @@ public class GameManager : MonoBehaviour
 
     public void EndNight()
     {
+        Fields.Clear();
+        foreach (FieldManager go in FieldManager.FindObjectsOfType(typeof(FieldManager)))       //finds all objects of type FieldManager
+        {
+            if (go.tag == "Field")                                                              //if the Tag of this object is "Field"
+            {
+                Fields.Add(go);                                                                 //add it to the List of Fields
+                Debug.Log("Added Field to list");
+            }
+        }
+
+
         EndOfDayCardUI.SetActive(false);
         Player = GameObject.Find("Player");         //Finds the Player
 
@@ -102,16 +109,14 @@ public class GameManager : MonoBehaviour
         }
         else if (GMInstance != this)
         {
-           Destroy(this);
-           return;
+            Destroy(this);
+            return;
         }
 
         DontDestroyOnLoad(this);
 
         animator = GameObject.Find("FadeManager");
 
-        //DontDestroyOnLoad(Player);                  //Player wont get destroyed if a new scene is loading
-
+        //DontDestroyOnLoad(Player);                  //Player wont get destroyed if a new scene is loadin
     }
-
 }

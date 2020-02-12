@@ -40,13 +40,13 @@ public class PauseMenu : MonoBehaviour
 
             if (!PauseMenuUI.activeSelf)
             {
-                Time.timeScale = 0f;
+                Time.timeScale = 1f;
                 Player.GetComponent<PlayerActions>().enabled = true;
                 Player.GetComponent<PlayerMovement>().enabled = true;
             }
             else
             {
-                Time.timeScale = 1f;
+                Time.timeScale = 0f;
 
                 StartCoroutine(Coroutine(0.2f, () =>
                 {

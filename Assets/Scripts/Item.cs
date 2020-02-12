@@ -4,7 +4,10 @@
 public class Item : ScriptableObject
 {
     [SerializeField]
-    private string Name = "New Item", ProductName = "Finished Item", Description = "This is an Item";
+    private string Name = "New Item", Description = "This is an Item";
+
+    [SerializeField]
+    private bool IsSeed;
 
     [SerializeField]
     private int SellingPrice, Cost;
@@ -21,16 +24,14 @@ public class Item : ScriptableObject
     [SerializeField]
     private GameObject HandModel;
 
+    [SerializeField]
+    Item FinishedPlant;
+
     #region Getter
 
     public string GetName()
     {
         return Name;
-    }
-
-    public string GetProductName()
-    {
-        return ProductName;
     }
 
     public string GetDescription()
@@ -46,6 +47,11 @@ public class Item : ScriptableObject
     public int GetCost()
     {
         return Cost;
+    }
+
+    public bool GetIsSeed()
+    {
+        return IsSeed;
     }
 
     public Sprite GetInventoryIcon()
@@ -101,6 +107,11 @@ public class Item : ScriptableObject
     public Item GetItem()
     {
         return this;
+    }
+
+    public Item GetFinishedPlant()
+    {
+        return FinishedPlant;
     }
 
     #endregion

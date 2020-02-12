@@ -169,6 +169,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8652156423972091477}
+  - component: {fileID: 5174892961848478548}
   m_Layer: 0
   m_Name: Shopbox
   m_TagString: Untagged
@@ -194,6 +195,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5174892961848478548
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5641316766294377542}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.0253437, y: 0.9567833, z: 1.0602582}
+  m_Center: {x: -0.0019391775, y: 0.47759247, z: 0.010054976}
 --- !u!1 &7027976062128537323
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8228519755278546017}
   - component: {fileID: 2381588870922930328}
   m_Layer: 0
-  m_Name: Verottet
+  m_Name: Verrotet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4121299954250595396}
   m_LocalRotation: {x: -0.70710677, y: 0.35355338, z: -0.000000008726785, w: 0.61237246}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.611089, y: 0.487942, z: 1}
+  m_LocalPosition: {x: -0.038005, y: 0.178, z: -0.0004416}
+  m_LocalScale: {x: 0.7800551, y: 0.622858, z: 1.2765}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
