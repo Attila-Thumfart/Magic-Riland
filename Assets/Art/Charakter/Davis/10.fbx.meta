@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2c93450d4bde382469cf63dd95b1fc62
+guid: 89037af8066b6f6419be36b37164595a
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable: []
@@ -9,6 +9,11 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: Material #10
     second: {fileID: 2100000, guid: f81fb2ed5b85cf244a73c6528ce0875b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material #11
+    second: {fileID: 2100000, guid: fe8ea12bf2df58c429bf35378aef30c4, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
@@ -68,7 +73,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Tshirt
-    second: {fileID: 2100000, guid: 4f098d8668ada4943a58a153a01b608e, type: 2}
+    second: {fileID: 2100000, guid: 3c143cf112dc21945a40e21237b33672, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

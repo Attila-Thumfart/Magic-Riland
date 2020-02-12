@@ -1,11 +1,11 @@
 fileFormatVersion: 2
-guid: 8359850ef3ee99b4c859d073bd8a39fc
+guid: 6322b40f801b6c1489ecf8a73e9e6828
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable:
   - first:
       74: 1827226128182048838
-    second: Davis_laufen
+    second: Take 001
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -35,7 +35,7 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Davis_laufen
+      name: Take 001
       takeName: Take 001
       internalID: 0
       firstFrame: 1
@@ -46,8 +46,8 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
+      loopTime: 1
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
