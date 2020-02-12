@@ -76,8 +76,16 @@ public class FieldManager : Interactable
         if (IsSeeded && (ActiveFieldstate == Fieldstate.finished || ActiveFieldstate == Fieldstate.withered))
         {
             if (ActiveFieldstate == Fieldstate.finished)
+            {
                 inventory.AddItemToInventory(GetThisPlant());
+                
+                GrowthModelSeedInstance.SetActive(false);
+                GrowthModelSproutInstance.SetActive(false);
+                GrowthModelMediumInstance.SetActive(false);
+                GrowthModelFinishedInstance.SetActive(false);
+                GrowthModelWitheredInstance.SetActive(false);
 
+            }
             ResetField();
         }
     }
@@ -205,6 +213,7 @@ public class FieldManager : Interactable
     {
         if (IsWatered)                              //if the field is watered
         {
+            Debug.Log("Field is watered");
             IsWatered = false;                      //dry out the field again
             FieldDryInstance.SetActive(true);
             FieldWateredInstance.SetActive(false);
@@ -212,6 +221,7 @@ public class FieldManager : Interactable
         }
         else if (!IsWatered && IsSeeded)            //if the field is not waterd but seeded
         {
+            Debug.Log("Field is not watered");
             DaysUntilWithered--;                    //the plant is one step closer to dry out
         }
     }

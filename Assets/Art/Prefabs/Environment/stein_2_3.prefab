@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6798366876089434913}
   - component: {fileID: 2523036243761625367}
   - component: {fileID: 8088229033236694510}
+  - component: {fileID: 1634151096296646229}
   m_Layer: 0
   m_Name: stein_2_3
   m_TagString: Untagged
@@ -79,3 +80,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!136 &1634151096296646229
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7495115127436423474}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.6475156
+  m_Height: 1.5632683
+  m_Direction: 2
+  m_Center: {x: -0.046676457, y: 0.12134542, z: -0.01307657}
