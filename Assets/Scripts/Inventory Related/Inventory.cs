@@ -21,8 +21,6 @@ public class Inventory : MonoBehaviour
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
 
-    private InventorySlot inventorySlot;
-
     [SerializeField]
     private int InventorySpace = 30;
     [SerializeField]
