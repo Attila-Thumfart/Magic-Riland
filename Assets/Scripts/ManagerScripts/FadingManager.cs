@@ -5,12 +5,7 @@ public class FadingManager : MonoBehaviour
 {
     public Animator animator;
 
-    private void Update()
-    {
-        
-    }
-
-    public void SetFade(bool _IsNight)
+    public void SetFade(bool _IsNight)              //called from other scripts to fade in and fade out
     {
         animator.SetBool("IsNight", _IsNight);
     }
