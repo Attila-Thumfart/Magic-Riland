@@ -122,11 +122,6 @@ public class PlayerActions : MonoBehaviour
         CloudInstance.SetActive(true);                                          //activates the cloud
     }
 
-    public void EnableMovement()                //used to enable the player movement from other scripts
-    {
-        GetComponent<PlayerMovement>().enabled = true;
-    }
-
     public Item GetCurrentItem()            //returns the first item from the inventory (used in FieldManager)
     {
         return CurrentItem;
