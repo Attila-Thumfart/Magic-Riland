@@ -167,6 +167,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7738645646939128800}
+  - component: {fileID: 3120988979792085732}
+  - component: {fileID: 1929939269157586608}
   m_Layer: 0
   m_Name: ahorn neu 1
   m_TagString: Untagged
@@ -190,3 +192,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &3120988979792085732
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6718923065829945843}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 2.2122064
+  m_Height: 15.963931
+  m_Direction: 1
+  m_Center: {x: 0.58864844, y: 6.3616495, z: -0.1694676}
+--- !u!135 &1929939269157586608
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6718923065829945843}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 7.1648674
+  m_Center: {x: 0.9839449, y: 14.461691, z: -0.3215991}
