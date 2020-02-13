@@ -28,6 +28,12 @@ public class Inventory : MonoBehaviour
 
     public Item[] items;
 
+    int TargetButtonIndex;
+    int PreviousIndex;
+
+    Item SelectedItem;
+    Item SwappedItem;
+
     private void Start()
     {
         items = new Item[InventorySpace];
@@ -70,6 +76,28 @@ public class Inventory : MonoBehaviour
         if (onItemChangedCallback != null)
         {
             onItemChangedCallback.Invoke();
+        }
+    }
+
+    public void PickUpItemInInventory(int TargetIndex)
+    {
+        TargetButtonIndex = TargetIndex;
+        // Debug.Log("Changed TragetButtonIndex");
+        // Debug.Log(TargetButtonIndex);
+
+        if (SelectedItem != null)
+        {
+            SwappedItem = items[TargetButtonIndex];
+            items[TargetButtonIndex] = SelectedItem;
+            items[PreviousIndex] = SwappedItem;
+            SelectedItem = null;
+            // Debug.Log("Item swapped");
+        }
+        else if (SelectedItem == null)
+        {
+            SelectedItem = items[TargetButtonIndex];
+            PreviousIndex = TargetButtonIndex;
+            Debug.Log("Item selected");
         }
     }
 

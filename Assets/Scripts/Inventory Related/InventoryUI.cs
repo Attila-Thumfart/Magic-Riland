@@ -11,8 +11,6 @@ public class InventoryUI : MonoBehaviour
 
     InventorySlot[] Slots;
 
-    Item item;
-
     public GameObject inventoryUI;
     public GameObject Player;
 

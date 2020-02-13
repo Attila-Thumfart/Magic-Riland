@@ -8,6 +8,13 @@ public class InventorySlot : MonoBehaviour
 
     Item Item;
 
+    private int ButtonIndex;
+
+    private void Start()
+    {
+        ButtonIndex = transform.GetSiblingIndex();
+    }
+
     public void AddItem (Item newItem)
     {
         Item = newItem;
@@ -22,5 +29,16 @@ public class InventorySlot : MonoBehaviour
 
         Icon.sprite = null;
         Icon.enabled = false;
+    }
+
+    public void GiveIndexToInventory()
+    {
+        Inventory.instance.PickUpItemInInventory(ButtonIndex);
+       // Debug.Log("ButtenIndex given");
+    }
+
+    public int GetButtonIndex()
+    {
+        return ButtonIndex;
     }
 }
