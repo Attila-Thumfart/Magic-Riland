@@ -34,7 +34,7 @@ public class ControllerCamera : MonoBehaviour
 
         controls = new PlayerControls();      //Unity Input Action System activated here
 
-        controls.Gameplay.CameraRight.started += ctx => TurnRight();   //The controls for the camera through the Unity Input Action System
+        //controls.Gameplay.CameraRight.started += ctx => TurnRight();   //The controls for the camera through the Unity Input Action System
         controls.Gameplay.CameraLeft.started += ctx => TurnLeft();      //The controls for the camera through the Unity Input Action System
     }
 
