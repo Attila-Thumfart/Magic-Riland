@@ -47,7 +47,7 @@ public class Inventory : MonoBehaviour
             {
                 items[i] = item;
 
-                inventoryUI.AddItemToSlot(i, item);
+                //inventoryUI.AddItemToSlot(i, item);
 
                 if (onItemChangedCallback != null)
                 {
@@ -71,7 +71,7 @@ public class Inventory : MonoBehaviour
         items[_inventorySlot] = null;
         inventoryUI.RemoveItemFromSlot(_inventorySlot);
 
-        //inventorySlot.ClearSlot();
+       // inventorySlot.ClearSlot();
 
         if (onItemChangedCallback != null)
         {
@@ -82,8 +82,6 @@ public class Inventory : MonoBehaviour
     public void PickUpItemInInventory(int TargetIndex)
     {
         TargetButtonIndex = TargetIndex;
-        // Debug.Log("Changed TragetButtonIndex");
-        // Debug.Log(TargetButtonIndex);
 
         if (SelectedItem != null)
         {
@@ -91,13 +89,16 @@ public class Inventory : MonoBehaviour
             items[TargetButtonIndex] = SelectedItem;
             items[PreviousIndex] = SwappedItem;
             SelectedItem = null;
-            // Debug.Log("Item swapped");
+
+            if (onItemChangedCallback != null)
+            {
+                onItemChangedCallback.Invoke();
+            }
         }
         else if (SelectedItem == null)
         {
             SelectedItem = items[TargetButtonIndex];
             PreviousIndex = TargetButtonIndex;
-            Debug.Log("Item selected");
         }
     }
 

@@ -26,7 +26,7 @@ public class InventoryUI : MonoBehaviour
     void Start()
     {
         Inventory = Inventory.instance;
-       // Inventory.onItemChangedCallback += UpdateUI;
+        Inventory.onItemChangedCallback += UpdateUI;
 
         Slots = ItemsParent.GetComponentsInChildren<InventorySlot>();
 
@@ -49,7 +49,7 @@ public class InventoryUI : MonoBehaviour
         Slots[_slotNumber].ClearSlot();
     }
 
-   /* void UpdateUI()
+    void UpdateUI()
     {
         for (int i = 0; i < Slots.Length; i++)
         {
@@ -62,7 +62,7 @@ public class InventoryUI : MonoBehaviour
                 Slots[i].ClearSlot();
             }
         }
-    }*/
+    }
 
     private void ToggleUI()
     {

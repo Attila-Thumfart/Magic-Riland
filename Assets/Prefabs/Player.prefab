@@ -109,7 +109,6 @@ GameObject:
   - component: {fileID: 7714960469062638504}
   - component: {fileID: 7714960469062638518}
   - component: {fileID: 7714960469062638516}
-  - component: {fileID: 3871046172646977992}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -161,7 +160,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &7714960469062638518
 MonoBehaviour:
@@ -177,6 +176,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSpeed: 5
   characterController: {fileID: 0}
+  Gravity: 4
+  cameraHolder: {fileID: 0}
 --- !u!114 &7714960469062638516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -189,25 +190,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a24a7d99142044e488fcc3fc47663544, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player: {fileID: 0}
   Cloud: {fileID: 1388125985609021433, guid: f2ed377b8ec653c4eafe371e5f4575ec, type: 3}
---- !u!143 &3871046172646977992
-CharacterController:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7714960469062638505}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Height: 2
-  m_Radius: 0.5
-  m_SlopeLimit: 45
-  m_StepOffset: 0.3
-  m_SkinWidth: 0.08
-  m_MinMoveDistance: 0.001
-  m_Center: {x: 0, y: 1, z: 0}
+  maxCloudDuration: 0
 --- !u!1001 &7611145671412292807
 PrefabInstance:
   m_ObjectHideFlags: 0
