@@ -39,7 +39,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""type"": ""Button"",
                     ""id"": ""98fd291e-fff9-4bd3-b928-61cac5f0430f"",
                     ""expectedControlType"": """",
-                    ""processors"": """",
+                    ""processors"": ""StickDeadzone"",
                     ""interactions"": """"
                 },
                 {

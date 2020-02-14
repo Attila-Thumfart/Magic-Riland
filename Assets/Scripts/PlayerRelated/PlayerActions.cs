@@ -11,6 +11,7 @@ public class PlayerActions : MonoBehaviour
     [SerializeField]
     private GameObject Player;          //defines the object this script is attached to
 
+    [SerializeField]
     private GameObject Cloud;           //cloud for the player to summon
     private GameObject CloudInstance;   //instance of the cloud (to not work on the prefab)
 
