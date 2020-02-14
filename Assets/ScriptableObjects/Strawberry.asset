@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71e50bdf55f8b8f4abf95e0f69e63767, type: 3}
   m_Name: Strawberry
   m_EditorClassIdentifier: 
-  Name: Strawberry Seed
+  Name: Strawberry
   Description: A BEATIFUL berry made of Straw.... -_-
   IsSeed: 0
   SellingPrice: 200

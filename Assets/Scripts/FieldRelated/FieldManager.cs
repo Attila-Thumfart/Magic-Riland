@@ -35,6 +35,11 @@ public class FieldManager : Interactable
     private int GrowthRateUntilMedium;
     private int GrowthRateUntilFinished;
 
+    [SerializeField]
+    private GameObject WeedModel;
+    private GameObject WeedModelInstance;
+    private bool isWeed;
+
     private GameObject GrowthModelSeed;
     private GameObject GrowthModelSprout;
     private GameObject GrowthModelMedium;
@@ -63,7 +68,6 @@ public class FieldManager : Interactable
 
         if (!IsSeeded)
         {
-            Debug.Log("Still Seeded");
             ThisPlant = Player.GetComponent<PlayerActions>().GetCurrentItem();
             if (ThisPlant != null)
             {
@@ -183,6 +187,13 @@ public class FieldManager : Interactable
     {
         IsWatered = _NewState;
     }
+    public void SetWeedstate(bool _NewState)
+    {
+        isWeed = _NewState;
+        WeedModelInstance = Instantiate(WeedModel, transform);
+        WeedModelInstance.SetActive(_NewState);
+    }
+
     public void SetThisPlant(Item _PlayerFirstItem)
     {
         GrowthRateUntilSprout = ThisPlant.GetGrowthRateUntilSprout();
@@ -222,9 +233,8 @@ public class FieldManager : Interactable
             FieldWateredInstance.SetActive(false);
             DayOfProgress++;                        //the plant growths towards its next step
         }
-        else if (!IsWatered && IsSeeded)            //if the field is not waterd but seeded
+        else if (!IsWatered && IsSeeded || isWeed)            //if the field is not waterd but seeded
         {
-            Debug.Log("Field is not watered");
             DaysUntilWithered--;                    //the plant is one step closer to dry out
         }
     }
