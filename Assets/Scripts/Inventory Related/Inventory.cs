@@ -69,7 +69,8 @@ public class Inventory : MonoBehaviour
     public void RemoveItemFromInventory(int _inventorySlot)
     {
         items[_inventorySlot] = null;
-        inventoryUI.RemoveItemFromSlot(_inventorySlot);
+
+        //inventoryUI.RemoveItemFromSlot(_inventorySlot);
 
        // inventorySlot.ClearSlot();
 
@@ -99,6 +100,20 @@ public class Inventory : MonoBehaviour
         {
             SelectedItem = items[TargetButtonIndex];
             PreviousIndex = TargetButtonIndex;
+        }
+    }
+
+    public void TrashcanItem()
+    {
+        if (SelectedItem != null)
+        {
+            items[TargetButtonIndex] = null;
+            SelectedItem = null;
+        }
+
+        if (onItemChangedCallback != null)
+        {
+            onItemChangedCallback.Invoke();
         }
     }
 

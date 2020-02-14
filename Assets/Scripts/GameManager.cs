@@ -79,7 +79,14 @@ public class GameManager : MonoBehaviour
 
     private void DefineGameObjects()
     {
-        if (GMInstance == null)                     //this makes it so only one GM is loaded
+        if (GMInstance != null)
+        {
+            ;
+            return;
+        }
+        GMInstance = this;
+
+        /*if (GMInstance == null)                     //this makes it so only one GM is loaded
         {
             GMInstance = this;                      //Defines the GM for other scripts to use
         }
@@ -87,7 +94,7 @@ public class GameManager : MonoBehaviour
         {
             Destroy(this);                          //this gets destroyed and the already existing GM is the real GM
         }
-
+        */
         DontDestroyOnLoad(this);                    //the GM does not get destroyed when a new scene is loaded in
 
         animator = GameObject.Find("FadeManager");  //Set the Animator to use fading effects

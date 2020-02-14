@@ -1094,9 +1094,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EndOfDayUI: {fileID: 8260319926203257005}
   Score1: {fileID: 8260319925930836319}
-  Score2: {fileID: 8260319925665132496}
-  Score3: {fileID: 8260319927079721808}
-  Score4: {fileID: 8260319927129637851}
 --- !u!1 &8260319926732381180
 GameObject:
   m_ObjectHideFlags: 0

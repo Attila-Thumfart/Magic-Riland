@@ -18,9 +18,16 @@ public class InventorySlot : MonoBehaviour
     public void AddItem (Item newItem)
     {
         Item = newItem;
-
-        Icon.sprite = Item.GetInventoryIcon();
-        Icon.enabled = true;
+        if (Item != null)
+        {
+            Icon.sprite = Item.GetInventoryIcon();
+            Icon.enabled = true;
+        }
+        else
+        {
+            Icon.sprite = null; ;
+            Icon.enabled = false;
+        }
     }
 
     public void ClearSlot()
@@ -34,7 +41,6 @@ public class InventorySlot : MonoBehaviour
     public void GiveIndexToInventory()
     {
         Inventory.instance.PickUpItemInInventory(ButtonIndex);
-       // Debug.Log("ButtenIndex given");
     }
 
     public int GetButtonIndex()

@@ -16,9 +16,19 @@ public class InventoryUI : MonoBehaviour
 
     PlayerControls controls;
 
+    public static InventoryUI InvUIInstance;
+
     private void Awake()
     {
         controls = new PlayerControls();
+
+        if (InvUIInstance != null)
+        {
+            ;
+            return;
+        }
+        InvUIInstance = this;
+
         DontDestroyOnLoad(this);
     }
 
@@ -39,7 +49,7 @@ public class InventoryUI : MonoBehaviour
 
     }
 
-    public void AddItemToSlot(int slot, Item _myItem)
+    /*public void AddItemToSlot(int slot, Item _myItem)
     {
         Slots[slot].AddItem(_myItem);
     }
@@ -48,6 +58,7 @@ public class InventoryUI : MonoBehaviour
     {
         Slots[_slotNumber].ClearSlot();
     }
+    */
 
     void UpdateUI()
     {
