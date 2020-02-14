@@ -50,7 +50,7 @@ public class GameManager : MonoBehaviour
     public void EndNight()                                      //gets called after closing the summary of the day to end the night
     {
         Fields.Clear();                                                                         //clears all fields from the list to not get double entries
-        foreach (FieldManager go in FieldManager.FindObjectsOfType(typeof(FieldManager)))       //finds all objects of type FieldManager
+        foreach (FieldManager go in FindObjectsOfType(typeof(FieldManager)))                    //finds all objects of type FieldManager
         {
             if (go.tag == "Field")                                                              //if the Tag of this object is "Field"
             {
@@ -72,6 +72,12 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < Fields.Count; i++)                          //every field in the scene
         {
             Fields[i].UpdateFieldDays();                                //update their status (happens in FieldManager)
+            int WeedChance = UnityEngine.Random.Range(1, 10);
+                if(WeedChance == 1)
+            {
+                Fields[i].SetWeedstate(true);
+                Debug.Log("Field numer " + Fields[i] + "now has weed");
+            }
         }
 
     }
