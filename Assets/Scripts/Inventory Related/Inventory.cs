@@ -21,14 +21,18 @@ public class Inventory : MonoBehaviour
     public delegate void OnItemChanged();
     public OnItemChanged onItemChangedCallback;
 
-    private InventorySlot inventorySlot;
-
     [SerializeField]
     private int InventorySpace = 30;
     [SerializeField]
     private InventoryUI inventoryUI;
 
     public Item[] items;
+
+    int TargetButtonIndex;
+    int PreviousIndex;
+
+    Item SelectedItem;
+    Item SwappedItem;
 
     private void Start()
     {
@@ -72,6 +76,28 @@ public class Inventory : MonoBehaviour
         if (onItemChangedCallback != null)
         {
             onItemChangedCallback.Invoke();
+        }
+    }
+
+    public void PickUpItemInInventory(int TargetIndex)
+    {
+        TargetButtonIndex = TargetIndex;
+        // Debug.Log("Changed TragetButtonIndex");
+        // Debug.Log(TargetButtonIndex);
+
+        if (SelectedItem != null)
+        {
+            SwappedItem = items[TargetButtonIndex];
+            items[TargetButtonIndex] = SelectedItem;
+            items[PreviousIndex] = SwappedItem;
+            SelectedItem = null;
+            // Debug.Log("Item swapped");
+        }
+        else if (SelectedItem == null)
+        {
+            SelectedItem = items[TargetButtonIndex];
+            PreviousIndex = TargetButtonIndex;
+            Debug.Log("Item selected");
         }
     }
 
