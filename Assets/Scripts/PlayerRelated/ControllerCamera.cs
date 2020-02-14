@@ -14,7 +14,7 @@ public class ControllerCamera : MonoBehaviour
     [SerializeField]
     private Vector3 offset;                 //Used for Positioning the Camera in relation to the Player
 
-    PlayerControls controls; // This is where the Controls and actual Input are saved (via Unity Input System)
+    PlayerControls controls;                //This is where the Controls and actual Input are saved (via Unity Input System)
 
 
     //Hardcoded Offsets for the camera to turn in 90° Steps
@@ -53,7 +53,7 @@ public class ControllerCamera : MonoBehaviour
         transform.position = smoothedPosition;                                                          //Moving the Camera when the player is moving
 
         transform.LookAt(target);                                                                       //Always look towards the player
-        resetCamera();
+        resetCamera();                                                                                  //resets the camera to the default position
     }
 
 
