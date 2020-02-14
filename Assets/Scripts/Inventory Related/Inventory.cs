@@ -110,6 +110,7 @@ public class Inventory : MonoBehaviour
         {
             SelectedItem = items[TargetButtonIndex];
             PreviousIndex = TargetButtonIndex;
+            inventoryUI.ItemDescriptionDisplay();
         }
     }
 
@@ -139,6 +140,11 @@ public class Inventory : MonoBehaviour
         }
         return null;*/
         return items[TargetButtonIndex];
+    }
+
+    public Item GetSelectedItem()
+    {
+        return SelectedItem;
     }
 
     public void ResetSelectedItem()

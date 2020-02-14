@@ -22,6 +22,7 @@ public class PlayerActions : MonoBehaviour
 
 
     private float interactionRange = 1.2f;                          //range of the player to interact with
+    private float interactionRadius = 0.5f;
     private Vector3 raycastHigth = new Vector3(0, 0.3f, 0);         //GETS CHANGED AFTER REWORKING RAYCAST TO RAYSPHERE
 
 
@@ -52,11 +53,11 @@ public class PlayerActions : MonoBehaviour
     void Interact()                             //calls the function Interact() of every object the player interacts with
     {
         RaycastHit hit;                         //GETS CHANGED AFTER SWITCHING TO RAYSPHERE
-        Ray interactionRay = new Ray(transform.position + raycastHigth, transform.TransformDirection(Vector3.forward) * interactionRange);      //throws a raycast in front of the player
+        //Ray interactionRay = new Ray(transform.position + raycastHigth, transform.TransformDirection(Vector3.forward) * interactionRange);      //throws a raycast in front of the player
 
-        Debug.DrawRay(transform.position + raycastHigth, transform.TransformDirection(Vector3.forward) * interactionRange);         //visualisation of the raycast for debug purposes
+        //Debug.DrawRay(transform.position + raycastHigth, transform.TransformDirection(Vector3.forward) * interactionRange);         //visualisation of the raycast for debug purposes
 
-        if (Physics.Raycast(interactionRay, out hit, interactionRange))                 //if raycast/RAYSPHERE hits something
+        if (Physics.SphereCast(transform.position + raycastHigth, interactionRadius, transform.forward, out hit, interactionRange))                 //if raycast/RAYSPHERE hits something
         {
             CurrentInteractable = hit.collider.GetComponent<Interactable>();            //returns the hit interactable gameobject
             if (CurrentInteractable != null)                                            //if there is one interactable
@@ -65,6 +66,13 @@ public class PlayerActions : MonoBehaviour
                 CurrentInteractable.Interact();                                         //calls interact of the hit object
             }
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Debug.DrawLine(transform.position + raycastHigth, (transform.position + raycastHigth) + transform.forward * interactionRange);
+        Gizmos.DrawWireSphere((transform.position + raycastHigth) + transform.forward * interactionRange, interactionRadius);
     }
 
     private void StartChannel()                                                 //when the player starts to channel the cloud

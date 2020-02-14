@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using TMPro;
 
 public class InventoryUI : MonoBehaviour
 {
@@ -17,6 +19,14 @@ public class InventoryUI : MonoBehaviour
     PlayerControls controls;
 
     public static InventoryUI InvUIInstance;
+
+    private Item DisplayItem;
+
+        [SerializeField]
+    private Image DisplayIcon;
+
+    [SerializeField]
+    private TMP_Text DescriptionDisplay;
 
     private void Awake()
     {
@@ -36,6 +46,7 @@ public class InventoryUI : MonoBehaviour
     void Start()
     {
         Inventory = Inventory.instance;
+
         Inventory.onItemChangedCallback += UpdateUI;
 
         Slots = ItemsParent.GetComponentsInChildren<InventorySlot>();
@@ -90,6 +101,22 @@ public class InventoryUI : MonoBehaviour
         {
             Player.GetComponent<PlayerMovement>().enabled = true;
             Player.GetComponent<PlayerActions>().enabled = true;
+        }
+    }
+
+    public void ItemDescriptionDisplay()
+    {
+        DisplayItem = Inventory.instance.GetSelectedItem();
+        if (DisplayItem != null)
+        {
+            DisplayIcon.sprite = DisplayItem.GetInventoryIcon();
+            DisplayIcon.enabled = true;
+            DescriptionDisplay.text = DisplayItem.GetDescription();
+        }
+        else
+        {
+            DisplayIcon.sprite = null; ;
+            DisplayIcon.enabled = false;
         }
     }
 
