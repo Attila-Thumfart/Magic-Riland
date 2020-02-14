@@ -24,7 +24,7 @@ public class InventoryUI : MonoBehaviour
 
         if (InvUIInstance != null)
         {
-            ;
+            Destroy(gameObject);
             return;
         }
         InvUIInstance = this;
