@@ -1,57 +1,22 @@
 fileFormatVersion: 2
-guid: e2f90759eea037d4e8625fd015311c3c
+guid: 85246c63a115b574eb56dfe1f7381d1f
 ModelImporter:
   serializedVersion: 19300
   internalIDToNameTable:
   - first:
       74: 1827226128182048838
-    second: Regnen
+    second: "pfl\xFCgen"
   externalObjects:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Material #25
-    second: {fileID: 2100000, guid: 11544522c4da2da46b58555e3df9075e, type: 2}
+      name: Material #2
+    second: {fileID: 2100000, guid: 29fff48161d4f024b800be5582b64159, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Material #26
-    second: {fileID: 2100000, guid: 60a5c5dcd9789d9418c9eda53144af52, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material #27
-    second: {fileID: 2100000, guid: 97e96e7bfc2202d4f8d03278d4a3ed0e, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material #28
-    second: {fileID: 2100000, guid: 238640b285139da43a6ce0db0accdab0, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material #29
-    second: {fileID: 2100000, guid: cc84f063d47e11f478e39ad8df2e7a8b, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material #30
-    second: {fileID: 2100000, guid: 59ce8d493a0b2c64687b5dce58cbf28c, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material #31
-    second: {fileID: 2100000, guid: 3d833c8977bcf7e4c9a25d66779fa325, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material #32
-    second: {fileID: 2100000, guid: 36acfd93639c6144592bc4343253d7a1, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Material #34
-    second: {fileID: 2100000, guid: fc654a854312c764f8d0f6d2fa7103cb, type: 2}
+      name: Material #3
+    second: {fileID: 2100000, guid: d77d0f629e6948848906ba2e223fb16c, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0
@@ -78,7 +43,36 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: "pfl\xFCgen"
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 0
+      lastFrame: 20
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 0
   meshes:
     lODScreenPercentages: []
@@ -116,7 +110,7 @@ ModelImporter:
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
   referencedClips: []
-  importAnimation: 0
+  importAnimation: 1
   humanDescription:
     serializedVersion: 3
     human: []
