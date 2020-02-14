@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(Coroutine(0.2f, () =>                            //Lambda function: waits for 0.2 seconds before executing the following code (emergency solution to quick-fix a bug)
        {
            Player.GetComponent<PlayerMovement>().enabled = true;       //Enables the Movement of the player when ending the night
+           Player.GetComponent<PlayerActions>().enabled = true;
        }));
 
         animator.GetComponent<FadingManager>().SetFade(false);          //Fades in after the night
@@ -81,20 +82,11 @@ public class GameManager : MonoBehaviour
     {
         if (GMInstance != null)
         {
-            ;
+            Destroy(gameObject);
             return;
         }
         GMInstance = this;
 
-        /*if (GMInstance == null)                     //this makes it so only one GM is loaded
-        {
-            GMInstance = this;                      //Defines the GM for other scripts to use
-        }
-        else if (GMInstance != this)                //if there is another GM
-        {
-            Destroy(this);                          //this gets destroyed and the already existing GM is the real GM
-        }
-        */
         DontDestroyOnLoad(this);                    //the GM does not get destroyed when a new scene is loaded in
 
         animator = GameObject.Find("FadeManager");  //Set the Animator to use fading effects
