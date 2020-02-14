@@ -33,3 +33,4 @@ MonoBehaviour:
     type: 3}
   HandModel: {fileID: 5282601792828595530, guid: 5699bc6a59b4f9f4990db8faea0b4359,
     type: 3}
+  FinishedPlant: {fileID: 0}

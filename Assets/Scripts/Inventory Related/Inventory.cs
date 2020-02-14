@@ -80,6 +80,16 @@ public class Inventory : MonoBehaviour
         }
     }
 
+    public void UseItemFromSlot()
+    {
+        items[TargetButtonIndex] = null;
+
+        if (onItemChangedCallback != null)
+        {
+            onItemChangedCallback.Invoke();
+        }
+    }
+
     public void PickUpItemInInventory(int TargetIndex)
     {
         TargetButtonIndex = TargetIndex;
@@ -117,7 +127,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public Item GetFirstItem()
+    public Item GetCurrentItem()
     {
         /*
         for (int i = 0; i < items.Length; i++)
@@ -128,7 +138,11 @@ public class Inventory : MonoBehaviour
             }
         }
         return null;*/
+        return items[TargetButtonIndex];
+    }
 
-        return items[0];
+    public void ResetSelectedItem()
+    {
+        SelectedItem = null;
     }
 }

@@ -79,6 +79,7 @@ public class InventoryUI : MonoBehaviour
     {
         inventoryUI.SetActive(!inventoryUI.activeSelf);
         Player = GameObject.FindGameObjectWithTag("Player");
+        Inventory.instance.ResetSelectedItem();
 
         if (inventoryUI.activeSelf)
         {

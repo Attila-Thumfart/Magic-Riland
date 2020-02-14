@@ -65,11 +65,14 @@ public class FieldManager : Interactable
         {
             Debug.Log("Still Seeded");
             ThisPlant = Player.GetComponent<PlayerActions>().GetCurrentItem();
-            if (ThisPlant.GetIsSeed())
+            if (ThisPlant != null)
             {
-                SetThisPlant(ThisPlant);
-                SetIsSeeded(true);
-               // inventory.RemoveItemFromInventory(0);
+                if (ThisPlant.GetIsSeed())
+                {
+                    SetThisPlant(ThisPlant);
+                    SetIsSeeded(true);
+                    inventory.UseItemFromSlot();
+                }
             }
         }
 
@@ -78,7 +81,7 @@ public class FieldManager : Interactable
             if (ActiveFieldstate == Fieldstate.finished)
             {
                 inventory.AddItemToInventory(GetThisPlant());
-                
+
                 GrowthModelSeedInstance.SetActive(false);
                 GrowthModelSproutInstance.SetActive(false);
                 GrowthModelMediumInstance.SetActive(false);

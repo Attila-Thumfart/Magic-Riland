@@ -61,7 +61,7 @@ public class PlayerActions : MonoBehaviour
             CurrentInteractable = hit.collider.GetComponent<Interactable>();            //returns the hit interactable gameobject
             if (CurrentInteractable != null)                                            //if there is one interactable
             {
-                CurrentItem = Inventory.instance.GetFirstItem(); ;                      //returns the first item from the inventory
+                CurrentItem = Inventory.instance.GetCurrentItem();                      //returns the first item from the inventory
                 CurrentInteractable.Interact();                                         //calls interact of the hit object
             }
         }
