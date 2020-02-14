@@ -20,7 +20,6 @@ public class ObjectFollower : MonoBehaviour
         controls.Gameplay.Camera.canceled += ctx => axis = Vector2.zero;
     }
 
-
     void Update()
     {
         Debug.Log(axis.x);

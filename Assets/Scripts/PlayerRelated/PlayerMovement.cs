@@ -13,7 +13,6 @@ public class PlayerMovement : MonoBehaviour
 
     PlayerControls controls; // This is where the Controls and actual Input are saved (via Unity Input System)
     private Vector2 move;            // Vector to save the JoyStick Inputs X and Y
-    private Vector2 rotate;
    
     [SerializeField]
     private float Gravity = 4f;
@@ -26,8 +25,6 @@ public class PlayerMovement : MonoBehaviour
 
         controls.Gameplay.Move.performed += ctx => move = ctx.ReadValue<Vector2>();  // When the action defined in controls is performed read and save the values of the Joystick in a Vector2
         controls.Gameplay.Move.canceled += ctx => move = Vector2.zero;               // When there is no input the vector is 0
-
-        controls.Gameplay.Rotate.performed += ctx => rotate = ctx.ReadValue<Vector2>();  // When the action defined in controls is performed read and save the values of the Joystick in a Vector2
 
         characterController = GetComponent<CharacterController>();
     }
@@ -46,14 +43,6 @@ public class PlayerMovement : MonoBehaviour
             0f, Mathf.Sin(angle) * cameraHolder.forward.x + Mathf.Cos(angle) * cameraHolder.forward.z);
 
         transform.SetPositionAndRotation(transform.position + direction * Time.fixedDeltaTime * playerSpeed, Quaternion.LookRotation(direction));
-
-        //characterController.SimpleMove(movement);
-        Debug.Log(Time.deltaTime);
-        //transform.Translate(movement, Space.World); // The values are applied to move the player in relation to the world
-
-        //Vector3 rotation = new Vector3(rotate.x, 0f, rotate.y) * Time.deltaTime;
-        //if(rotation != Vector3.zero)
-        //transform.rotation = Quaternion.LookRotation(rotation);
     }
 
     private void OnEnable() // This function enables the controls when the object becomes enabled and active
@@ -70,6 +59,4 @@ public class PlayerMovement : MonoBehaviour
     {
         transform.position = new Vector3(_targetPosition.x, _targetPosition.y, _targetPosition.z);
     }
-
-
 }
