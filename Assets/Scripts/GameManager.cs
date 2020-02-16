@@ -73,6 +73,13 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < Fields.Count; i++)                          //every field in the scene
         {
             Fields[i].UpdateFieldDays();                                //update their status (happens in FieldManager)
+            int WeedChance = UnityEngine.Random.Range(1, 10);
+            if (WeedChance == 1)
+            {
+                Fields[i].SetWeedstate(true);
+
+                Debug.Log("Field " + Fields[i] + " is weeded");
+            }
         }
 
     }

@@ -32,17 +32,11 @@ public class ObjectFollower : MonoBehaviour
         {
             SetCameraBehindPlayer();
         }
-        // Debug.Log(axis.x);
-        // Debug.Log(axis.y);
-        Debug.Log("The camera direction is " + transform.rotation);
 
         transform.SetPositionAndRotation(playerTransform.position, transform.rotation);
 
-       // CountUntilReset += Time.deltaTime;
-
         if (axis.x > 0.1f || axis.x < -0.1f)
         {
-            //transform.Rotate(0f, axis.x * speed, 0f, Space.Self);
             transform.SetPositionAndRotation(transform.position, Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + axis.x * speed, transform.rotation.eulerAngles.z));
         }
 
@@ -50,21 +44,11 @@ public class ObjectFollower : MonoBehaviour
         {
             float Angle = upDownHolder.rotation.eulerAngles.x + axis.y * speed;
 
-            if(Angle < 45 && Angle > 5)
+            if(Angle < 60 && Angle > 0)
             {
                 upDownHolder.SetPositionAndRotation(upDownHolder.position, Quaternion.Euler(Angle, upDownHolder.rotation.eulerAngles.y, upDownHolder.rotation.eulerAngles.z));
-            }
-           
-            Debug.Log("The Angle is " + Angle);
-            //transform.Rotate(axis.y * speed, 0f, 0f, Space.Self);
+            } 
         }
-
-       /* if (CountUntilReset > 1)
-        {
-            SetCameraBehindPlayer();
-            Debug.Log("Camera Reset");
-            CountUntilReset = 0;
-        }*/
     }
 
     public void SetCameraBehindPlayer()

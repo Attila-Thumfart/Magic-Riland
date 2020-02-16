@@ -75,9 +75,14 @@ public class FieldManager : Interactable
                 {
                     SetThisPlant(ThisPlant);
                     SetIsSeeded(true);
-                    inventory.UseItemFromSlot();
+                    inventory.RemoveItemFromInventory(0);
                 }
             }
+        }
+
+        if(isWeed)
+        {
+            SetWeedstate(false);
         }
 
         if (IsSeeded && (ActiveFieldstate == Fieldstate.finished || ActiveFieldstate == Fieldstate.withered))
@@ -85,13 +90,6 @@ public class FieldManager : Interactable
             if (ActiveFieldstate == Fieldstate.finished)
             {
                 inventory.AddItemToInventory(GetThisPlant());
-
-                GrowthModelSeedInstance.SetActive(false);
-                GrowthModelSproutInstance.SetActive(false);
-                GrowthModelMediumInstance.SetActive(false);
-                GrowthModelFinishedInstance.SetActive(false);
-                GrowthModelWitheredInstance.SetActive(false);
-
             }
             ResetField();
         }
@@ -190,10 +188,16 @@ public class FieldManager : Interactable
     public void SetWeedstate(bool _NewState)
     {
         isWeed = _NewState;
-        WeedModelInstance = Instantiate(WeedModel, transform);
-        WeedModelInstance.SetActive(_NewState);
+        if (_NewState)
+        {
+            WeedModelInstance = Instantiate(WeedModel, transform);
+            WeedModelInstance.SetActive(_NewState);
+        }
+        else if(!_NewState)
+        {
+            Destroy(WeedModelInstance);
+        }
     }
-
     public void SetThisPlant(Item _PlayerFirstItem)
     {
         GrowthRateUntilSprout = ThisPlant.GetGrowthRateUntilSprout();
@@ -227,13 +231,12 @@ public class FieldManager : Interactable
     {
         if (IsWatered)                              //if the field is watered
         {
-            Debug.Log("Field is watered");
             IsWatered = false;                      //dry out the field again
             FieldDryInstance.SetActive(true);
             FieldWateredInstance.SetActive(false);
             DayOfProgress++;                        //the plant growths towards its next step
         }
-        else if (!IsWatered && IsSeeded || isWeed)            //if the field is not waterd but seeded
+        else if ((!IsWatered && IsSeeded) || isWeed)            //if the field is not waterd but seeded
         {
             DaysUntilWithered--;                    //the plant is one step closer to dry out
         }
@@ -241,6 +244,12 @@ public class FieldManager : Interactable
 
     public void ResetField()                                //resets the field to an empty state
     {
+        GrowthModelSeedInstance.SetActive(false);
+        GrowthModelSproutInstance.SetActive(false);
+        GrowthModelMediumInstance.SetActive(false);
+        GrowthModelFinishedInstance.SetActive(false);
+        GrowthModelWitheredInstance.SetActive(false);
+
         IsSeeded = false;
         ActiveFieldstate = Fieldstate.empty;
     }
