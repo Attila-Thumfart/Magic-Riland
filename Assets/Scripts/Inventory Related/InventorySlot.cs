@@ -40,6 +40,7 @@ public class InventorySlot : MonoBehaviour
         {
             Icon.sprite = null; ;
             Icon.enabled = false;
+            StackSize.text = null;
         }
     }
 
@@ -49,6 +50,7 @@ public class InventorySlot : MonoBehaviour
 
         Icon.sprite = null;
         Icon.enabled = false;
+        StackSize.text = null;
     }
 
     public void GiveIndexToInventory()

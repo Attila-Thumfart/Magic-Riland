@@ -66,8 +66,11 @@ public class Inventory : MonoBehaviour
                     return false;
                 }
             }
+        }
 
-            else if (items[i] == null)
+        for (int i = 0; i < items.Length; i++)
+        {
+            if (items[i] == null)
             {
                 items[i] = item;
                 items[i].SetNumberOfItems(1);
@@ -134,17 +137,17 @@ public class Inventory : MonoBehaviour
             items[TargetButtonIndex] = SelectedItem;
             items[PreviousIndex] = SwappedItem;
             SelectedItem = null;
-
-            if (onItemChangedCallback != null)
-            {
-                onItemChangedCallback.Invoke();
-            }
         }
         else if (SelectedItem == null)
         {
             SelectedItem = items[TargetButtonIndex];
             PreviousIndex = TargetButtonIndex;
             inventoryUI.ItemDescriptionDisplay();
+        }
+
+        if (onItemChangedCallback != null)
+        {
+            onItemChangedCallback.Invoke();
         }
     }
 
