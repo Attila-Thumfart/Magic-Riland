@@ -12,7 +12,6 @@ public class Shop : MonoBehaviour
     [SerializeField]
     private InventoryUI inventoryUI;
 
-    private Item SelectedItem;
 
     public Item[] items;
 
@@ -23,22 +22,15 @@ public class Shop : MonoBehaviour
         items = new Item[ShopSpace];
     }
 
-    public Item GetCurrentItem(int TargetIndex)
+    public Item SelectItem(int TargetIndex)
     {
         TargetButtonIndex = TargetIndex;
-
-        SelectedItem = items[TargetButtonIndex];
 
         return items[TargetButtonIndex];
     }
 
-    public Item GetSelectedItem()
+    public void BuyItem()
     {
-        return SelectedItem;
-    }
 
-    public void ResetSelectedItem()
-    {
-        SelectedItem = null;
     }
 }
