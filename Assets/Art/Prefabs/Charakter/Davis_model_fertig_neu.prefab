@@ -1416,7 +1416,7 @@ GameObject:
   - component: {fileID: 8621182000528421500}
   - component: {fileID: 3665406267741824248}
   m_Layer: 0
-  m_Name: Davis_model_fertig_neu (1)
+  m_Name: Davis_model_fertig_neu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1430,8 +1430,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4755746792806154351}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.047629, y: -235.04, z: -10.948}
-  m_LocalScale: {x: 109.8625, y: 109.8625, z: 109.8625}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6149318982086036167}
   - {fileID: 361021985314161775}
