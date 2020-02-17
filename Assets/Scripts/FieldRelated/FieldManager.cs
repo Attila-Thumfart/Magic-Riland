@@ -67,7 +67,7 @@ public class FieldManager : Interactable
     {
         inventory = Inventory.instance;
 
-        if (!IsSeeded)
+        if (!IsSeeded && ActiveFieldstate == Fieldstate.empty)
         {
             ThisPlant = Player.GetComponent<PlayerActions>().GetCurrentItem();
             if (ThisPlant != null)

@@ -60,6 +60,7 @@ public class PlayerActions : MonoBehaviour
         controls.Gameplay.Erde.canceled += ctx => EndEarthChannel(); 
         controls.Gameplay.Wind.started += ctx => StartWindChannel();
         controls.Gameplay.Wind.canceled += ctx => EndWindChannel();
+
         controls.Gameplay.Interact.started += ctx => Interact();
 
         Player = this.gameObject;               //defines the game object of this script as a Player
@@ -194,7 +195,7 @@ public class PlayerActions : MonoBehaviour
         {
             WindChannelState = false;       //channel gets ended WITHOUT spawning the cloud
             windDuration = 0f;         //duration of the cloud gets reset
-
+            Player.GetComponent<PlayerMovement>().enabled = true;
         }
         else if (windDuration>= 1f)                   //if the player pressed the button for more than one second
         {
@@ -226,7 +227,7 @@ public class PlayerActions : MonoBehaviour
     #region EARTHSPELL
     private void StartEarthChannel()                                                 //when the player starts to channel the cloud
     {
-        if (CloudInstance == null)                                              //if there is no cloud active
+        if (EarthInstance == null)                                              //if there is no cloud active
         {
             Player.GetComponent<PlayerMovement>().enabled = false;
             //WolkenActions myCloud = Cloud.GetComponent<WolkenActions>();        //player gets a cloud to use
@@ -244,7 +245,7 @@ public class PlayerActions : MonoBehaviour
         if (EarthChannelState && earthDuration >= maxEarthDuration)      //while the player is channeling and the channel duration is less then the maximum cloud duration
         {
             EarthChannelState = false;                                   //ends the channeling
-            earthDuration = maxEarthDuration;                       //sets the cloud duration to the max cloud duration (to not get any weird numbers)
+            earthDuration = maxCloudDuration;                       //sets the cloud duration to the max cloud duration (to not get any weird numbers)
             EndEarthChannel();                                           //calls EndChannel()
         }
     }
@@ -259,7 +260,6 @@ public class PlayerActions : MonoBehaviour
         }
         else if (earthDuration >= 1f)                   //if the player pressed the button for more than one second
         {
-            Debug.Log("Should do stuff");
             Player.GetComponent<PlayerMovement>().enabled = true;
             Camera = GameObject.Find("CameraHolder");
             Camera.GetComponent<ObjectFollower>().enabled = false;

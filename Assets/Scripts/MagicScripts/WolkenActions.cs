@@ -46,8 +46,7 @@ public class WolkenActions : MonoBehaviour
             CurrentField = other.gameObject;            //references the current field; used for SeedField to know which field is seeded
 
             if (IsOnField)  //If the cloud is above a field it is watered
-            {
-                
+            { 
                 CurrentField.GetComponent<FieldManager>().SetIsWatered(true);
             }
         }
@@ -64,7 +63,7 @@ public class WolkenActions : MonoBehaviour
 
     private void CancleSpell()
     {
-        Destroy(this.gameObject);
+        Destroy(gameObject);
         Camera = GameObject.Find("CameraHolder");
         Camera.GetComponent<ObjectFollower>().enabled = true;
         //cloudCam.SetActive(false);
