@@ -1,24 +1,12 @@
 fileFormatVersion: 2
-guid: dacc8d48142682a478ed42dc465f1791
+guid: b94fb44b912d8064e9bcbcf4bb0336a3
 ModelImporter:
   serializedVersion: 19300
-  internalIDToNameTable: []
-  externalObjects:
+  internalIDToNameTable:
   - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Metall
-    second: {fileID: 2100000, guid: cf93ba0518bf00a49a5692e1a407747a, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Tshirt
-    second: {fileID: 2100000, guid: 4f098d8668ada4943a58a153a01b608e, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Zopf
-    second: {fileID: 2100000, guid: 17b0947a2c354394eac800c7e1ff0697, type: 2}
+      74: 1827226128182048838
+    second: Take 001
+  externalObjects: {}
   materials:
     materialImportMode: 1
     materialName: 0
