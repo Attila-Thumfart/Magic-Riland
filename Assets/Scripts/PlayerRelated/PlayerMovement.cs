@@ -40,10 +40,8 @@ public class PlayerMovement : MonoBehaviour
 
         float angle = (Vector2.SignedAngle(Vector2.up, new Vector2(move.x, move.y))) * Mathf.PI / 180;
 
-         direction = new Vector3(Mathf.Cos(angle) * cameraHolder.forward.x - Mathf.Sin(angle) * cameraHolder.forward.z,
-            0f, Mathf.Sin(angle) * cameraHolder.forward.x + Mathf.Cos(angle) * cameraHolder.forward.z);
-
-        Debug.Log("The Player direction is " + direction);
+        direction = new Vector3(Mathf.Cos(angle) * cameraHolder.forward.x - Mathf.Sin(angle) * cameraHolder.forward.z,
+           0f, Mathf.Sin(angle) * cameraHolder.forward.x + Mathf.Cos(angle) * cameraHolder.forward.z);
 
         transform.SetPositionAndRotation(transform.position + direction * Time.fixedDeltaTime * playerSpeed, Quaternion.LookRotation(direction));
     }

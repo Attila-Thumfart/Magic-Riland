@@ -27,6 +27,8 @@ public class Inventory : MonoBehaviour
     private InventoryUI inventoryUI;
 
     public Item[] items;
+    private int NumberOfAllowedItems = 10;
+
 
     int TargetButtonIndex;
     int PreviousIndex;
@@ -43,9 +45,26 @@ public class Inventory : MonoBehaviour
     {
         for (int i = 0; i < items.Length; i++)
         {
-            if (items[i] == null)
+            if(items[i] != null && items[i].GetName() == item.GetName())
+            {
+                if (items[i].GetNumberOfItems() < NumberOfAllowedItems)
+                {
+                    items[i].ChangeNumberOfItemsBy(1);
+                    Debug.Log("You now have this item " + items[i].GetNumberOfItems() + " times");
+                    Debug.Log(items[i].GetNumberOfItems() + "/" + NumberOfAllowedItems);
+                    return true;
+                }
+                else
+                {
+                    Debug.Log("You already have enough of those, dont be greedy!");
+                    return false;
+                }
+            }
+
+            else if (items[i] == null)
             {
                 items[i] = item;
+                items[i].SetNumberOfItems(1);
 
                 //inventoryUI.AddItemToSlot(i, item);
 
@@ -68,8 +87,17 @@ public class Inventory : MonoBehaviour
 
     public void RemoveItemFromInventory(int _inventorySlot)
     {
-        items[_inventorySlot] = null;
+        if (items[_inventorySlot].GetNumberOfItems() == 1)
+        {
+            items[_inventorySlot] = null;
+            Debug.Log("This was the last of its kind...");
+        }
 
+        else
+        {
+            items[_inventorySlot].ChangeNumberOfItemsBy(-1);
+            Debug.Log("The item " + items[_inventorySlot].GetName() + "is now a bit lonlier " + items[_inventorySlot].GetNumberOfItems());
+        }
         //inventoryUI.RemoveItemFromSlot(_inventorySlot);
 
        // inventorySlot.ClearSlot();
