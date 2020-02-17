@@ -50,6 +50,11 @@ public class OptionsMenu : MonoBehaviour
             fullscreenToggle.isOn = false;
         }
 
+    }
+
+    private void OnEnable()
+    {
+
         resolutionDropdown.onValueChanged.AddListener(new UnityAction<int>(index =>  // Checks if there are any previously safed states for this UI and loads them if that is the case
         {
             PlayerPrefs.SetInt(resolutionSaveBucket, resolutionDropdown.value);
@@ -61,6 +66,12 @@ public class OptionsMenu : MonoBehaviour
             PlayerPrefs.SetInt(qualitySaveBucket, qualityDropdown.value);
             Save();
         }));
+    }
+
+    private void OnDisable()
+    {
+        resolutionDropdown.onValueChanged.RemoveAllListeners();
+        qualityDropdown.onValueChanged.RemoveAllListeners();
     }
 
     private void Start()

@@ -13,7 +13,8 @@ public class PlayerMovement : MonoBehaviour
 
     PlayerControls controls; // This is where the Controls and actual Input are saved (via Unity Input System)
     private Vector2 move;            // Vector to save the JoyStick Inputs X and Y
-   
+    private Vector3 direction;
+
     [SerializeField]
     private float Gravity = 4f;
 
@@ -39,8 +40,8 @@ public class PlayerMovement : MonoBehaviour
 
         float angle = (Vector2.SignedAngle(Vector2.up, new Vector2(move.x, move.y))) * Mathf.PI / 180;
 
-        Vector3 direction = new Vector3(Mathf.Cos(angle) * cameraHolder.forward.x - Mathf.Sin(angle) * cameraHolder.forward.z,
-            0f, Mathf.Sin(angle) * cameraHolder.forward.x + Mathf.Cos(angle) * cameraHolder.forward.z);
+        direction = new Vector3(Mathf.Cos(angle) * cameraHolder.forward.x - Mathf.Sin(angle) * cameraHolder.forward.z,
+           0f, Mathf.Sin(angle) * cameraHolder.forward.x + Mathf.Cos(angle) * cameraHolder.forward.z);
 
         transform.SetPositionAndRotation(transform.position + direction * Time.fixedDeltaTime * playerSpeed, Quaternion.LookRotation(direction));
     }
@@ -55,6 +56,10 @@ public class PlayerMovement : MonoBehaviour
         controls.Gameplay.Disable();
     }
 
+    public Vector3 GetPlayerDirection()
+    {
+        return  direction;
+    }
     public void SetPlayerPosition(Vector3 _targetPosition)
     {
         transform.position = new Vector3(_targetPosition.x, _targetPosition.y, _targetPosition.z);

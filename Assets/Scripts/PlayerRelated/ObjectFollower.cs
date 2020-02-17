@@ -6,10 +6,15 @@ using UnityEngine.InputSystem;
 public class ObjectFollower : MonoBehaviour
 {
     [SerializeField] private float speed;
+    [SerializeField] private Transform upDownHolder;
+
 
     private Transform playerTransform;
+
+    private Vector3 playerDirection;
     PlayerControls controls;
     private Vector2 axis;
+    private float CountUntilReset;
 
     private void Awake()
     {
@@ -20,14 +25,37 @@ public class ObjectFollower : MonoBehaviour
         controls.Gameplay.Camera.canceled += ctx => axis = Vector2.zero;
     }
 
+
     void Update()
     {
-        Debug.Log(axis.x);
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            SetCameraBehindPlayer();
+        }
 
         transform.SetPositionAndRotation(playerTransform.position, transform.rotation);
-        transform.Rotate(0f, axis.x * speed, 0f, Space.Self);
+
+        if (axis.x > 0.1f || axis.x < -0.1f)
+        {
+            transform.SetPositionAndRotation(transform.position, Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + axis.x * speed, transform.rotation.eulerAngles.z));
+        }
+
+        if (axis.y > 0.1f || axis.y < -0.1f)
+        {
+            float Angle = upDownHolder.rotation.eulerAngles.x + axis.y * speed;
+
+            if(Angle < 60 && Angle > 0)
+            {
+                upDownHolder.SetPositionAndRotation(upDownHolder.position, Quaternion.Euler(Angle, upDownHolder.rotation.eulerAngles.y, upDownHolder.rotation.eulerAngles.z));
+            } 
+        }
     }
 
+    public void SetCameraBehindPlayer()
+    {
+        playerDirection = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().GetPlayerDirection();
+        transform.SetPositionAndRotation(playerTransform.position, Quaternion.LookRotation(playerDirection, Vector3.up));
+    }
     private void OnEnable() // This function enables the controls when the object becomes enabled and active
     {
         controls.Gameplay.Enable();

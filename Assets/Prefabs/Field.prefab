@@ -115,3 +115,5 @@ MonoBehaviour:
     type: 3}
   IsSeeded: 0
   IsWatered: 0
+  WeedModel: {fileID: 1709507708307719295, guid: 88cdf9b7aac83df42bebddf7775e1f99,
+    type: 3}

@@ -65,6 +65,7 @@ public class GameManager : MonoBehaviour
         StartCoroutine(Coroutine(0.2f, () =>                            //Lambda function: waits for 0.2 seconds before executing the following code (emergency solution to quick-fix a bug)
        {
            Player.GetComponent<PlayerMovement>().enabled = true;       //Enables the Movement of the player when ending the night
+           Player.GetComponent<PlayerActions>().enabled = true;
        }));
 
         animator.GetComponent<FadingManager>().SetFade(false);          //Fades in after the night
@@ -72,6 +73,13 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < Fields.Count; i++)                          //every field in the scene
         {
             Fields[i].UpdateFieldDays();                                //update their status (happens in FieldManager)
+            int WeedChance = UnityEngine.Random.Range(1, 10);
+            if (WeedChance == 1)
+            {
+                Fields[i].SetWeedstate(true);
+
+                Debug.Log("Field " + Fields[i] + " is weeded");
+            }
         }
 
     }
@@ -79,14 +87,12 @@ public class GameManager : MonoBehaviour
 
     private void DefineGameObjects()
     {
-        if (GMInstance == null)                     //this makes it so only one GM is loaded
+        if (GMInstance != null)
         {
-            GMInstance = this;                      //Defines the GM for other scripts to use
+            Destroy(gameObject);
+            return;
         }
-        else if (GMInstance != this)                //if there is another GM
-        {
-            Destroy(this);                          //this gets destroyed and the already existing GM is the real GM
-        }
+        GMInstance = this;
 
         DontDestroyOnLoad(this);                    //the GM does not get destroyed when a new scene is loaded in
 

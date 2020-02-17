@@ -24,8 +24,13 @@ public class Item : ScriptableObject
     [SerializeField]
     private GameObject HandModel;
 
+    private int NumberOfItems = 1;
+
+
     [SerializeField]
     Item FinishedPlant;
+
+
 
     #region Getter
 
@@ -108,6 +113,11 @@ public class Item : ScriptableObject
     {
         return this;
     }
+    
+    public int GetNumberOfItems()
+    {
+        return NumberOfItems;
+    }
 
     public Item GetFinishedPlant()
     {
@@ -115,6 +125,15 @@ public class Item : ScriptableObject
     }
 
     #endregion
+
+    public void SetNumberOfItems(int _Amount)
+    {
+        NumberOfItems = _Amount;
+    }
+    public void ChangeNumberOfItemsBy(int _AmountToChange)
+    {
+        NumberOfItems += _AmountToChange;
+    }
 
     public virtual void UseItem()
     {

@@ -60,6 +60,7 @@ public class PauseMenu : MonoBehaviour
     // Loads the first scene in the Build order (usually the Main Menu)
     public void LoadMenu()
     {
+        Time.timeScale = 1f;
         SceneManager.LoadScene(sceneBuildIndex: 0);
     }
     private IEnumerator Coroutine(float _TimeToWait, Action _callback)

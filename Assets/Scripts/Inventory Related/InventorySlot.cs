@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class InventorySlot : MonoBehaviour
 {
@@ -10,17 +11,37 @@ public class InventorySlot : MonoBehaviour
 
     private int ButtonIndex;
 
+    [SerializeField]
+    private TMP_Text StackSize;
+
     private void Start()
     {
         ButtonIndex = transform.GetSiblingIndex();
     }
 
-    public void AddItem (Item newItem)
+    public void AddItem(Item newItem)
     {
         Item = newItem;
+        if (Item != null)
+        {
+            Icon.sprite = Item.GetInventoryIcon();
+            Icon.enabled = true;
 
-        Icon.sprite = Item.GetInventoryIcon();
-        Icon.enabled = true;
+            if (Item.GetNumberOfItems() > 1)
+            {
+                StackSize.text = Item.GetNumberOfItems().ToString();
+            }
+            else
+            {
+                StackSize.text = null;
+            }
+        }
+        else
+        {
+            Icon.sprite = null; ;
+            Icon.enabled = false;
+            StackSize.text = null;
+        }
     }
 
     public void ClearSlot()
@@ -29,12 +50,12 @@ public class InventorySlot : MonoBehaviour
 
         Icon.sprite = null;
         Icon.enabled = false;
+        StackSize.text = null;
     }
 
     public void GiveIndexToInventory()
     {
         Inventory.instance.PickUpItemInInventory(ButtonIndex);
-       // Debug.Log("ButtenIndex given");
     }
 
     public int GetButtonIndex()
