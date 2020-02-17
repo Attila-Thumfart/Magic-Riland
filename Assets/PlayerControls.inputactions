@@ -22,11 +22,11 @@
                     "interactions": ""
                 },
                 {
-                    "name": "CameraRight",
+                    "name": "Camera",
                     "type": "Button",
                     "id": "98fd291e-fff9-4bd3-b928-61cac5f0430f",
                     "expectedControlType": "",
-                    "processors": "",
+                    "processors": "StickDeadzone",
                     "interactions": ""
                 },
                 {
@@ -141,11 +141,11 @@
                 {
                     "name": "",
                     "id": "c47922fb-1253-4904-8afc-d8c26f887bd0",
-                    "path": "<Gamepad>/rightStick/right",
+                    "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "CameraRight",
+                    "action": "Camera",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

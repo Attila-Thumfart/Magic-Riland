@@ -35,11 +35,11 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""CameraRight"",
+                    ""name"": ""Camera"",
                     ""type"": ""Button"",
                     ""id"": ""98fd291e-fff9-4bd3-b928-61cac5f0430f"",
                     ""expectedControlType"": """",
-                    ""processors"": """",
+                    ""processors"": ""StickDeadzone"",
                     ""interactions"": """"
                 },
                 {
@@ -154,11 +154,11 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""c47922fb-1253-4904-8afc-d8c26f887bd0"",
-                    ""path"": ""<Gamepad>/rightStick/right"",
+                    ""path"": ""<Gamepad>/rightStick"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""CameraRight"",
+                    ""action"": ""Camera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -515,7 +515,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Gameplay = asset.FindActionMap("Gameplay", throwIfNotFound: true);
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
         m_Gameplay_Rotate = m_Gameplay.FindAction("Rotate", throwIfNotFound: true);
-        m_Gameplay_CameraRight = m_Gameplay.FindAction("CameraRight", throwIfNotFound: true);
+        m_Gameplay_Camera = m_Gameplay.FindAction("Camera", throwIfNotFound: true);
         m_Gameplay_CameraLeft = m_Gameplay.FindAction("CameraLeft", throwIfNotFound: true);
         m_Gameplay_MoveSpell = m_Gameplay.FindAction("MoveSpell", throwIfNotFound: true);
         m_Gameplay_Blitz = m_Gameplay.FindAction("Blitz", throwIfNotFound: true);
@@ -591,7 +591,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private IGameplayActions m_GameplayActionsCallbackInterface;
     private readonly InputAction m_Gameplay_Move;
     private readonly InputAction m_Gameplay_Rotate;
-    private readonly InputAction m_Gameplay_CameraRight;
+    private readonly InputAction m_Gameplay_Camera;
     private readonly InputAction m_Gameplay_CameraLeft;
     private readonly InputAction m_Gameplay_MoveSpell;
     private readonly InputAction m_Gameplay_Blitz;
@@ -610,7 +610,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public GameplayActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_Gameplay_Move;
         public InputAction @Rotate => m_Wrapper.m_Gameplay_Rotate;
-        public InputAction @CameraRight => m_Wrapper.m_Gameplay_CameraRight;
+        public InputAction @Camera => m_Wrapper.m_Gameplay_Camera;
         public InputAction @CameraLeft => m_Wrapper.m_Gameplay_CameraLeft;
         public InputAction @MoveSpell => m_Wrapper.m_Gameplay_MoveSpell;
         public InputAction @Blitz => m_Wrapper.m_Gameplay_Blitz;
@@ -638,9 +638,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Rotate.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRotate;
                 @Rotate.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRotate;
                 @Rotate.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnRotate;
-                @CameraRight.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraRight;
-                @CameraRight.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraRight;
-                @CameraRight.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraRight;
+                @Camera.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCamera;
+                @Camera.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCamera;
+                @Camera.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCamera;
                 @CameraLeft.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraLeft;
                 @CameraLeft.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraLeft;
                 @CameraLeft.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraLeft;
@@ -687,9 +687,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Rotate.started += instance.OnRotate;
                 @Rotate.performed += instance.OnRotate;
                 @Rotate.canceled += instance.OnRotate;
-                @CameraRight.started += instance.OnCameraRight;
-                @CameraRight.performed += instance.OnCameraRight;
-                @CameraRight.canceled += instance.OnCameraRight;
+                @Camera.started += instance.OnCamera;
+                @Camera.performed += instance.OnCamera;
+                @Camera.canceled += instance.OnCamera;
                 @CameraLeft.started += instance.OnCameraLeft;
                 @CameraLeft.performed += instance.OnCameraLeft;
                 @CameraLeft.canceled += instance.OnCameraLeft;
@@ -848,7 +848,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
-        void OnCameraRight(InputAction.CallbackContext context);
+        void OnCamera(InputAction.CallbackContext context);
         void OnCameraLeft(InputAction.CallbackContext context);
         void OnMoveSpell(InputAction.CallbackContext context);
         void OnBlitz(InputAction.CallbackContext context);

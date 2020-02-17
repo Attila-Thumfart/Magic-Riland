@@ -4,9 +4,7 @@ using UnityEngine;
 
 public class WolkenActions : MonoBehaviour
 {
-    PlayerControls controls; // This is where the Controls and actual Input are saved (via Unity Input System)
-
-    public GameObject cloud;
+    // public GameObject cloud;
     // public GameObject player;
     // public GameObject mainCam;
     // public GameObject cloudCam;
@@ -20,14 +18,13 @@ public class WolkenActions : MonoBehaviour
 
     private bool IsOnField = false;
     GameObject CurrentField;
+    private GameObject Camera;
 
     private void Awake()
     {
-        controls = new PlayerControls();  //enables the controls from the Unity Action Input System
+        // countdown = cloudDuration;
 
-       // countdown = cloudDuration;
-
-     //   controls.Gameplay.Wasser.performed += ctx => CancleSpell();
+        //   controls.Gameplay.Wasser.performed += ctx => CancleSpell();
     }
 
     private void Update()
@@ -38,20 +35,21 @@ public class WolkenActions : MonoBehaviour
         {
             CancleSpell();
         }
-
-        if(IsOnField)  //If the cloud is above a field it is watered
-        {
-            CurrentField.GetComponent<FieldManager>().SetIsWatered(true);
-        }
     }
 
     private void OnTriggerEnter(Collider other)         //checks if the Player touches a Field
     {
         if (other.tag == "Field")
         {
+            Debug.Log("Watering Field");
             IsOnField = true;                           //sets the bool for it to true
             CurrentField = other.gameObject;            //references the current field; used for SeedField to know which field is seeded
 
+            if (IsOnField)  //If the cloud is above a field it is watered
+            {
+                
+                CurrentField.GetComponent<FieldManager>().SetIsWatered(true);
+            }
         }
     }
 
@@ -67,6 +65,8 @@ public class WolkenActions : MonoBehaviour
     private void CancleSpell()
     {
         Destroy(this.gameObject);
+        Camera = GameObject.Find("CameraHolder");
+        Camera.GetComponent<ObjectFollower>().enabled = true;
         //cloudCam.SetActive(false);
         //player.GetComponent<ControllerMovement>().enabled = true;
         //mainCam.SetActive(true);
@@ -81,15 +81,5 @@ public class WolkenActions : MonoBehaviour
     public float GetMaxCloudChannelDuration()  //Simple Getter for the Maximum Cloud Duration
     {
         return maxCloudChannelDuration;
-    }
-
-    private void OnEnable() // This function enables the controls when the object becomes enabled and active
-    {
-        controls.Gameplay.Enable();
-    }
-
-    private void OnDisable() // This function disables the controls when the object becomes disabled or inactive
-    {
-        controls.Gameplay.Disable();
     }
 }

@@ -6,6 +6,7 @@ public class FieldManager : Interactable
 {
     public enum Fieldstate             //different fieldstates
     {
+        notThere,
         empty,
         seeded,
         sprout,
@@ -35,6 +36,11 @@ public class FieldManager : Interactable
     private int GrowthRateUntilMedium;
     private int GrowthRateUntilFinished;
 
+    [SerializeField]
+    private GameObject WeedModel;
+    private GameObject WeedModelInstance;
+    private bool isWeed;
+
     private GameObject GrowthModelSeed;
     private GameObject GrowthModelSprout;
     private GameObject GrowthModelMedium;
@@ -63,14 +69,21 @@ public class FieldManager : Interactable
 
         if (!IsSeeded)
         {
-            Debug.Log("Still Seeded");
             ThisPlant = Player.GetComponent<PlayerActions>().GetCurrentItem();
-            if (ThisPlant.GetIsSeed())
+            if (ThisPlant != null)
             {
-                SetThisPlant(ThisPlant);
-                SetIsSeeded(true);
-               // inventory.RemoveItemFromInventory(0);
+                if (ThisPlant.GetIsSeed())
+                {
+                    SetThisPlant(ThisPlant);
+                    SetIsSeeded(true);
+                    inventory.RemoveItemFromInventory(0);
+                }
             }
+        }
+
+        if(isWeed)
+        {
+            SetWeedstate(false);
         }
 
         if (IsSeeded && (ActiveFieldstate == Fieldstate.finished || ActiveFieldstate == Fieldstate.withered))
@@ -78,13 +91,6 @@ public class FieldManager : Interactable
             if (ActiveFieldstate == Fieldstate.finished)
             {
                 inventory.AddItemToInventory(GetThisPlant());
-                
-                GrowthModelSeedInstance.SetActive(false);
-                GrowthModelSproutInstance.SetActive(false);
-                GrowthModelMediumInstance.SetActive(false);
-                GrowthModelFinishedInstance.SetActive(false);
-                GrowthModelWitheredInstance.SetActive(false);
-
             }
             ResetField();
         }
@@ -180,6 +186,19 @@ public class FieldManager : Interactable
     {
         IsWatered = _NewState;
     }
+    public void SetWeedstate(bool _NewState)
+    {
+        isWeed = _NewState;
+        if (_NewState)
+        {
+            WeedModelInstance = Instantiate(WeedModel, transform);
+            WeedModelInstance.SetActive(_NewState);
+        }
+        else if(!_NewState)
+        {
+            Destroy(WeedModelInstance);
+        }
+    }
     public void SetThisPlant(Item _PlayerFirstItem)
     {
         GrowthRateUntilSprout = ThisPlant.GetGrowthRateUntilSprout();
@@ -200,7 +219,7 @@ public class FieldManager : Interactable
         GrowthModelFinishedInstance = Instantiate(GrowthModelFinished, transform);
         GrowthModelWitheredInstance = Instantiate(GrowthModelWithered, transform);
 
-        GrowthModelSeedInstance.SetActive(false);
+        GrowthModelSeedInstance.SetActive(true);
         GrowthModelSproutInstance.SetActive(false);
         GrowthModelMediumInstance.SetActive(false);
         GrowthModelFinishedInstance.SetActive(false);
@@ -213,21 +232,25 @@ public class FieldManager : Interactable
     {
         if (IsWatered)                              //if the field is watered
         {
-            Debug.Log("Field is watered");
             IsWatered = false;                      //dry out the field again
             FieldDryInstance.SetActive(true);
             FieldWateredInstance.SetActive(false);
             DayOfProgress++;                        //the plant growths towards its next step
         }
-        else if (!IsWatered && IsSeeded)            //if the field is not waterd but seeded
+        else if ((!IsWatered && IsSeeded) || isWeed)            //if the field is not waterd but seeded
         {
-            Debug.Log("Field is not watered");
             DaysUntilWithered--;                    //the plant is one step closer to dry out
         }
     }
 
     public void ResetField()                                //resets the field to an empty state
     {
+        GrowthModelSeedInstance.SetActive(false);
+        GrowthModelSproutInstance.SetActive(false);
+        GrowthModelMediumInstance.SetActive(false);
+        GrowthModelFinishedInstance.SetActive(false);
+        GrowthModelWitheredInstance.SetActive(false);
+
         IsSeeded = false;
         ActiveFieldstate = Fieldstate.empty;
     }

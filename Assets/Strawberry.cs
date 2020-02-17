@@ -6,11 +6,6 @@ public class Strawberry : MonoBehaviour
 {
     [SerializeField]
     private Item StrawberryItem;
-    
-    void Start()
-    {
-
-    }
 
     public Item GetItem()
     {
