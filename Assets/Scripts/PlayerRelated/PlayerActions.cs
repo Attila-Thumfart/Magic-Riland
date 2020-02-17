@@ -15,6 +15,8 @@ public class PlayerActions : MonoBehaviour
     private GameObject Cloud;           //cloud for the player to summon
     private GameObject CloudInstance;   //instance of the cloud (to not work on the prefab)
 
+    private GameObject Camera;
+
     private bool channelState = false;  //used for the channel of the cloud
     private float cloudDuration;        //duration of the cloud after being summoned
     [SerializeField]
@@ -79,6 +81,7 @@ public class PlayerActions : MonoBehaviour
     { 
         if (CloudInstance == null)                                              //if there is no cloud active
         {
+            Player.GetComponent<PlayerMovement>().enabled = false;
             WolkenActions myCloud = Cloud.GetComponent<WolkenActions>();        //player gets a cloud to use
             maxCloudDuration = myCloud.GetMaxCloudChannelDuration();            //max cloud channel duration is set
 
@@ -111,6 +114,9 @@ public class PlayerActions : MonoBehaviour
         }
         else if (cloudDuration >= 1f)                   //if the player pressed the button for more than one second
         {
+            Player.GetComponent<PlayerMovement>().enabled = true;
+            Camera = GameObject.Find("CameraHolder");
+            Camera.GetComponent<ObjectFollower>().enabled = false;
             channelState = false;                       //channel gets ended
 
             CloudInstance = Instantiate(Cloud);         //creates an instance of the cloud

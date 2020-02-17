@@ -18,6 +18,7 @@ public class WolkenActions : MonoBehaviour
 
     private bool IsOnField = false;
     GameObject CurrentField;
+    private GameObject Camera;
 
     private void Awake()
     {
@@ -64,6 +65,8 @@ public class WolkenActions : MonoBehaviour
     private void CancleSpell()
     {
         Destroy(this.gameObject);
+        Camera = GameObject.Find("CameraHolder");
+        Camera.GetComponent<ObjectFollower>().enabled = true;
         //cloudCam.SetActive(false);
         //player.GetComponent<ControllerMovement>().enabled = true;
         //mainCam.SetActive(true);
