@@ -45,13 +45,19 @@ public class Inventory : MonoBehaviour
     {
         for (int i = 0; i < items.Length; i++)
         {
-            if(items[i] != null && items[i].GetName() == item.GetName())
+            if (items[i] != null && items[i].GetName() == item.GetName())
             {
                 if (items[i].GetNumberOfItems() < NumberOfAllowedItems)
                 {
                     items[i].ChangeNumberOfItemsBy(1);
                     Debug.Log("You now have this item " + items[i].GetNumberOfItems() + " times");
                     Debug.Log(items[i].GetNumberOfItems() + "/" + NumberOfAllowedItems);
+
+                    if (onItemChangedCallback != null)
+                    {
+                        onItemChangedCallback.Invoke();
+                    }
+
                     return true;
                 }
                 else
@@ -100,7 +106,7 @@ public class Inventory : MonoBehaviour
         }
         //inventoryUI.RemoveItemFromSlot(_inventorySlot);
 
-       // inventorySlot.ClearSlot();
+        // inventorySlot.ClearSlot();
 
         if (onItemChangedCallback != null)
         {
