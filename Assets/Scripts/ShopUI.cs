@@ -5,18 +5,17 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
 
-public class InventoryUI : MonoBehaviour
+public class ShopUI : Interactable
 {
     public Transform ItemsParent;
+    public Transform ShopParent;
 
     Inventory Inventory;
 
-    InventorySlot[] Slots;
+    InventorySlot[] InventorySlots;
+    ShopSlot[] ShopSlots;
 
-    public GameObject inventoryUI;
-    public GameObject Player;
-
-    PlayerControls controls;
+    public GameObject shopUI;
 
     public static InventoryUI InvUIInstance;
 
@@ -28,79 +27,92 @@ public class InventoryUI : MonoBehaviour
     [SerializeField]
     private TMP_Text DescriptionDisplay;
 
-    private void Awake()
+    PlayerControls controls;
+
+    [SerializeField]
+    Shop Shop;
+
+    public override void Awake()
     {
+        base.Awake();
         controls = new PlayerControls();
-
-        if (InvUIInstance != null)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        InvUIInstance = this;
-
-        DontDestroyOnLoad(this);
     }
 
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
+        base.Start();
+
         Inventory = Inventory.instance;
 
         Inventory.onItemChangedCallback += UpdateUI;
 
-        Slots = ItemsParent.GetComponentsInChildren<InventorySlot>();
+        UpdateShopUI();
 
-        controls.Gameplay.Inventar.started += ctx => ToggleUI();
+        InventorySlots = ItemsParent.GetComponentsInChildren<InventorySlot>();
+        ShopSlots = ShopParent.GetComponentsInChildren<ShopSlot>();
+
+        controls.Menus.Cancle.started += ctx => DeactivateUI();
     }
 
-    // Update is called once per frame
-    void Update()
+    public override void Interact()
     {
-
+        base.Interact();
+        ActivateUI();
     }
-
-    /*public void AddItemToSlot(int slot, Item _myItem)
-    {
-        Slots[slot].AddItem(_myItem);
-    }
-
-    public void RemoveItemFromSlot(int _slotNumber)
-    {
-        Slots[_slotNumber].ClearSlot();
-    }
-    */
 
     void UpdateUI()
     {
-        for (int i = 0; i < Slots.Length; i++)
+        for (int i = 0; i < InventorySlots.Length; i++)
         {
             if (i < Inventory.items.Length)
             {
-                Slots[i].AddItem(Inventory.items[i]);
+                InventorySlots[i].AddItem(Inventory.items[i]);
             }
             else
             {
-                Slots[i].ClearSlot();
+                InventorySlots[i].ClearSlot();
             }
         }
     }
 
-    private void ToggleUI()
+    public void UpdateShopUI()
     {
-        inventoryUI.SetActive(!inventoryUI.activeSelf);
-        Player = GameObject.FindGameObjectWithTag("Player");
-        Inventory.instance.ResetSelectedItem();
+        for (int i = 0; i < ShopSlots.Length; i++)
+        {
+            if (i < Shop.shopItems.Length)
+            {
+                ShopSlots[i].AddItem(Shop.shopItems[i]);
+            }
+            else
+            {
+                ShopSlots[i].ClearSlot();
+            }
+        }
+    }
 
-        if (inventoryUI.activeSelf)
+    private void ActivateUI()
+    {
+        shopUI.SetActive(true);
+
+        if (shopUI.activeSelf)
         {
             Player.GetComponent<PlayerMovement>().enabled = false;
             Player.GetComponent<PlayerActions>().enabled = false;
         }
-        else
+    }
+
+    private void DeactivateUI()
+    {
+        if (shopUI.activeSelf)
         {
-            Player.GetComponent<PlayerMovement>().enabled = true;
-            Player.GetComponent<PlayerActions>().enabled = true;
+            shopUI.SetActive(false);
+
+            if (!shopUI.activeSelf)
+            {
+                Player.GetComponent<PlayerMovement>().enabled = true;
+                Player.GetComponent<PlayerActions>().enabled = true;
+            }
         }
     }
 

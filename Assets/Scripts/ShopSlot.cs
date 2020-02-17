@@ -2,7 +2,7 @@
 using UnityEngine.UI;
 using TMPro;
 
-public class InventorySlot : MonoBehaviour
+public class ShopSlot : MonoBehaviour
 {
     [SerializeField]
     private Image Icon;
@@ -13,9 +13,6 @@ public class InventorySlot : MonoBehaviour
     private Shop Shop;
 
     private int ButtonIndex;
-
-    [SerializeField]
-    private TMP_Text StackSize;
 
     private void Start()
     {
@@ -29,21 +26,11 @@ public class InventorySlot : MonoBehaviour
         {
             Icon.sprite = Item.GetInventoryIcon();
             Icon.enabled = true;
-
-            if (Item.GetNumberOfItems() > 1)
-            {
-                StackSize.text = Item.GetNumberOfItems().ToString();
-            }
-            else
-            {
-                StackSize.text = null;
-            }
         }
         else
         {
             Icon.sprite = null; ;
             Icon.enabled = false;
-            StackSize.text = null;
         }
     }
 
@@ -53,7 +40,11 @@ public class InventorySlot : MonoBehaviour
 
         Icon.sprite = null;
         Icon.enabled = false;
-        StackSize.text = null;
+    }
+
+    public void BuyIndex()
+    {
+        Shop.BuyItem(ButtonIndex);
     }
 
     public void GiveIndexToInventory()
@@ -69,10 +60,5 @@ public class InventorySlot : MonoBehaviour
     public int GetButtonIndex()
     {
         return ButtonIndex;
-    }
-
-    public void SellIndex()
-    {
-        Shop.SellItem(ButtonIndex);
     }
 }
