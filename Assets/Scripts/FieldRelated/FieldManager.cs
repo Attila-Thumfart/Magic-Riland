@@ -23,11 +23,11 @@ public class FieldManager : Interactable
 
     [SerializeField]
     private GameObject FieldDry, FieldWatered;
-    [SerializeField]
     private bool IsSeeded = false;
-    [SerializeField]
     private bool IsWatered = false;
-
+    private bool IsWinded = false;
+    [SerializeField]
+    private bool IsPlowed = false;
 
     private Item ThisPlant;
     private Item ThisFinishedPlant;
@@ -59,7 +59,7 @@ public class FieldManager : Interactable
         FieldDryInstance = Instantiate(FieldDry, transform);
         FieldWateredInstance = Instantiate(FieldWatered, transform);
         GetComponent<MeshRenderer>().enabled = false;
-        FieldDryInstance.SetActive(true);
+        FieldDryInstance.SetActive(false);
         FieldWateredInstance.SetActive(false);
     }
 
@@ -105,6 +105,12 @@ public class FieldManager : Interactable
             FieldDryInstance.SetActive(false);
             FieldWateredInstance.SetActive(true);
         }
+        if(!IsPlowed)
+        {
+            ActiveFieldstate = Fieldstate.notThere;
+            FieldDryInstance.SetActive(false);
+            FieldWateredInstance.SetActive(false);
+        }
     }
 
     #region FIELD ROTATION
@@ -112,6 +118,14 @@ public class FieldManager : Interactable
     {
         switch (ActiveFieldstate)
         {
+            case (Fieldstate.notThere):
+                if (IsPlowed)
+                {
+                    FieldDryInstance.SetActive(true);
+                    ActiveFieldstate = Fieldstate.empty;
+                }
+                break;
+
             case (Fieldstate.empty):                                        //if this field is empty   
                 if (IsSeeded)                                               //if the player seeded the field
                 {
@@ -177,6 +191,7 @@ public class FieldManager : Interactable
     #endregion
 
     #region SETTER
+
     public void SetIsSeeded(bool _NewState)          //can get called by PlayerActions to seed the field/empty the field
     {
         IsSeeded = _NewState;
@@ -186,6 +201,22 @@ public class FieldManager : Interactable
     {
         IsWatered = _NewState;
     }
+
+    public void SetIsPlowed(bool _NewState)
+    {
+        IsPlowed = _NewState;
+        if(_NewState)
+        {
+            FieldDryInstance.SetActive(true);
+        }
+        else if(!_NewState)
+        {
+            ActiveFieldstate = Fieldstate.notThere;
+            FieldDryInstance.SetActive(false);
+            FieldWateredInstance.SetActive(false);
+        }
+    }
+
     public void SetWeedstate(bool _NewState)
     {
         isWeed = _NewState;
