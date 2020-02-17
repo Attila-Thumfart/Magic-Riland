@@ -193,6 +193,8 @@ MonoBehaviour:
   Player: {fileID: 0}
   Cloud: {fileID: 1388125985609021433, guid: f2ed377b8ec653c4eafe371e5f4575ec, type: 3}
   maxCloudDuration: 0
+  Wind: {fileID: 1230103767551851472, guid: 9ed01fb2d8841db41a500f7d9950fa96, type: 3}
+  maxWindDuration: 0
 --- !u!1001 &7611145671412292807
 PrefabInstance:
   m_ObjectHideFlags: 0
