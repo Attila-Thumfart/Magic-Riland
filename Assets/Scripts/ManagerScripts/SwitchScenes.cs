@@ -7,6 +7,7 @@ using System;
 public class SwitchScenes : MonoBehaviour
 {
     private GameObject player;          //player to check against
+    private GameObject DontDestroy;
 
     [SerializeField]
     private Vector3 TargetPosition;     //position the player will get set to
@@ -31,14 +32,16 @@ public class SwitchScenes : MonoBehaviour
     private void OnTriggerEnter(Collider other)                         //if something hits the collider of the game object this script is attached to
     {
         if (other.tag == "Player")                                      //if this is a player
-        {
+        { 
             player.GetComponent<PlayerMovement>().enabled = false;      //disables player movement
-            animator.GetComponent<FadingManager>().SetFade(true);       //calls the FadeManager to fade out
+           // animator.GetComponent<FadingManager>().SetFade(true);       //calls the FadeManager to fade out
             StartCoroutine(Coroutine(1, () =>                           //Lambda function that gets called after 1 second
             {
                 SceneManager.LoadScene(TargetScene);                                        //Loads the target scene
+                DontDestroy = FindObjectOfType<DontDestroyFields>().gameObject;
+                DontDestroy.GetComponent<DontDestroyFields>().CheckActiveScene(TargetScene);
                 player.GetComponent<PlayerMovement>().SetPlayerPosition(TargetPosition);    //sets the player to the target position
-                animator.GetComponent<FadingManager>().SetFade(false);                      //fades out
+               // animator.GetComponent<FadingManager>().SetFade(false);                      //fades out
                 player.GetComponent<PlayerMovement>().enabled = true;                       //enables the playermovement again
             }));
         }
