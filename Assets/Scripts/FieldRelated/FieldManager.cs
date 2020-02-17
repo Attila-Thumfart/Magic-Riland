@@ -4,13 +4,9 @@ using UnityEngine;
 
 public class FieldManager : Interactable
 {
-
-    //GameManager GM;                     //used to use the GameManager
-    //GameObject Player;                  //used to use informations of the Player
-
-    [SerializeField]
     public enum Fieldstate             //different fieldstates
     {
+        notThere,
         empty,
         seeded,
         sprout,
@@ -18,87 +14,116 @@ public class FieldManager : Interactable
         finished,
         withered,
     }
-
     [SerializeField]
     private Fieldstate ActiveFieldstate = Fieldstate.empty;     //all Fields are empty at the start
 
-    [SerializeField]
-    private int SeedDay;
-    [SerializeField]
+
     private int DayOfProgress;
-    [SerializeField]
     private int DaysUntilWithered = 3;
 
     [SerializeField]
-    private int GrowthRateMedium;
-    [SerializeField]
-    private int GrowthRateFinished;
-
+    private GameObject FieldDry, FieldWatered;
     [SerializeField]
     private bool IsSeeded = false;
     [SerializeField]
     private bool IsWatered = false;
 
-    private GameObject MediumPlant;
 
-    private GameObject FinishedPlant;
-    private Item Item;
+    private Item ThisPlant;
+    private Item ThisFinishedPlant;
 
+    private int GrowthRateUntilSprout;
+    private int GrowthRateUntilMedium;
+    private int GrowthRateUntilFinished;
+
+    [SerializeField]
+    private GameObject WeedModel;
+    private GameObject WeedModelInstance;
+    private bool isWeed;
+
+    private GameObject GrowthModelSeed;
+    private GameObject GrowthModelSprout;
+    private GameObject GrowthModelMedium;
+    private GameObject GrowthModelFinished;
+    private GameObject GrowthModelWithered;
+
+    private GameObject FieldDryInstance, FieldWateredInstance;
+    private GameObject GrowthModelSeedInstance, GrowthModelSproutInstance, GrowthModelMediumInstance, GrowthModelFinishedInstance, GrowthModelWitheredInstance;
+
+    private Inventory inventory;
+
+
+    public override void Start()
+    {
+        base.Start();
+        FieldDryInstance = Instantiate(FieldDry, transform);
+        FieldWateredInstance = Instantiate(FieldWatered, transform);
+        GetComponent<MeshRenderer>().enabled = false;
+        FieldDryInstance.SetActive(true);
+        FieldWateredInstance.SetActive(false);
+    }
 
     public override void Interact()
     {
+        inventory = Inventory.instance;
+
         if (!IsSeeded)
         {
-            SetIsSeeded(true);
-            SetGrowthrates(Player.GetComponent<PlayerActions>().GetCurrentItem());
-            SetMeshes(Player.GetComponent<PlayerActions>().GetCurrentItem());
-            SetItem(Player.GetComponent<PlayerActions>().GetCurrentItem());
+            ThisPlant = Player.GetComponent<PlayerActions>().GetCurrentItem();
+            if (ThisPlant != null)
+            {
+                if (ThisPlant.GetIsSeed())
+                {
+                    SetThisPlant(ThisPlant);
+                    SetIsSeeded(true);
+                    inventory.RemoveItemFromInventory(0);
+                }
+            }
+        }
+
+        if(isWeed)
+        {
+            SetWeedstate(false);
         }
 
         if (IsSeeded && (ActiveFieldstate == Fieldstate.finished || ActiveFieldstate == Fieldstate.withered))
         {
-            ResetField();
             if (ActiveFieldstate == Fieldstate.finished)
-                GetItem();
+            {
+                inventory.AddItemToInventory(GetThisPlant());
+            }
+            ResetField();
         }
-
-        
- 
     }
-
 
     void Update()
     {
-
         SwitchFields();
-
-
         WitheredField();
+        if (IsWatered)
+        {
+            FieldDryInstance.SetActive(false);
+            FieldWateredInstance.SetActive(true);
+        }
     }
 
+    #region FIELD ROTATION
     private void SwitchFields()         //this switches the different states of the Field (Enums)
     {
         switch (ActiveFieldstate)
         {
             case (Fieldstate.empty):                                        //if this field is empty   
-
                 if (IsSeeded)                                               //if the player seeded the field
                 {
-                    MediumPlant.SetActive(true);
-                    GetComponent<MeshRenderer>().enabled = false;
                     ActiveFieldstate = Fieldstate.seeded;                   //the field is now seeded
-                    SeedDay = GameManager.GMInstance.GetCalenderDay();      //remember what day the seeding has taken place
                     DayOfProgress = 0;
                 }
-
-                //IsSeeded = false;  
-                //GetComponent<MeshRenderer>().enabled = true;
-                //Destroy(MediumPlant);
-                //Destroy(FinishedPlant); // REFACTORING!
                 break;
 
             case (Fieldstate.seeded):                                       //if the plant is seeded
-                if (DayOfProgress == 1)                                     //and if the day is ended (only for the first step from seed --> sprout)
+                GrowthModelSeedInstance.SetActive(true);
+
+                if (DayOfProgress == GrowthRateUntilSprout)                                     //and if the day is ended (only for the first step from seed --> sprout)
                 {
                     ActiveFieldstate = Fieldstate.sprout;                   //the seed growths into a sprout
                     DayOfProgress = 0;                                      //reset the progresstimer
@@ -106,7 +131,10 @@ public class FieldManager : Interactable
                 break;
 
             case (Fieldstate.sprout):                                       //if the plant is a sprout
-                if (DayOfProgress == GrowthRateMedium)                      //and if the DayOfProgress matches the GrowthRateMedium step of the plant
+                GrowthModelSeedInstance.SetActive(false);
+                GrowthModelSproutInstance.SetActive(true);
+
+                if (DayOfProgress == GrowthRateUntilMedium)                      //and if the DayOfProgress matches the GrowthRateMedium step of the plant
                 {
                     ActiveFieldstate = Fieldstate.medium;                   //the plant reaches its 2nd stage of its growthcycle
                     DayOfProgress = 0;                                      //reset the progresstimer
@@ -114,15 +142,20 @@ public class FieldManager : Interactable
                 break;
 
             case (Fieldstate.medium):                                       //if the plant is on its medium state
-                if (DayOfProgress == GrowthRateFinished)                    //and if the DayOfProgress matches the GrowthRateFinished step of the plant
+                GrowthModelSproutInstance.SetActive(false);
+                GrowthModelMediumInstance.SetActive(true);
+
+                if (DayOfProgress == GrowthRateUntilFinished)                    //and if the DayOfProgress matches the GrowthRateFinished step of the plant
                 {
-                    //MeshRenderer
                     ActiveFieldstate = Fieldstate.finished;                 //the plant is fully grown and ready to be harvested
                     DayOfProgress = 0;                                      //reset the progresstimer
                 }
                 break;
 
             case (Fieldstate.finished):                                     //if the plant is fully grown
+                GrowthModelMediumInstance.SetActive(false);
+                GrowthModelFinishedInstance.SetActive(true);
+
                 if (DayOfProgress == 3)                                      //and if 3 days are passed
                 {
                     ActiveFieldstate = Fieldstate.withered;                 //the plant is withered 
@@ -130,54 +163,95 @@ public class FieldManager : Interactable
                 break;
 
             case (Fieldstate.withered):
-                MediumPlant.SetActive(false);
-                GetComponent<MeshRenderer>().enabled = true;
+                GrowthModelSeedInstance.SetActive(false);
+                GrowthModelSproutInstance.SetActive(false);
+                GrowthModelMediumInstance.SetActive(false);
+                GrowthModelFinishedInstance.SetActive(false);
+                GrowthModelWitheredInstance.SetActive(true);
+
+                //MediumPlant.SetActive(false);
                 break;
 
         }
     }
+    #endregion
 
-    
+    #region SETTER
     public void SetIsSeeded(bool _NewState)          //can get called by PlayerActions to seed the field/empty the field
     {
         IsSeeded = _NewState;
+        DaysUntilWithered = 3;
     }
+    public void SetIsWatered(bool _NewState)               //setter for other scripts to set the watered state of the field
+    {
+        IsWatered = _NewState;
+    }
+    public void SetWeedstate(bool _NewState)
+    {
+        isWeed = _NewState;
+        if (_NewState)
+        {
+            WeedModelInstance = Instantiate(WeedModel, transform);
+            WeedModelInstance.SetActive(_NewState);
+        }
+        else if(!_NewState)
+        {
+            Destroy(WeedModelInstance);
+        }
+    }
+    public void SetThisPlant(Item _PlayerFirstItem)
+    {
+        GrowthRateUntilSprout = ThisPlant.GetGrowthRateUntilSprout();
+        GrowthRateUntilMedium = ThisPlant.GetGrowthRateUntilMedium();
+        GrowthRateUntilFinished = ThisPlant.GetGrowthRateUntilMedium();
+
+        GrowthModelSeed = ThisPlant.GetGrowthModelSeed();
+        GrowthModelSprout = ThisPlant.GetGrowthModelSprout();
+        GrowthModelMedium = ThisPlant.GetGrowthModelMedium();
+        GrowthModelFinished = ThisPlant.GetGrowthModelFinished();
+        GrowthModelWithered = ThisPlant.GetGrowthModelWithered();
+
+        ThisFinishedPlant = ThisPlant.GetFinishedPlant();
+
+        GrowthModelSeedInstance = Instantiate(GrowthModelSeed, transform);
+        GrowthModelSproutInstance = Instantiate(GrowthModelSprout, transform);
+        GrowthModelMediumInstance = Instantiate(GrowthModelMedium, transform);
+        GrowthModelFinishedInstance = Instantiate(GrowthModelFinished, transform);
+        GrowthModelWitheredInstance = Instantiate(GrowthModelWithered, transform);
+
+        GrowthModelSeedInstance.SetActive(true);
+        GrowthModelSproutInstance.SetActive(false);
+        GrowthModelMediumInstance.SetActive(false);
+        GrowthModelFinishedInstance.SetActive(false);
+        GrowthModelWitheredInstance.SetActive(false);
+    }
+    #endregion
+
 
     public void UpdateFieldDays()                   //does the logic behind the daily cycling of the stages, gets called every day from GameManager
     {
         if (IsWatered)                              //if the field is watered
         {
-            DayOfProgress++;                        //the plant growths towards its next step
             IsWatered = false;                      //dry out the field again
+            FieldDryInstance.SetActive(true);
+            FieldWateredInstance.SetActive(false);
+            DayOfProgress++;                        //the plant growths towards its next step
         }
-        else if (!IsWatered && IsSeeded)            //if the field is not waterd but seeded
+        else if ((!IsWatered && IsSeeded) || isWeed)            //if the field is not waterd but seeded
         {
             DaysUntilWithered--;                    //the plant is one step closer to dry out
         }
     }
 
-    public void SetGrowthrates(GameObject _MySamplePlant)           //gets informations of MySamplePlant to the field
-    {
-        GrowthRateMedium = _MySamplePlant.GetComponent<MySamplePlant>().GetGrowthRateMedium();          //growthrate to first state
-        GrowthRateFinished = _MySamplePlant.GetComponent<MySamplePlant>().GetGrowthRateFinished();      //growthrate to finished state
-    }
-
-    public void SetMeshes(GameObject _MySamplePlant)
-    {
-        MediumPlant = Instantiate(_MySamplePlant.GetComponent<MySamplePlant>().GetPlantMedium(), transform);
-        MediumPlant.SetActive(false);
-        
-        FinishedPlant = _MySamplePlant.GetComponent<MySamplePlant>().GetPlantFinished();
-    }
-
-    public void SetIsWatered(bool _NewState)               //setter for other scripts to set the watered state of the field
-    {
-        IsWatered = _NewState;
-    }
-
-
     public void ResetField()                                //resets the field to an empty state
     {
+        GrowthModelSeedInstance.SetActive(false);
+        GrowthModelSproutInstance.SetActive(false);
+        GrowthModelMediumInstance.SetActive(false);
+        GrowthModelFinishedInstance.SetActive(false);
+        GrowthModelWitheredInstance.SetActive(false);
+
+        IsSeeded = false;
         ActiveFieldstate = Fieldstate.empty;
     }
 
@@ -189,14 +263,9 @@ public class FieldManager : Interactable
         }
     }
 
-    public void SetItem(GameObject _MySamplePlant)
+    public Item GetThisPlant()
     {
-        Item = _MySamplePlant.GetComponent<MySamplePlant>().GetFinishedItem();
-    }
-
-    public Item GetItem()
-    {
-        return Item;
+        return ThisFinishedPlant;
     }
 
     public Fieldstate GetFieldstate()                       //getter for other scripts to get the active Fieldstate

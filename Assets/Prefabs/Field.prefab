@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3549897477857251089}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.6, y: -0.38, z: -3.5852563}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -109,10 +109,11 @@ MonoBehaviour:
   Player: {fileID: 0}
   GM: {fileID: 0}
   ActiveFieldstate: 0
-  SeedDay: 0
-  DayOfProgress: 0
-  DaysUntilWithered: 3
-  GrowthRateMedium: 0
-  GrowthRateFinished: 0
+  FieldDry: {fileID: 8427436457407850252, guid: 5b6752c9fc6c31043a99e260973c5855,
+    type: 3}
+  FieldWatered: {fileID: 9072890098637015540, guid: ab8874fb3cea3f3499a3d3ad0c95ff86,
+    type: 3}
   IsSeeded: 0
   IsWatered: 0
+  WeedModel: {fileID: 1709507708307719295, guid: 88cdf9b7aac83df42bebddf7775e1f99,
+    type: 3}

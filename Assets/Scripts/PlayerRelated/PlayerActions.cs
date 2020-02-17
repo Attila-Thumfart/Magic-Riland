@@ -5,49 +5,45 @@ using UnityEngine.InputSystem;
 
 public class PlayerActions : MonoBehaviour
 {
-    //private bool IsOnField = false;
-   // private bool TouchesBed = false;
-    //GameObject CurrentField;
-    GameObject CurrentItem;
-
-   // GameObject CIO;
-    Interactable CurrentInteractable;
-
+    Item CurrentItem;                   //first item in inventory
+    Interactable CurrentInteractable;   //the object the player is facing when interacting with something
 
     [SerializeField]
-    private GameObject cloud;
-    private GameObject Player;
-   // private GameObject animator;
+    private GameObject Player;          //defines the object this script is attached to
 
-    private bool channelState = false;
-    private float cloudDuration;
-    private float maxCloudDuration;
+    [SerializeField]
+    private GameObject Cloud;           //cloud for the player to summon
+    private GameObject CloudInstance;   //instance of the cloud (to not work on the prefab)
 
-    private float interactionRange = 1.2f;
-    private Vector3 raycastHigth = new Vector3(0, 0.3f, 0);
-    private Interactable focus;
+    private GameObject Camera;
 
-    // public GameObject mainCam;
-    // public GameObject cloudCam;
+    private bool channelState = false;  //used for the channel of the cloud
+    private float cloudDuration;        //duration of the cloud after being summoned
+    [SerializeField]
+    private float maxCloudDuration;     //maximum duration of the cloud
 
-    PlayerControls controls; // This is where the Controls and actual Input are saved (via Unity Input System)
+
+    private float interactionRange = 1.2f;                          //range of the player to interact with
+    private float interactionRadius = 0.5f;
+    private Vector3 raycastHigth = new Vector3(0, 0.3f, 0);         //GETS CHANGED AFTER REWORKING RAYCAST TO RAYSPHERE
+
+
+    private Inventory PlayerInventory;      //inventory of the player
+
+    PlayerControls controls;                // This is where the Controls and actual Input are saved (via Unity Input System)
 
     private void Awake()
     {
-        controls = new PlayerControls();
+        controls = new PlayerControls();        //Unity Input Action System activated here
 
         // The Controls via the Unity Action Input System are set here
-
         controls.Gameplay.Wasser.started += ctx => StartChannel();
         controls.Gameplay.Wasser.canceled += ctx => EndChannel();
-        controls.Gameplay.Interact.performed += ctx => Interact();
-        // controls.Gameplay.Interact.performed += ctx => FieldAction();
-        // controls.Keyboard.Interact.performed += ctx => FieldAction();
-        // controls.Gameplay.Interact.performed += ctx => EndDay();
-        // controls.Keyboard.Interact.performed += ctx => EndDay();
+        controls.Gameplay.Interact.started += ctx => Interact();
 
-        Player = this.gameObject;
-     //   animator = GameObject.FindGameObjectWithTag("Animator");
+        Player = this.gameObject;               //defines the game object of this script as a Player
+
+        PlayerInventory = Inventory.instance;   //creates an instance of the player inventory
     }
 
 
@@ -56,167 +52,96 @@ public class PlayerActions : MonoBehaviour
         ChannelCounter();
     }
 
-    void Interact()
+    void Interact()                             //calls the function Interact() of every object the player interacts with
     {
-            RaycastHit hit;
-            Ray interactionRay = new Ray(transform.position + raycastHigth, transform.TransformDirection(Vector3.forward) * interactionRange);
+        RaycastHit hit;                         //GETS CHANGED AFTER SWITCHING TO RAYSPHERE
+        //Ray interactionRay = new Ray(transform.position + raycastHigth, transform.TransformDirection(Vector3.forward) * interactionRange);      //throws a raycast in front of the player
 
-            Debug.DrawRay(transform.position + raycastHigth, transform.TransformDirection(Vector3.forward) * interactionRange);
+        //Debug.DrawRay(transform.position + raycastHigth, transform.TransformDirection(Vector3.forward) * interactionRange);         //visualisation of the raycast for debug purposes
 
-            if (Physics.Raycast(interactionRay, out hit, interactionRange))
+        if (Physics.SphereCast(transform.position + raycastHigth, interactionRadius, transform.forward, out hit, interactionRange))                 //if raycast/RAYSPHERE hits something
+        {
+            CurrentInteractable = hit.collider.GetComponent<Interactable>();            //returns the hit interactable gameobject
+            if (CurrentInteractable != null)                                            //if there is one interactable
             {
-                CurrentInteractable = hit.collider.GetComponent<Interactable>();
-                if (CurrentInteractable != null)
-                {
-                    CurrentItem = GameObject.FindObjectOfType<MySamplePlant>().gameObject;
-                    CurrentInteractable.Interact();
-                }
+                CurrentItem = Inventory.instance.GetCurrentItem();                      //returns the first item from the inventory
+                CurrentInteractable.Interact();                                         //calls interact of the hit object
             }
-    }
-
-    private void StartChannel()  // Checks if there is already a cloud active, if not the Max Duration of the used cloud is pulled here for later use and the channel State is set as true to start the charge up/channel
-    {
-
-        if (cloud.activeSelf == false)
-        {
-            WolkenActions myCloud = cloud.GetComponent<WolkenActions>();
-            maxCloudDuration = myCloud.GetMaxCloudChannelDuration();
-
-            channelState = true;
         }
     }
 
-    private void EndChannel()  // Activates when the button is released and stops the counter, if it is above the threshold a cloud is spawned with a duration according to the channel time
+    private void OnDrawGizmosSelected()
     {
-        if (cloudDuration < 1f)
+        Gizmos.color = Color.red;
+        Debug.DrawLine(transform.position + raycastHigth, (transform.position + raycastHigth) + transform.forward * interactionRange);
+        Gizmos.DrawWireSphere((transform.position + raycastHigth) + transform.forward * interactionRange, interactionRadius);
+    }
+
+    private void StartChannel()                                                 //when the player starts to channel the cloud
+    { 
+        if (CloudInstance == null)                                              //if there is no cloud active
         {
-            channelState = false;
-            cloudDuration = 0f;
-        }
-        else if (cloudDuration >= 1f)
-        {
-            channelState = false;
-            WaterSpell(cloudDuration * 2);
-            cloudDuration = 0f;
+            Player.GetComponent<PlayerMovement>().enabled = false;
+            WolkenActions myCloud = Cloud.GetComponent<WolkenActions>();        //player gets a cloud to use
+            maxCloudDuration = myCloud.GetMaxCloudChannelDuration();            //max cloud channel duration is set
+
+            channelState = true;                                                //sets the channel state for the player on true
         }
     }
 
     private void ChannelCounter()  // the counter that measures the channel duration, if the maximum channel duration is reached it automatically casts the spell fully charged and stops the counter
     {
-        if (channelState)
+        if (channelState)                           //while the player starts channeling
         {
-            cloudDuration += Time.deltaTime;
+            cloudDuration += Time.deltaTime;        //cloud duration gets increased
         }
 
-        if (channelState && cloudDuration >= maxCloudDuration)
+        if (channelState && cloudDuration >= maxCloudDuration)      //while the player is channeling and the channel duration is less then the maximum cloud duration
         {
-            channelState = false;
-            cloudDuration = maxCloudDuration;
-            EndChannel();
+            channelState = false;                                   //ends the channeling
+            cloudDuration = maxCloudDuration;                       //sets the cloud duration to the max cloud duration (to not get any weird numbers)
+            EndChannel();                                           //calls EndChannel()
         }
     }
+
+    private void EndChannel()  //gets called after the player ends his channel
+    {
+        if (cloudDuration < 1f)         //if the player pressed the button for less than one second
+        {
+            channelState = false;       //channel gets ended WITHOUT spawning the cloud
+            cloudDuration = 0f;         //duration of the cloud gets reset
+
+        }
+        else if (cloudDuration >= 1f)                   //if the player pressed the button for more than one second
+        {
+            Player.GetComponent<PlayerMovement>().enabled = true;
+            Camera = GameObject.Find("CameraHolder");
+            Camera.GetComponent<ObjectFollower>().enabled = false;
+            channelState = false;                       //channel gets ended
+
+            CloudInstance = Instantiate(Cloud);         //creates an instance of the cloud
+
+            WaterSpell(cloudDuration * 2);              //waterspell gets activated with 2 times the channeltime
+            cloudDuration = 0f;                         //duration of the cloud gets reset
+        }
+    }
+
 
     private void WaterSpell(float _duration)   // Spawns a cloud on the player position and sets its duration
     {
-        cloud.transform.position = Player.transform.position;
-        //cloudCam.transform.position = mainCam.transform.position;
+        CloudInstance.transform.position = Player.transform.position;           //sets the cloud position to the position of the player (GETS MAYBE CHANGED WITH OTHER CAMERA MOVEMENT)
 
-        WolkenActions myCloud = cloud.GetComponent<WolkenActions>();
-        myCloud.SetCloudDuration(_duration);
+        WolkenActions myCloud = CloudInstance.GetComponent<WolkenActions>();    //gets an instance of WolkenActions
+        myCloud.SetCloudDuration(_duration);                                    //sets the duration of the cloud to the channel duration in EndChannel()
 
-        cloud.SetActive(true);
-
-        // cloudCam.SetActive(true);
-        // player.GetComponent<ControllerMovement>().enabled = false;
-        // mainCam.SetActive(false);
-    }
-/*
-    private void OnTriggerEnter(Collider other)         //checks if the Player touches a Field
-    {
-
-        if (other.tag == "Field")
-        {
-            IsOnField = true;                           //sets the bool for it to true
-            CurrentField = other.gameObject;            //references the current field; used for SeedField to know which field is seeded
-        }
-
-        else if (other.name == "Bed")
-        {
-            TouchesBed = true;
-        }
+        CloudInstance.SetActive(true);                                          //activates the cloud
     }
 
-    private void OnTriggerExit(Collider other)          //checks if the Player stops touching a field
+    public Item GetCurrentItem()            //returns the first item from the inventory (used in FieldManager)
     {
-        if (other.tag == "Field")
-        {
-            IsOnField = false;                          //sets the bool for it to false
-            CurrentField = null;                        //dereferences the current field 
-        }
-
-        else if (other.name == "Bed")
-        {
-            TouchesBed = false;
-        }
+        return CurrentItem;
     }
 
-    void SeedField()                                    //Seeds the field and gives over the plants information
-    {
-        /*
-        CurrentField.GetComponent<FieldManager>().SetIsSeeded(true);
-        CurrentField.GetComponent<FieldManager>().SetGrowthrates(CurrentItem);
-        CurrentField.GetComponent<FieldManager>().SetMeshes(CurrentItem);
-        CurrentField.GetComponent<FieldManager>().SetItem(CurrentItem);
-    }
-
-    void HarvestField()                                 //Harvests the field the player is standing on
-    {
-        CurrentField.GetComponent<FieldManager>().ResetField();
-        Inventory.instance.Add(CurrentField.GetComponent<FieldManager>().GetItem());
-    }
-
-    public void FieldAction()
-    {
-        if (IsOnField)
-        {
-            if (CurrentField.GetComponent<FieldManager>().GetFieldstate() == FieldManager.Fieldstate.empty)         //if the field the player is standing on is empty
-            {
-                //and if there is a Plant in the scene (Later: if the first item in inventory is a seed)
-                SeedField();                                                                                        //seeds the field
-            }
-
-            if (CurrentField.GetComponent<FieldManager>().GetFieldstate() == FieldManager.Fieldstate.finished)      //if the field the player is standing on has a grown up plant
-            {
-                HarvestField();                                                                                     //harvests the field
-            }
-
-            if (CurrentField.GetComponent<FieldManager>().GetFieldstate() == FieldManager.Fieldstate.withered)
-            {
-                HarvestField();
-            }
-        }
-    }
-*/
-   /* void EndDay()
-    {
-        if (TouchesBed)           //if the player touches the Bed and presses "E"
-        {
-            TouchesBed = false;
-            GameManager.GMInstance.IncrementCalenderDay();      //end the day 
-            GetComponent<PlayerMovement>().enabled = false;
-            animator.GetComponent<FadingManager>().SetFade(true);
-        }
-    }*/
-
-    public Interactable GetFocus()
-    {
-        return focus;
-    }
-
-    public void EnableMovement()
-    {
-        GetComponent<PlayerMovement>().enabled = true;
-    }
 
     private void OnEnable() // This function enables the controls when the object becomes enabled and active
     {
@@ -226,10 +151,5 @@ public class PlayerActions : MonoBehaviour
     private void OnDisable() // This function disables the controls when the object becomes disabled or inactive
     {
         controls.Gameplay.Disable();
-    }
-
-    public GameObject GetCurrentItem()
-    {
-        return CurrentItem;
     }
 }

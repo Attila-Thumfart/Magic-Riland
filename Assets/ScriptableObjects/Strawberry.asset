@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71e50bdf55f8b8f4abf95e0f69e63767, type: 3}
+  m_Name: Strawberry
+  m_EditorClassIdentifier: 
+  Name: Strawberry
+  Description: A BEATIFUL berry made of Straw.... -_-
+  IsSeed: 0
+  SellingPrice: 200
+  Cost: 50
+  InventoryIcon: {fileID: 21300000, guid: 2a21235d205a0da439987ae5933c7030, type: 3}
+  GrowthRateUntilSprout: 1
+  GrowtRateUntilMedium: 2
+  GrowthRateUntilFinished: 1
+  GrowthModelSeed: {fileID: 999019228972583639, guid: 90721b090083e0449ba866ba37833413,
+    type: 3}
+  GrowthModelSprout: {fileID: 6972832900841127878, guid: b9619e288e52d21499b7be1dd1b16a21,
+    type: 3}
+  GrowthModelMedium: {fileID: 7949438525675117524, guid: 01cfeba30d4fc1e4396a98069a347780,
+    type: 3}
+  GrowthModelFinished: {fileID: 2095344982100626464, guid: cacc92ed19e8d8d48bb2ac16d40af793,
+    type: 3}
+  GrowthModelWithered: {fileID: 926866951584954849, guid: 92186779d7b39e3498dd28eba9a1b85c,
+    type: 3}
+  HandModel: {fileID: 5282601792828595530, guid: 5699bc6a59b4f9f4990db8faea0b4359,
+    type: 3}
+  FinishedPlant: {fileID: 0}

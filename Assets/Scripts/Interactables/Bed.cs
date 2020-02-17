@@ -4,25 +4,17 @@ using UnityEngine;
 
 public class Bed : Interactable
 {
-    private GameObject animator;
-    private GameObject EndOfDayCardUI;
+    private GameObject animator;        //creates an animator 
 
     public override void Interact()
     {
-        animator = GameObject.FindGameObjectWithTag("Animator");
+        animator = GameObject.Find("FadeManager");  //Set the Animator to use fading effects 
 
-        GameManager.GMInstance.IncrementCalenderDay();      //end the day 
+        GameManager.GMInstance.IncrementCalenderDay();      //calls the GM to end the day
 
-        Player.GetComponent<PlayerMovement>().enabled = false;
-        Player.GetComponent<PlayerActions>().enabled = false;
+        Player.GetComponent<PlayerMovement>().enabled = false;      //disables PlayerMovement
+        Player.GetComponent<PlayerActions>().enabled = false;       //disables PlayerActions
 
-        animator.GetComponent<FadingManager>().SetFade(true);
+        animator.GetComponent<FadingManager>().SetFade(true);       //fades out
     }
-
-   /* public override void Start()
-    {
-        base.Start();
-        EndOfDayCardUI = GameObject.Find("EndOfDayCard");
-        EndOfDayCardUI.SetActive(false);
-    }*/
 }

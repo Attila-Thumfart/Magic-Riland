@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 7739998133191680761}
   - component: {fileID: 1599615644806715599}
   - component: {fileID: 4976038468122010678}
+  - component: {fileID: 1542733278614958942}
+  - component: {fileID: 1274962319069173637}
   m_Layer: 0
   m_Name: "034_Farmhaus_ohne_T\xFCr"
   m_TagString: Untagged
@@ -104,6 +106,32 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!65 &1542733278614958942
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6715613148218740970}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 4.70722, y: 5.06325, z: 4.931171}
+  m_Center: {x: 0.13620853, y: -0.24236298, z: 2.4555943}
+--- !u!65 &1274962319069173637
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6715613148218740970}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.6899123, y: 3.1692388, z: 4.931171}
+  m_Center: {x: 1.1331923, y: 3.7074687, z: 2.4555943}
 --- !u!1001 &3320080388312099647
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -16,52 +16,30 @@ public class GameManager : MonoBehaviour
     private int CalenderDay = 1;            //the days passing in a playthrough
 
     [SerializeField]
-    private GameObject EndOfDayCardUI;
+    private GameObject EndOfDayCardUI;      //Used to show the summary of the end of each day
 
     public void Awake()
     {
-        DefineGameObjects();
+        DefineGameObjects();                //every Game Object the GM needs gets defined there
 
-        foreach (FieldManager go in FieldManager.FindObjectsOfType(typeof(FieldManager)))       //finds all objects of type FieldManager
-        {
-            if (go.tag == "Field")                                                              //if the Tag of this object is "Field"
-                Fields.Add(go);                                                                 //add it to the List of Fields
-        }
-
-        //EndOfDayCardUI = GameObject.Find("EndOfDayCard");
-        EndOfDayCardUI.SetActive(false);
-        Debug.Log("EndOfDayCard disabled");
-    }
-
-    private void Start()
-    {
-        //DefineGameObjects();
-
-        //animator.GetComponent<FadingManager>().SetFade(false);
-        //  EndOfDayCardUI = GameObject.Find("EndOfDayCard");
-        // EndOfDayCardUI.SetActive(false);
-    }
-
-    private void Update()
-    {
-        // IncrementCalenderDay();
-        // EndNight();
+        EndOfDayCardUI.SetActive(false);    //the scene gets faded in
     }
 
 
     public void IncrementCalenderDay()                       //Incrementer for other scripts to call an update of CalenderDay
     {
         CalenderDay++;
-        StartCoroutine(Coroutine(1.2f, () =>
+        StartCoroutine(Coroutine(1.2f, () =>                //Lambda fuunction: waits 1.2 seconds before continuing with the following code
         {
-            EndOfDayCardUI.SetActive(true);
+            EndOfDayCardUI.SetActive(true);                 //shows the summary at the end of the day
+            EndOfDayCardUI.GetComponent<EndOfDayRandomNumbers>().Start();       //GETS CHANGED LATER
         }));
     }
 
-    private IEnumerator Coroutine(float _TimeToWait, Action _callback)
+    private IEnumerator Coroutine(float _TimeToWait, Action _callback)      //used to wait a set number of seconds for the code to continue
     {
-        yield return new WaitForSecondsRealtime(_TimeToWait);
-        _callback?.Invoke();
+        yield return new WaitForSecondsRealtime(_TimeToWait);               //waiting for the given time in seconds
+        _callback?.Invoke();                                                //actions that get called after the set time
     }
 
     public int GetCalenderDay()                             //getter for other scripts to read CalenderDay
@@ -69,27 +47,39 @@ public class GameManager : MonoBehaviour
         return CalenderDay;
     }
 
-    public void ControlButton()
+    public void EndNight()                                      //gets called after closing the summary of the day to end the night
     {
-
-    }
-
-    public void EndNight()
-    {
-
-        EndOfDayCardUI.SetActive(false);
-        Player = GameObject.Find("Player");         //Finds the Player
-
-        StartCoroutine(Coroutine(0.2f, () =>
-       {
-           Player.GetComponent<PlayerActions>().enabled = true;
-           Player.GetComponent<PlayerActions>().EnableMovement();      //Enables the Movement of the player when ending the night
-       }));
-        animator.GetComponent<FadingManager>().SetFade(false);
-
-        for (int i = 0; i < Fields.Count; i++)                      //every field in the scene
+        Fields.Clear();                                                                         //clears all fields from the list to not get double entries
+        foreach (FieldManager go in FieldManager.FindObjectsOfType(typeof(FieldManager)))       //finds all objects of type FieldManager
         {
-            Fields[i].UpdateFieldDays();                            //update their status (happens in FieldManager)
+            if (go.tag == "Field")                                                              //if the Tag of this object is "Field"
+            {
+                Fields.Add(go);                                                                 //add it to the List of Fields
+            }
+        }
+
+
+        EndOfDayCardUI.SetActive(false);                                //Removes the summary of the previous day
+        Player = GameObject.Find("Player");                             //Finds the Player
+
+        StartCoroutine(Coroutine(0.2f, () =>                            //Lambda function: waits for 0.2 seconds before executing the following code (emergency solution to quick-fix a bug)
+       {
+           Player.GetComponent<PlayerMovement>().enabled = true;       //Enables the Movement of the player when ending the night
+           Player.GetComponent<PlayerActions>().enabled = true;
+       }));
+
+        animator.GetComponent<FadingManager>().SetFade(false);          //Fades in after the night
+
+        for (int i = 0; i < Fields.Count; i++)                          //every field in the scene
+        {
+            Fields[i].UpdateFieldDays();                                //update their status (happens in FieldManager)
+            int WeedChance = UnityEngine.Random.Range(1, 10);
+            if (WeedChance == 1)
+            {
+                Fields[i].SetWeedstate(true);
+
+                Debug.Log("Field " + Fields[i] + " is weeded");
+            }
         }
 
     }
@@ -97,22 +87,15 @@ public class GameManager : MonoBehaviour
 
     private void DefineGameObjects()
     {
-        if (GMInstance == null)                     //this makes it so only one GM is loaded
+        if (GMInstance != null)
         {
-            GMInstance = this;                      //Defines the GM for other scripts to use
+            Destroy(gameObject);
+            return;
         }
-        else if (GMInstance != this)
-        {
-           Destroy(this);
-           return;
-        }
+        GMInstance = this;
 
-        DontDestroyOnLoad(this);
+        DontDestroyOnLoad(this);                    //the GM does not get destroyed when a new scene is loaded in
 
-        animator = GameObject.Find("FadeManager");
-
-        //DontDestroyOnLoad(Player);                  //Player wont get destroyed if a new scene is loading
-
+        animator = GameObject.Find("FadeManager");  //Set the Animator to use fading effects
     }
-
 }

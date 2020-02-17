@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1250262531163526551}
   - component: {fileID: 638643263048012663}
   m_Layer: 0
-  m_Name: Feld-samen
+  m_Name: Tulpe-Samen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25,15 +25,15 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4060448045315829714}
-  m_LocalRotation: {x: 0.7996836, y: -0.000000013122632, z: -0.60042167, w: 0.00000001747764}
-  m_LocalPosition: {x: -0.061560176, y: -1.7853193e-10, z: -0.10408432}
-  m_LocalScale: {x: 0.484449, y: 0.479289, z: 0.583112}
+  m_LocalRotation: {x: -1, y: 0, z: 0, w: 0}
+  m_LocalPosition: {x: 0.108, y: 0.15, z: -0.039}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6986478718900295198}
   - {fileID: 368864679212231994}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -180, y: 73.799995, z: -0.000015258789}
+  m_LocalEulerAnglesHint: {x: -180, y: 0, z: 0}
 --- !u!33 &1250262531163526551
 MeshFilter:
   m_ObjectHideFlags: 0
