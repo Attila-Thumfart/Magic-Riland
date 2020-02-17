@@ -6,6 +6,7 @@ public class FieldManager : Interactable
 {
     public enum Fieldstate             //different fieldstates
     {
+        notThere,
         empty,
         seeded,
         sprout,
@@ -218,7 +219,7 @@ public class FieldManager : Interactable
         GrowthModelFinishedInstance = Instantiate(GrowthModelFinished, transform);
         GrowthModelWitheredInstance = Instantiate(GrowthModelWithered, transform);
 
-        GrowthModelSeedInstance.SetActive(false);
+        GrowthModelSeedInstance.SetActive(true);
         GrowthModelSproutInstance.SetActive(false);
         GrowthModelMediumInstance.SetActive(false);
         GrowthModelFinishedInstance.SetActive(false);
