@@ -22,7 +22,7 @@ public class InventoryUI : MonoBehaviour
 
     private Item DisplayItem;
 
-        [SerializeField]
+    [SerializeField]
     private Image DisplayIcon;
 
     [SerializeField]
@@ -106,18 +106,21 @@ public class InventoryUI : MonoBehaviour
 
     public void ItemDescriptionDisplay()
     {
-        DisplayItem = Inventory.instance.GetSelectedItem();
+        DisplayItem = Inventory.instance.GetHoveredItem();
+
         if (DisplayItem != null)
         {
             DisplayIcon.sprite = DisplayItem.GetInventoryIcon();
             DisplayIcon.enabled = true;
             DescriptionDisplay.text = DisplayItem.GetDescription();
         }
-        else
-        {
-            DisplayIcon.sprite = null; ;
-            DisplayIcon.enabled = false;
-        }
+    }
+
+    public void ClearDescriptionDisplay()
+    {
+        DisplayIcon.sprite = null; ;
+        DisplayIcon.enabled = false;
+        DescriptionDisplay.text = null;
     }
 
     private void OnEnable() // This function enables the controls when the object becomes enabled and active
