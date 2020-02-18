@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71e50bdf55f8b8f4abf95e0f69e63767, type: 3}
   m_Name: Tulpe
   m_EditorClassIdentifier: 
-  Name: New Item
-  ProductName: Finished Item
-  Description: This is an Item
-  SellingPrice: 0
-  Cost: 0
+  Name: Tulpe
+  Description: Flowers are so beautiful, aren't they?
+  IsSeed: 0
+  SellingPrice: 500
+  Cost: 750
   InventoryIcon: {fileID: 21300000, guid: f8d9705442b761f4fb144b0fbe6d3c88, type: 3}
   GrowthRateUntilSprout: 0
   GrowtRateUntilMedium: 0
@@ -26,4 +26,6 @@ MonoBehaviour:
   GrowthModelMedium: {fileID: 0}
   GrowthModelFinished: {fileID: 0}
   GrowthModelWithered: {fileID: 0}
-  HandModel: {fileID: 0}
+  HandModel: {fileID: 331201015684036561, guid: e9e0d1ffa4ee95742909b24fcf215cdd,
+    type: 3}
+  FinishedPlant: {fileID: 0}

@@ -2,17 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WolkenActions : MonoBehaviour
+public class EarthActions : MonoBehaviour
 {
-    // public GameObject cloud;
-    // public GameObject player;
-    // public GameObject mainCam;
-    // public GameObject cloudCam;
-
-    private float cloudDuration;
+    private float earthDuration;
 
     [SerializeField]
-    private float maxCloudChannelDuration;
+    private float maxEarthChannelDuration;
 
     // private float countdown;
 
@@ -29,9 +24,9 @@ public class WolkenActions : MonoBehaviour
 
     private void Update()
     {
-        cloudDuration -= Time.deltaTime;  // Counts down the duration of the cloud
+        earthDuration -= Time.deltaTime;  // Counts down the duration of the cloud
 
-        if (cloudDuration <= 0f)  //If the countdown reaches 0 the spell is cancled
+        if (earthDuration <= 0f)  //If the countdown reaches 0 the spell is cancled
         {
             CancleSpell();
         }
@@ -41,14 +36,13 @@ public class WolkenActions : MonoBehaviour
     {
         if (other.tag == "Field")
         {
-            Debug.Log("Watering Field");
+            Debug.Log("Earthing Field");
             IsOnField = true;                           //sets the bool for it to true
             CurrentField = other.gameObject;            //references the current field; used for SeedField to know which field is seeded
 
             if (IsOnField)  //If the cloud is above a field it is watered
             {
-                
-                CurrentField.GetComponent<FieldManager>().SetIsWatered(true);
+                CurrentField.GetComponent<FieldManager>().SetIsPlowed(true);
             }
         }
     }
@@ -64,7 +58,7 @@ public class WolkenActions : MonoBehaviour
 
     private void CancleSpell()
     {
-        Destroy(this.gameObject);
+        Destroy(gameObject);
         Camera = GameObject.Find("CameraHolder");
         Camera.GetComponent<ObjectFollower>().enabled = true;
         //cloudCam.SetActive(false);
@@ -73,13 +67,13 @@ public class WolkenActions : MonoBehaviour
         //countdown = cloudDuration;
     }
 
-    public void SetCloudDuration(float _duration)  //Simple Setter for the cloud duration
+    public void SetEarthDuration(float _duration)  //Simple Setter for the cloud duration
     {
-        cloudDuration = _duration;
+        earthDuration = _duration;
     }
 
-    public float GetMaxCloudChannelDuration()  //Simple Getter for the Maximum Cloud Duration
+    public float GetMaxEarthChannelDuration()  //Simple Getter for the Maximum Cloud Duration
     {
-        return maxCloudChannelDuration;
+        return maxEarthChannelDuration;
     }
 }

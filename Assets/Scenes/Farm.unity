@@ -53811,6 +53811,33 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7714960469062638516, guid: 168d78fcd51b05e4e887619311b3d3ea,
+        type: 3}
+      propertyPath: maxCloudDuration
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7714960469062638516, guid: 168d78fcd51b05e4e887619311b3d3ea,
+        type: 3}
+      propertyPath: maxWindDuration
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7714960469062638516, guid: 168d78fcd51b05e4e887619311b3d3ea,
+        type: 3}
+      propertyPath: Earth
+      value: 
+      objectReference: {fileID: 1230103767551851472, guid: 750e0295934c0be4d9890790c1c08594,
+        type: 3}
+    - target: {fileID: 7714960469062638516, guid: 168d78fcd51b05e4e887619311b3d3ea,
+        type: 3}
+      propertyPath: Cloud
+      value: 
+      objectReference: {fileID: 1388125985609021433, guid: f2ed377b8ec653c4eafe371e5f4575ec,
+        type: 3}
+    - target: {fileID: 7714960469062638516, guid: 168d78fcd51b05e4e887619311b3d3ea,
+        type: 3}
+      propertyPath: maxEarthDuration
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7714960469062638517, guid: 168d78fcd51b05e4e887619311b3d3ea,
         type: 3}
       propertyPath: m_LocalPosition.x
