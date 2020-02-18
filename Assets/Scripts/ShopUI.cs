@@ -104,7 +104,6 @@ public class ShopUI : Interactable
 
     private void DeactivateUI()
     {
-        Debug.Log("Cancel");
         if (shopUI.activeSelf)
         {
             shopUI.SetActive(false);
@@ -116,8 +115,7 @@ public class ShopUI : Interactable
             //}
         }
     }
-
-    public void ItemDescriptionDisplay()
+    public void InventoryItemDescriptionDisplay()
     {
         DisplayItem = Inventory.instance.GetHoveredItem();
 
@@ -126,6 +124,30 @@ public class ShopUI : Interactable
             DisplayIcon.sprite = DisplayItem.GetInventoryIcon();
             DisplayIcon.enabled = true;
             DescriptionDisplay.text = DisplayItem.GetDescription();
+        }
+        else if (DisplayItem == null)
+        {
+            DisplayIcon.sprite = null;
+            DisplayIcon.enabled = false;
+            DescriptionDisplay.text = null;
+        }
+    }
+
+    public void ShopItemDescriptionDisplay()
+    {
+        DisplayItem = Shop.GetHoveredItem();
+
+        if (DisplayItem != null)
+        {
+            DisplayIcon.sprite = DisplayItem.GetInventoryIcon();
+            DisplayIcon.enabled = true;
+            DescriptionDisplay.text = DisplayItem.GetDescription();
+        }
+        else if (DisplayItem == null)
+        {
+            DisplayIcon.sprite = null;
+            DisplayIcon.enabled = false;
+            DescriptionDisplay.text = null;
         }
     }
 
