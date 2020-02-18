@@ -21,6 +21,9 @@ public class ShopUI : Interactable
 
     private Item DisplayItem;
 
+    private GameObject Menus;
+    private GameObject InventoryUI;
+
     [SerializeField]
     private Image DisplayIcon;
 
@@ -52,7 +55,7 @@ public class ShopUI : Interactable
 
         UpdateShopUI();
 
-        controls. Gameplay.Erde.started += ctx => DeactivateUI();  // Erde is used because I cant for the love of god figure out how the Unity Input Action System works
+        controls.Gameplay.Erde.started += ctx => DeactivateUI();  // Erde is used because I cant for the love of god figure out how the Unity Input Action System works
     }
 
     public override void Interact()
@@ -93,9 +96,14 @@ public class ShopUI : Interactable
 
     private void ActivateUI()
     {
+        Menus = GameObject.Find("MenuManager");
+        Menus.GetComponentInChildren<PauseMenu>().enabled = false;
+        InventoryUI = GameObject.Find("Inventory");
+        InventoryUI.GetComponent<InventoryUI>().enabled = false;
+
         shopUI.SetActive(true);
 
-       // if (shopUI.activeSelf)
+        // if (shopUI.activeSelf)
         {
             Player.GetComponent<PlayerMovement>().enabled = false;
             Player.GetComponent<PlayerActions>().enabled = false;
@@ -108,10 +116,13 @@ public class ShopUI : Interactable
         {
             shopUI.SetActive(false);
 
-           // if (!shopUI.activeSelf)
+            Menus.GetComponentInChildren<PauseMenu>().enabled = true;
+            InventoryUI.GetComponent<InventoryUI>().enabled = true;
+
+            // if (!shopUI.activeSelf)
             //{
-                Player.GetComponent<PlayerMovement>().enabled = true;
-                Player.GetComponent<PlayerActions>().enabled = true;
+            Player.GetComponent<PlayerMovement>().enabled = true;
+            Player.GetComponent<PlayerActions>().enabled = true;
             //}
         }
     }
