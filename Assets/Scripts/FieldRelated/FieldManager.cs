@@ -25,7 +25,6 @@ public class FieldManager : Interactable
     private GameObject FieldDry, FieldWatered;
     private bool IsSeeded = false;
     private bool IsWatered = false;
-    private bool IsWinded = false;
     [SerializeField]
     private bool IsPlowed = false;
 
