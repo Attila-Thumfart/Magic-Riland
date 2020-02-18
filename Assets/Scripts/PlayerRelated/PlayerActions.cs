@@ -41,8 +41,8 @@ public class PlayerActions : MonoBehaviour
 
 
     private float interactionRange = 1.2f;                          //range of the player to interact with
-    private float interactionRadius = 0.5f;
-    private Vector3 raycastHigth = new Vector3(0, 0.3f, 0);         //GETS CHANGED AFTER REWORKING RAYCAST TO RAYSPHERE
+    private float interactionRadius = 0.85f;
+    private Vector3 raycastHigth = new Vector3(0, 0.4f, 0);         //GETS CHANGED AFTER REWORKING RAYCAST TO RAYSPHERE
 
 
     private Inventory PlayerInventory;      //inventory of the player
