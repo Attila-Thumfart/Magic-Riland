@@ -47,12 +47,12 @@ public class ShopUI : Interactable
 
         Inventory.onItemChangedCallback += UpdateUI;
 
-        UpdateShopUI();
-
         InventorySlots = ItemsParent.GetComponentsInChildren<InventorySlot>();
         ShopSlots = ShopParent.GetComponentsInChildren<ShopSlot>();
 
-        controls.Menus.Cancle.started += ctx => DeactivateUI();
+        UpdateShopUI();
+
+        controls. Gameplay.Erde.started += ctx => DeactivateUI();  // Erde is used because I cant for the love of god figure out how the Unity Input Action System works
     }
 
     public override void Interact()
@@ -95,7 +95,7 @@ public class ShopUI : Interactable
     {
         shopUI.SetActive(true);
 
-        if (shopUI.activeSelf)
+       // if (shopUI.activeSelf)
         {
             Player.GetComponent<PlayerMovement>().enabled = false;
             Player.GetComponent<PlayerActions>().enabled = false;
@@ -104,15 +104,16 @@ public class ShopUI : Interactable
 
     private void DeactivateUI()
     {
+        Debug.Log("Cancel");
         if (shopUI.activeSelf)
         {
             shopUI.SetActive(false);
 
-            if (!shopUI.activeSelf)
-            {
+           // if (!shopUI.activeSelf)
+            //{
                 Player.GetComponent<PlayerMovement>().enabled = true;
                 Player.GetComponent<PlayerActions>().enabled = true;
-            }
+            //}
         }
     }
 
