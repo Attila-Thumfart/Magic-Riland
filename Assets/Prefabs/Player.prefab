@@ -714,9 +714,9 @@ MonoBehaviour:
   DurationSliderVisual: {fileID: 3467314410315259077}
   ChannelSlider: {fileID: 8616134176319058114}
   DurationSlider: {fileID: 4011027333014926111}
-  Cloud: {fileID: 1634268324207440844, guid: f5584e685a8f8f247820b71b5809edf3, type: 3}
+  Cloud: {fileID: 1634268324207440844, guid: 076349036d0dd47499c1752cc4749a55, type: 3}
   maxCloudDuration: 5
-  Wind: {fileID: 6796828781244951958, guid: 070864463940578428f96d349d490860, type: 3}
+  Wind: {fileID: 6796828781244951958, guid: 6eecd3add60ae0e459d61d1ff9c4be8c, type: 3}
   maxWindDuration: 5
   Earth: {fileID: 5550142552838617564, guid: a6548abd755e4ed4cb580a405c189646, type: 3}
   maxEarthDuration: 5
