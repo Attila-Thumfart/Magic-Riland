@@ -52,9 +52,9 @@ public class ShopSlot : MonoBehaviour
         Inventory.instance.PickUpItemInInventory(ButtonIndex);
     }
 
-    public void GiveButtonIndexToUI()
+    public void GiveButtonIndexToShopUI()
     {
-        Inventory.instance.SetHoveredItem(ButtonIndex);
+        Shop.SetHoveredItem(ButtonIndex);
     }
 
     public int GetButtonIndex()

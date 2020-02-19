@@ -12,6 +12,8 @@ public class Shop : MonoBehaviour
 
     public GameObject Player;
 
+    private Item HoveredItem;
+
     public Item[] shopItems;
 
     private void Start()
@@ -31,5 +33,15 @@ public class Shop : MonoBehaviour
         Player = GameObject.FindGameObjectWithTag("Player");
         Inventory.instance.AddItemToInventory(shopItems[TargetIndex]);
         // player.money -= shopItems[TargetIndex].GetCost();
+    }
+
+    public void SetHoveredItem(int hoveredItemID)
+    {
+        HoveredItem = shopItems[hoveredItemID];
+    }
+
+    public Item GetHoveredItem()
+    {
+        return HoveredItem;
     }
 }

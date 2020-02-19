@@ -16173,6 +16173,30 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7011361014231373138, guid: 2b78048e0b587a34283093574700a4c7,
+        type: 3}
+      propertyPath: shopItems.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 859e9cbba4d180e459c7c145946caf26,
+        type: 2}
+    - target: {fileID: 7011361014231373138, guid: 2b78048e0b587a34283093574700a4c7,
+        type: 3}
+      propertyPath: shopItems.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 631a2dc8ac9f27c43bd7bac711d2f9fd,
+        type: 2}
+    - target: {fileID: 7848942045957523893, guid: 2b78048e0b587a34283093574700a4c7,
+        type: 3}
+      propertyPath: shopItems.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 859e9cbba4d180e459c7c145946caf26,
+        type: 2}
+    - target: {fileID: 7848942045957523893, guid: 2b78048e0b587a34283093574700a4c7,
+        type: 3}
+      propertyPath: shopItems.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: 631a2dc8ac9f27c43bd7bac711d2f9fd,
+        type: 2}
     m_RemovedComponents:
     - {fileID: 9107400885963662656, guid: 2b78048e0b587a34283093574700a4c7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 2b78048e0b587a34283093574700a4c7, type: 3}
