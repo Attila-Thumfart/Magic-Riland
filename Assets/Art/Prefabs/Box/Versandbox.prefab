@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3196862746034391459}
   - component: {fileID: 2609926151301016206}
+  - component: {fileID: 561886576907769298}
   m_Layer: 0
   m_Name: Versandbox
   m_TagString: Untagged
@@ -48,6 +49,25 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0253437, y: 0.9567833, z: 1.0602582}
   m_Center: {x: -0.0019391775, y: 0.47759247, z: 0.010054976}
+--- !u!95 &561886576907769298
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1875415415154916272}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a4be9c3116f555944bb89b39d27bce3d, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3875146448507601181
 GameObject:
   m_ObjectHideFlags: 0
