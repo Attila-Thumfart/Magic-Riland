@@ -2,15 +2,12 @@
 using UnityEngine.UI;
 using TMPro;
 
-public class InventorySlot : MonoBehaviour
+public class DeliveryBoxSlot : MonoBehaviour
 {
     [SerializeField]
     private Image Icon;
 
     Item Item;
-
-    [SerializeField]
-    private Shop Shop;
 
     [SerializeField]
     private DeliveryBox DeliveryBox;
@@ -59,28 +56,23 @@ public class InventorySlot : MonoBehaviour
         StackSize.text = null;
     }
 
+    /*public void TakeIndex()
+    {
+        DeliveryBox.TakeItem(ButtonIndex);
+    }*/
+
     public void GiveIndexToInventory()
     {
         Inventory.instance.PickUpItemInInventory(ButtonIndex);
     }
 
-    public void GiveButtonIndexToUI()
+    /*public void GiveButtonIndexToBoxUI()
     {
-        Inventory.instance.SetHoveredItem(ButtonIndex);
-    }
+        DeliveryBox.SetHoveredItem(ButtonIndex);
+    }*/
 
     public int GetButtonIndex()
     {
         return ButtonIndex;
-    }
-
-    public void SellIndex()
-    {
-        Shop.SellItem(ButtonIndex);
-    }
-
-    public void PutItemInBox()
-    {
-        DeliveryBox.DeliverItem(ButtonIndex);
     }
 }

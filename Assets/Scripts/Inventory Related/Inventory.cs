@@ -95,20 +95,23 @@ public class Inventory : MonoBehaviour
 
     public void RemoveItemFromInventory(int _inventorySlot)
     {
-        if (items[_inventorySlot].GetNumberOfItems() == 1)
+        if (items[_inventorySlot] != null)
         {
-            items[_inventorySlot] = null;
-            Debug.Log("This was the last of its kind...");
-        }
+            if (items[_inventorySlot].GetNumberOfItems() == 1)
+            {
+                items[_inventorySlot] = null;
+                Debug.Log("This was the last of its kind...");
+            }
 
-        else
-        {
-            items[_inventorySlot].ChangeNumberOfItemsBy(-1);
-            Debug.Log("The item " + items[_inventorySlot].GetName() + "is now a bit lonlier " + items[_inventorySlot].GetNumberOfItems());
-        }
-        //inventoryUI.RemoveItemFromSlot(_inventorySlot);
+            else
+            {
+                items[_inventorySlot].ChangeNumberOfItemsBy(-1);
+                Debug.Log("The item " + items[_inventorySlot].GetName() + "is now a bit lonlier " + items[_inventorySlot].GetNumberOfItems());
+            }
+            //inventoryUI.RemoveItemFromSlot(_inventorySlot);
 
-        // inventorySlot.ClearSlot();
+            // inventorySlot.ClearSlot();
+        }
 
         if (onItemChangedCallback != null)
         {
