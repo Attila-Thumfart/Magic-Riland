@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Farm.unity
     guid: 3a6de1479617e124fb9fac3de0c6ca72
+  - enabled: 1
+    path: Assets/Scenes/InneresFarmhaus.unity
+    guid: 2fb25482db170a94e92fd2b9c07451bb
   m_configObjects: {}
