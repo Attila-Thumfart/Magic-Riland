@@ -219,7 +219,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08300ff79cddedc4fa3b6c03ea270f3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cloud: {fileID: 0}
   maxCloudChannelDuration: 5
 --- !u!114 &5601253488243400561
 MonoBehaviour:
