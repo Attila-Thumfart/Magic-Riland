@@ -121,7 +121,7 @@ public class PlayerActions : MonoBehaviour
     #region WATERSPELL
     private void StartWaterChannel()                                                 //when the player starts to channel the cloud
     { 
-        if (CloudInstance == null)                                              //if there is no cloud active
+        if (CloudInstance == null && WindInstance == null && EarthInstance == null)                                              //if there is no cloud active
         {
             ChannelSlider.maxValue = maxCloudDuration;
             DurationSlider.maxValue = maxCloudDuration * 3;
@@ -193,7 +193,7 @@ public class PlayerActions : MonoBehaviour
     
     private void StartWindChannel()                                                 //when the player starts to channel the cloud
     {
-        if (WindInstance == null)                                              //if there is no cloud active
+        if (CloudInstance == null && WindInstance == null && EarthInstance == null)                                              //if there is no cloud active
         {
             ChannelSlider.maxValue = maxWindDuration;
             DurationSlider.maxValue = maxWindDuration * 3;
@@ -266,7 +266,7 @@ public class PlayerActions : MonoBehaviour
     #region EARTHSPELL
     private void StartEarthChannel()                                                 //when the player starts to channel the cloud
     {
-        if (EarthInstance == null)                                              //if there is no cloud active
+        if (CloudInstance == null && WindInstance == null && EarthInstance == null)                                              //if there is no cloud active
         {
             ChannelSlider.maxValue = maxWindDuration;
             DurationSlider.maxValue = maxWindDuration * 3;

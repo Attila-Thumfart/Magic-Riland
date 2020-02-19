@@ -714,11 +714,11 @@ MonoBehaviour:
   DurationSliderVisual: {fileID: 3467314410315259077}
   ChannelSlider: {fileID: 8616134176319058114}
   DurationSlider: {fileID: 4011027333014926111}
-  Cloud: {fileID: 1388125985609021433, guid: f2ed377b8ec653c4eafe371e5f4575ec, type: 3}
+  Cloud: {fileID: 1634268324207440844, guid: f5584e685a8f8f247820b71b5809edf3, type: 3}
   maxCloudDuration: 5
   Wind: {fileID: 6796828781244951958, guid: 070864463940578428f96d349d490860, type: 3}
   maxWindDuration: 5
-  Earth: {fileID: 5550142552838617564, guid: d1bfdefcdd906cd4a929c36b5c12ae5d, type: 3}
+  Earth: {fileID: 5550142552838617564, guid: a6548abd755e4ed4cb580a405c189646, type: 3}
   maxEarthDuration: 5
 --- !u!1 &7782870315372965453
 GameObject:
