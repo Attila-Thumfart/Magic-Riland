@@ -26,7 +26,7 @@ public class InventoryUI : MonoBehaviour
     private Image DisplayIcon;
 
     [SerializeField]
-    private TMP_Text DescriptionDisplay;
+    private TMP_Text DescriptionDisplay, PlayerMoneyDisplay;
 
     private void Awake()
     {
@@ -52,6 +52,8 @@ public class InventoryUI : MonoBehaviour
         Slots = ItemsParent.GetComponentsInChildren<InventorySlot>();
 
         controls.Gameplay.Inventar.started += ctx => ToggleUI();
+
+        PlayerMoneyDisplay.text = GameManager.GMInstance.GetPlayerMoney().ToString();
     }
 
     // Update is called once per frame
@@ -84,6 +86,8 @@ public class InventoryUI : MonoBehaviour
                 Slots[i].ClearSlot();
             }
         }
+
+        PlayerMoneyDisplay.text = GameManager.GMInstance.GetPlayerMoney().ToString();
     }
 
     private void ToggleUI()
