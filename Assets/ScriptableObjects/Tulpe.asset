@@ -15,8 +15,8 @@ MonoBehaviour:
   Name: Tulpe
   Description: Flowers are so beautiful, aren't they?
   IsSeed: 0
-  SellingPrice: 500
-  Cost: 750
+  SellingPrice: 7
+  Cost: 10
   InventoryIcon: {fileID: 21300000, guid: f8d9705442b761f4fb144b0fbe6d3c88, type: 3}
   GrowthRateUntilSprout: 0
   GrowtRateUntilMedium: 0

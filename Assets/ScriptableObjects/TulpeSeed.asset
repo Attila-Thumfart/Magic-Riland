@@ -15,8 +15,8 @@ MonoBehaviour:
   Name: TulpeSeed
   Description: Seed of a Tulpe
   IsSeed: 1
-  SellingPrice: 25
-  Cost: 300
+  SellingPrice: 4
+  Cost: 4
   InventoryIcon: {fileID: 21300000, guid: 81a87126ed3ba444b8339c7aab31c13c, type: 3}
   GrowthRateUntilSprout: 1
   GrowtRateUntilMedium: 2
