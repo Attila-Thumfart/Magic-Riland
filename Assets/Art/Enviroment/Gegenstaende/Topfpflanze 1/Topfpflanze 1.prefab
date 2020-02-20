@@ -1194,6 +1194,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5275483232275144451}
+  - component: {fileID: 517705092466620910}
   m_Layer: 0
   m_Name: Topfpflanze 1
   m_TagString: Untagged
@@ -1210,7 +1211,7 @@ Transform:
   m_GameObject: {fileID: 9182014819150916880}
   m_LocalRotation: {x: 0.003306144, y: 0.4326744, z: 0.00029124398, w: -0.9015441}
   m_LocalPosition: {x: 281.25055, y: 327.1435, z: -664.60236}
-  m_LocalScale: {x: 3.8808, y: 3.8808, z: 3.8808}
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
   m_Children:
   - {fileID: 211456692303824815}
   - {fileID: 1048618537771321990}
@@ -1230,3 +1231,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -0.356, y: -411.276, z: 0.134}
+--- !u!65 &517705092466620910
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9182014819150916880}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.2598405, y: 3.3879855, z: 2.1718032}
+  m_Center: {x: 0.043475237, y: 1.1939942, z: -0.072953306}
