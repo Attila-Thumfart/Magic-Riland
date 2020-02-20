@@ -267,7 +267,7 @@ public class FieldManager : Interactable
             FieldWateredInstance.SetActive(false);
             DayOfProgress++;                        //the plant growths towards its next step
         }
-        else if ((!IsWatered && IsSeeded) || isWeed)            //if the field is not waterd but seeded
+        else if ((!IsWatered && IsSeeded) || (IsWatered && isWeed))            //if the field is not waterd but seeded
         {
             DaysUntilWithered--;                    //the plant is one step closer to dry out
         }
