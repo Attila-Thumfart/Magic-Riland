@@ -15,8 +15,8 @@ MonoBehaviour:
   Name: Strawberry
   Description: A BEATIFUL berry made of Straw.... -_-
   IsSeed: 0
-  SellingPrice: 200
-  Cost: 50
+  SellingPrice: 22
+  Cost: 30
   InventoryIcon: {fileID: 21300000, guid: 2a21235d205a0da439987ae5933c7030, type: 3}
   GrowthRateUntilSprout: 1
   GrowtRateUntilMedium: 2
