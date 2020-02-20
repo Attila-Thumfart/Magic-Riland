@@ -9,6 +9,12 @@ public class InventorySlot : MonoBehaviour
 
     Item Item;
 
+    [SerializeField]
+    private Shop Shop;
+
+    [SerializeField]
+    private DeliveryBox DeliveryBox;
+
     private int ButtonIndex;
 
     [SerializeField]
@@ -58,8 +64,23 @@ public class InventorySlot : MonoBehaviour
         Inventory.instance.PickUpItemInInventory(ButtonIndex);
     }
 
+    public void GiveButtonIndexToUI()
+    {
+        Inventory.instance.SetHoveredItem(ButtonIndex);
+    }
+
     public int GetButtonIndex()
     {
         return ButtonIndex;
+    }
+
+    public void SellIndex()
+    {
+        Shop.SellItem(ButtonIndex);
+    }
+
+    public void PutItemInBox()
+    {
+        DeliveryBox.DeliverItem(ButtonIndex);
     }
 }

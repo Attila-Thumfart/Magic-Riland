@@ -22,11 +22,11 @@ public class InventoryUI : MonoBehaviour
 
     private Item DisplayItem;
 
-        [SerializeField]
+    [SerializeField]
     private Image DisplayIcon;
 
     [SerializeField]
-    private TMP_Text DescriptionDisplay;
+    private TMP_Text DescriptionDisplay, PlayerMoneyDisplay;
 
     private void Awake()
     {
@@ -52,6 +52,8 @@ public class InventoryUI : MonoBehaviour
         Slots = ItemsParent.GetComponentsInChildren<InventorySlot>();
 
         controls.Gameplay.Inventar.started += ctx => ToggleUI();
+
+        PlayerMoneyDisplay.text = GameManager.GMInstance.GetPlayerMoney().ToString();
     }
 
     // Update is called once per frame
@@ -84,6 +86,8 @@ public class InventoryUI : MonoBehaviour
                 Slots[i].ClearSlot();
             }
         }
+
+        PlayerMoneyDisplay.text = GameManager.GMInstance.GetPlayerMoney().ToString();
     }
 
     private void ToggleUI()
@@ -106,18 +110,21 @@ public class InventoryUI : MonoBehaviour
 
     public void ItemDescriptionDisplay()
     {
-        DisplayItem = Inventory.instance.GetSelectedItem();
+        DisplayItem = Inventory.instance.GetHoveredItem();
+
         if (DisplayItem != null)
         {
             DisplayIcon.sprite = DisplayItem.GetInventoryIcon();
             DisplayIcon.enabled = true;
             DescriptionDisplay.text = DisplayItem.GetDescription();
         }
-        else
-        {
-            DisplayIcon.sprite = null; ;
-            DisplayIcon.enabled = false;
-        }
+    }
+
+    public void ClearDescriptionDisplay()
+    {
+        DisplayIcon.sprite = null; ;
+        DisplayIcon.enabled = false;
+        DescriptionDisplay.text = null;
     }
 
     private void OnEnable() // This function enables the controls when the object becomes enabled and active

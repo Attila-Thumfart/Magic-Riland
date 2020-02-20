@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerActions : MonoBehaviour
 {
@@ -11,21 +12,43 @@ public class PlayerActions : MonoBehaviour
     [SerializeField]
     private GameObject Player;          //defines the object this script is attached to
 
+    private GameObject Camera;
+
+    [SerializeField]
+    private GameObject ChannleSliderVisual, DurationSliderVisual;
+
+    private bool WaterChannelState = false;  //used for the channel of the cloud
+    private bool WindChannelState = false;
+    private bool EarthChannelState = false;
+
+    [SerializeField]
+    private Slider ChannelSlider, DurationSlider;
+
     [SerializeField]
     private GameObject Cloud;           //cloud for the player to summon
     private GameObject CloudInstance;   //instance of the cloud (to not work on the prefab)
-
-    private GameObject Camera;
-
-    private bool channelState = false;  //used for the channel of the cloud
     private float cloudDuration;        //duration of the cloud after being summoned
     [SerializeField]
     private float maxCloudDuration;     //maximum duration of the cloud
 
+    [SerializeField]
+    private GameObject Wind;
+    private GameObject WindInstance;
+    private float windDuration;
+    [SerializeField]
+    private float maxWindDuration;
+
+    [SerializeField]
+    private GameObject Earth;
+    private GameObject EarthInstance;
+    private float earthDuration;
+    [SerializeField]
+    private float maxEarthDuration;
+
 
     private float interactionRange = 1.2f;                          //range of the player to interact with
-    private float interactionRadius = 0.5f;
-    private Vector3 raycastHigth = new Vector3(0, 0.3f, 0);         //GETS CHANGED AFTER REWORKING RAYCAST TO RAYSPHERE
+    private float interactionRadius = 0.85f;
+    private Vector3 raycastHigth = new Vector3(0, 0.4f, 0);         //GETS CHANGED AFTER REWORKING RAYCAST TO RAYSPHERE
 
 
     private Inventory PlayerInventory;      //inventory of the player
@@ -37,19 +60,37 @@ public class PlayerActions : MonoBehaviour
         controls = new PlayerControls();        //Unity Input Action System activated here
 
         // The Controls via the Unity Action Input System are set here
-        controls.Gameplay.Wasser.started += ctx => StartChannel();
-        controls.Gameplay.Wasser.canceled += ctx => EndChannel();
+        controls.Gameplay.Wasser.started += ctx => StartWaterChannel();
+        controls.Gameplay.Wasser.canceled += ctx => EndWaterChannel();
+        controls.Gameplay.Erde.started += ctx => StartEarthChannel();
+        controls.Gameplay.Erde.canceled += ctx => EndEarthChannel(); 
+        controls.Gameplay.Wind.started += ctx => StartWindChannel();
+        controls.Gameplay.Wind.canceled += ctx => EndWindChannel();
+
         controls.Gameplay.Interact.started += ctx => Interact();
 
         Player = this.gameObject;               //defines the game object of this script as a Player
 
         PlayerInventory = Inventory.instance;   //creates an instance of the player inventory
+
+        ChannelSlider.minValue = 0f;
+        DurationSlider.minValue = 0f;
     }
 
 
     private void FixedUpdate()
     {
-        ChannelCounter();
+        WaterChannelCounter();
+        WindChannelCounter();
+        EarthChannelCounter();
+
+        DurationSlider.value -= Time.deltaTime;
+
+        if (DurationSlider.value <= 0)
+        {
+            DurationSlider.value = 0;
+            DurationSliderVisual.SetActive(false);
+        }
     }
 
     void Interact()                             //calls the function Interact() of every object the player interacts with
@@ -77,52 +118,61 @@ public class PlayerActions : MonoBehaviour
         Gizmos.DrawWireSphere((transform.position + raycastHigth) + transform.forward * interactionRange, interactionRadius);
     }
 
-    private void StartChannel()                                                 //when the player starts to channel the cloud
+    #region WATERSPELL
+    private void StartWaterChannel()                                                 //when the player starts to channel the cloud
     { 
-        if (CloudInstance == null)                                              //if there is no cloud active
+        if (CloudInstance == null && WindInstance == null && EarthInstance == null)                                              //if there is no cloud active
         {
+            ChannelSlider.maxValue = maxCloudDuration;
+            DurationSlider.maxValue = maxCloudDuration * 3;
             Player.GetComponent<PlayerMovement>().enabled = false;
-            WolkenActions myCloud = Cloud.GetComponent<WolkenActions>();        //player gets a cloud to use
-            maxCloudDuration = myCloud.GetMaxCloudChannelDuration();            //max cloud channel duration is set
-
-            channelState = true;                                                //sets the channel state for the player on true
+            //WolkenActions myCloud = Cloud.GetComponent<WolkenActions>();        //player gets a cloud to use
+            ChannleSliderVisual.SetActive(true);
+            WaterChannelState = true;                                                //sets the channel state for the player on true
         }
     }
 
-    private void ChannelCounter()  // the counter that measures the channel duration, if the maximum channel duration is reached it automatically casts the spell fully charged and stops the counter
+    private void WaterChannelCounter()  // the counter that measures the channel duration, if the maximum channel duration is reached it automatically casts the spell fully charged and stops the counter
     {
-        if (channelState)                           //while the player starts channeling
+        if (WaterChannelState)                           //while the player starts channeling
         {
             cloudDuration += Time.deltaTime;        //cloud duration gets increased
+            ChannelSlider.value = cloudDuration;
         }
 
-        if (channelState && cloudDuration >= maxCloudDuration)      //while the player is channeling and the channel duration is less then the maximum cloud duration
+        if (WaterChannelState && cloudDuration >= maxCloudDuration)      //while the player is channeling and the channel duration is less then the maximum cloud duration
         {
-            channelState = false;                                   //ends the channeling
+            WaterChannelState = false;                                   //ends the channeling
             cloudDuration = maxCloudDuration;                       //sets the cloud duration to the max cloud duration (to not get any weird numbers)
-            EndChannel();                                           //calls EndChannel()
+            ChannelSlider.value = cloudDuration;
+            EndWaterChannel();                                           //calls EndChannel()
         }
     }
 
-    private void EndChannel()  //gets called after the player ends his channel
+    private void EndWaterChannel()  //gets called after the player ends his channel
     {
         if (cloudDuration < 1f)         //if the player pressed the button for less than one second
         {
-            channelState = false;       //channel gets ended WITHOUT spawning the cloud
+            WaterChannelState = false;       //channel gets ended WITHOUT spawning the cloud
+            ChannleSliderVisual.SetActive(false);
             cloudDuration = 0f;         //duration of the cloud gets reset
-
+            ChannelSlider.value = cloudDuration;
+            Player.GetComponent<PlayerMovement>().enabled = true;
         }
         else if (cloudDuration >= 1f)                   //if the player pressed the button for more than one second
         {
             Player.GetComponent<PlayerMovement>().enabled = true;
             Camera = GameObject.Find("CameraHolder");
             Camera.GetComponent<ObjectFollower>().enabled = false;
-            channelState = false;                       //channel gets ended
-
+            WaterChannelState = false;                       //channel gets ended
+            ChannleSliderVisual.SetActive(false);
+            DurationSlider.value = cloudDuration * 3;
+            DurationSliderVisual.SetActive(true);
             CloudInstance = Instantiate(Cloud);         //creates an instance of the cloud
 
-            WaterSpell(cloudDuration * 2);              //waterspell gets activated with 2 times the channeltime
+            WaterSpell(cloudDuration * 3);              //waterspell gets activated with 2 times the channeltime
             cloudDuration = 0f;                         //duration of the cloud gets reset
+            ChannelSlider.value = cloudDuration;
         }
     }
 
@@ -136,6 +186,155 @@ public class PlayerActions : MonoBehaviour
 
         CloudInstance.SetActive(true);                                          //activates the cloud
     }
+
+    #endregion
+    
+    #region WINDSPELL
+    
+    private void StartWindChannel()                                                 //when the player starts to channel the cloud
+    {
+        if (CloudInstance == null && WindInstance == null && EarthInstance == null)                                              //if there is no cloud active
+        {
+            ChannelSlider.maxValue = maxWindDuration;
+            DurationSlider.maxValue = maxWindDuration * 3;
+            Player.GetComponent<PlayerMovement>().enabled = false;
+            ChannleSliderVisual.SetActive(true);
+
+            WindChannelState = true;                                                //sets the channel state for the player on true
+        }
+    }
+
+    private void WindChannelCounter()  // the counter that measures the channel duration, if the maximum channel duration is reached it automatically casts the spell fully charged and stops the counter
+    {
+        if (WindChannelState)                           //while the player starts channeling
+        {
+            windDuration += Time.deltaTime;        //cloud duration gets increased
+            ChannelSlider.value = windDuration;
+        }
+
+        if (WindChannelState && windDuration >= maxWindDuration)      //while the player is channeling and the channel duration is less then the maximum cloud duration
+        {
+            WindChannelState = false;                                   //ends the channeling
+            windDuration = maxWindDuration;                       //sets the cloud duration to the max cloud duration (to not get any weird numbers)
+            ChannelSlider.value = windDuration;
+            EndWindChannel();                                           //calls EndChannel()
+        }
+    }
+
+    private void EndWindChannel()  //gets called after the player ends his channel
+    {
+        if (windDuration < 1f)         //if the player pressed the button for less than one second
+        {
+            WindChannelState = false;       //channel gets ended WITHOUT spawning the cloud
+            ChannleSliderVisual.SetActive(false);
+            windDuration = 0f;         //duration of the cloud gets reset
+            ChannelSlider.value = windDuration;
+            Player.GetComponent<PlayerMovement>().enabled = true;
+        }
+        else if (windDuration>= 1f)                   //if the player pressed the button for more than one second
+        {
+            Player.GetComponent<PlayerMovement>().enabled = true;
+            Camera = GameObject.Find("CameraHolder");
+            Camera.GetComponent<ObjectFollower>().enabled = false;
+            WindChannelState = false;                       //channel gets ended
+
+            ChannleSliderVisual.SetActive(false);
+            DurationSlider.value = windDuration * 3;
+            DurationSliderVisual.SetActive(true);
+
+            WindInstance = Instantiate(Wind);         //creates an instance of the cloud
+
+            WindSpell(windDuration * 3);              //waterspell gets activated with 2 times the channeltime
+            windDuration = 0f;                         //duration of the cloud gets reset
+            ChannelSlider.value = windDuration;
+        }
+    }
+
+
+    private void WindSpell(float _duration)   // Spawns a cloud on the player position and sets its duration
+    {
+        WindInstance.transform.position = Player.transform.position;           //sets the cloud position to the position of the player (GETS MAYBE CHANGED WITH OTHER CAMERA MOVEMENT)
+
+        WindActions myWind = WindInstance.GetComponent<WindActions>();    //gets an instance of WolkenActions
+        myWind.SetWindDuration(_duration);                                    //sets the duration of the cloud to the channel duration in EndChannel()
+
+        WindInstance.SetActive(true);                                          //activates the cloud
+    }
+
+    #endregion
+
+    #region EARTHSPELL
+    private void StartEarthChannel()                                                 //when the player starts to channel the cloud
+    {
+        if (CloudInstance == null && WindInstance == null && EarthInstance == null)                                              //if there is no cloud active
+        {
+            ChannelSlider.maxValue = maxWindDuration;
+            DurationSlider.maxValue = maxWindDuration * 3;
+            Player.GetComponent<PlayerMovement>().enabled = false;
+            //WolkenActions myCloud = Cloud.GetComponent<WolkenActions>();        //player gets a cloud to use
+            ChannleSliderVisual.SetActive(true);
+            EarthChannelState = true;                                                //sets the channel state for the player on true
+        }
+    }
+
+    private void EarthChannelCounter()  // the counter that measures the channel duration, if the maximum channel duration is reached it automatically casts the spell fully charged and stops the counter
+    {
+        if (EarthChannelState)                           //while the player starts channeling
+        {
+            earthDuration += Time.deltaTime;        //cloud duration gets increased
+            ChannelSlider.value = earthDuration;
+        }
+
+        if (EarthChannelState && earthDuration >= maxEarthDuration)      //while the player is channeling and the channel duration is less then the maximum cloud duration
+        {
+            EarthChannelState = false;                                   //ends the channeling
+            earthDuration = maxCloudDuration;                       //sets the cloud duration to the max cloud duration (to not get any weird numbers)
+            ChannelSlider.value = earthDuration;
+            EndEarthChannel();                                           //calls EndChannel()
+        }
+    }
+
+    private void EndEarthChannel()  //gets called after the player ends his channel
+    {
+        if (earthDuration < 1f)         //if the player pressed the button for less than one second
+        {
+            EarthChannelState = false;       //channel gets ended WITHOUT spawning the cloud
+            ChannleSliderVisual.SetActive(false);
+            earthDuration = 0f;         //duration of the cloud gets reset
+            ChannelSlider.value = earthDuration;
+            Player.GetComponent<PlayerMovement>().enabled = true;
+        }
+        else if (earthDuration >= 1f)                   //if the player pressed the button for more than one second
+        {
+            Player.GetComponent<PlayerMovement>().enabled = true;
+            Camera = GameObject.Find("CameraHolder");
+            Camera.GetComponent<ObjectFollower>().enabled = false;
+            EarthChannelState = false;                       //channel gets ended
+
+            ChannleSliderVisual.SetActive(false);
+            DurationSlider.value = earthDuration * 3;
+            DurationSliderVisual.SetActive(true);
+
+            EarthInstance = Instantiate(Earth);         //creates an instance of the cloud
+
+            EarthSpell(earthDuration * 3);              //waterspell gets activated with 2 times the channeltime
+            earthDuration = 0f;                         //duration of the cloud gets reset
+            ChannelSlider.value = earthDuration;
+        }
+    }
+
+
+    private void EarthSpell(float _duration)   // Spawns a cloud on the player position and sets its duration
+    {
+        EarthInstance.transform.position = Player.transform.position;           //sets the cloud position to the position of the player (GETS MAYBE CHANGED WITH OTHER CAMERA MOVEMENT)
+
+        EarthActions myEarth = EarthInstance.GetComponent<EarthActions>();    //gets an instance of WolkenActions
+        myEarth.SetEarthDuration(_duration);                                    //sets the duration of the cloud to the channel duration in EndChannel()
+
+        EarthInstance.SetActive(true);                                          //activates the cloud
+    }
+
+    #endregion
 
     public Item GetCurrentItem()            //returns the first item from the inventory (used in FieldManager)
     {

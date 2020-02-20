@@ -23,8 +23,6 @@ public class Inventory : MonoBehaviour
 
     [SerializeField]
     private int InventorySpace = 30;
-    [SerializeField]
-    private InventoryUI inventoryUI;
 
     public Item[] items;
     private int NumberOfAllowedItems = 10;
@@ -33,6 +31,7 @@ public class Inventory : MonoBehaviour
     int TargetButtonIndex;
     int PreviousIndex;
 
+    Item HoveredItem;
     Item SelectedItem;
     Item SwappedItem;
 
@@ -96,20 +95,23 @@ public class Inventory : MonoBehaviour
 
     public void RemoveItemFromInventory(int _inventorySlot)
     {
-        if (items[_inventorySlot].GetNumberOfItems() == 1)
+        if (items[_inventorySlot] != null)
         {
-            items[_inventorySlot] = null;
-            Debug.Log("This was the last of its kind...");
-        }
+            if (items[_inventorySlot].GetNumberOfItems() == 1)
+            {
+                items[_inventorySlot] = null;
+                Debug.Log("This was the last of its kind...");
+            }
 
-        else
-        {
-            items[_inventorySlot].ChangeNumberOfItemsBy(-1);
-            Debug.Log("The item " + items[_inventorySlot].GetName() + "is now a bit lonlier " + items[_inventorySlot].GetNumberOfItems());
-        }
-        //inventoryUI.RemoveItemFromSlot(_inventorySlot);
+            else
+            {
+                items[_inventorySlot].ChangeNumberOfItemsBy(-1);
+                Debug.Log("The item " + items[_inventorySlot].GetName() + "is now a bit lonlier " + items[_inventorySlot].GetNumberOfItems());
+            }
+            //inventoryUI.RemoveItemFromSlot(_inventorySlot);
 
-        // inventorySlot.ClearSlot();
+            // inventorySlot.ClearSlot();
+        }
 
         if (onItemChangedCallback != null)
         {
@@ -142,7 +144,7 @@ public class Inventory : MonoBehaviour
         {
             SelectedItem = items[TargetButtonIndex];
             PreviousIndex = TargetButtonIndex;
-            inventoryUI.ItemDescriptionDisplay();
+            //inventoryUI.ItemDescriptionDisplay();
         }
 
         if (onItemChangedCallback != null)
@@ -163,6 +165,16 @@ public class Inventory : MonoBehaviour
         {
             onItemChangedCallback.Invoke();
         }
+    }
+
+    public void SetHoveredItem(int hoveredItemID)
+    {
+        HoveredItem = items[hoveredItemID];
+    }
+
+    public Item GetHoveredItem()
+    {
+        return HoveredItem;
     }
 
     public Item GetCurrentItem()

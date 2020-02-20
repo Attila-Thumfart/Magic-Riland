@@ -170,6 +170,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8652156423972091477}
   - component: {fileID: 5174892961848478548}
+  - component: {fileID: 3880939548888269504}
   m_Layer: 0
   m_Name: Shopbox
   m_TagString: Untagged
@@ -208,6 +209,25 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.0253437, y: 0.9567833, z: 1.0602582}
   m_Center: {x: -0.0019391775, y: 0.47759247, z: 0.010054976}
+--- !u!95 &3880939548888269504
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5641316766294377542}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: afe3651f14c4d8749861174e0d5ca8a3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7027976062128537323
 GameObject:
   m_ObjectHideFlags: 0
