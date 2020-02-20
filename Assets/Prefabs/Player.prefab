@@ -628,6 +628,7 @@ GameObject:
   - component: {fileID: 7714960469062638504}
   - component: {fileID: 7714960469062638518}
   - component: {fileID: 7714960469062638516}
+  - component: {fileID: 6044376973723531389}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -720,6 +721,19 @@ MonoBehaviour:
   maxWindDuration: 5
   Earth: {fileID: 5550142552838617564, guid: a6548abd755e4ed4cb580a405c189646, type: 3}
   maxEarthDuration: 5
+--- !u!114 &6044376973723531389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7714960469062638505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8de6099b056d08479e81f58150da340, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 4188363134809711442}
 --- !u!1 &7782870315372965453
 GameObject:
   m_ObjectHideFlags: 0
@@ -1034,6 +1048,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5ff69cc76aba50c47be14ef6d9d3a88f, type: 3}
+--- !u!95 &4188363134809711442 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 3665406267741824248, guid: 5ff69cc76aba50c47be14ef6d9d3a88f,
+    type: 3}
+  m_PrefabInstance: {fileID: 648005424612722602}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9176852636856333782 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8621182000528421500, guid: 5ff69cc76aba50c47be14ef6d9d3a88f,
