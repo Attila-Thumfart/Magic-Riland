@@ -18,7 +18,7 @@ public class Shop : MonoBehaviour
 
     private void Start()
     {
-       // shopItems = new Item[ShopSpace];
+        // shopItems = new Item[ShopSpace];
     }
 
     public void SellItem(int TargetIndex)
@@ -31,8 +31,12 @@ public class Shop : MonoBehaviour
     public void BuyItem(int TargetIndex)
     {
         Player = GameObject.FindGameObjectWithTag("Player");
-        Inventory.instance.AddItemToInventory(shopItems[TargetIndex]);
-        // player.money -= shopItems[TargetIndex].GetCost();
+
+        if (GameManager.GMInstance.RemovePlayerMoney(shopItems[TargetIndex].GetCost()))
+        {
+           // GameManager.GMInstance.RemovePlayerMoney(shopItems[TargetIndex].GetCost());
+            Inventory.instance.AddItemToInventory(shopItems[TargetIndex]);
+        }
     }
 
     public void SetHoveredItem(int hoveredItemID)

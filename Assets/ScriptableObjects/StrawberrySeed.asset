@@ -15,8 +15,8 @@ MonoBehaviour:
   Name: New Item
   Description: This is an Item
   IsSeed: 1
-  SellingPrice: 0
-  Cost: 0
+  SellingPrice: 9
+  Cost: 9
   InventoryIcon: {fileID: 21300000, guid: c4216cfa225a97445b43b488fddaee6d, type: 3}
   GrowthRateUntilSprout: 1
   GrowtRateUntilMedium: 1

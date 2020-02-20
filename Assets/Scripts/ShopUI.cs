@@ -28,7 +28,7 @@ public class ShopUI : Interactable
     private Image DisplayIcon;
 
     [SerializeField]
-    private TMP_Text DescriptionDisplay;
+    private TMP_Text DescriptionDisplay, PlayerMoneyDisplay;
 
     PlayerControls controls;
 
@@ -56,6 +56,8 @@ public class ShopUI : Interactable
         UpdateShopUI();
 
         controls.Gameplay.Erde.started += ctx => DeactivateUI();  // Erde is used because I cant for the love of god figure out how the Unity Input Action System works
+
+        PlayerMoneyDisplay.text = GameManager.GMInstance.GetPlayerMoney().ToString();
     }
 
     public override void Interact()
@@ -77,6 +79,8 @@ public class ShopUI : Interactable
                 InventorySlots[i].ClearSlot();
             }
         }
+
+        PlayerMoneyDisplay.text = GameManager.GMInstance.GetPlayerMoney().ToString();
     }
 
     public void UpdateShopUI()

@@ -24,7 +24,7 @@ public class DeliveryBox : MonoBehaviour
     public void DeliverItem(int TargetIndex)
     {
         Player = GameObject.FindGameObjectWithTag("Player");
-        //DailyMoney = DailyMoney + Inventory.instance.items[TargetIndex].GetSellingPrice;
+        GameManager.GMInstance.AddDailyIncome(Inventory.instance.items[TargetIndex].GetSellingPrice());
         Inventory.instance.RemoveItemFromInventory(TargetIndex);
     }
 
