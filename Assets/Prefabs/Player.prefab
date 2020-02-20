@@ -694,7 +694,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d85cae30f415f754caa81e4f6dd55e4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 5
+  playerSpeed: 6
   characterController: {fileID: 0}
   Gravity: 4
   cameraHolder: {fileID: 0}
@@ -717,7 +717,7 @@ MonoBehaviour:
   DurationSlider: {fileID: 4011027333014926111}
   Cloud: {fileID: 1634268324207440844, guid: 076349036d0dd47499c1752cc4749a55, type: 3}
   maxCloudDuration: 5
-  Wind: {fileID: 6796828781244951958, guid: 6eecd3add60ae0e459d61d1ff9c4be8c, type: 3}
+  Wind: {fileID: 2657292145054298459, guid: 3b62903be5a07ba46b0bff2d5ff0aa17, type: 3}
   maxWindDuration: 5
   Earth: {fileID: 5550142552838617564, guid: a6548abd755e4ed4cb580a405c189646, type: 3}
   maxEarthDuration: 5

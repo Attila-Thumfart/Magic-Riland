@@ -65,7 +65,7 @@ public class PlayerActions : MonoBehaviour
         controls.Gameplay.Wasser.started += ctx => StartWaterChannel();
         controls.Gameplay.Wasser.canceled += ctx => EndWaterChannel();
         controls.Gameplay.Erde.started += ctx => StartEarthChannel();
-        controls.Gameplay.Erde.canceled += ctx => EndEarthChannel(); 
+        controls.Gameplay.Erde.canceled += ctx => EndEarthChannel();
         controls.Gameplay.Wind.started += ctx => StartWindChannel();
         controls.Gameplay.Wind.canceled += ctx => EndWindChannel();
 
@@ -110,6 +110,7 @@ public class PlayerActions : MonoBehaviour
                 CurrentItem = Inventory.instance.GetCurrentItem();                      //returns the first item from the inventory
                 CurrentInteractable.Interact();                                         //calls interact of the hit object
             }
+            GetComponent<PlayerAnimation>().SetAction();
         }
     }
 
@@ -122,7 +123,7 @@ public class PlayerActions : MonoBehaviour
 
     #region WATERSPELL
     private void StartWaterChannel()                                                 //when the player starts to channel the cloud
-    { 
+    {
         if (CloudInstance == null && WindInstance == null && EarthInstance == null)                                              //if there is no cloud active
         {
             ChannelSlider.maxValue = maxCloudDuration;
@@ -193,9 +194,9 @@ public class PlayerActions : MonoBehaviour
     }
 
     #endregion
-    
+
     #region WINDSPELL
-    
+
     private void StartWindChannel()                                                 //when the player starts to channel the cloud
     {
         if (CloudInstance == null && WindInstance == null && EarthInstance == null)                                              //if there is no cloud active
@@ -238,7 +239,7 @@ public class PlayerActions : MonoBehaviour
             ChannelSlider.value = windDuration;
             Player.GetComponent<PlayerMovement>().enabled = true;
         }
-        else if (windDuration>= 1f)                   //if the player pressed the button for more than one second
+        else if (windDuration >= 1f)                   //if the player pressed the button for more than one second
         {
             Player.GetComponent<PlayerMovement>().enabled = true;
             Camera = GameObject.Find("CameraHolder");

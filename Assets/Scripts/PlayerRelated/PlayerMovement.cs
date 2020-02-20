@@ -67,15 +67,6 @@ public class PlayerMovement : MonoBehaviour
 
     public float GetCharacterSpeed()
     {
-        /*
-        if (move.x > 0.01 || move.x < -0.01 || move.y < -0.01 || move.y > 0.01)
-        {
-            return 1f;
-        }
-        else
-            return 0;*/
-        Debug.Log(Mathf.Abs(move.x) + Mathf.Abs(move.y));
-
         return Mathf.Abs(move.x) + Mathf.Abs(move.y);
     }
 }

@@ -12,4 +12,9 @@ public class PlayerAnimation : MonoBehaviour
         animator.SetFloat("Speed", Mathf.Abs(GetComponent<PlayerMovement>().GetCharacterSpeed()) * 10);
         animator.SetBool("Zaubern", GetComponent<PlayerActions>().Channeling());
     }
+
+    public void SetAction()
+    {
+        animator.SetTrigger("nehmen");
+    }
 }
