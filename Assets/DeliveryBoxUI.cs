@@ -29,7 +29,7 @@ public class DeliveryBoxUI : Interactable
     private Image DisplayIcon;
 
     [SerializeField]
-    private TMP_Text DescriptionDisplay;
+    private TMP_Text DescriptionDisplay, DailyIncomeDisplay;
 
     PlayerControls controls;
 
@@ -58,9 +58,13 @@ public class DeliveryBoxUI : Interactable
         //UpdateDeliveryBoxUI();
 
         controls.Gameplay.Erde.started += ctx => DeactivateUI();  // Erde is used because I cant for the love of god figure out how the Unity Input Action System works
-    }
 
-    public override void Interact()
+
+        DailyIncomeDisplay.text = GameManager.GMInstance.GetDailyIncome().ToString();
+
+}
+
+public override void Interact()
     {
         base.Interact();
         ActivateUI();
@@ -79,6 +83,8 @@ public class DeliveryBoxUI : Interactable
                 InventorySlots[i].ClearSlot();
             }
         }
+
+        DailyIncomeDisplay.text = GameManager.GMInstance.GetDailyIncome().ToString();
     }
 
     /*public void UpdateDeliveryBoxUI()
