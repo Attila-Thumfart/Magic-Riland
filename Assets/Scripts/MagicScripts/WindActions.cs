@@ -56,7 +56,7 @@ public class WindActions : MonoBehaviour
         }
     }
 
-    private void CancleSpell()
+    public void CancleSpell()
     {
         Destroy(gameObject);
         Camera = GameObject.Find("CameraHolder");
