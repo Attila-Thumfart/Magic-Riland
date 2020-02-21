@@ -12,6 +12,8 @@ public class PauseMenu : MonoBehaviour
 
     public GameObject OptionsMenuUI;
 
+    private bool isPaused;
+
     GameObject Player;
 
     PlayerControls controls; // This is where the Controls and actual Input are saved (via Unity Input System)
@@ -43,6 +45,7 @@ public class PauseMenu : MonoBehaviour
                 Time.timeScale = 1f;
                 Player.GetComponent<PlayerActions>().enabled = true;
                 Player.GetComponent<PlayerMovement>().enabled = true;
+                isPaused = false;
             }
             else
             {
@@ -52,6 +55,7 @@ public class PauseMenu : MonoBehaviour
                 {
                     Player.GetComponent<PlayerActions>().enabled = false;
                     Player.GetComponent<PlayerMovement>().enabled = false;
+                    isPaused = true;
                 }));
             }
         }
@@ -77,5 +81,10 @@ public class PauseMenu : MonoBehaviour
     private void OnDisable() // This function disables the controls when the object becomes disabled or inactive
     {
         controls.Gameplay.Disable();
+    }
+
+    public bool GetIsPaused()
+    {
+        return isPaused;
     }
 }

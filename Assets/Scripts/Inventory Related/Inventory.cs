@@ -177,6 +177,11 @@ public class Inventory : MonoBehaviour
         return HoveredItem;
     }
 
+    public int GetCurrentItemIndex()
+    {
+        return TargetButtonIndex;
+    }
+
     public Item GetCurrentItem()
     {
         /*

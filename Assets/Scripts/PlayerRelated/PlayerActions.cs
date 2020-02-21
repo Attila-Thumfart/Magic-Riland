@@ -27,6 +27,8 @@ public class PlayerActions : MonoBehaviour
     [SerializeField]
     private GameObject Cloud;           //cloud for the player to summon
     private GameObject CloudInstance;   //instance of the cloud (to not work on the prefab)
+    private WolkenActions myCloud;
+
     private float cloudDuration;        //duration of the cloud after being summoned
     [SerializeField]
     private float maxCloudDuration;     //maximum duration of the cloud
@@ -34,6 +36,8 @@ public class PlayerActions : MonoBehaviour
     [SerializeField]
     private GameObject Wind;
     private GameObject WindInstance;
+    private WindActions myWind;
+
     private float windDuration;
     [SerializeField]
     private float maxWindDuration;
@@ -41,6 +45,8 @@ public class PlayerActions : MonoBehaviour
     [SerializeField]
     private GameObject Earth;
     private GameObject EarthInstance;
+    private EarthActions myEarth;
+
     private float earthDuration;
     [SerializeField]
     private float maxEarthDuration;
@@ -64,10 +70,15 @@ public class PlayerActions : MonoBehaviour
         // The Controls via the Unity Action Input System are set here
         controls.Gameplay.Wasser.started += ctx => StartWaterChannel();
         controls.Gameplay.Wasser.canceled += ctx => EndWaterChannel();
+        controls.Gameplay.Wasser.started += ctx => EndCloudSpell();
+
         controls.Gameplay.Erde.started += ctx => StartEarthChannel();
         controls.Gameplay.Erde.canceled += ctx => EndEarthChannel();
+        controls.Gameplay.Erde.started += ctx => EndEarthSpell();
+
         controls.Gameplay.Wind.started += ctx => StartWindChannel();
         controls.Gameplay.Wind.canceled += ctx => EndWindChannel();
+        controls.Gameplay.Wind.started += ctx => EndWindSpell();
 
         controls.Gameplay.Interact.started += ctx => Interact();
 
@@ -187,10 +198,19 @@ public class PlayerActions : MonoBehaviour
     {
         CloudInstance.transform.position = Player.transform.position;           //sets the cloud position to the position of the player (GETS MAYBE CHANGED WITH OTHER CAMERA MOVEMENT)
 
-        WolkenActions myCloud = CloudInstance.GetComponent<WolkenActions>();    //gets an instance of WolkenActions
+        myCloud = CloudInstance.GetComponent<WolkenActions>();    //gets an instance of WolkenActions
         myCloud.SetCloudDuration(_duration);                                    //sets the duration of the cloud to the channel duration in EndChannel()
 
         CloudInstance.SetActive(true);                                          //activates the cloud
+    }
+
+    public void EndCloudSpell()
+    {
+        if (CloudInstance != null)
+        {
+            myCloud.CancleSpell();
+            DurationSlider.value = 0;
+        }
     }
 
     #endregion
@@ -263,12 +283,20 @@ public class PlayerActions : MonoBehaviour
     {
         WindInstance.transform.position = Player.transform.position;           //sets the cloud position to the position of the player (GETS MAYBE CHANGED WITH OTHER CAMERA MOVEMENT)
 
-        WindActions myWind = WindInstance.GetComponent<WindActions>();    //gets an instance of WolkenActions
+        myWind = WindInstance.GetComponent<WindActions>();    //gets an instance of WolkenActions
         myWind.SetWindDuration(_duration);                                    //sets the duration of the cloud to the channel duration in EndChannel()
 
         WindInstance.SetActive(true);                                          //activates the cloud
     }
 
+    public void EndWindSpell()
+    {
+        if (WindInstance != null)
+        {
+            myWind.CancleSpell();
+            DurationSlider.value = 0;
+        }
+    }
     #endregion
 
     #region EARTHSPELL
@@ -339,12 +367,20 @@ public class PlayerActions : MonoBehaviour
     {
         EarthInstance.transform.position = Player.transform.position;           //sets the cloud position to the position of the player (GETS MAYBE CHANGED WITH OTHER CAMERA MOVEMENT)
 
-        EarthActions myEarth = EarthInstance.GetComponent<EarthActions>();    //gets an instance of WolkenActions
+        myEarth = EarthInstance.GetComponent<EarthActions>();    //gets an instance of WolkenActions
         myEarth.SetEarthDuration(_duration);                                    //sets the duration of the cloud to the channel duration in EndChannel()
 
         EarthInstance.SetActive(true);                                          //activates the cloud
     }
 
+    public void EndEarthSpell()
+    {
+        if (EarthInstance != null)
+        {
+            myEarth.CancleSpell();
+            DurationSlider.value = 0;
+        }
+    }
     #endregion
 
     public Item GetCurrentItem()            //returns the first item from the inventory (used in FieldManager)

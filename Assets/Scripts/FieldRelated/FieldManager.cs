@@ -75,7 +75,7 @@ public class FieldManager : Interactable
                 {
                     SetThisPlant(ThisPlant);
                     SetIsSeeded(true);
-                    inventory.RemoveItemFromInventory(0);
+                    inventory.RemoveItemFromInventory(inventory.GetCurrentItemIndex());
                 }
             }
         }
