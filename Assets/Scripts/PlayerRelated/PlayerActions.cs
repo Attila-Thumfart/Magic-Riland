@@ -46,6 +46,8 @@ public class PlayerActions : MonoBehaviour
     private float maxEarthDuration;
 
 
+    private bool IsChanneling;
+
     private float interactionRange = 1.2f;                          //range of the player to interact with
     private float interactionRadius = 0.85f;
     private Vector3 raycastHigth = new Vector3(0, 0.4f, 0);         //GETS CHANGED AFTER REWORKING RAYCAST TO RAYSPHERE
@@ -63,7 +65,7 @@ public class PlayerActions : MonoBehaviour
         controls.Gameplay.Wasser.started += ctx => StartWaterChannel();
         controls.Gameplay.Wasser.canceled += ctx => EndWaterChannel();
         controls.Gameplay.Erde.started += ctx => StartEarthChannel();
-        controls.Gameplay.Erde.canceled += ctx => EndEarthChannel(); 
+        controls.Gameplay.Erde.canceled += ctx => EndEarthChannel();
         controls.Gameplay.Wind.started += ctx => StartWindChannel();
         controls.Gameplay.Wind.canceled += ctx => EndWindChannel();
 
@@ -108,6 +110,7 @@ public class PlayerActions : MonoBehaviour
                 CurrentItem = Inventory.instance.GetCurrentItem();                      //returns the first item from the inventory
                 CurrentInteractable.Interact();                                         //calls interact of the hit object
             }
+            GetComponent<PlayerAnimation>().SetAction();
         }
     }
 
@@ -120,7 +123,7 @@ public class PlayerActions : MonoBehaviour
 
     #region WATERSPELL
     private void StartWaterChannel()                                                 //when the player starts to channel the cloud
-    { 
+    {
         if (CloudInstance == null && WindInstance == null && EarthInstance == null)                                              //if there is no cloud active
         {
             ChannelSlider.maxValue = maxCloudDuration;
@@ -129,6 +132,7 @@ public class PlayerActions : MonoBehaviour
             //WolkenActions myCloud = Cloud.GetComponent<WolkenActions>();        //player gets a cloud to use
             ChannleSliderVisual.SetActive(true);
             WaterChannelState = true;                                                //sets the channel state for the player on true
+            IsChanneling = true;
         }
     }
 
@@ -151,6 +155,8 @@ public class PlayerActions : MonoBehaviour
 
     private void EndWaterChannel()  //gets called after the player ends his channel
     {
+        IsChanneling = false;
+
         if (cloudDuration < 1f)         //if the player pressed the button for less than one second
         {
             WaterChannelState = false;       //channel gets ended WITHOUT spawning the cloud
@@ -188,9 +194,9 @@ public class PlayerActions : MonoBehaviour
     }
 
     #endregion
-    
+
     #region WINDSPELL
-    
+
     private void StartWindChannel()                                                 //when the player starts to channel the cloud
     {
         if (CloudInstance == null && WindInstance == null && EarthInstance == null)                                              //if there is no cloud active
@@ -201,6 +207,7 @@ public class PlayerActions : MonoBehaviour
             ChannleSliderVisual.SetActive(true);
 
             WindChannelState = true;                                                //sets the channel state for the player on true
+            IsChanneling = true;
         }
     }
 
@@ -223,6 +230,7 @@ public class PlayerActions : MonoBehaviour
 
     private void EndWindChannel()  //gets called after the player ends his channel
     {
+        IsChanneling = false;
         if (windDuration < 1f)         //if the player pressed the button for less than one second
         {
             WindChannelState = false;       //channel gets ended WITHOUT spawning the cloud
@@ -231,7 +239,7 @@ public class PlayerActions : MonoBehaviour
             ChannelSlider.value = windDuration;
             Player.GetComponent<PlayerMovement>().enabled = true;
         }
-        else if (windDuration>= 1f)                   //if the player pressed the button for more than one second
+        else if (windDuration >= 1f)                   //if the player pressed the button for more than one second
         {
             Player.GetComponent<PlayerMovement>().enabled = true;
             Camera = GameObject.Find("CameraHolder");
@@ -274,6 +282,7 @@ public class PlayerActions : MonoBehaviour
             //WolkenActions myCloud = Cloud.GetComponent<WolkenActions>();        //player gets a cloud to use
             ChannleSliderVisual.SetActive(true);
             EarthChannelState = true;                                                //sets the channel state for the player on true
+            IsChanneling = true;
         }
     }
 
@@ -296,6 +305,8 @@ public class PlayerActions : MonoBehaviour
 
     private void EndEarthChannel()  //gets called after the player ends his channel
     {
+        IsChanneling = false;
+
         if (earthDuration < 1f)         //if the player pressed the button for less than one second
         {
             EarthChannelState = false;       //channel gets ended WITHOUT spawning the cloud
@@ -339,6 +350,11 @@ public class PlayerActions : MonoBehaviour
     public Item GetCurrentItem()            //returns the first item from the inventory (used in FieldManager)
     {
         return CurrentItem;
+    }
+
+    public bool Channeling()
+    {
+        return IsChanneling;
     }
 
 
