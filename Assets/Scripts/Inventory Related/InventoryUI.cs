@@ -91,6 +91,11 @@ public class InventoryUI : MonoBehaviour
         }
 
         PlayerMoneyDisplay.text = GameManager.GMInstance.GetPlayerMoney().ToString();
+
+        if (Inventory.instance.GetSelectedItem() == null)
+        {
+            SetButtonColorSelected();
+        }
     }
 
     private void ToggleUI()
@@ -160,6 +165,19 @@ public class InventoryUI : MonoBehaviour
         DisplayIcon.sprite = null; ;
         DisplayIcon.enabled = false;
         DescriptionDisplay.text = null;
+    }
+
+    public void SetButtonColorSelected()
+    {
+        for (int i = 0; i < Slots.Length; i++)
+        {
+            Slots[i].ResetColor();
+        }
+
+        if (Inventory.instance.GetCurrentItem() != null)
+        {
+            Slots[Inventory.instance.GetCurrentItemIndex()].SetColorActive();
+        }
     }
 
     private void OnEnable() // This function enables the controls when the object becomes enabled and active

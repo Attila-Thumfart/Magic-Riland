@@ -31,6 +31,7 @@ public class Inventory : MonoBehaviour
     int TargetButtonIndex;
     int PreviousIndex;
 
+    Item CurrentItem;
     Item HoveredItem;
     Item SelectedItem;
     Item SwappedItem;
@@ -100,6 +101,7 @@ public class Inventory : MonoBehaviour
             if (items[_inventorySlot].GetNumberOfItems() == 1)
             {
                 items[_inventorySlot] = null;
+                CurrentItem = null;
                 Debug.Log("This was the last of its kind...");
             }
 
@@ -139,11 +141,14 @@ public class Inventory : MonoBehaviour
             items[TargetButtonIndex] = SelectedItem;
             items[PreviousIndex] = SwappedItem;
             SelectedItem = null;
+            CurrentItem = null;
         }
         else if (SelectedItem == null)
         {
             SelectedItem = items[TargetButtonIndex];
             PreviousIndex = TargetButtonIndex;
+            CurrentItem = SelectedItem;
+
             //inventoryUI.ItemDescriptionDisplay();
         }
 
@@ -182,18 +187,15 @@ public class Inventory : MonoBehaviour
         return TargetButtonIndex;
     }
 
+    public int GetPreviousIndex()
+    {
+        return PreviousIndex;
+    }
+
     public Item GetCurrentItem()
     {
-        /*
-        for (int i = 0; i < items.Length; i++)
-        {
-            if (items[i].GetIsSeed())
-            {
-                return items[i];
-            }
-        }
-        return null;*/
-        return items[TargetButtonIndex];
+        return CurrentItem;
+        //return items[TargetButtonIndex]; //May need this still
     }
 
     public Item GetSelectedItem()
