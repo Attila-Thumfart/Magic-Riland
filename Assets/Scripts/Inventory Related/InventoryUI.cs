@@ -16,6 +16,8 @@ public class InventoryUI : MonoBehaviour
     public GameObject inventoryUI;
     public GameObject Player;
 
+    private GameObject Menus;
+
     PlayerControls controls;
 
     public static InventoryUI InvUIInstance;
@@ -52,6 +54,7 @@ public class InventoryUI : MonoBehaviour
         Slots = ItemsParent.GetComponentsInChildren<InventorySlot>();
 
         controls.Gameplay.Inventar.started += ctx => ToggleUI();
+        controls.Gameplay.Erde.started += ctx => DeactivateUI();
 
         PlayerMoneyDisplay.text = GameManager.GMInstance.GetPlayerMoney().ToString();
     }
@@ -92,19 +95,45 @@ public class InventoryUI : MonoBehaviour
 
     private void ToggleUI()
     {
-        inventoryUI.SetActive(!inventoryUI.activeSelf);
-        Player = GameObject.FindGameObjectWithTag("Player");
-        Inventory.instance.ResetSelectedItem();
+        PlayerMoneyDisplay.text = GameManager.GMInstance.GetPlayerMoney().ToString();
 
+        Menus = GameObject.Find("MenuManager");
+
+        if (!Menus.GetComponentInChildren<PauseMenu>().GetIsPaused())
+        {
+            inventoryUI.SetActive(!inventoryUI.activeSelf);
+            Player = GameObject.FindGameObjectWithTag("Player");
+            Inventory.instance.ResetSelectedItem();
+
+            if (inventoryUI.activeSelf)
+            {
+                Player.GetComponent<PlayerMovement>().enabled = false;
+                Player.GetComponent<PlayerActions>().enabled = false;
+                Menus.GetComponentInChildren<PauseMenu>().enabled = false;
+            }
+            else
+            {
+                Player.GetComponent<PlayerMovement>().enabled = true;
+                Player.GetComponent<PlayerActions>().enabled = true;
+                Menus.GetComponentInChildren<PauseMenu>().enabled = true;
+            }
+        }
+    }
+
+    private void DeactivateUI()
+    {
         if (inventoryUI.activeSelf)
         {
-            Player.GetComponent<PlayerMovement>().enabled = false;
-            Player.GetComponent<PlayerActions>().enabled = false;
-        }
-        else
-        {
+            inventoryUI.SetActive(false);
+
+            // Menus.GetComponentInChildren<PauseMenu>().enabled = true;
+
+            // if (!shopUI.activeSelf)
+            //{
             Player.GetComponent<PlayerMovement>().enabled = true;
             Player.GetComponent<PlayerActions>().enabled = true;
+            Menus.GetComponentInChildren<PauseMenu>().enabled = true;
+            //}
         }
     }
 
@@ -117,6 +146,12 @@ public class InventoryUI : MonoBehaviour
             DisplayIcon.sprite = DisplayItem.GetInventoryIcon();
             DisplayIcon.enabled = true;
             DescriptionDisplay.text = DisplayItem.GetDescription();
+        }
+        else
+        {
+            DisplayIcon.sprite = null; ;
+            DisplayIcon.enabled = false;
+            DescriptionDisplay.text = null;
         }
     }
 

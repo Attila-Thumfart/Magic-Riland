@@ -100,6 +100,8 @@ public class ShopUI : Interactable
 
     private void ActivateUI()
     {
+        PlayerMoneyDisplay.text = GameManager.GMInstance.GetPlayerMoney().ToString();
+
         Menus = GameObject.Find("MenuManager");
         Menus.GetComponentInChildren<PauseMenu>().enabled = false;
         InventoryUI = GameObject.Find("Inventory");

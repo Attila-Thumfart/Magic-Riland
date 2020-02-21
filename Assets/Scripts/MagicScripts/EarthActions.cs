@@ -56,7 +56,7 @@ public class EarthActions : MonoBehaviour
         }
     }
 
-    private void CancleSpell()
+    public void CancleSpell()
     {
         Destroy(gameObject);
         Camera = GameObject.Find("CameraHolder");
