@@ -58,6 +58,8 @@ public class GameManager : MonoBehaviour
 
     public void EndNight()                                      //gets called after closing the summary of the day to end the night
     {
+        FindObjectOfType<DontDestroyFields>().transform.GetChild(0).gameObject.SetActive(true);
+
         Fields.Clear();                                                                         //clears all fields from the list to not get double entries
         foreach (FieldManager go in FieldManager.FindObjectsOfType(typeof(FieldManager)))       //finds all objects of type FieldManager
         {
@@ -89,7 +91,7 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Field " + Fields[i] + " is weeded");
             }
         }
-
+        FindObjectOfType<DontDestroyFields>().transform.GetChild(0).gameObject.SetActive(false);
     }
 
     public void AddDailyIncome(int _money)
