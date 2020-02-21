@@ -83,4 +83,14 @@ public class InventorySlot : MonoBehaviour
     {
         DeliveryBox.DeliverItem(ButtonIndex);
     }
+
+    public void SetColorActive()
+    {
+        this.GetComponentInChildren<Image>().color = Color.green;
+    }
+
+    public void ResetColor()
+    {
+        this.GetComponentInChildren<Image>().color = Color.white;
+    }
 }
