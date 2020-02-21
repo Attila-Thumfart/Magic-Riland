@@ -204,6 +204,15 @@ public class PlayerActions : MonoBehaviour
         CloudInstance.SetActive(true);                                          //activates the cloud
     }
 
+    public void EndCloudSpell()
+    {
+        if (CloudInstance != null)
+        {
+            myCloud.CancleSpell();
+            DurationSlider.value = 0;
+        }
+    }
+
     #endregion
 
     #region WINDSPELL
@@ -280,6 +289,14 @@ public class PlayerActions : MonoBehaviour
         WindInstance.SetActive(true);                                          //activates the cloud
     }
 
+    public void EndWindSpell()
+    {
+        if (WindInstance != null)
+        {
+            myWind.CancleSpell();
+            DurationSlider.value = 0;
+        }
+    }
     #endregion
 
     #region EARTHSPELL
@@ -356,17 +373,6 @@ public class PlayerActions : MonoBehaviour
         EarthInstance.SetActive(true);                                          //activates the cloud
     }
 
-    #endregion
-
-    public void EndCloudSpell()
-    {
-        if (CloudInstance != null)
-        {
-            myCloud.CancleSpell();
-            DurationSlider.value = 0;
-        }
-    }
-
     public void EndEarthSpell()
     {
         if (EarthInstance != null)
@@ -375,15 +381,7 @@ public class PlayerActions : MonoBehaviour
             DurationSlider.value = 0;
         }
     }
-
-    public void EndWindSpell()
-    {
-        if (WindInstance != null)
-        {
-            myWind.CancleSpell();
-            DurationSlider.value = 0;
-        }
-    }
+    #endregion
 
     public Item GetCurrentItem()            //returns the first item from the inventory (used in FieldManager)
     {
