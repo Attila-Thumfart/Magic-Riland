@@ -28,16 +28,68 @@ public class NPC : ScriptableObject
     [SerializeField]
     private GameObject NPCMesh;
     [SerializeField]
-    private GameObject Wish1;
+    private Item FirstWishObject;
     [SerializeField]
-    private GameObject Wish2;
+    private Item SecondWishObject;
     [SerializeField]
-    private GameObject Wish3;
+    private Item ThirdWishObject;
 
-    private GameObject PresentGiven;
+    private Item PresentGiven;
+
+    #region GETTER
+    public string GetWelcomeText()
+    {
+        return WelcomeText;
+    }
+    public string GetFirstWishText()
+    {
+        return FirstWish;
+    }
+    public string GetThanksForFirstWishText()
+    {
+        return ThanksForFirstWish;
+    }
+    public string GetSecondWishText()
+    {
+        return SecondWish;
+    }
+    public string GetThanksForSecondWishText()
+    {
+        return ThanksForSecondWish;
+    }
+    public string GetThirdWishText()
+    {
+        return ThirdWish;
+    }
+    public string GetThanksForThirdWishText()
+    {
+        return ThanksForThirdWish;
+    }
+    public string GetLoveText()
+    {
+        return LoveText;
+    }
+    public string GetWrongItemText()
+    {
+        return WrongItem;
+    }
 
 
-    public void SetPresent(GameObject _Present)
+    public Item GetFirstWishObject()
+    {
+        return FirstWishObject;
+    }
+    public Item GetSecondWishObject()
+    {
+        return SecondWishObject;
+    }
+    public Item GetThirdWishObject()
+    {
+        return ThirdWishObject;
+    }
+    #endregion
+
+    public void SetPresent(Item _Present)
     {
         PresentGiven = _Present;
     }

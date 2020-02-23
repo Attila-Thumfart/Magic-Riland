@@ -80,11 +80,6 @@ public class FieldManager : Interactable
             }
         }
 
-        if(isWeed)
-        {
-            SetWeedstate(false);
-        }
-
         if (IsSeeded && (ActiveFieldstate == Fieldstate.finished || ActiveFieldstate == Fieldstate.withered))
         {
             if (ActiveFieldstate == Fieldstate.finished)
@@ -136,7 +131,7 @@ public class FieldManager : Interactable
             case (Fieldstate.seeded):                                       //if the plant is seeded
                 GrowthModelSeedInstance.SetActive(true);
 
-                if (DayOfProgress == GrowthRateUntilSprout)                                     //and if the day is ended (only for the first step from seed --> sprout)
+                if (DayOfProgress == GrowthRateUntilSprout)                 //and if the day is ended (only for the first step from seed --> sprout)
                 {
                     ActiveFieldstate = Fieldstate.sprout;                   //the seed growths into a sprout
                     DayOfProgress = 0;                                      //reset the progresstimer
@@ -147,7 +142,7 @@ public class FieldManager : Interactable
                 GrowthModelSeedInstance.SetActive(false);
                 GrowthModelSproutInstance.SetActive(true);
 
-                if (DayOfProgress == GrowthRateUntilMedium)                      //and if the DayOfProgress matches the GrowthRateMedium step of the plant
+                if (DayOfProgress == GrowthRateUntilMedium)                 //and if the DayOfProgress matches the GrowthRateMedium step of the plant
                 {
                     ActiveFieldstate = Fieldstate.medium;                   //the plant reaches its 2nd stage of its growthcycle
                     DayOfProgress = 0;                                      //reset the progresstimer
@@ -158,7 +153,7 @@ public class FieldManager : Interactable
                 GrowthModelSproutInstance.SetActive(false);
                 GrowthModelMediumInstance.SetActive(true);
 
-                if (DayOfProgress == GrowthRateUntilFinished)                    //and if the DayOfProgress matches the GrowthRateFinished step of the plant
+                if (DayOfProgress == GrowthRateUntilFinished)               //and if the DayOfProgress matches the GrowthRateFinished step of the plant
                 {
                     ActiveFieldstate = Fieldstate.finished;                 //the plant is fully grown and ready to be harvested
                     DayOfProgress = 0;                                      //reset the progresstimer
@@ -171,7 +166,7 @@ public class FieldManager : Interactable
 
                 if (DayOfProgress == 3)                                      //and if 3 days are passed
                 {
-                    ActiveFieldstate = Fieldstate.withered;                 //the plant is withered 
+                    ActiveFieldstate = Fieldstate.withered;                  //the plant is withered 
                 }
                 break;
 

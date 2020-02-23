@@ -403,4 +403,87 @@ public class PlayerActions : MonoBehaviour
     {
         controls.Gameplay.Disable();
     }
+
+
+    #region CHANNEL NOT WORKING
+    public void Magic(bool _channelState, float _spellDuration, float _maxSpellDuration, GameObject _spellInstance)
+    {
+        StartChannel(_channelState);
+        ChannelCounter(_channelState, _spellDuration, _maxSpellDuration, _spellInstance);
+        EndChannel(_spellDuration, _channelState, _spellInstance);
+        Spell(EndChannel(_spellDuration, _channelState, _spellInstance), _spellInstance);
+    }
+
+
+    private void StartChannel(bool _channelState)                                                 //when the player starts to channel the cloud
+    {
+        if (CloudInstance == null && WindInstance == null && EarthInstance == null)                                              //if there is no cloud active
+        {
+            ChannelSlider.maxValue = maxCloudDuration;
+            DurationSlider.maxValue = maxCloudDuration * 3;
+            Player.GetComponent<PlayerMovement>().enabled = false;
+            //WolkenActions myCloud = Cloud.GetComponent<WolkenActions>();        //player gets a cloud to use
+            ChannleSliderVisual.SetActive(true);
+            _channelState = true;                                                //sets the channel state for the player on true
+            IsChanneling = true;
+        }
+    }
+
+    private void ChannelCounter(bool _channelState, float _spellDuration, float _maxSpellDuration, GameObject _spellInstance)  // the counter that measures the channel duration, if the maximum channel duration is reached it automatically casts the spell fully charged and stops the counter
+    {
+        if (_channelState)                           //while the player starts channeling
+        {
+            _spellDuration += Time.deltaTime;        //cloud duration gets increased
+            ChannelSlider.value = _spellDuration;
+        }
+
+        if (_channelState && _spellDuration >= _maxSpellDuration)      //while the player is channeling and the channel duration is less then the maximum cloud duration
+        {
+            _channelState = false;                                   //ends the channeling
+            _spellDuration = _maxSpellDuration;                       //sets the cloud duration to the max cloud duration (to not get any weird numbers)
+            ChannelSlider.value = _spellDuration;
+            EndChannel(_spellDuration, _channelState, _spellInstance);                                           //calls EndChannel()
+        }
+    }
+
+    private float EndChannel(float _spellDuration, bool _channelState, GameObject _spellInstance)  //gets called after the player ends his channel
+    {
+        IsChanneling = false;
+
+        if (_spellDuration < 1f)         //if the player pressed the button for less than one second
+        {
+            _channelState = false;       //channel gets ended WITHOUT spawning the cloud
+            ChannleSliderVisual.SetActive(false);
+            _spellDuration = 0f;         //duration of the cloud gets reset
+            ChannelSlider.value = _spellDuration;
+            Player.GetComponent<PlayerMovement>().enabled = true;
+        }
+        else if (_spellDuration >= 1f)                   //if the player pressed the button for more than one second
+        {
+            Player.GetComponent<PlayerMovement>().enabled = true;
+            Camera = GameObject.Find("CameraHolder");
+            Camera.GetComponent<ObjectFollower>().enabled = false;
+            _channelState = false;                       //channel gets ended
+            ChannleSliderVisual.SetActive(false);
+            DurationSlider.value = _spellDuration * 3;
+            DurationSliderVisual.SetActive(true);
+            CloudInstance = Instantiate(Cloud);         //creates an instance of the cloud
+            _spellDuration = 0f;                         //duration of the cloud gets reset
+            ChannelSlider.value = _spellDuration;
+            return _spellDuration * 3;
+        }
+        return 0;
+    }
+
+
+    private void Spell(float _duration, GameObject _spellInstance)   // Spawns a cloud on the player position and sets its duration
+    {
+        _spellInstance.transform.position = Player.transform.position;           //sets the cloud position to the position of the player (GETS MAYBE CHANGED WITH OTHER CAMERA MOVEMENT)
+
+        SpellActions mySpell = _spellInstance.GetComponent<SpellActions>();
+        mySpell.SetSpellDuration(_duration);
+        _spellInstance.SetActive(true);                                          //activates the cloud
+    }
+
+    #endregion
 }
