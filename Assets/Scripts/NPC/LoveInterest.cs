@@ -57,7 +57,8 @@ public class LoveInterest : Interactable
                 break;
 
             case (LoveState.love):
-                LoveText();
+                Message.text = LoveText();
+                MessageBox.SetActive(true);
                 break;
         }
     }
@@ -74,15 +75,15 @@ public class LoveInterest : Interactable
     {
         if (_Present == null)
         {
-            Message.text = "I want to have a " + _WishText;
+            Message.text = _WishText;
             MessageBox.SetActive(true);
         }
 
         else if (_Present == _Wish)
         {
-            Message.text = "Thanks for this " + _RightPresentText;
+            Message.text = _RightPresentText;
             MessageBox.SetActive(true);
-            Inventory.instance.RemoveItemFromInventory(0);//Inventory.instance.GetCurrentItemIndex());
+            Inventory.instance.RemoveItemFromInventory(Inventory.instance.GetCurrentItemIndex());//Inventory.instance.GetCurrentItemIndex());
                 CurrentLovestate = _nextLoveState;
         }
 
