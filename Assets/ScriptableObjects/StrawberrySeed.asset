@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71e50bdf55f8b8f4abf95e0f69e63767, type: 3}
   m_Name: StrawberrySeed
   m_EditorClassIdentifier: 
-  Name: New Item
-  Description: This is an Item
+  Name: Starwberry Seed
+  Description: 'This Seed is used to grow Strawberrys. A favorite amongst many and
+    a sure way to get the attention of that special someone. Cost: 9 Gold'
   IsSeed: 1
   SellingPrice: 9
   Cost: 9

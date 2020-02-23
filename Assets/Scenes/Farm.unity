@@ -74363,6 +74363,75 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1688876264115178041}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6062031220993547365
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4764276035482440511, guid: e1c1c0892ad21a34993406bfb3cce3e4,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 106.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764276035482440511, guid: e1c1c0892ad21a34993406bfb3cce3e4,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764276035482440511, guid: e1c1c0892ad21a34993406bfb3cce3e4,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 67.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764276035482440511, guid: e1c1c0892ad21a34993406bfb3cce3e4,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764276035482440511, guid: e1c1c0892ad21a34993406bfb3cce3e4,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764276035482440511, guid: e1c1c0892ad21a34993406bfb3cce3e4,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764276035482440511, guid: e1c1c0892ad21a34993406bfb3cce3e4,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764276035482440511, guid: e1c1c0892ad21a34993406bfb3cce3e4,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764276035482440511, guid: e1c1c0892ad21a34993406bfb3cce3e4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764276035482440511, guid: e1c1c0892ad21a34993406bfb3cce3e4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4764276035482440511, guid: e1c1c0892ad21a34993406bfb3cce3e4,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7214195032235159588, guid: e1c1c0892ad21a34993406bfb3cce3e4,
+        type: 3}
+      propertyPath: m_Name
+      value: KillPlane
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e1c1c0892ad21a34993406bfb3cce3e4, type: 3}
 --- !u!1001 &7340303706803401832
 PrefabInstance:
   m_ObjectHideFlags: 0
