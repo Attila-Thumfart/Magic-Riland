@@ -62,9 +62,10 @@ public class DeliveryBoxUI : Interactable
 
         DailyIncomeDisplay.text = GameManager.GMInstance.GetDailyIncome().ToString();
 
-}
+        UpdateUI();
+    }
 
-public override void Interact()
+    public override void Interact()
     {
         base.Interact();
         ActivateUI();
@@ -154,30 +155,30 @@ public override void Interact()
         }
     }
 
-   /* public void BoxItemDescriptionDisplay()
-    {
-        DisplayItem = DeliveryBox.GetHoveredItem();
+    /* public void BoxItemDescriptionDisplay()
+     {
+         DisplayItem = DeliveryBox.GetHoveredItem();
 
-        if (DisplayItem != null)
-        {
-            DisplayIcon.sprite = DisplayItem.GetInventoryIcon();
-            DisplayIcon.enabled = true;
-            DescriptionDisplay.text = DisplayItem.GetDescription();
-        }
-        else if (DisplayItem == null)
-        {
-            DisplayIcon.sprite = null;
-            DisplayIcon.enabled = false;
-            DescriptionDisplay.text = null;
-        }
-    }
+         if (DisplayItem != null)
+         {
+             DisplayIcon.sprite = DisplayItem.GetInventoryIcon();
+             DisplayIcon.enabled = true;
+             DescriptionDisplay.text = DisplayItem.GetDescription();
+         }
+         else if (DisplayItem == null)
+         {
+             DisplayIcon.sprite = null;
+             DisplayIcon.enabled = false;
+             DescriptionDisplay.text = null;
+         }
+     }
 
-    public void ClearDescriptionDisplay()
-    {
-        DisplayIcon.sprite = null; ;
-        DisplayIcon.enabled = false;
-        DescriptionDisplay.text = null;
-    }*/
+     public void ClearDescriptionDisplay()
+     {
+         DisplayIcon.sprite = null; ;
+         DisplayIcon.enabled = false;
+         DescriptionDisplay.text = null;
+     }*/
 
     private void OnEnable() // This function enables the controls when the object becomes enabled and active
     {

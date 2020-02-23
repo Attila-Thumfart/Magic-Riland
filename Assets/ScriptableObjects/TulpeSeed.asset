@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TulpeSeed
   m_EditorClassIdentifier: 
   Name: TulpeSeed
-  Description: Seed of a Tulpe
+  Description: 'The Seed of a Tulip. It takes 3 Days to grow. Cost: 4 Gold'
   IsSeed: 1
   SellingPrice: 4
   Cost: 4

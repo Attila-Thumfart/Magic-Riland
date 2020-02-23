@@ -1885,8 +1885,33 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5222c5b1a3d4084f8327fd56c41ec20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InventorySpace: 30
-  items: []
+  InventorySpace: 24
+  items:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  StartItem: {fileID: 11400000, guid: 859e9cbba4d180e459c7c145946caf26, type: 2}
 --- !u!1 &792117927
 GameObject:
   m_ObjectHideFlags: 0

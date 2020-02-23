@@ -36,9 +36,15 @@ public class Inventory : MonoBehaviour
     Item SelectedItem;
     Item SwappedItem;
 
+    [SerializeField]
+    Item StartItem;
+
     private void Start()
     {
         items = new Item[InventorySpace];
+
+        for (int i = 0; i < 10; i++)
+            AddItemToInventory(StartItem);
     }
 
     public bool AddItemToInventory(Item item)
