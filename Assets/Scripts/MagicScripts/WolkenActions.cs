@@ -20,6 +20,7 @@ public class WolkenActions : MonoBehaviour
     GameObject CurrentField;
     private GameObject Camera;
 
+    PlayerActions playerActions;
     private void Awake()
     {
         // countdown = cloudDuration;
@@ -64,8 +65,11 @@ public class WolkenActions : MonoBehaviour
     public void CancleSpell()
     {
         Destroy(gameObject);
-        Camera = GameObject.Find("CameraHolder");
-        Camera.GetComponent<ObjectFollower>().enabled = true;
+        //Camera = GameObject.Find("CameraHolder");
+        playerActions = GameObject.Find("Player").GetComponent<PlayerActions>();
+        playerActions.SetActiveMagic(false);
+
+        //Camera.GetComponent<ObjectFollower>().enabled = true;
         //cloudCam.SetActive(false);
         //player.GetComponent<ControllerMovement>().enabled = true;
         //mainCam.SetActive(true);

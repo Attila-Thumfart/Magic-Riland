@@ -51,6 +51,8 @@ public class PlayerActions : MonoBehaviour
     [SerializeField]
     private float maxEarthDuration;
 
+    private bool MagicIsActive = false;
+
 
     private bool IsChanneling;
 
@@ -180,7 +182,8 @@ public class PlayerActions : MonoBehaviour
         {
             Player.GetComponent<PlayerMovement>().enabled = true;
             Camera = GameObject.Find("CameraHolder");
-            Camera.GetComponent<ObjectFollower>().enabled = false;
+            //Camera.GetComponent<ObjectFollower>().enabled = false;
+            MagicIsActive = true;
             WaterChannelState = false;                       //channel gets ended
             ChannleSliderVisual.SetActive(false);
             DurationSlider.value = cloudDuration * 3;
@@ -263,7 +266,8 @@ public class PlayerActions : MonoBehaviour
         {
             Player.GetComponent<PlayerMovement>().enabled = true;
             Camera = GameObject.Find("CameraHolder");
-            Camera.GetComponent<ObjectFollower>().enabled = false;
+            //Camera.GetComponent<ObjectFollower>().enabled = false;
+            MagicIsActive = true;
             WindChannelState = false;                       //channel gets ended
 
             ChannleSliderVisual.SetActive(false);
@@ -347,7 +351,8 @@ public class PlayerActions : MonoBehaviour
         {
             Player.GetComponent<PlayerMovement>().enabled = true;
             Camera = GameObject.Find("CameraHolder");
-            Camera.GetComponent<ObjectFollower>().enabled = false;
+            //Camera.GetComponent<ObjectFollower>().enabled = false;
+            MagicIsActive = true;
             EarthChannelState = false;                       //channel gets ended
 
             ChannleSliderVisual.SetActive(false);
@@ -391,6 +396,16 @@ public class PlayerActions : MonoBehaviour
     public bool Channeling()
     {
         return IsChanneling;
+    }
+
+    public bool ActiveMagic()
+    {
+        return MagicIsActive;
+    }
+
+    public void SetActiveMagic(bool _newState)
+    {
+        MagicIsActive = _newState;
     }
 
 
