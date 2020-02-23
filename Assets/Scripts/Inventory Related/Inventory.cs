@@ -36,9 +36,15 @@ public class Inventory : MonoBehaviour
     Item SelectedItem;
     Item SwappedItem;
 
+    [SerializeField]
+    Item StartItem;
+
     private void Start()
     {
         items = new Item[InventorySpace];
+
+        for (int i = 0; i < 10; i++)
+            AddItemToInventory(StartItem);
     }
 
     public bool AddItemToInventory(Item item)
@@ -50,8 +56,8 @@ public class Inventory : MonoBehaviour
                 if (items[i].GetNumberOfItems() < NumberOfAllowedItems)
                 {
                     items[i].ChangeNumberOfItemsBy(1);
-                    Debug.Log("You now have this item " + items[i].GetNumberOfItems() + " times");
-                    Debug.Log(items[i].GetNumberOfItems() + "/" + NumberOfAllowedItems);
+                    //Debug.Log("You now have this item " + items[i].GetNumberOfItems() + " times");
+                    //Debug.Log(items[i].GetNumberOfItems() + "/" + NumberOfAllowedItems);
 
                     if (onItemChangedCallback != null)
                     {

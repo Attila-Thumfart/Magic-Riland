@@ -1796,7 +1796,7 @@ MonoBehaviour:
   shopItems:
   - {fileID: 11400000, guid: 859e9cbba4d180e459c7c145946caf26, type: 2}
   - {fileID: 11400000, guid: 631a2dc8ac9f27c43bd7bac711d2f9fd, type: 2}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: f455fb0fb1f322e459b75e796239d3ae, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

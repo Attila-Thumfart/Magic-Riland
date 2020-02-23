@@ -58,6 +58,8 @@ public class ShopUI : Interactable
         controls.Gameplay.Erde.started += ctx => DeactivateUI();  // Erde is used because I cant for the love of god figure out how the Unity Input Action System works
 
         PlayerMoneyDisplay.text = GameManager.GMInstance.GetPlayerMoney().ToString();
+
+        UpdateUI();
     }
 
     public override void Interact()
