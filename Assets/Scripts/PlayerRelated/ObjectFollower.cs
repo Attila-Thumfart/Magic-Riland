@@ -28,13 +28,28 @@ public class ObjectFollower : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             SetCameraBehindPlayer();
         }
 
-        transform.SetPositionAndRotation(playerTransform.position, transform.rotation);
+       // Debug.Log(playerTransform.GetComponent<PlayerActions>().ActiveMagic());
 
+        transform.SetPositionAndRotation(playerTransform.position, transform.rotation);
+        if (!playerTransform.GetComponent<PlayerActions>().ActiveMagic())
+        {
+            MoveCamera();
+        }
+    }
+
+    public void SetCameraBehindPlayer()
+    {
+        playerDirection = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().GetPlayerDirection();
+        transform.SetPositionAndRotation(playerTransform.position, Quaternion.LookRotation(playerDirection, Vector3.up));
+    }
+
+    public void MoveCamera()
+    {
         if (axis.x > 0.1f || axis.x < -0.1f)
         {
             transform.SetPositionAndRotation(transform.position, Quaternion.Euler(transform.rotation.eulerAngles.x, transform.rotation.eulerAngles.y + axis.x * speed, transform.rotation.eulerAngles.z));
@@ -44,18 +59,13 @@ public class ObjectFollower : MonoBehaviour
         {
             float Angle = upDownHolder.rotation.eulerAngles.x + axis.y * speed;
 
-            if(Angle < 60 && Angle > 0)
+            if (Angle < 60 && Angle > 0)
             {
                 upDownHolder.SetPositionAndRotation(upDownHolder.position, Quaternion.Euler(Angle, upDownHolder.rotation.eulerAngles.y, upDownHolder.rotation.eulerAngles.z));
-            } 
+            }
         }
     }
 
-    public void SetCameraBehindPlayer()
-    {
-        playerDirection = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().GetPlayerDirection();
-        transform.SetPositionAndRotation(playerTransform.position, Quaternion.LookRotation(playerDirection, Vector3.up));
-    }
     private void OnEnable() // This function enables the controls when the object becomes enabled and active
     {
         controls.Gameplay.Enable();
