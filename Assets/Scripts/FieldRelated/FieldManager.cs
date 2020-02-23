@@ -20,6 +20,7 @@ public class FieldManager : Interactable
 
     private int DayOfProgress;
     private int DaysUntilWithered = 3;
+    private int DaysUntilNotThere = 0;
 
     [SerializeField]
     private GameObject FieldDry, FieldWatered;
@@ -201,6 +202,7 @@ public class FieldManager : Interactable
         IsPlowed = _NewState;
         if(_NewState)
         {
+            DaysUntilNotThere = 3;
             FieldDryInstance.SetActive(true);
         }
         else if(!_NewState)
@@ -266,6 +268,12 @@ public class FieldManager : Interactable
         {
             DaysUntilWithered--;                    //the plant is one step closer to dry out
         }
+
+        if(!IsSeeded)
+        {
+            DaysUntilNotThere--;
+            EmptyField();
+        }
     }
 
     public void ResetField()                                //resets the field to an empty state
@@ -285,6 +293,14 @@ public class FieldManager : Interactable
         if (DaysUntilWithered == 0)
         {
             ActiveFieldstate = Fieldstate.withered;
+        }
+    }
+
+    private void EmptyField()
+    {
+        if(DaysUntilNotThere == 0)
+        {
+            SetIsPlowed(false);
         }
     }
 
