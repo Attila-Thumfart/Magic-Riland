@@ -56,8 +56,8 @@ public class Inventory : MonoBehaviour
                 if (items[i].GetNumberOfItems() < NumberOfAllowedItems)
                 {
                     items[i].ChangeNumberOfItemsBy(1);
-                    Debug.Log("You now have this item " + items[i].GetNumberOfItems() + " times");
-                    Debug.Log(items[i].GetNumberOfItems() + "/" + NumberOfAllowedItems);
+                    //Debug.Log("You now have this item " + items[i].GetNumberOfItems() + " times");
+                    //Debug.Log(items[i].GetNumberOfItems() + "/" + NumberOfAllowedItems);
 
                     if (onItemChangedCallback != null)
                     {

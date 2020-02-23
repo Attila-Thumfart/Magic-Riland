@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class LoveInterest : Interactable
 {
@@ -8,6 +9,11 @@ public class LoveInterest : Interactable
     private NPC FemaleLove;
 
     private Item Present;
+
+    [SerializeField]
+    private GameObject MessageBox;
+    [SerializeField]
+    private TMP_Text Message;
 
     public enum LoveState           
     {
@@ -59,7 +65,8 @@ public class LoveInterest : Interactable
 
     public void GetToKnowTheChar()
     {
-            Debug.Log(FemaleLove.GetWelcomeText());
+            Message.text = FemaleLove.GetWelcomeText();
+        MessageBox.SetActive(true);
             CurrentLovestate = LoveState.firstWish;
     }
 
@@ -67,19 +74,22 @@ public class LoveInterest : Interactable
     {
         if (_Present == null)
         {
-                Debug.Log("I want to have a " + _WishText);
+            Message.text = "I want to have a " + _WishText;
+            MessageBox.SetActive(true);
         }
 
         else if (_Present == _Wish)
         {
-                Debug.Log("Thanks for this " + _RightPresentText);
+            Message.text = "Thanks for this " + _RightPresentText;
+            MessageBox.SetActive(true);
             Inventory.instance.RemoveItemFromInventory(0);//Inventory.instance.GetCurrentItemIndex());
                 CurrentLovestate = _nextLoveState;
         }
 
         else if (_Present != _Wish)
         {
-            WrongPresent();
+            Message.text = WrongPresent();
+            MessageBox.SetActive(true);
         }
     }
 
@@ -91,5 +101,10 @@ public class LoveInterest : Interactable
     private string WrongPresent()
     {
         return FemaleLove.GetWrongItemText();
+    }
+
+    public void DisableMessageBox()
+    {
+        MessageBox.SetActive(false);
     }
 }
