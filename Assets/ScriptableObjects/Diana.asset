@@ -14,15 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NPCName: Diana
   WelcomeText: Hi
-  FirstWish: Tulip
+  FirstWish: I really like Tulips.
   ThanksForFirstWish: Thx
-  SecondWish: Strawberry
+  SecondWish: I'd love to have a Strawberry right now.
   ThanksForSecondWish: Thx+1
-  ThirdWish: Parfume
+  ThirdWish: Did you see the fancy Perfume in the shop? Its so expensive... I really
+    want to know how it smells.
   ThanksForThirdWish: ThxFR
   LoveText: uWu
   WrongItem: I have a boyfriend
   NPCMesh: {fileID: 0}
   FirstWishObject: {fileID: 11400000, guid: fc3570048d1ed9849a1230452cddb5fa, type: 2}
   SecondWishObject: {fileID: 11400000, guid: 4c0a4a961e45cf449af449cc6b5b33de, type: 2}
-  ThirdWishObject: {fileID: 11400000, guid: 859e9cbba4d180e459c7c145946caf26, type: 2}
+  ThirdWishObject: {fileID: 11400000, guid: f455fb0fb1f322e459b75e796239d3ae, type: 2}

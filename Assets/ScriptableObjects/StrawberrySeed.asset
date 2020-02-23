@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Starwberry Seed
   Description: 'This Seed is used to grow Strawberrys. A favorite amongst many and
-    a sure way to get the attention of that special someone. Cost: 9 Gold'
+    a sure way to get the attention of that special someone. It takes 3 Days to grow.
+    Cost: 9 Gold'
   IsSeed: 1
   SellingPrice: 9
   Cost: 9
