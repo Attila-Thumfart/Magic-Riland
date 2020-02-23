@@ -721,6 +721,8 @@ MonoBehaviour:
   maxWindDuration: 5
   Earth: {fileID: 5550142552838617564, guid: a6548abd755e4ed4cb580a405c189646, type: 3}
   maxEarthDuration: 5
+  interactionRange: 1.63
+  interactionRadius: 0.37
 --- !u!114 &6044376973723531389
 MonoBehaviour:
   m_ObjectHideFlags: 0

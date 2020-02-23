@@ -56,7 +56,9 @@ public class PlayerActions : MonoBehaviour
 
     private bool IsChanneling;
 
+    [SerializeField]
     private float interactionRange = 1.2f;                          //range of the player to interact with
+    [SerializeField]
     private float interactionRadius = 0.85f;
     private Vector3 raycastHigth = new Vector3(0, 0.4f, 0);         //GETS CHANGED AFTER REWORKING RAYCAST TO RAYSPHERE
 
