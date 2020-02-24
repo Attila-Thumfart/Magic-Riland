@@ -37,7 +37,6 @@ public class LoveInterest : Interactable
     {
         base.Interact();
         Present = Player.GetComponent<PlayerActions>().GetCurrentItem();
-        Debug.Log("Start Conversation");
         SwitchLoveState();
     }
 
