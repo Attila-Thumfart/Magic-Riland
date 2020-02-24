@@ -69,4 +69,9 @@ public class PlayerMovement : MonoBehaviour
     {
         return Mathf.Abs(move.x) + Mathf.Abs(move.y);
     }
+
+    public Transform GetCameraInformation()
+    {
+        return cameraHolder;
+    }
 }
