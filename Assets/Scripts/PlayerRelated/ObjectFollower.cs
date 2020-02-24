@@ -23,15 +23,17 @@ public class ObjectFollower : MonoBehaviour
 
         controls.Gameplay.Camera.performed += ctx => axis = ctx.ReadValue<Vector2>();
         controls.Gameplay.Camera.canceled += ctx => axis = Vector2.zero;
+
+        controls.Gameplay.CameraReset.started += ctx => SetCameraBehindPlayer();
     }
 
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        /*if (Input.GetKeyDown(KeyCode.E))
         {
             SetCameraBehindPlayer();
-        }
+        }*/
 
        // Debug.Log(playerTransform.GetComponent<PlayerActions>().ActiveMagic());
 

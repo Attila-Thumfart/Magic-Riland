@@ -124,6 +124,14 @@
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "CameraReset",
+                    "type": "Button",
+                    "id": "431a6286-2f05-431c-af21-f3d5676fafdc",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -289,6 +297,17 @@
                     "processors": "StickDeadzone(min=0.3)",
                     "groups": "",
                     "action": "Rotate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6d3c9c69-870b-45eb-af0b-d57cc0305e9a",
+                    "path": "<Gamepad>/rightStickPress",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraReset",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
