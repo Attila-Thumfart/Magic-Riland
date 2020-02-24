@@ -719,7 +719,7 @@ MonoBehaviour:
   maxCloudDuration: 5
   Wind: {fileID: 2657292145054298459, guid: 3b62903be5a07ba46b0bff2d5ff0aa17, type: 3}
   maxWindDuration: 5
-  Earth: {fileID: 5550142552838617564, guid: a6548abd755e4ed4cb580a405c189646, type: 3}
+  Earth: {fileID: 1790683477967824326, guid: 547adc247c2384f42a84b7bc7edf5759, type: 3}
   maxEarthDuration: 5
   interactionRange: 1.63
   interactionRadius: 0.37
