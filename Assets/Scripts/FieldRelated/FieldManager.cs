@@ -65,6 +65,7 @@ public class FieldManager : Interactable
 
     public override void Interact()
     {
+        base.Interact();
         inventory = Inventory.instance;
 
         if (!IsSeeded && ActiveFieldstate == Fieldstate.empty)
