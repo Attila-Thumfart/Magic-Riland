@@ -24,10 +24,12 @@ public class DontDestroyFields : MonoBehaviour
         if (_TargetScene == "Farm")
         {
             InstanceOfObject.transform.GetChild(0).gameObject.SetActive(true);
+            InstanceOfObject.transform.GetChild(1).gameObject.SetActive(true);
         }
         else
         {
             InstanceOfObject.transform.GetChild(0).gameObject.SetActive(false);
+            InstanceOfObject.transform.GetChild(1).gameObject.SetActive(true);
         }
     }
 }
