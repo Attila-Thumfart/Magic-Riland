@@ -726,6 +726,6 @@ MonoBehaviour:
   FemaleLove: {fileID: 11400000, guid: dfc37c09f3d5e6249b068f0846efd4dc, type: 2}
   HeartParticles: {fileID: 1202522996400206, guid: f87e7926fd589094b8a269e14b8bea5e,
     type: 3}
-  MessageBox: {fileID: 8183592935274476990}
+  MessageBox: {fileID: 8183592935315760788}
   Message: {fileID: 8183592936265604796}
   CurrentLovestate: 0
