@@ -30,7 +30,7 @@ public class WolkenMovement : MonoBehaviour
         controls.Gameplay.Enable();
     }
 
-    private void OnDisable() // This function disables the controls when the object becomes disabled or inactive
+    private void OnDisable() // This function disables the csontrols when the object becomes disabled or inactive
     {
         controls.Gameplay.Disable();
     }
