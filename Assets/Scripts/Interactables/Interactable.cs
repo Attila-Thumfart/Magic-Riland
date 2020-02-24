@@ -9,7 +9,6 @@ public class Interactable : MonoBehaviour
     public virtual void Interact()
     {
         // This method is meant to be overwritten
-        Debug.Log("Interacting with " + transform.name);
         Player = GameObject.FindGameObjectWithTag("Player");            //finds the Player
     }
 

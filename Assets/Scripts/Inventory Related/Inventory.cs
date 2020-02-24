@@ -68,7 +68,6 @@ public class Inventory : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("You already have enough of those, dont be greedy!");
                     return false;
                 }
             }
@@ -93,7 +92,6 @@ public class Inventory : MonoBehaviour
 
             if (i == items.Length - 1 && items[i] != null)
             {
-                Debug.Log("Inventory full.");
                 return false;
             }
         }
@@ -108,13 +106,11 @@ public class Inventory : MonoBehaviour
             {
                 items[_inventorySlot] = null;
                 CurrentItem = null;
-                Debug.Log("This was the last of its kind...");
             }
 
             else
             {
                 items[_inventorySlot].ChangeNumberOfItemsBy(-1);
-                Debug.Log("The item " + items[_inventorySlot].GetName() + "is now a bit lonlier " + items[_inventorySlot].GetNumberOfItems());
             }
             //inventoryUI.RemoveItemFromSlot(_inventorySlot);
 

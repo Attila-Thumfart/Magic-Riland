@@ -87,8 +87,6 @@ public class GameManager : MonoBehaviour
             if (WeedChance == 1)
             {
                 Fields[i].SetWeedstate(true);
-
-                Debug.Log("Field " + Fields[i] + " is weeded");
             }
         }
         FindObjectOfType<DontDestroyFields>().transform.GetChild(0).gameObject.SetActive(false);
@@ -118,7 +116,6 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Not enough money");
             return false;
         }
     }
