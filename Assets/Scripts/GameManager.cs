@@ -13,6 +13,10 @@ public class GameManager : MonoBehaviour
     List<FieldManager> Fields = new List<FieldManager>();       //makes a List containing all "FieldManagers"
 
     [SerializeField]
+    private int PlayerMoney;
+    private int DailyIncome;
+
+    [SerializeField]
     private int CalenderDay = 1;            //the days passing in a playthrough
 
     [SerializeField]
@@ -23,6 +27,9 @@ public class GameManager : MonoBehaviour
         DefineGameObjects();                //every Game Object the GM needs gets defined there
 
         EndOfDayCardUI.SetActive(false);    //the scene gets faded in
+
+        DailyIncome = 0;
+        PlayerMoney = 0;
     }
 
 
@@ -31,8 +38,10 @@ public class GameManager : MonoBehaviour
         CalenderDay++;
         StartCoroutine(Coroutine(1.2f, () =>                //Lambda fuunction: waits 1.2 seconds before continuing with the following code
         {
+            AddDailyIncomeToPlayerMoney();
             EndOfDayCardUI.SetActive(true);                 //shows the summary at the end of the day
-            EndOfDayCardUI.GetComponent<EndOfDayRandomNumbers>().Start();       //GETS CHANGED LATER
+            EndOfDayCardUI.GetComponent<EndOfDayUI>().UpdateEndOFDayUI();
+            ResetDailyIncome();
         }));
     }
 
@@ -49,6 +58,8 @@ public class GameManager : MonoBehaviour
 
     public void EndNight()                                      //gets called after closing the summary of the day to end the night
     {
+        FindObjectOfType<DontDestroyFields>().transform.GetChild(0).gameObject.SetActive(true);
+
         Fields.Clear();                                                                         //clears all fields from the list to not get double entries
         foreach (FieldManager go in FieldManager.FindObjectsOfType(typeof(FieldManager)))       //finds all objects of type FieldManager
         {
@@ -57,7 +68,6 @@ public class GameManager : MonoBehaviour
                 Fields.Add(go);                                                                 //add it to the List of Fields
             }
         }
-
 
         EndOfDayCardUI.SetActive(false);                                //Removes the summary of the previous day
         Player = GameObject.Find("Player");                             //Finds the Player
@@ -81,9 +91,47 @@ public class GameManager : MonoBehaviour
                 Debug.Log("Field " + Fields[i] + " is weeded");
             }
         }
-
+        FindObjectOfType<DontDestroyFields>().transform.GetChild(0).gameObject.SetActive(false);
     }
 
+    public void AddDailyIncome(int _money)
+    {
+        DailyIncome += _money;
+    }
+
+    public void AddDailyIncomeToPlayerMoney()
+    {
+        PlayerMoney += DailyIncome;
+    }
+
+    public void ResetDailyIncome()
+    {
+        DailyIncome = 0;
+    }
+
+    public bool RemovePlayerMoney(int _price)
+    {
+        if (PlayerMoney - _price >= 0)
+        {
+            PlayerMoney -= _price;
+            return true;
+        }
+        else
+        {
+            Debug.Log("Not enough money");
+            return false;
+        }
+    }
+
+    public int GetPlayerMoney()
+    {
+        return PlayerMoney;
+    }
+
+    public int GetDailyIncome()
+    {
+        return DailyIncome;
+    }
 
     private void DefineGameObjects()
     {

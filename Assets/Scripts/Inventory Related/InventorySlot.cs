@@ -12,6 +12,9 @@ public class InventorySlot : MonoBehaviour
     [SerializeField]
     private Shop Shop;
 
+    [SerializeField]
+    private DeliveryBox DeliveryBox;
+
     private int ButtonIndex;
 
     [SerializeField]
@@ -74,5 +77,20 @@ public class InventorySlot : MonoBehaviour
     public void SellIndex()
     {
         Shop.SellItem(ButtonIndex);
+    }
+
+    public void PutItemInBox()
+    {
+        DeliveryBox.DeliverItem(ButtonIndex);
+    }
+
+    public void SetColorActive()
+    {
+        this.GetComponentInChildren<Image>().color = Color.green;
+    }
+
+    public void ResetColor()
+    {
+        this.GetComponentInChildren<Image>().color = Color.white;
     }
 }

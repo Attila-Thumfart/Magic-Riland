@@ -31,13 +31,20 @@ public class Inventory : MonoBehaviour
     int TargetButtonIndex;
     int PreviousIndex;
 
+    Item CurrentItem;
     Item HoveredItem;
     Item SelectedItem;
     Item SwappedItem;
 
+    [SerializeField]
+    Item StartItem;
+
     private void Start()
     {
         items = new Item[InventorySpace];
+
+        for (int i = 0; i < 10; i++)
+            AddItemToInventory(StartItem);
     }
 
     public bool AddItemToInventory(Item item)
@@ -49,8 +56,8 @@ public class Inventory : MonoBehaviour
                 if (items[i].GetNumberOfItems() < NumberOfAllowedItems)
                 {
                     items[i].ChangeNumberOfItemsBy(1);
-                    Debug.Log("You now have this item " + items[i].GetNumberOfItems() + " times");
-                    Debug.Log(items[i].GetNumberOfItems() + "/" + NumberOfAllowedItems);
+                    //Debug.Log("You now have this item " + items[i].GetNumberOfItems() + " times");
+                    //Debug.Log(items[i].GetNumberOfItems() + "/" + NumberOfAllowedItems);
 
                     if (onItemChangedCallback != null)
                     {
@@ -95,20 +102,24 @@ public class Inventory : MonoBehaviour
 
     public void RemoveItemFromInventory(int _inventorySlot)
     {
-        if (items[_inventorySlot].GetNumberOfItems() == 1)
+        if (items[_inventorySlot] != null)
         {
-            items[_inventorySlot] = null;
-            Debug.Log("This was the last of its kind...");
-        }
+            if (items[_inventorySlot].GetNumberOfItems() == 1)
+            {
+                items[_inventorySlot] = null;
+                CurrentItem = null;
+                Debug.Log("This was the last of its kind...");
+            }
 
-        else
-        {
-            items[_inventorySlot].ChangeNumberOfItemsBy(-1);
-            Debug.Log("The item " + items[_inventorySlot].GetName() + "is now a bit lonlier " + items[_inventorySlot].GetNumberOfItems());
-        }
-        //inventoryUI.RemoveItemFromSlot(_inventorySlot);
+            else
+            {
+                items[_inventorySlot].ChangeNumberOfItemsBy(-1);
+                Debug.Log("The item " + items[_inventorySlot].GetName() + "is now a bit lonlier " + items[_inventorySlot].GetNumberOfItems());
+            }
+            //inventoryUI.RemoveItemFromSlot(_inventorySlot);
 
-        // inventorySlot.ClearSlot();
+            // inventorySlot.ClearSlot();
+        }
 
         if (onItemChangedCallback != null)
         {
@@ -136,11 +147,14 @@ public class Inventory : MonoBehaviour
             items[TargetButtonIndex] = SelectedItem;
             items[PreviousIndex] = SwappedItem;
             SelectedItem = null;
+            CurrentItem = null;
         }
         else if (SelectedItem == null)
         {
             SelectedItem = items[TargetButtonIndex];
             PreviousIndex = TargetButtonIndex;
+            CurrentItem = SelectedItem;
+
             //inventoryUI.ItemDescriptionDisplay();
         }
 
@@ -174,18 +188,20 @@ public class Inventory : MonoBehaviour
         return HoveredItem;
     }
 
+    public int GetCurrentItemIndex()
+    {
+        return TargetButtonIndex;
+    }
+
+    public int GetPreviousIndex()
+    {
+        return PreviousIndex;
+    }
+
     public Item GetCurrentItem()
     {
-        /*
-        for (int i = 0; i < items.Length; i++)
-        {
-            if (items[i].GetIsSeed())
-            {
-                return items[i];
-            }
-        }
-        return null;*/
-        return items[TargetButtonIndex];
+        return CurrentItem;
+        //return items[TargetButtonIndex]; //May need this still
     }
 
     public Item GetSelectedItem()

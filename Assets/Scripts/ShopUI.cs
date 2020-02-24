@@ -21,11 +21,14 @@ public class ShopUI : Interactable
 
     private Item DisplayItem;
 
+    private GameObject Menus;
+    private GameObject InventoryUI;
+
     [SerializeField]
     private Image DisplayIcon;
 
     [SerializeField]
-    private TMP_Text DescriptionDisplay;
+    private TMP_Text DescriptionDisplay, PlayerMoneyDisplay;
 
     PlayerControls controls;
 
@@ -47,12 +50,16 @@ public class ShopUI : Interactable
 
         Inventory.onItemChangedCallback += UpdateUI;
 
-        UpdateShopUI();
-
         InventorySlots = ItemsParent.GetComponentsInChildren<InventorySlot>();
         ShopSlots = ShopParent.GetComponentsInChildren<ShopSlot>();
 
-        controls.Menus.Cancle.started += ctx => DeactivateUI();
+        UpdateShopUI();
+
+        controls.Gameplay.Erde.started += ctx => DeactivateUI();  // Erde is used because I cant for the love of god figure out how the Unity Input Action System works
+
+        PlayerMoneyDisplay.text = GameManager.GMInstance.GetPlayerMoney().ToString();
+
+        UpdateUI();
     }
 
     public override void Interact()
@@ -74,6 +81,8 @@ public class ShopUI : Interactable
                 InventorySlots[i].ClearSlot();
             }
         }
+
+        PlayerMoneyDisplay.text = GameManager.GMInstance.GetPlayerMoney().ToString();
     }
 
     public void UpdateShopUI()
@@ -93,9 +102,16 @@ public class ShopUI : Interactable
 
     private void ActivateUI()
     {
+        PlayerMoneyDisplay.text = GameManager.GMInstance.GetPlayerMoney().ToString();
+
+        Menus = GameObject.Find("MenuManager");
+        Menus.GetComponentInChildren<PauseMenu>().enabled = false;
+        InventoryUI = GameObject.Find("Inventory");
+        InventoryUI.GetComponent<InventoryUI>().enabled = false;
+
         shopUI.SetActive(true);
 
-        if (shopUI.activeSelf)
+        // if (shopUI.activeSelf)
         {
             Player.GetComponent<PlayerMovement>().enabled = false;
             Player.GetComponent<PlayerActions>().enabled = false;
@@ -108,15 +124,17 @@ public class ShopUI : Interactable
         {
             shopUI.SetActive(false);
 
-            if (!shopUI.activeSelf)
-            {
-                Player.GetComponent<PlayerMovement>().enabled = true;
-                Player.GetComponent<PlayerActions>().enabled = true;
-            }
+            Menus.GetComponentInChildren<PauseMenu>().enabled = true;
+            InventoryUI.GetComponent<InventoryUI>().enabled = true;
+
+            // if (!shopUI.activeSelf)
+            //{
+            Player.GetComponent<PlayerMovement>().enabled = true;
+            Player.GetComponent<PlayerActions>().enabled = true;
+            //}
         }
     }
-
-    public void ItemDescriptionDisplay()
+    public void InventoryItemDescriptionDisplay()
     {
         DisplayItem = Inventory.instance.GetHoveredItem();
 
@@ -125,6 +143,30 @@ public class ShopUI : Interactable
             DisplayIcon.sprite = DisplayItem.GetInventoryIcon();
             DisplayIcon.enabled = true;
             DescriptionDisplay.text = DisplayItem.GetDescription();
+        }
+        else if (DisplayItem == null)
+        {
+            DisplayIcon.sprite = null;
+            DisplayIcon.enabled = false;
+            DescriptionDisplay.text = null;
+        }
+    }
+
+    public void ShopItemDescriptionDisplay()
+    {
+        DisplayItem = Shop.GetHoveredItem();
+
+        if (DisplayItem != null)
+        {
+            DisplayIcon.sprite = DisplayItem.GetInventoryIcon();
+            DisplayIcon.enabled = true;
+            DescriptionDisplay.text = DisplayItem.GetDescription();
+        }
+        else if (DisplayItem == null)
+        {
+            DisplayIcon.sprite = null;
+            DisplayIcon.enabled = false;
+            DescriptionDisplay.text = null;
         }
     }
 

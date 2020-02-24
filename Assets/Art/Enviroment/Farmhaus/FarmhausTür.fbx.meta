@@ -9,7 +9,17 @@ ModelImporter:
   - first:
       74: -5405653242291790180
     second: Take 001 (1)
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material #26
+    second: {fileID: 2100000, guid: 88716037273bf3c4c9cd12e2ddabf5b4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material #27
+    second: {fileID: 2100000, guid: 9b9d915287a1f9c46bc9682c3b28bc6e, type: 2}
   materials:
     materialImportMode: 1
     materialName: 0

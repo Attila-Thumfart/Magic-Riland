@@ -16,6 +16,8 @@ public class InventoryUI : MonoBehaviour
     public GameObject inventoryUI;
     public GameObject Player;
 
+    private GameObject Menus;
+
     PlayerControls controls;
 
     public static InventoryUI InvUIInstance;
@@ -26,7 +28,7 @@ public class InventoryUI : MonoBehaviour
     private Image DisplayIcon;
 
     [SerializeField]
-    private TMP_Text DescriptionDisplay;
+    private TMP_Text DescriptionDisplay, PlayerMoneyDisplay;
 
     private void Awake()
     {
@@ -52,6 +54,9 @@ public class InventoryUI : MonoBehaviour
         Slots = ItemsParent.GetComponentsInChildren<InventorySlot>();
 
         controls.Gameplay.Inventar.started += ctx => ToggleUI();
+        controls.Gameplay.Erde.started += ctx => DeactivateUI();
+
+        PlayerMoneyDisplay.text = GameManager.GMInstance.GetPlayerMoney().ToString();
     }
 
     // Update is called once per frame
@@ -84,23 +89,56 @@ public class InventoryUI : MonoBehaviour
                 Slots[i].ClearSlot();
             }
         }
+
+        PlayerMoneyDisplay.text = GameManager.GMInstance.GetPlayerMoney().ToString();
+
+        if (Inventory.instance.GetSelectedItem() == null)
+        {
+            SetButtonColorSelected();
+        }
     }
 
     private void ToggleUI()
     {
-        inventoryUI.SetActive(!inventoryUI.activeSelf);
-        Player = GameObject.FindGameObjectWithTag("Player");
-        Inventory.instance.ResetSelectedItem();
+        PlayerMoneyDisplay.text = GameManager.GMInstance.GetPlayerMoney().ToString();
 
+        Menus = GameObject.Find("MenuManager");
+
+        if (!Menus.GetComponentInChildren<PauseMenu>().GetIsPaused())
+        {
+            inventoryUI.SetActive(!inventoryUI.activeSelf);
+            Player = GameObject.FindGameObjectWithTag("Player");
+            Inventory.instance.ResetSelectedItem();
+
+            if (inventoryUI.activeSelf)
+            {
+                Player.GetComponent<PlayerMovement>().enabled = false;
+                Player.GetComponent<PlayerActions>().enabled = false;
+                Menus.GetComponentInChildren<PauseMenu>().enabled = false;
+            }
+            else
+            {
+                Player.GetComponent<PlayerMovement>().enabled = true;
+                Player.GetComponent<PlayerActions>().enabled = true;
+                Menus.GetComponentInChildren<PauseMenu>().enabled = true;
+            }
+        }
+    }
+
+    private void DeactivateUI()
+    {
         if (inventoryUI.activeSelf)
         {
-            Player.GetComponent<PlayerMovement>().enabled = false;
-            Player.GetComponent<PlayerActions>().enabled = false;
-        }
-        else
-        {
+            inventoryUI.SetActive(false);
+
+            // Menus.GetComponentInChildren<PauseMenu>().enabled = true;
+
+            // if (!shopUI.activeSelf)
+            //{
             Player.GetComponent<PlayerMovement>().enabled = true;
             Player.GetComponent<PlayerActions>().enabled = true;
+            Menus.GetComponentInChildren<PauseMenu>().enabled = true;
+            //}
         }
     }
 
@@ -114,6 +152,12 @@ public class InventoryUI : MonoBehaviour
             DisplayIcon.enabled = true;
             DescriptionDisplay.text = DisplayItem.GetDescription();
         }
+        else
+        {
+            DisplayIcon.sprite = null; ;
+            DisplayIcon.enabled = false;
+            DescriptionDisplay.text = null;
+        }
     }
 
     public void ClearDescriptionDisplay()
@@ -121,6 +165,19 @@ public class InventoryUI : MonoBehaviour
         DisplayIcon.sprite = null; ;
         DisplayIcon.enabled = false;
         DescriptionDisplay.text = null;
+    }
+
+    public void SetButtonColorSelected()
+    {
+        for (int i = 0; i < Slots.Length; i++)
+        {
+            Slots[i].ResetColor();
+        }
+
+        if (Inventory.instance.GetCurrentItem() != null)
+        {
+            Slots[Inventory.instance.GetCurrentItemIndex()].SetColorActive();
+        }
     }
 
     private void OnEnable() // This function enables the controls when the object becomes enabled and active

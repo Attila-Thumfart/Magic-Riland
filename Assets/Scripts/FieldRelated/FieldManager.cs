@@ -20,6 +20,7 @@ public class FieldManager : Interactable
 
     private int DayOfProgress;
     private int DaysUntilWithered = 3;
+    private int DaysUntilNotThere = 0;
 
     [SerializeField]
     private GameObject FieldDry, FieldWatered;
@@ -75,14 +76,9 @@ public class FieldManager : Interactable
                 {
                     SetThisPlant(ThisPlant);
                     SetIsSeeded(true);
-                    inventory.RemoveItemFromInventory(0);
+                    inventory.RemoveItemFromInventory(inventory.GetCurrentItemIndex());
                 }
             }
-        }
-
-        if(isWeed)
-        {
-            SetWeedstate(false);
         }
 
         if (IsSeeded && (ActiveFieldstate == Fieldstate.finished || ActiveFieldstate == Fieldstate.withered))
@@ -136,7 +132,7 @@ public class FieldManager : Interactable
             case (Fieldstate.seeded):                                       //if the plant is seeded
                 GrowthModelSeedInstance.SetActive(true);
 
-                if (DayOfProgress == GrowthRateUntilSprout)                                     //and if the day is ended (only for the first step from seed --> sprout)
+                if (DayOfProgress == GrowthRateUntilSprout)                 //and if the day is ended (only for the first step from seed --> sprout)
                 {
                     ActiveFieldstate = Fieldstate.sprout;                   //the seed growths into a sprout
                     DayOfProgress = 0;                                      //reset the progresstimer
@@ -147,7 +143,7 @@ public class FieldManager : Interactable
                 GrowthModelSeedInstance.SetActive(false);
                 GrowthModelSproutInstance.SetActive(true);
 
-                if (DayOfProgress == GrowthRateUntilMedium)                      //and if the DayOfProgress matches the GrowthRateMedium step of the plant
+                if (DayOfProgress == GrowthRateUntilMedium)                 //and if the DayOfProgress matches the GrowthRateMedium step of the plant
                 {
                     ActiveFieldstate = Fieldstate.medium;                   //the plant reaches its 2nd stage of its growthcycle
                     DayOfProgress = 0;                                      //reset the progresstimer
@@ -158,7 +154,7 @@ public class FieldManager : Interactable
                 GrowthModelSproutInstance.SetActive(false);
                 GrowthModelMediumInstance.SetActive(true);
 
-                if (DayOfProgress == GrowthRateUntilFinished)                    //and if the DayOfProgress matches the GrowthRateFinished step of the plant
+                if (DayOfProgress == GrowthRateUntilFinished)               //and if the DayOfProgress matches the GrowthRateFinished step of the plant
                 {
                     ActiveFieldstate = Fieldstate.finished;                 //the plant is fully grown and ready to be harvested
                     DayOfProgress = 0;                                      //reset the progresstimer
@@ -171,7 +167,7 @@ public class FieldManager : Interactable
 
                 if (DayOfProgress == 3)                                      //and if 3 days are passed
                 {
-                    ActiveFieldstate = Fieldstate.withered;                 //the plant is withered 
+                    ActiveFieldstate = Fieldstate.withered;                  //the plant is withered 
                 }
                 break;
 
@@ -206,6 +202,7 @@ public class FieldManager : Interactable
         IsPlowed = _NewState;
         if(_NewState)
         {
+            DaysUntilNotThere = 3;
             FieldDryInstance.SetActive(true);
         }
         else if(!_NewState)
@@ -267,9 +264,15 @@ public class FieldManager : Interactable
             FieldWateredInstance.SetActive(false);
             DayOfProgress++;                        //the plant growths towards its next step
         }
-        else if ((!IsWatered && IsSeeded) || isWeed)            //if the field is not waterd but seeded
+        else if ((!IsWatered && IsSeeded) || (IsWatered && isWeed))            //if the field is not waterd but seeded
         {
             DaysUntilWithered--;                    //the plant is one step closer to dry out
+        }
+
+        if(!IsSeeded)
+        {
+            DaysUntilNotThere--;
+            EmptyField();
         }
     }
 
@@ -290,6 +293,14 @@ public class FieldManager : Interactable
         if (DaysUntilWithered == 0)
         {
             ActiveFieldstate = Fieldstate.withered;
+        }
+    }
+
+    private void EmptyField()
+    {
+        if(DaysUntilNotThere == 0)
+        {
+            SetIsPlowed(false);
         }
     }
 

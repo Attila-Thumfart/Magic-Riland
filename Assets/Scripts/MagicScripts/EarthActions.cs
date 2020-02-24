@@ -15,6 +15,8 @@ public class EarthActions : MonoBehaviour
     GameObject CurrentField;
     private GameObject Camera;
 
+    PlayerActions playerActions;
+
     private void Awake()
     {
         // countdown = cloudDuration;
@@ -56,11 +58,13 @@ public class EarthActions : MonoBehaviour
         }
     }
 
-    private void CancleSpell()
+    public void CancleSpell()
     {
         Destroy(gameObject);
         Camera = GameObject.Find("CameraHolder");
-        Camera.GetComponent<ObjectFollower>().enabled = true;
+        playerActions = GameObject.Find("Player").GetComponent<PlayerActions>();
+        playerActions.SetActiveMagic(false);
+        //Camera.GetComponent<ObjectFollower>().enabled = true;
         //cloudCam.SetActive(false);
         //player.GetComponent<ControllerMovement>().enabled = true;
         //mainCam.SetActive(true);

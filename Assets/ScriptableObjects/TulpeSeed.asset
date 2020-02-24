@@ -12,15 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71e50bdf55f8b8f4abf95e0f69e63767, type: 3}
   m_Name: TulpeSeed
   m_EditorClassIdentifier: 
-  Name: TulpeSeed
-  Description: Seed of a Tulpe
+  Name: Tulip Seed
+  Description: 'The Seed of a Tulip. The Flower of Flowers sure to spark joy in whoever
+    it is given to. It takes 3 Days to grow. Cost: 4 Gold'
   IsSeed: 1
-  SellingPrice: 25
-  Cost: 300
+  SellingPrice: 4
+  Cost: 4
   InventoryIcon: {fileID: 21300000, guid: 81a87126ed3ba444b8339c7aab31c13c, type: 3}
   GrowthRateUntilSprout: 1
-  GrowtRateUntilMedium: 2
-  GrowthRateUntilFinished: 3
+  GrowtRateUntilMedium: 1
+  GrowthRateUntilFinished: 1
   GrowthModelSeed: {fileID: 926866951584954849, guid: 92186779d7b39e3498dd28eba9a1b85c,
     type: 3}
   GrowthModelSprout: {fileID: 2734001056743021161, guid: b743f1e3de623c649b74db60238f0f93,

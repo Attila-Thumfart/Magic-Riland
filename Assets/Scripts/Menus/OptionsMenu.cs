@@ -16,11 +16,11 @@ public class OptionsMenu : MonoBehaviour
     [SerializeField]
     protected Slider volumeSlider;
 
-    [SerializeField]
+    /*[SerializeField]
     protected TMP_Dropdown qualityDropdown;
 
     [SerializeField]
-    protected TMP_Dropdown resolutionDropdown;
+    protected TMP_Dropdown resolutionDropdown;*/
 
     [SerializeField]
     protected Toggle fullscreenToggle;
@@ -52,7 +52,7 @@ public class OptionsMenu : MonoBehaviour
 
     }
 
-    private void OnEnable()
+    /*private void OnEnable()
     {
 
         resolutionDropdown.onValueChanged.AddListener(new UnityAction<int>(index =>  // Checks if there are any previously safed states for this UI and loads them if that is the case
@@ -66,13 +66,13 @@ public class OptionsMenu : MonoBehaviour
             PlayerPrefs.SetInt(qualitySaveBucket, qualityDropdown.value);
             Save();
         }));
-    }
+    }*/
 
-    private void OnDisable()
+   /* private void OnDisable()
     {
         resolutionDropdown.onValueChanged.RemoveAllListeners();
         qualityDropdown.onValueChanged.RemoveAllListeners();
-    }
+    }*/
 
     private void Start()
     {
@@ -81,13 +81,13 @@ public class OptionsMenu : MonoBehaviour
         audioMixer.SetFloat("Volume", PlayerPrefs.GetFloat("MVolume"));
 
         //Sets the quality to the previously saved option if there is one
-        qualityDropdown.value = PlayerPrefs.GetInt(qualitySaveBucket, 5);
+       // qualityDropdown.value = PlayerPrefs.GetInt(qualitySaveBucket, 5);
 
         //fills the array with all available resolutions for the currently used screen
         resolutions = Screen.resolutions;
 
         //clears the preconfigured placeholder-options in the dropdown menu
-        resolutionDropdown.ClearOptions();
+       // resolutionDropdown.ClearOptions();
 
         //the list is filled with the strings that are meant to be shown in the dropdown menu
         List<string> options = new List<string>();
@@ -109,11 +109,11 @@ public class OptionsMenu : MonoBehaviour
         }
 
         //adds the options saved in the list to the actual dropdown menu
-        resolutionDropdown.AddOptions(options);
+        //resolutionDropdown.AddOptions(options);
         //sets the resolution to the standard (maximum) resolution when starting the application
-        resolutionDropdown.value = PlayerPrefs.GetInt(resolutionSaveBucket, currentResolutionIndex);
+        //resolutionDropdown.value = PlayerPrefs.GetInt(resolutionSaveBucket, currentResolutionIndex);
         //refreshes the dropdown menu so the right resolution option is shown
-        resolutionDropdown.RefreshShownValue();
+        //resolutionDropdown.RefreshShownValue();
     }
 
     //resolutionIndex is set by the dropdown menu in unity

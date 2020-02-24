@@ -64,4 +64,9 @@ public class PlayerMovement : MonoBehaviour
     {
         transform.position = new Vector3(_targetPosition.x, _targetPosition.y, _targetPosition.z);
     }
+
+    public float GetCharacterSpeed()
+    {
+        return Mathf.Abs(move.x) + Mathf.Abs(move.y);
+    }
 }
