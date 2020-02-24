@@ -13,16 +13,16 @@ MonoBehaviour:
   m_Name: Diana
   m_EditorClassIdentifier: 
   NPCName: Diana
-  WelcomeText: Hi
-  FirstWish: I really like Tulips.
-  ThanksForFirstWish: Thx
-  SecondWish: I'd love to have a Strawberry right now.
-  ThanksForSecondWish: Thx+1
-  ThirdWish: Did you see the fancy Perfume in the shop? Its so expensive... I really
-    want to know how it smells.
-  ThanksForThirdWish: ThxFR
-  LoveText: uWu
-  WrongItem: I have a boyfriend
+  WelcomeText: Hi, you seem to be new around here, right?
+  FirstWish: 'Let me test you: Bring me a Tulip.'
+  ThanksForFirstWish: 'Didn''t expect that. '
+  SecondWish: I want a Snack. A Strawberry woul be perfect!
+  ThanksForSecondWish: 'Wow so sweet ~  '
+  ThirdWish: I reall fancy the Perfume from the shop, but it's a little too expensive
+    for me.
+  ThanksForThirdWish: "You sure? Well than thank you very much\u2026 you're the best~"
+  LoveText: Thanks again. I am sure you will get along with the other Villagers.
+  WrongItem: "Thanks\u2026 i guess? But I don't really need that right now\u2026"
   NPCMesh: {fileID: 0}
   FirstWishObject: {fileID: 11400000, guid: fc3570048d1ed9849a1230452cddb5fa, type: 2}
   SecondWishObject: {fileID: 11400000, guid: 4c0a4a961e45cf449af449cc6b5b33de, type: 2}

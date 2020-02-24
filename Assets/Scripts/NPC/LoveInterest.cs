@@ -11,6 +11,11 @@ public class LoveInterest : Interactable
     private Item Present;
 
     [SerializeField]
+    private GameObject HeartParticles;
+
+    private GameObject HeartParticlesInstace;
+
+    [SerializeField]
     private GameObject MessageBox;
     [SerializeField]
     private TMP_Text Message;
@@ -32,7 +37,6 @@ public class LoveInterest : Interactable
     {
         base.Interact();
         Present = Player.GetComponent<PlayerActions>().GetCurrentItem();
-        Debug.Log("Start Conversation");
         SwitchLoveState();
     }
 
@@ -85,6 +89,7 @@ public class LoveInterest : Interactable
             MessageBox.SetActive(true);
             Inventory.instance.RemoveItemFromInventory(Inventory.instance.GetCurrentItemIndex());//Inventory.instance.GetCurrentItemIndex());
                 CurrentLovestate = _nextLoveState;
+            HeartParticlesInstace = Instantiate(HeartParticles, transform);
         }
 
         else if (_Present != _Wish)

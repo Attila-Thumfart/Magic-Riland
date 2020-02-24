@@ -28,25 +28,28 @@ public class InventorySlot : MonoBehaviour
     public void AddItem(Item newItem)
     {
         Item = newItem;
-        if (Item != null)
+        if (Icon)
         {
-            Icon.sprite = Item.GetInventoryIcon();
-            Icon.enabled = true;
-
-            if (Item.GetNumberOfItems() > 1)
+            if (Item)
             {
-                StackSize.text = Item.GetNumberOfItems().ToString();
+                Icon.sprite = Item.GetInventoryIcon();
+                Icon.enabled = true;
+
+                if (Item.GetNumberOfItems() > 1)
+                {
+                    StackSize.text = Item.GetNumberOfItems().ToString();
+                }
+                else
+                {
+                    StackSize.text = null;
+                }
             }
             else
             {
+                Icon.sprite = null; ;
+                Icon.enabled = false;
                 StackSize.text = null;
             }
-        }
-        else
-        {
-            Icon.sprite = null; ;
-            Icon.enabled = false;
-            StackSize.text = null;
         }
     }
 

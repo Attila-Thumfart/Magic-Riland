@@ -3794,7 +3794,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4859262852212729910}
   m_Layer: 0
-  m_Name: zzzz
+  m_Name: Roland_model_Pose 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3807,9 +3807,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8445595144353405477}
-  m_LocalRotation: {x: -0, y: 0.9903021, z: -0, w: -0.13893102}
-  m_LocalPosition: {x: 274.90518, y: 329.85, z: -701.06604}
-  m_LocalScale: {x: 2.3856, y: 2.3856, z: 2.3856}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3981312524346740542}
   - {fileID: 7033993160646119565}
@@ -3847,7 +3847,7 @@ Transform:
   - {fileID: 5917522273916683592}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 195.97198, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8458611341485282882
 GameObject:
   m_ObjectHideFlags: 0

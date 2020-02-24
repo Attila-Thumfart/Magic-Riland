@@ -137,6 +137,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""CameraReset"",
+                    ""type"": ""Button"",
+                    ""id"": ""431a6286-2f05-431c-af21-f3d5676fafdc"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -302,6 +310,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""processors"": ""StickDeadzone(min=0.3)"",
                     ""groups"": """",
                     ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6d3c9c69-870b-45eb-af0b-d57cc0305e9a"",
+                    ""path"": ""<Gamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""CameraReset"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -528,6 +547,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Gameplay_Interact = m_Gameplay.FindAction("Interact", throwIfNotFound: true);
         m_Gameplay_Wind = m_Gameplay.FindAction("Wind", throwIfNotFound: true);
         m_Gameplay_Wasser = m_Gameplay.FindAction("Wasser", throwIfNotFound: true);
+        m_Gameplay_CameraReset = m_Gameplay.FindAction("CameraReset", throwIfNotFound: true);
         // Menus
         m_Menus = asset.FindActionMap("Menus", throwIfNotFound: true);
         m_Menus_Navigate = m_Menus.FindAction("Navigate", throwIfNotFound: true);
@@ -604,6 +624,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Interact;
     private readonly InputAction m_Gameplay_Wind;
     private readonly InputAction m_Gameplay_Wasser;
+    private readonly InputAction m_Gameplay_CameraReset;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
@@ -623,6 +644,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Interact => m_Wrapper.m_Gameplay_Interact;
         public InputAction @Wind => m_Wrapper.m_Gameplay_Wind;
         public InputAction @Wasser => m_Wrapper.m_Gameplay_Wasser;
+        public InputAction @CameraReset => m_Wrapper.m_Gameplay_CameraReset;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -677,6 +699,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Wasser.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnWasser;
                 @Wasser.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnWasser;
                 @Wasser.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnWasser;
+                @CameraReset.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraReset;
+                @CameraReset.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraReset;
+                @CameraReset.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnCameraReset;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -726,6 +751,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Wasser.started += instance.OnWasser;
                 @Wasser.performed += instance.OnWasser;
                 @Wasser.canceled += instance.OnWasser;
+                @CameraReset.started += instance.OnCameraReset;
+                @CameraReset.performed += instance.OnCameraReset;
+                @CameraReset.canceled += instance.OnCameraReset;
             }
         }
     }
@@ -861,6 +889,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnInteract(InputAction.CallbackContext context);
         void OnWind(InputAction.CallbackContext context);
         void OnWasser(InputAction.CallbackContext context);
+        void OnCameraReset(InputAction.CallbackContext context);
     }
     public interface IMenusActions
     {
