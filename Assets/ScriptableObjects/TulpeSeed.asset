@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: TulpeSeed
   m_EditorClassIdentifier: 
   Name: Tulip Seed
-  Description: 'The Seed of a Tulip. The Flower of Flowers sure to spark joy in whoever
-    it is given to. It takes 3 Days to grow. Cost: 4 Gold'
+  Description: 'The seed of a tulip. The flower of flower''s sure to spark joy in
+    whoever it is given to. It takes 3 days to grow. Cost: 4 Gold'
   IsSeed: 1
   SellingPrice: 4
   Cost: 4
