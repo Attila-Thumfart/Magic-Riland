@@ -20,6 +20,12 @@ public class LoveInterest : Interactable
     [SerializeField]
     private TMP_Text Message;
 
+    private bool MessageBoxIsActive;
+
+    [SerializeField]
+    private float MaxMessageDuration;
+    private float MessageBoxTimer;
+
     public enum LoveState           
     {
         unknown,
@@ -38,6 +44,22 @@ public class LoveInterest : Interactable
         base.Interact();
         Present = Player.GetComponent<PlayerActions>().GetCurrentItem();
         SwitchLoveState();
+    }
+
+    private void Update()
+    {
+        if (MessageBoxIsActive)
+        {
+            MessageBoxTimer += Time.deltaTime;
+
+            if(MessageBoxTimer >= MaxMessageDuration)
+            {
+                MessageBox.SetActive(false);
+                MessageBoxIsActive = false;
+                MessageBoxTimer = 0;
+            }
+
+        }
     }
 
     private void SwitchLoveState()        
@@ -63,6 +85,7 @@ public class LoveInterest : Interactable
             case (LoveState.love):
                 Message.text = LoveText();
                 MessageBox.SetActive(true);
+                MessageBoxIsActive = true;
                 break;
         }
     }
@@ -72,7 +95,8 @@ public class LoveInterest : Interactable
     {
             Message.text = FemaleLove.GetWelcomeText();
         MessageBox.SetActive(true);
-            CurrentLovestate = LoveState.firstWish;
+        MessageBoxIsActive = true;
+        CurrentLovestate = LoveState.firstWish;
     }
 
     private void GotPresent(Item _Present, Item _Wish, string _WishText, string _RightPresentText, LoveState _nextLoveState)
@@ -81,12 +105,14 @@ public class LoveInterest : Interactable
         {
             Message.text = _WishText;
             MessageBox.SetActive(true);
+            MessageBoxIsActive = true;
         }
 
         else if (_Present == _Wish)
         {
             Message.text = _RightPresentText;
             MessageBox.SetActive(true);
+            MessageBoxIsActive = true;
             Inventory.instance.RemoveItemFromInventory(Inventory.instance.GetCurrentItemIndex());//Inventory.instance.GetCurrentItemIndex());
                 CurrentLovestate = _nextLoveState;
             HeartParticlesInstace = Instantiate(HeartParticles, transform);
@@ -96,6 +122,7 @@ public class LoveInterest : Interactable
         {
             Message.text = WrongPresent();
             MessageBox.SetActive(true);
+            MessageBoxIsActive = true;
         }
     }
 
@@ -112,5 +139,7 @@ public class LoveInterest : Interactable
     public void DisableMessageBox()
     {
         MessageBox.SetActive(false);
+        MessageBoxIsActive = false;
+        MessageBoxTimer = 0;
     }
 }
