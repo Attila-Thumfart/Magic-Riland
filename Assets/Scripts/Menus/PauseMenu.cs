@@ -24,7 +24,7 @@ public class PauseMenu : MonoBehaviour
         controls = new PlayerControls();
 
         controls.Gameplay.Menu.started += ctx => Pause();
-        controls.Gameplay.Erde.started += ctx => Pause();
+        controls.Gameplay.Erde.started += ctx => CloseMenu();
     }
 
     //to prevent the game from starting paused
@@ -58,6 +58,21 @@ public class PauseMenu : MonoBehaviour
                     Player.GetComponent<PlayerMovement>().enabled = false;
                     isPaused = true;
                 }));
+            }
+        }
+    }
+
+    public void CloseMenu()
+    {
+        if(PauseMenuUI.activeSelf)
+        {
+            if(!OptionsMenuUI.activeSelf)
+            {
+                PauseMenuUI.SetActive(false);
+                Time.timeScale = 1f;
+                Player.GetComponent<PlayerActions>().enabled = true;
+                Player.GetComponent<PlayerMovement>().enabled = true;
+                isPaused = false;
             }
         }
     }
