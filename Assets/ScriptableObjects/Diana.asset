@@ -13,14 +13,19 @@ MonoBehaviour:
   m_Name: Diana
   m_EditorClassIdentifier: 
   NPCName: Diana
-  WelcomeText: Hi, you seem to be new around here, right?
-  FirstWish: 'Let me test you: Bring me a Tulip.'
-  ThanksForFirstWish: 'Didn''t expect that. '
-  SecondWish: I want a Snack. A Strawberry woul be perfect!
-  ThanksForSecondWish: 'Wow so sweet ~  '
-  ThirdWish: I reall fancy the Perfume from the shop, but it's a little too expensive
-    for me.
-  ThanksForThirdWish: "You sure? Well than thank you very much\u2026 you're the best~"
+  WelcomeText: Hi, you seem to be new around here, right? Nice to meet you, the name's
+    Diana
+  FirstWish: 'Hm... you''re a little green behind the ears. Let me test you: Bring
+    me a Tulip.'
+  ThanksForFirstWish: 'Wow, you really did it! Didn''t expect that. '
+  SecondWish: You're not a bad guy, so can i ask you one more thing? I want a Snack.
+    A Strawberry woul be perfect!
+  ThanksForSecondWish: Wow so sweet ~. I'm talking about that Strawberry of course.
+  ThirdWish: You know... I'll consider you a friend now... So can you keep a secret?
+    I really fancy the Perfume from the shop, but it's a little too expensive for
+    me.
+  ThanksForThirdWish: "Wait?! For real? ... No, i can't accept such an expensive
+    gift! ...You sure? Well than thank you very much\u2026 you're the best~"
   LoveText: Thanks again. Sadly this is the end of our Demo. I hope I'll see you
     again when the game is finished.
   WrongItem: "Thanks\u2026 i guess? But I don't really need that right now\u2026"
