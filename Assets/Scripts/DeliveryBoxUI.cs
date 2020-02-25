@@ -144,20 +144,23 @@ public class DeliveryBoxUI : Interactable
     {
         DisplayItem = Inventory.instance.GetHoveredItem();
 
-        if (DisplayItem != null)
+        if (DisplayIcon)
         {
-            DisplayIcon.sprite = DisplayItem.GetInventoryIcon();
-            DisplayIcon.enabled = true;
-            DescriptionDisplay.text = DisplayItem.GetDescription();
-            DescriptionDisplay.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 110.29f);
-            DescriptionDisplay.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 200);
-            DescriptionDisplay.fontSize = 14;
-        }
-        else if (DisplayItem == null)
-        {
-            DisplayIcon.sprite = null;
-            DisplayIcon.enabled = false;
-            DescriptionDisplay.text = null;
+            if (DisplayItem != null)
+            {
+                DisplayIcon.sprite = DisplayItem.GetInventoryIcon();
+                DisplayIcon.enabled = true;
+                DescriptionDisplay.text = DisplayItem.GetDescription();
+                DescriptionDisplay.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 110.29f);
+                DescriptionDisplay.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 200);
+                DescriptionDisplay.fontSize = 14;
+            }
+            else if (DisplayItem == null)
+            {
+                DisplayIcon.sprite = null;
+                DisplayIcon.enabled = false;
+                DescriptionDisplay.text = null;
+            }
         }
     }
 
