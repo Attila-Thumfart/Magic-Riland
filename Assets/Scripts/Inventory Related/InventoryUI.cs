@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class InventoryUI : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class InventoryUI : MonoBehaviour
 
     public GameObject inventoryUI;
     public GameObject Player;
+
+    [SerializeField]
+    private GameObject InGameUI;
 
     private GameObject Menus;
 
@@ -47,6 +51,8 @@ public class InventoryUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        InGameUI.SetActive(false);
+
         Inventory = Inventory.instance;
 
         Inventory.onItemChangedCallback += UpdateUI;
@@ -75,6 +81,12 @@ public class InventoryUI : MonoBehaviour
         Slots[_slotNumber].ClearSlot();
     }
     */
+
+    public void OnLevelWasLoaded(int level)
+    {
+        if(level == 0)
+            InGameUI.SetActive(false);
+    }
 
     void UpdateUI()
     {
@@ -105,9 +117,9 @@ public class InventoryUI : MonoBehaviour
                 InGameStackDisplay.text = Inventory.instance.GetCurrentItem().GetNumberOfItems().ToString();
                 InGameDisplay.enabled = true;
 
-               // InGameStackDisplay.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 15);
+                // InGameStackDisplay.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 15);
                 //InGameStackDisplay.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 24);
-               // InGameStackDisplay.fontSize = 14;
+                // InGameStackDisplay.fontSize = 14;
             }
             else
             {
@@ -120,6 +132,8 @@ public class InventoryUI : MonoBehaviour
 
     private void ToggleUI()
     {
+        UpdateUI();
+
         PlayerMoneyDisplay.text = GameManager.GMInstance.GetPlayerMoney().ToString();
 
         Menus = GameObject.Find("MenuManager");
