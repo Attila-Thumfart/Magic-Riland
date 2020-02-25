@@ -82,7 +82,7 @@ public class FieldManager : Interactable
             }
         }
 
-        if (IsSeeded && (ActiveFieldstate == Fieldstate.finished || ActiveFieldstate == Fieldstate.withered))
+        if (IsSeeded && (ActiveFieldstate == Fieldstate.finished /*|| ActiveFieldstate == Fieldstate.withered*/))
         {
             if (ActiveFieldstate == Fieldstate.finished)
             {
@@ -181,7 +181,6 @@ public class FieldManager : Interactable
 
                 //MediumPlant.SetActive(false);
                 break;
-
         }
     }
     #endregion
@@ -285,6 +284,7 @@ public class FieldManager : Interactable
         GrowthModelFinishedInstance.SetActive(false);
         GrowthModelWitheredInstance.SetActive(false);
 
+        DaysUntilWithered = 3;
         IsSeeded = false;
         ActiveFieldstate = Fieldstate.empty;
     }
@@ -294,6 +294,14 @@ public class FieldManager : Interactable
         if (DaysUntilWithered == 0)
         {
             ActiveFieldstate = Fieldstate.withered;
+        }
+    }
+
+    public void ResetWitheredField()
+    {
+        if(ActiveFieldstate == Fieldstate.withered)
+        {
+            ResetField();
         }
     }
 

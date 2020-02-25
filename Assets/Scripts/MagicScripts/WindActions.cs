@@ -45,6 +45,7 @@ public class WindActions : MonoBehaviour
             if (IsOnField)  //If the cloud is above a field it is watered
             {    
                 CurrentField.GetComponent<FieldManager>().SetWeedstate(false);
+                CurrentField.GetComponent<FieldManager>().ResetWitheredField();
             }
         }
     }
