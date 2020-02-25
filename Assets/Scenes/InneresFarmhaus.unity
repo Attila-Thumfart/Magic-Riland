@@ -6484,6 +6484,11 @@ PrefabInstance:
       propertyPath: m_IsKinematic
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7714960469062638504, guid: 168d78fcd51b05e4e887619311b3d3ea,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 112
+      objectReference: {fileID: 0}
     - target: {fileID: 7714960469062638505, guid: 168d78fcd51b05e4e887619311b3d3ea,
         type: 3}
       propertyPath: m_Name
