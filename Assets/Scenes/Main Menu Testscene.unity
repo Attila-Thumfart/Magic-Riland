@@ -6746,6 +6746,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 2078583941265328216, guid: 018c7dc5af9548842a675a8801a2f94d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3151357069096945908, guid: 018c7dc5af9548842a675a8801a2f94d,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -7521,6 +7526,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 8700610810574526353, guid: 018c7dc5af9548842a675a8801a2f94d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8889141299213499097, guid: 018c7dc5af9548842a675a8801a2f94d,
         type: 3}
       propertyPath: m_AnchorMin.y
@@ -7554,6 +7564,12 @@ PrefabInstance:
     m_RemovedComponents:
     - {fileID: 7927004661516032070, guid: 018c7dc5af9548842a675a8801a2f94d, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 018c7dc5af9548842a675a8801a2f94d, type: 3}
+--- !u!1 &1390220470 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1407125178435057817, guid: 018c7dc5af9548842a675a8801a2f94d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1390220469}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1415542302 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7927004661516032065, guid: 018c7dc5af9548842a675a8801a2f94d,
@@ -8512,6 +8528,17 @@ MonoBehaviour:
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1390220470}
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1598094909
 MonoBehaviour:
