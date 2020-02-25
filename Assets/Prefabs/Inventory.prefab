@@ -861,6 +861,7 @@ MonoBehaviour:
   InGameDisplay: {fileID: 1348879478682817507}
   DescriptionDisplay: {fileID: 7927004662760724202}
   PlayerMoneyDisplay: {fileID: 857926822977073737}
+  InGameStackDisplay: {fileID: 8612523013030353738}
 --- !u!1 &7927004662760724180
 GameObject:
   m_ObjectHideFlags: 0

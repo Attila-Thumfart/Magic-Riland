@@ -28,7 +28,7 @@ public class InventoryUI : MonoBehaviour
     private Image DisplayIcon, InGameDisplay;
 
     [SerializeField]
-    private TMP_Text DescriptionDisplay, PlayerMoneyDisplay;
+    private TMP_Text DescriptionDisplay, PlayerMoneyDisplay, InGameStackDisplay;
 
     private void Awake()
     {
@@ -100,11 +100,17 @@ public class InventoryUI : MonoBehaviour
         if (Inventory.instance.GetCurrentItem())
         {
             InGameDisplay.sprite = Inventory.instance.GetCurrentItem().GetInventoryIcon();
+            InGameStackDisplay.text = Inventory.instance.GetCurrentItem().GetNumberOfItems().ToString();
             InGameDisplay.enabled = true;
+
+            InGameStackDisplay.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 15);
+            InGameStackDisplay.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 24);
+            InGameStackDisplay.fontSize = 14;
         }
         else
         {
             InGameDisplay.sprite = null;
+            InGameStackDisplay.text = null;
             InGameDisplay.enabled = false;
         }
     }
