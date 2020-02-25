@@ -85,6 +85,9 @@ public class DeliveryBoxUI : Interactable
             }
         }
 
+        if (Inventory.instance.GetHoveredItem() == null)
+            InventoryItemDescriptionDisplay();
+
         DailyIncomeDisplay.text = GameManager.GMInstance.GetDailyIncome().ToString();
     }
 
@@ -146,6 +149,9 @@ public class DeliveryBoxUI : Interactable
             DisplayIcon.sprite = DisplayItem.GetInventoryIcon();
             DisplayIcon.enabled = true;
             DescriptionDisplay.text = DisplayItem.GetDescription();
+            DescriptionDisplay.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 110.29f);
+            DescriptionDisplay.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 200);
+            DescriptionDisplay.fontSize = 14;
         }
         else if (DisplayItem == null)
         {

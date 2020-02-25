@@ -116,6 +116,7 @@ public class LoveInterest : Interactable
             Inventory.instance.RemoveItemFromInventory(Inventory.instance.GetCurrentItemIndex());//Inventory.instance.GetCurrentItemIndex());
                 CurrentLovestate = _nextLoveState;
             HeartParticlesInstace = Instantiate(HeartParticles, transform);
+            Inventory.instance.ResetCurrentItem();
         }
 
         else if (_Present != _Wish)

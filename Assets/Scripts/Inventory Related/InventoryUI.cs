@@ -102,6 +102,11 @@ public class InventoryUI : MonoBehaviour
             }
         }
 
+        ItemDescriptionDisplay();
+
+        if (Inventory.instance.GetCurrentItem() == null)
+            ClearDescriptionDisplay();
+
         PlayerMoneyDisplay.text = GameManager.GMInstance.GetPlayerMoney().ToString();
 
         if (Inventory.instance.GetSelectedItem() == null)
@@ -185,6 +190,9 @@ public class InventoryUI : MonoBehaviour
             DisplayIcon.sprite = DisplayItem.GetInventoryIcon();
             DisplayIcon.enabled = true;
             DescriptionDisplay.text = DisplayItem.GetDescription();
+            DescriptionDisplay.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 110.29f);
+            DescriptionDisplay.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 200);
+            DescriptionDisplay.fontSize = 14;
         }
         else
         {

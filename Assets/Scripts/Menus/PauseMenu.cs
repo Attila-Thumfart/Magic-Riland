@@ -24,6 +24,7 @@ public class PauseMenu : MonoBehaviour
         controls = new PlayerControls();
 
         controls.Gameplay.Menu.started += ctx => Pause();
+        controls.Gameplay.Erde.started += ctx => Pause();
     }
 
     //to prevent the game from starting paused

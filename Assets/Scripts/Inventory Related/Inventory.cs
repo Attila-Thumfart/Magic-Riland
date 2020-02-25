@@ -42,9 +42,6 @@ public class Inventory : MonoBehaviour
     private void Start()
     {
         items = new Item[InventorySpace];
-
-        for (int i = 0; i < 10; i++)
-            AddItemToInventory(StartItem);
     }
 
     public bool AddItemToInventory(Item item)
@@ -106,6 +103,7 @@ public class Inventory : MonoBehaviour
             {
                 items[_inventorySlot] = null;
                 CurrentItem = null;
+                HoveredItem = null;
             }
 
             else
@@ -142,6 +140,7 @@ public class Inventory : MonoBehaviour
             SwappedItem = items[TargetButtonIndex];
             items[TargetButtonIndex] = SelectedItem;
             items[PreviousIndex] = SwappedItem;
+            HoveredItem = SelectedItem;
             SelectedItem = null;
             CurrentItem = null;
         }
@@ -149,6 +148,7 @@ public class Inventory : MonoBehaviour
         {
             SelectedItem = items[TargetButtonIndex];
             PreviousIndex = TargetButtonIndex;
+            HoveredItem = SelectedItem;
             CurrentItem = SelectedItem;
 
             //inventoryUI.ItemDescriptionDisplay();
@@ -158,6 +158,12 @@ public class Inventory : MonoBehaviour
         {
             onItemChangedCallback.Invoke();
         }
+    }
+
+    public void AddStartItem()
+    {
+        for (int i = 0; i < 10; i++)
+            AddItemToInventory(StartItem);
     }
 
     public void TrashcanItem()
@@ -198,6 +204,11 @@ public class Inventory : MonoBehaviour
     {
         return CurrentItem;
         //return items[TargetButtonIndex]; //May need this still
+    }
+
+    public void ResetCurrentItem()
+    {
+        CurrentItem = null;
     }
 
     public Item GetSelectedItem()
