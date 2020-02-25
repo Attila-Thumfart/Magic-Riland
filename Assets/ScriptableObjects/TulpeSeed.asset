@@ -22,11 +22,11 @@ MonoBehaviour:
   GrowthRateUntilSprout: 1
   GrowtRateUntilMedium: 1
   GrowthRateUntilFinished: 1
-  GrowthModelSeed: {fileID: 926866951584954849, guid: 92186779d7b39e3498dd28eba9a1b85c,
+  GrowthModelSeed: {fileID: 4060448045315829714, guid: 896fa1f18ed0258429156381662a65f2,
     type: 3}
-  GrowthModelSprout: {fileID: 2734001056743021161, guid: b743f1e3de623c649b74db60238f0f93,
+  GrowthModelSprout: {fileID: 1247536150862078718, guid: 16bdaeac386bffe489f7addde2c60a06,
     type: 3}
-  GrowthModelMedium: {fileID: 9204131795749246333, guid: 9262394ca4539b5498b30ec376c50cba,
+  GrowthModelMedium: {fileID: 2734001056743021161, guid: b743f1e3de623c649b74db60238f0f93,
     type: 3}
   GrowthModelFinished: {fileID: 3097618905383490181, guid: bf7e45190c3df4b4fa00f01dfc07be54,
     type: 3}
