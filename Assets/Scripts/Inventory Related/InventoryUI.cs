@@ -25,7 +25,7 @@ public class InventoryUI : MonoBehaviour
     private Item DisplayItem;
 
     [SerializeField]
-    private Image DisplayIcon;
+    private Image DisplayIcon, InGameDisplay;
 
     [SerializeField]
     private TMP_Text DescriptionDisplay, PlayerMoneyDisplay;
@@ -95,6 +95,17 @@ public class InventoryUI : MonoBehaviour
         if (Inventory.instance.GetSelectedItem() == null)
         {
             SetButtonColorSelected();
+        }
+
+        if (Inventory.instance.GetCurrentItem())
+        {
+            InGameDisplay.sprite = Inventory.instance.GetCurrentItem().GetInventoryIcon();
+            InGameDisplay.enabled = true;
+        }
+        else
+        {
+            InGameDisplay.sprite = null;
+            InGameDisplay.enabled = false;
         }
     }
 
