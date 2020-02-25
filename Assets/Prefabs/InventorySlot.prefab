@@ -207,7 +207,7 @@ GameObject:
   - component: {fileID: 5861505123678738386}
   - component: {fileID: 6454705652794091859}
   m_Layer: 5
-  m_Name: InventorySlot 1
+  m_Name: InventorySlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -246,6 +246,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Icon: {fileID: 5861505124468686805}
+  Shop: {fileID: 0}
+  DeliveryBox: {fileID: 0}
   StackSize: {fileID: 1301729837653377984}
 --- !u!1 &5861505124468686807
 GameObject:
@@ -355,7 +357,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 8.8, y: -14.2}
-  m_SizeDelta: {x: 24.34, y: 15.38}
+  m_SizeDelta: {x: 24, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6048250441514929907
 CanvasRenderer:
