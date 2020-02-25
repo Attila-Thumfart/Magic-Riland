@@ -694,7 +694,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d85cae30f415f754caa81e4f6dd55e4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerSpeed: 6
+  playerSpeed: 8
   characterController: {fileID: 0}
   Gravity: 4
   cameraHolder: {fileID: 0}
