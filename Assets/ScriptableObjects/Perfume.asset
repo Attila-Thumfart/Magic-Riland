@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Perfume
   m_EditorClassIdentifier: 
   Name: Perfume
-  Description: 'A Prefume of extraordinary quality. The pleasent smell will surely
-    let any sane person fall for you. Cost: 150 Gold'
+  Description: 'A perfume of extraordinary quality. It''s liked by ladies of every
+    age. Cost: 150 Gold'
   IsSeed: 0
   SellingPrice: 150
   Cost: 150

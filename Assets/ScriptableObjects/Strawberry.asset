@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Strawberry
   m_EditorClassIdentifier: 
   Name: Strawberry
-  Description: A beautyful berry made of straw.
+  Description: A red, sweet and tasty berry
   IsSeed: 0
   SellingPrice: 22
   Cost: 30
