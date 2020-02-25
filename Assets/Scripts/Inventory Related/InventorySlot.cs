@@ -38,6 +38,9 @@ public class InventorySlot : MonoBehaviour
                 if (Item.GetNumberOfItems() > 1)
                 {
                     StackSize.text = Item.GetNumberOfItems().ToString();
+                    StackSize.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 15);
+                    StackSize.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 24);
+                    StackSize.fontSize = 14;
                 }
                 else
                 {
@@ -52,9 +55,7 @@ public class InventorySlot : MonoBehaviour
             }
         }
 
-        StackSize.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 15);
-        StackSize.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 24);
-        StackSize.fontSize = 14;
+        
     }
 
     public void ClearSlot()
@@ -64,10 +65,6 @@ public class InventorySlot : MonoBehaviour
         Icon.sprite = null;
         Icon.enabled = false;
         StackSize.text = null;
-
-        StackSize.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 15);
-        StackSize.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 24);
-        StackSize.fontSize = 14;
     }
 
     public void GiveIndexToInventory()
