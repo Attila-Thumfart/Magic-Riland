@@ -97,21 +97,24 @@ public class InventoryUI : MonoBehaviour
             SetButtonColorSelected();
         }
 
-        if (Inventory.instance.GetCurrentItem())
+        if (InGameDisplay)
         {
-            InGameDisplay.sprite = Inventory.instance.GetCurrentItem().GetInventoryIcon();
-            InGameStackDisplay.text = Inventory.instance.GetCurrentItem().GetNumberOfItems().ToString();
-            InGameDisplay.enabled = true;
+            if (Inventory.instance.GetCurrentItem())
+            {
+                InGameDisplay.sprite = Inventory.instance.GetCurrentItem().GetInventoryIcon();
+                InGameStackDisplay.text = Inventory.instance.GetCurrentItem().GetNumberOfItems().ToString();
+                InGameDisplay.enabled = true;
 
-            InGameStackDisplay.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 15);
-            InGameStackDisplay.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 24);
-            InGameStackDisplay.fontSize = 14;
-        }
-        else
-        {
-            InGameDisplay.sprite = null;
-            InGameStackDisplay.text = null;
-            InGameDisplay.enabled = false;
+               // InGameStackDisplay.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 15);
+                //InGameStackDisplay.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, 24);
+               // InGameStackDisplay.fontSize = 14;
+            }
+            else
+            {
+                InGameDisplay.sprite = null;
+                InGameStackDisplay.text = null;
+                InGameDisplay.enabled = false;
+            }
         }
     }
 
