@@ -21,7 +21,8 @@ MonoBehaviour:
   ThirdWish: I reall fancy the Perfume from the shop, but it's a little too expensive
     for me.
   ThanksForThirdWish: "You sure? Well than thank you very much\u2026 you're the best~"
-  LoveText: Thanks again. I am sure you will get along with the other Villagers.
+  LoveText: Thanks again. Sadly this is the end of our Demo. I hope I'll see you
+    again when the game is finished.
   WrongItem: "Thanks\u2026 i guess? But I don't really need that right now\u2026"
   NPCMesh: {fileID: 0}
   FirstWishObject: {fileID: 11400000, guid: fc3570048d1ed9849a1230452cddb5fa, type: 2}
