@@ -322,4 +322,9 @@ public class FieldManager : Interactable
     {
         return ActiveFieldstate;
     }
+
+    public bool IsWeeded()
+    {
+        return isWeed;
+    }
 }
