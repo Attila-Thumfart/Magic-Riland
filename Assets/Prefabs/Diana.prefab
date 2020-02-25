@@ -728,4 +728,5 @@ MonoBehaviour:
     type: 3}
   MessageBox: {fileID: 8183592935315760788}
   Message: {fileID: 8183592936265604796}
+  MaxMessageDuration: 5
   CurrentLovestate: 0
